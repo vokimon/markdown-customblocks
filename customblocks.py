@@ -29,17 +29,20 @@ class CustomBlocksProcessor(BlockProcessor):
 		remainder = block[match.end():]
 		div = etree.SubElement(parent, 'div')
 		div.set('class', '%s' % (mainClass))
-		div.text, unindented = self.detab(remainder)
+		indented, unindented = self.detab(remainder)
+		if indented:
+			p = etree.SubElement(div, 'p')
+			p.text = indented
 		blocks.insert(0,unindented)
 		return True
 
 """
 # TODO
-- Takes content
++ Takes content
 - Content is reprocessed
 - Subblocs are reprocessed
 - In the middle of a paragraph
-- Indentation over within the block
++ Indentation over within the block
 - key parameters
 - parameters with commas
 """

@@ -43,7 +43,9 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			::: myblock
 				Some content
 			""", """\
-			<div class="myblock">Some content</div>
+			<div class="myblock">
+			<p>Some content</p>
+			</div>
 			""")
 
 	def test_content_unindentedNotIncluded(self):
