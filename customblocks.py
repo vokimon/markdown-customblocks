@@ -39,9 +39,12 @@ class CustomBlocksProcessor(BlockProcessor):
 		content = []
 		while True:
 			indented, unindented = self.detab(remainder)
-			if indented: content.append(indented)
+			if indented:
+				content.append(indented)
 			if unindented:
-				blocks.insert(0,unindented)
+				unindented = re.sub(r'^:::(?:$|\n)','', unindented)
+				if unindented:
+					blocks.insert(0,unindented)
 				break
 			if not blocks: break
 			remainder = blocks.pop(0)

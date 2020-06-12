@@ -110,7 +110,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			""")
 
 
-	def test_content_nested(self):
+	def test_nested(self):
 		self.assertMarkdown("""\
 			::: myblock
 				::: inner
@@ -136,6 +136,32 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<p>Some content</p>
 			</div>
 			""")
+
+	def test_explicitEnd(self):
+		self.assertMarkdown("""\
+			::: myblock
+				Some content
+			:::
+			""", """\
+			<div class="myblock">
+			<p>Some content</p>
+			</div>
+			""")
+
+	def test_explicitEnd_contentAfter(self):
+		self.assertMarkdown("""\
+			::: myblock
+				Some content
+			:::
+				Some code
+			""", """\
+			<div class="myblock">
+			<p>Some content</p>
+			</div>
+			<pre><code>Some code
+			</code></pre>
+			""")
+
 
 
 
