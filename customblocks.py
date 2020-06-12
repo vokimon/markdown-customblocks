@@ -16,6 +16,12 @@ class CustomBlocksExtension(Extension):
         md.parser.blockprocessors.register(CustomBlocksProcessor(md.parser), 'admonition', 105)
 
 
+def default(blockType, parser, parent, content):
+	div = etree.SubElement(parent, 'div')
+	div.set('class', '%s' % (blockType))
+	if content:
+		parser.parseChunk(div, content)
+
 class CustomBlocksProcessor(BlockProcessor):
 	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?:\n|$)')
 
@@ -30,8 +36,6 @@ class CustomBlocksProcessor(BlockProcessor):
 		if previous:
 			self.parser.parseChunk(parent, previous)
 		remainder = block[match.end():]
-		div = etree.SubElement(parent, 'div')
-		div.set('class', '%s' % (mainClass))
 		content = []
 		while True:
 			indented, unindented = self.detab(remainder)
@@ -41,20 +45,24 @@ class CustomBlocksProcessor(BlockProcessor):
 				break
 			if not blocks: break
 			remainder = blocks.pop(0)
-		if content:
-			print(content)
-			self.parser.parseChunk(div, '\n\n'.join(content))
+		default(
+			blockType=mainClass,
+			parent=parent,
+			content='\n\n'.join(content),
+			parser=self.parser,
+		)
 		return True
 
 """
 # TODO
 + Takes content
-- Content is reprocessed
-- Subblocs are reprocessed
-- In the middle of a paragraph
++ Content is reprocessed
++ Inter custom blocks
++ In the middle of a paragraph
 + Indentation over within the block
 - key parameters
 - parameters with commas
+- calling custom functions
 """
 
 
