@@ -38,9 +38,9 @@ class CustomBlocksProcessor(BlockProcessor):
 			self.parser.parseChunk(parent, previous)
 		blocks[0] = block[match.end():]
 		content = []
-		while True:
-			remainder = blocks.pop(0)
-			indented, unindented = self.detab(remainder)
+		while blocks:
+			block = blocks.pop(0)
+			indented, unindented = self.detab(block)
 			if indented:
 				content.append(indented)
 			if unindented:
@@ -48,7 +48,6 @@ class CustomBlocksProcessor(BlockProcessor):
 				if unindented:
 					blocks.insert(0,unindented)
 				break
-			if not blocks: break
 		default(
 			blockType=mainClass,
 			parent=parent,
