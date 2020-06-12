@@ -47,7 +47,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		block = blocks[0]
 		match = self.RE.search(block)
 		mainClass = match.group(1)
-		params = match.string[match.end(1): match.end()].split()
+		params = block[match.end(1): match.end()].split()
 		previous = block[:match.start()]
 		if previous:
 			self.parser.parseChunk(parent, previous)
