@@ -26,6 +26,9 @@ class CustomBlocksProcessor(BlockProcessor):
 		block = blocks.pop(0)
 		match = self.RE.search(block)
 		mainClass = match.group(1)
+		previous = block[:match.start()]
+		if previous:
+			self.parser.parseChunk(parent, previous)
 		remainder = block[match.end():]
 		div = etree.SubElement(parent, 'div')
 		div.set('class', '%s' % (mainClass))

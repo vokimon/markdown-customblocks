@@ -125,18 +125,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</div>
 			""")
 
-	def _test_innerAndOuter(self):
-
-		self.assertMarkdownRenders(self.dedent("""\
-			::: block
-				inner
-			outer
-			"""),self.dedent("""\
-			<div class='block'>
-			<p>inner</p>
+	def test_inMiddleOfABlock(self):
+		self.assertMarkdown("""\
+			Not in block
+			::: myblock
+				Some content
+			""", """\
+			<p>Not in block</p>
+			<div class="myblock">
+			<p>Some content</p>
 			</div>
-			<p>outer</p>
-			"""))
+			""")
+
 
 
 	
