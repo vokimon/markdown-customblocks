@@ -190,6 +190,12 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<div class="myblock param1 param2"></div>
 			""")
 
+	def test_quotedParam(self):
+		self.assertMarkdown("""\
+			::: myblock "quoted param"
+			""", """\
+			<div class="myblock quoted-param"></div>
+			""")
 
 
 

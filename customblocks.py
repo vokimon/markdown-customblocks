@@ -18,12 +18,15 @@ class CustomBlocksExtension(Extension):
 
 def default(blockType, parser, parent, content, args):
 	div = etree.SubElement(parent, 'div')
-	div.set('class', '%s' % (' '.join([blockType]+list(args))))
+	div.set('class', '%s' % (' '.join(
+		'-'.join(cl.split())
+		for cl in [blockType]+list(args)
+	)))
 	if content:
 		parser.parseChunk(div, content)
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: ([\w\-]+))*(?:\n|$)')
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: ("[^"]*"|[\w\-]+))*(?:\n|$)')
 	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):
@@ -41,14 +44,21 @@ class CustomBlocksProcessor(BlockProcessor):
 				break
 		return '\n\n'.join(content)
 
+	def _processParams(self, params):
+		RE_PARAM = re.compile(r' ("[^"]*"|[\w\-]+)')
+		return [
+			param[1:-1] if param[0]==param[-1]=='"' else param
+			for param in RE_PARAM.findall(params)
+		]
+
 	def run(self, parent, blocks):
 		block = blocks[0]
 		match = self.RE.search(block)
-		mainClass = match.group(1)
-		params = block[match.end(1): match.end()].split()
 		previous = block[:match.start()]
 		if previous:
 			self.parser.parseChunk(parent, previous)
+		mainClass = match.group(1)
+		params = self._processParams(block[match.end(1): match.end()])
 		blocks[0] = block[match.end():]
 		content = self._indentedContent(blocks)
 		# Remove optional closing if present
