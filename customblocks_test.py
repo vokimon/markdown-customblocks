@@ -38,6 +38,14 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<div class="myblock"></div>
 			""")
 
+	def test_content_singleLine(self):
+		self.assertMarkdown("""\
+			::: myblock
+				Some content
+			""", """\
+			<div class="myblock">Some content</div>
+			""")
+
 
 
 	def _test_innerAndOuter(self):

@@ -26,8 +26,10 @@ class CustomBlocksProcessor(BlockProcessor):
 		block = blocks.pop(0)
 		match = self.RE.search(block)
 		mainClass = match.group(1)
+		remainder = block[match.end():]
 		div = etree.SubElement(parent, 'div')
 		div.set('class', '%s' % (mainClass))
+		div.text, unindented = self.detab(remainder)
 		return True
 
 """
