@@ -5,7 +5,7 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
 
-def default(*args, _type, _parser, _parent, _content, **kwds):
+def container(*args, _type, _parser, _parent, _content, **kwds):
 	div = etree.SubElement(_parent, 'div')
 	div.set('class', '%s' % (' '.join(
 		'-'.join(cl.split())
@@ -40,7 +40,7 @@ class CustomBlocksExtension(Extension):
 
     def __init__(self, **kwargs):
         self.config = dict(
-            fallback = [default,
+            fallback = [container,
                 "Renderer used when the type is not defined. "
                 "By default, is a div container."],
             renderers = [{},
@@ -95,7 +95,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		previous = block[:match.start()]
 		if previous:
 			self.parser.parseChunk(parent, previous)
-		mainClass = match.group(1)
+		_type = match.group(1)
 		args, kwds = self._processParams(block[match.end(1): match.end()])
 		blocks[0] = block[match.end():]
 		content = self._indentedContent(blocks)
@@ -105,9 +105,9 @@ class CustomBlocksProcessor(BlockProcessor):
 
 		print(self.config)
 
-		generator = typeGenerators.get(mainClass, default)
+		generator = typeGenerators.get(_type, container)
 		generator(
-			_type=mainClass,
+			_type=_type,
 			_parent=parent,
 			_content=content,
 			_parser=self.parser,
