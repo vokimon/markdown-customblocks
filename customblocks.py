@@ -30,6 +30,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		div = etree.SubElement(parent, 'div')
 		div.set('class', '%s' % (mainClass))
 		div.text, unindented = self.detab(remainder)
+		blocks.insert(0,unindented)
 		return True
 
 """

@@ -46,6 +46,15 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<div class="myblock">Some content</div>
 			""")
 
+	def test_content_unindentedNotIncluded(self):
+		self.assertMarkdown("""\
+			::: myblock
+			Some content
+			""", """\
+			<div class="myblock"></div>
+			<p>Some content</p>
+			""")
+
 
 
 	def _test_innerAndOuter(self):
