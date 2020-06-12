@@ -28,7 +28,7 @@ def default(blockType, parser, parent, content, args, kwds):
 		parser.parseChunk(div, content)
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("[^"]*"|[\w\-]+))*(?:\n|$)')
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\w\-]+))*(?:\n|$)')
 	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):
@@ -47,12 +47,12 @@ class CustomBlocksProcessor(BlockProcessor):
 		return '\n\n'.join(content)
 
 	def _processParams(self, params):
-		RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("[^"]*"|[\w\-]+)')
+		RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\w\-]+)')
 		args =[]
 		kwd = {}
 		for key, param in RE_PARAM.findall(params):
 			if param[0]==param[-1]=='"':
-				param = param[1:-1]
+				param = eval(param)
 			if key:
 				kwd[key]=param
 			else:
