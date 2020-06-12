@@ -29,10 +29,18 @@ class CustomBlocksProcessor(BlockProcessor):
 		remainder = block[match.end():]
 		div = etree.SubElement(parent, 'div')
 		div.set('class', '%s' % (mainClass))
-		indented, unindented = self.detab(remainder)
-		if indented:
-			self.parser.parseChunk(div, indented)
-		blocks.insert(0,unindented)
+		content = []
+		while True:
+			indented, unindented = self.detab(remainder)
+			if indented: content.append(indented)
+			if unindented:
+				blocks.insert(0,unindented)
+				break
+			if not blocks: break
+			remainder = blocks.pop(0)
+		if content:
+			print(content)
+			self.parser.parseChunk(div, '\n\n'.join(content))
 		return True
 
 """

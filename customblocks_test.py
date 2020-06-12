@@ -96,7 +96,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</div>
 			""")
 
-	def _test_content_unindentedNotIncluded(self):
+	def test_content_joinLaterIndentedBlocks(self):
 		self.assertMarkdown("""\
 			::: myblock
 				Some content
@@ -110,6 +110,20 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			""")
 
 
+	def test_content_nested(self):
+		self.assertMarkdown("""\
+			::: myblock
+				::: inner
+					Inner content
+				Some content
+			""", """\
+			<div class="myblock">
+			<div class="inner">
+			<p>Inner content</p>
+			</div>
+			<p>Some content</p>
+			</div>
+			""")
 
 	def _test_innerAndOuter(self):
 
