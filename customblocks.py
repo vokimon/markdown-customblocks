@@ -16,15 +16,15 @@ class CustomBlocksExtension(Extension):
         md.parser.blockprocessors.register(CustomBlocksProcessor(md.parser), 'admonition', 105)
 
 
-def default(blockType, parser, parent, content):
+def default(blockType, parser, parent, content, args):
 	div = etree.SubElement(parent, 'div')
-	div.set('class', '%s' % (blockType))
+	div.set('class', '%s' % (' '.join([blockType]+list(args))))
 	if content:
 		parser.parseChunk(div, content)
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?:\n|$)')
-	RE_END= r'^:::(?:$|\n)' # Not required but sometimes useful
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: (?P<positional>[\w\-]+))?(?:\n|$)')
+	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):
 		return self.RE.search(block)
@@ -47,6 +47,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		block = blocks[0]
 		match = self.RE.search(block)
 		mainClass = match.group(1)
+		positional = match.groupdict()['positional']
 		previous = block[:match.start()]
 		if previous:
 			self.parser.parseChunk(parent, previous)
@@ -57,6 +58,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			parent=parent,
 			content=content,
 			parser=self.parser,
+			args=[positional] if positional else [],
 		)
 		return True
 

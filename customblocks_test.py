@@ -162,6 +162,13 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</code></pre>
 			""")
 
+	def test_extraClass(self):
+		self.assertMarkdown("""\
+			::: myblock extraclass
+			""", """\
+			<div class="myblock extraclass"></div>
+			""")
+
 
 
 
