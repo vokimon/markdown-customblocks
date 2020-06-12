@@ -29,14 +29,7 @@ class CustomBlocksProcessor(BlockProcessor):
 	def test(self, parent, block):
 		return self.RE.search(block)
 
-	def run(self, parent, blocks):
-		block = blocks[0]
-		match = self.RE.search(block)
-		mainClass = match.group(1)
-		previous = block[:match.start()]
-		if previous:
-			self.parser.parseChunk(parent, previous)
-		blocks[0] = block[match.end():]
+	def _indentedContent(self, blocks):
 		content = []
 		while blocks:
 			block = blocks.pop(0)
@@ -48,10 +41,21 @@ class CustomBlocksProcessor(BlockProcessor):
 				if unindented:
 					blocks.insert(0,unindented)
 				break
+		return '\n\n'.join(content)
+
+	def run(self, parent, blocks):
+		block = blocks[0]
+		match = self.RE.search(block)
+		mainClass = match.group(1)
+		previous = block[:match.start()]
+		if previous:
+			self.parser.parseChunk(parent, previous)
+		blocks[0] = block[match.end():]
+		content = self._indentedContent(blocks)
 		default(
 			blockType=mainClass,
 			parent=parent,
-			content='\n\n'.join(content),
+			content=content,
 			parser=self.parser,
 		)
 		return True
