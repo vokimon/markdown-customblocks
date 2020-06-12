@@ -225,5 +225,55 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<div class="myblock" key="value &quot;with spaces"></div>
 			""")
 
+	def test_quotedValues_escapedEol(self):
+		self.assertMarkdown("""\
+			::: myblock key="value \\nwith eols"
+			""", """\
+			<div class="myblock" key="value \nwith eols"></div>
+			""")
+
+	def test_fenceSymbol(self):
+		self.assertMarkdown("""\
+			::: myblock key="value \\nwith eols"
+			""", """\
+			<div class="myblock" key="value \nwith eols"></div>
+			""")
+
+	def test_admonition(self):
+		self.assertMarkdown("""\
+			::: notice title="A title"
+				content
+			""", """\
+			<div class="admonition notice">
+			<div class="title">A title</div>
+			<p>content</p>
+			</div>
+			""")
+
+	def test_admonition_byPosition(self):
+		self.assertMarkdown("""\
+			::: notice "A title"
+				content
+			""", """\
+			<div class="admonition notice">
+			<div class="title">A title</div>
+			<p>content</p>
+			</div>
+			""")
+
+	def test_admonition_extra(self):
+		self.assertMarkdown("""\
+			::: notice "A title" super style="float:left;width:30%"
+				content
+			""", """\
+			<div class="admonition notice super" style="float:left;width:30%">
+			<div class="title">A title</div>
+			<p>content</p>
+			</div>
+			""")
+
+		
+
+
 
 

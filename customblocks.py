@@ -5,27 +5,51 @@ from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
 
-
-class CustomBlocksExtension(Extension):
-    """ Admonition extension for Python-Markdown. """
-
-    def extendMarkdown(self, md):
-        """ Add Admonition to Markdown instance. """
-        md.registerExtension(self)
-
-        md.parser.blockprocessors.register(CustomBlocksProcessor(md.parser), 'admonition', 105)
-
-
-def default(blockType, parser, parent, content, args, kwds):
-	div = etree.SubElement(parent, 'div')
+def default(*args, _type, _parser, _parent, _content, **kwds):
+	div = etree.SubElement(_parent, 'div')
 	div.set('class', '%s' % (' '.join(
 		'-'.join(cl.split())
-		for cl in [blockType]+list(args)
+		for cl in [_type]+list(args)
 	)))
 	for k,v in kwds.items():
 		div.set(k,v)
-	if content:
-		parser.parseChunk(div, content)
+	_parser.parseChunk(div, _content)
+
+def admonition(title=None, *args, _type, _parser, _parent, _content, **kwds):
+	div = etree.SubElement(_parent, 'div')
+	div.set('class', 'admonition %s' % (' '.join(
+		'-'.join(cl.split())
+		for cl in [_type]+list(args)
+	)))
+	if title: 
+		titlediv = etree.SubElement(div, 'div')
+		titlediv.set('class', 'title')
+		titlediv.text = title
+	for k,v in kwds.items():
+		div.set(k,v)
+	_parser.parseChunk(div, _content)
+
+class CustomBlocksExtension(Extension):
+    """ CustomBlocks extension for Python-Markdown. """
+
+    def __init__(self, **kwargs):
+        self.config = dict(
+            fallback = [default,
+                "Renderer used when the type is not defined. "
+                "By default, is a div container."],
+            renderers = [{},
+                "Type-renderer bind as a dict, it will update the default map. "
+                "Set a type to None to use the fallback."],
+            )
+        super(CustomBlocksExtension, self).__init__(**kwargs)
+
+    def extendMarkdown(self, md):
+        """ Add CustomBlocks to Markdown instance. """
+        md.registerExtension(self)
+        processor = CustomBlocksProcessor(md.parser)
+        processor.config = self.getConfigs()
+        md.parser.blockprocessors.register(processor, 'customblocks', 105)
+
 
 class CustomBlocksProcessor(BlockProcessor):
 	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\w\-]+))*(?:\n|$)')
@@ -72,25 +96,25 @@ class CustomBlocksProcessor(BlockProcessor):
 		# Remove optional closing if present
 		if blocks:
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
-		default(
-			blockType=mainClass,
-			parent=parent,
-			content=content,
-			parser=self.parser,
-			args=args,
-			kwds=kwds,
+
+		print(self.config)
+
+		generator = default
+		if mainClass in ('notice', 'warning', 'info'):
+			generator = admonition
+
+		generator(
+			_type=mainClass,
+			_parent=parent,
+			_content=content,
+			_parser=self.parser,
+			*args,
+			**kwds,
 		)
 		return True
 
 """
 # TODO
-+ Takes content
-+ Content is reprocessed
-+ Inter custom blocks
-+ In the middle of a paragraph
-+ Indentation over within the block
-- key parameters
-- parameters with commas
 - calling custom functions
 """
 
