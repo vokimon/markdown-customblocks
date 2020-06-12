@@ -26,7 +26,7 @@ def default(blockType, parser, parent, content, args):
 		parser.parseChunk(div, content)
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: ("[^"]*"|[\w\-]+))*(?:\n|$)')
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +("[^"]*"|[\w\-]+))*(?:\n|$)')
 	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):

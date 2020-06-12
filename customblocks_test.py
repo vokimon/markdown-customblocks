@@ -198,7 +198,10 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			""")
 
 
-
-	
-
+	def test_manyParams_extraSeparation(self):
+		self.assertMarkdown("""\
+			::: myblock   param1   param2
+			""", """\
+			<div class="myblock param1 param2"></div>
+			""")
 
