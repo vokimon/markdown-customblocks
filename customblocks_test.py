@@ -162,11 +162,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</code></pre>
 			""")
 
-	def test_extraClass(self):
+	def test_singleParam(self):
 		self.assertMarkdown("""\
-			::: myblock extraclass
+			::: myblock param1
 			""", """\
-			<div class="myblock extraclass"></div>
+			<div class="myblock param1"></div>
+			""")
+
+	def test_manyParams(self):
+		self.assertMarkdown("""\
+			::: myblock param1 param2
+			""", """\
+			<div class="myblock param1 param2"></div>
 			""")
 
 

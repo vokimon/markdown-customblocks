@@ -23,7 +23,7 @@ def default(blockType, parser, parent, content, args):
 		parser.parseChunk(div, content)
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: (?P<positional>[\w\-]+))?(?:\n|$)')
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: ([\w\-]+))*(?:\n|$)')
 	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):
@@ -47,7 +47,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		block = blocks[0]
 		match = self.RE.search(block)
 		mainClass = match.group(1)
-		positional = match.groupdict()['positional']
+		params = match.string[match.end(1): match.end()].split()
 		previous = block[:match.start()]
 		if previous:
 			self.parser.parseChunk(parent, previous)
@@ -58,7 +58,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			parent=parent,
 			content=content,
 			parser=self.parser,
-			args=[positional] if positional else [],
+			args=params,
 		)
 		return True
 
