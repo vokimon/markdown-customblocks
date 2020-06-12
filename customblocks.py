@@ -30,15 +30,16 @@ class CustomBlocksProcessor(BlockProcessor):
 		return self.RE.search(block)
 
 	def run(self, parent, blocks):
-		block = blocks.pop(0)
-		match = self.RE.search(block)
+		block = blocks[0]
+		match = self.RE.search(blocks[0])
 		mainClass = match.group(1)
 		previous = block[:match.start()]
 		if previous:
 			self.parser.parseChunk(parent, previous)
-		remainder = block[match.end():]
+		blocks[0] = block[match.end():]
 		content = []
 		while True:
+			remainder = blocks.pop(0)
 			indented, unindented = self.detab(remainder)
 			if indented:
 				content.append(indented)
@@ -48,7 +49,6 @@ class CustomBlocksProcessor(BlockProcessor):
 					blocks.insert(0,unindented)
 				break
 			if not blocks: break
-			remainder = blocks.pop(0)
 		default(
 			blockType=mainClass,
 			parent=parent,
