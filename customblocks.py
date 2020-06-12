@@ -24,6 +24,7 @@ def default(blockType, parser, parent, content):
 
 class CustomBlocksProcessor(BlockProcessor):
 	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?:\n|$)')
+	RE_END= r'^:::(?:$|\n)' # Not required but sometimes useful
 
 	def test(self, parent, block):
 		return self.RE.search(block)
@@ -42,7 +43,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			if indented:
 				content.append(indented)
 			if unindented:
-				unindented = re.sub(r'^:::(?:$|\n)','', unindented)
+				unindented = re.sub(self.RE_END, '', unindented)
 				if unindented:
 					blocks.insert(0,unindented)
 				break
