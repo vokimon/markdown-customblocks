@@ -162,6 +162,20 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</code></pre>
 			""")
 
+	def test_explicitEnd_afterOutContent_ignored(self):
+		self.assertMarkdown("""\
+			::: myblock
+				Some content
+			Outer code
+			:::
+			""", """\
+			<div class="myblock">
+			<p>Some content</p>
+			</div>
+			<p>Outer code
+			:::</p>
+			""")
+
 	def test_singleParam(self):
 		self.assertMarkdown("""\
 			::: myblock param1

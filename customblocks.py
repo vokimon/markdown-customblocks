@@ -37,9 +37,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			if indented:
 				content.append(indented)
 			if unindented:
-				unindented = re.sub(self.RE_END, '', unindented)
-				if unindented:
-					blocks.insert(0,unindented)
+				blocks.insert(0,unindented)
 				break
 		return '\n\n'.join(content)
 
@@ -53,6 +51,9 @@ class CustomBlocksProcessor(BlockProcessor):
 			self.parser.parseChunk(parent, previous)
 		blocks[0] = block[match.end():]
 		content = self._indentedContent(blocks)
+		# Remove optional closing if present
+		if blocks:
+			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 		default(
 			blockType=mainClass,
 			parent=parent,
