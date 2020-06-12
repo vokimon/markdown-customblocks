@@ -31,8 +31,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		div.set('class', '%s' % (mainClass))
 		indented, unindented = self.detab(remainder)
 		if indented:
-			p = etree.SubElement(div, 'p')
-			p.text = indented
+			self.parser.parseChunk(div, indented)
 		blocks.insert(0,unindented)
 		return True
 

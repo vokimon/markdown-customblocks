@@ -51,10 +51,62 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 	def test_content_unindentedNotIncluded(self):
 		self.assertMarkdown("""\
 			::: myblock
-			Some content
+			Not content
 			""", """\
 			<div class="myblock"></div>
+			<p>Not content</p>
+			""")
+
+	def test_content_reparsed(self):
+		self.assertMarkdown("""\
+			::: myblock
+				- a list
+			""", """\
+			<div class="myblock">
+			<ul>
+			<li>a list</li>
+			</ul>
+			</div>
+			""")
+
+	def test_content_secondIndentKept(self):
+		self.assertMarkdown("""\
+			::: myblock
+				- a list
+					- subitem
+			""", """\
+			<div class="myblock">
+			<ul>
+			<li>a list<ul>
+			<li>subitem</li>
+			</ul>
+			</li>
+			</ul>
+			</div>
+			""")
+
+	def test_content_extraIndent(self):
+		self.assertMarkdown("""\
+			::: myblock
+					extra indented
+			""", """\
+			<div class="myblock">
+			<pre><code>extra indented
+			</code></pre>
+			</div>
+			""")
+
+	def _test_content_unindentedNotIncluded(self):
+		self.assertMarkdown("""\
+			::: myblock
+				Some content
+
+				More content
+			""", """\
+			<div class="myblock">
 			<p>Some content</p>
+			<p>More content</p>
+			</div>
 			""")
 
 
