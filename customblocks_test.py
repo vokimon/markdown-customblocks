@@ -245,7 +245,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				content
 			""", """\
 			<div class="admonition notice">
-			<div class="title">A title</div>
+			<div class="admonition-title">A title</div>
 			<p>content</p>
 			</div>
 			""")
@@ -256,7 +256,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				content
 			""", """\
 			<div class="admonition notice">
-			<div class="title">A title</div>
+			<div class="admonition-title">A title</div>
 			<p>content</p>
 			</div>
 			""")
@@ -267,7 +267,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				content
 			""", """\
 			<div class="admonition notice super" style="float:left;width:30%">
-			<div class="title">A title</div>
+			<div class="admonition-title">A title</div>
 			<p>content</p>
 			</div>
 			""")

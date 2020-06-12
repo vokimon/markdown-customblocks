@@ -23,7 +23,7 @@ def admonition(title=None, *args, _type, _parser, _parent, _content, **kwds):
 	)))
 	if title: 
 		titlediv = etree.SubElement(div, 'div')
-		titlediv.set('class', 'title')
+		titlediv.set('class', 'admonition-title')
 		titlediv.text = title
 	for k,v in kwds.items():
 		div.set(k,v)
