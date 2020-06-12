@@ -197,11 +197,25 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<div class="myblock quoted-param"></div>
 			""")
 
-
 	def test_manyParams_extraSeparation(self):
 		self.assertMarkdown("""\
 			::: myblock   param1   param2
 			""", """\
 			<div class="myblock param1 param2"></div>
 			""")
+
+	def test_keyParam(self):
+		self.assertMarkdown("""\
+			::: myblock key=value
+			""", """\
+			<div class="myblock" key="value"></div>
+			""")
+
+	def test_keyParam_quotedValue(self):
+		self.assertMarkdown("""\
+			::: myblock key="value with spaces"
+			""", """\
+			<div class="myblock" key="value with spaces"></div>
+			""")
+
 

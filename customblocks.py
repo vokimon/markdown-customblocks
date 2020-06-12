@@ -16,17 +16,19 @@ class CustomBlocksExtension(Extension):
         md.parser.blockprocessors.register(CustomBlocksProcessor(md.parser), 'admonition', 105)
 
 
-def default(blockType, parser, parent, content, args):
+def default(blockType, parser, parent, content, args, kwds):
 	div = etree.SubElement(parent, 'div')
 	div.set('class', '%s' % (' '.join(
 		'-'.join(cl.split())
 		for cl in [blockType]+list(args)
 	)))
+	for k,v in kwds.items():
+		div.set(k,v)
 	if content:
 		parser.parseChunk(div, content)
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +("[^"]*"|[\w\-]+))*(?:\n|$)')
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("[^"]*"|[\w\-]+))*(?:\n|$)')
 	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):
@@ -45,11 +47,17 @@ class CustomBlocksProcessor(BlockProcessor):
 		return '\n\n'.join(content)
 
 	def _processParams(self, params):
-		RE_PARAM = re.compile(r' ("[^"]*"|[\w\-]+)')
-		return [
-			param[1:-1] if param[0]==param[-1]=='"' else param
-			for param in RE_PARAM.findall(params)
-		]
+		RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("[^"]*"|[\w\-]+)')
+		args =[]
+		kwd = {}
+		for key, param in RE_PARAM.findall(params):
+			if param[0]==param[-1]=='"':
+				param = param[1:-1]
+			if key:
+				kwd[key]=param
+			else:
+				args.append(param)
+		return args, kwd
 
 	def run(self, parent, blocks):
 		block = blocks[0]
@@ -58,7 +66,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		if previous:
 			self.parser.parseChunk(parent, previous)
 		mainClass = match.group(1)
-		params = self._processParams(block[match.end(1): match.end()])
+		args, kwds = self._processParams(block[match.end(1): match.end()])
 		blocks[0] = block[match.end():]
 		content = self._indentedContent(blocks)
 		# Remove optional closing if present
@@ -69,7 +77,8 @@ class CustomBlocksProcessor(BlockProcessor):
 			parent=parent,
 			content=content,
 			parser=self.parser,
-			args=params,
+			args=args,
+			kwds=kwds,
 		)
 		return True
 
