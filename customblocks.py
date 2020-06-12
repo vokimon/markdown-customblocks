@@ -31,7 +31,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
 	def run(self, parent, blocks):
 		block = blocks[0]
-		match = self.RE.search(blocks[0])
+		match = self.RE.search(block)
 		mainClass = match.group(1)
 		previous = block[:match.start()]
 		if previous:
