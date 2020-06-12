@@ -29,6 +29,12 @@ def admonition(title=None, *args, _type, _parser, _parent, _content, **kwds):
 		div.set(k,v)
 	_parser.parseChunk(div, _content)
 
+typeGenerators = dict(
+	notice=admonition,
+	danger=admonition,
+	info=admonition,
+)
+
 class CustomBlocksExtension(Extension):
     """ CustomBlocks extension for Python-Markdown. """
 
@@ -99,10 +105,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
 		print(self.config)
 
-		generator = default
-		if mainClass in ('notice', 'warning', 'info'):
-			generator = admonition
-
+		generator = typeGenerators.get(mainClass, default)
 		generator(
 			_type=mainClass,
 			_parent=parent,
