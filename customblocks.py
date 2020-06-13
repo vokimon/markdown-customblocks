@@ -104,6 +104,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 
 		print(self.config)
+		typeGenerators.update(self.config['renderers'])
 
 		generator = typeGenerators.get(_type, container)
 		generator(
@@ -119,6 +120,7 @@ class CustomBlocksProcessor(BlockProcessor):
 """
 # TODO
 - calling custom functions
+- generalize interface
 """
 
 

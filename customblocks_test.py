@@ -272,7 +272,24 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</div>
 			""")
 
-		
+	def test_customGenerator_isCalled(self):
+		from markdown.util import etree
+		calls = []
+		def custom(*args, _type, _parser, _parent, _content, **kwds):
+			etree.SubElement(_parent, 'custom')
+
+		self.assertMarkdown("""\
+			::: custom 
+		""","""\
+			<custom></custom>
+			""",
+			extension_configs = dict(
+				customblocks = dict(
+					renderers = dict(
+						custom = custom,
+					)
+				),
+			))
 
 
 
