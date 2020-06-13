@@ -4,6 +4,7 @@ from markdown.extensions import Extension
 from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
+import inspect
 
 def container(*args, _type, _parser, _parent, _content, **kwds):
 	div = etree.SubElement(_parent, 'div')
@@ -104,17 +105,23 @@ class CustomBlocksProcessor(BlockProcessor):
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 
 		print(self.config)
-		typeGenerators.update(self.config['renderers'])
-
-		generator = typeGenerators.get(_type, container)
-		result = generator(
-			_type=_type,
-			_parent=parent,
-			_content=content,
-			_parser=self.parser,
-			*args,
-			**kwds,
-		)
+		#typeGenerators.update(self.config['renderers'])
+		generator = self.config['renderers'].get(_type)
+		if generator:
+			signature = inspect.signature(generator)
+			if '_parent' in signature.parameters:
+				kwds['_parent'] = parent
+			result = generator(**kwds)
+		else:
+			generator = typeGenerators.get(_type, container)
+			result = generator(
+				_type=_type,
+				_parent=parent,
+				_content=content,
+				_parser=self.parser,
+				*args,
+				**kwds,
+			)
 		if result is None:
 			return True
 		if type(result) == type(u''):

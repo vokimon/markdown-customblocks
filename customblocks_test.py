@@ -275,7 +275,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 	def test_customGenerator_isCalled(self):
 		from markdown.util import etree
 		calls = []
-		def custom(*args, _type, _parser, _parent, _content, **kwds):
+		def custom(_parent):
 			etree.SubElement(_parent, 'custom')
 
 		self.assertMarkdown("""\
@@ -294,7 +294,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 	def test_customGenerator_returnsEtree(self):
 		from markdown.util import etree
 		calls = []
-		def custom(*args, _type, _parser, _parent, _content, **kwds):
+		def custom():
 			return etree.Element("custom")
 
 		self.assertMarkdown("""\
@@ -313,7 +313,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 	def test_customGenerator_returnsBytes(self):
 		from markdown.util import etree
 		calls = []
-		def custom(*args, _type, _parser, _parent, _content, **kwds):
+		def custom():
 			return "<custom></custom>".encode('utf8')
 
 		self.assertMarkdown("""\
@@ -332,7 +332,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 	def test_customGenerator_returnsString(self):
 		from markdown.util import etree
 		calls = []
-		def custom(*args, _type, _parser, _parent, _content, **kwds):
+		def custom():
 			return "<custom></custom>"
 
 		self.assertMarkdown("""\
