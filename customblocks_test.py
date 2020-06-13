@@ -1,6 +1,7 @@
 import unittest
 from markdown import markdown
 from markdown import test_tools
+from markdown.util import etree
 
 class CustomBlockExtension_Test(test_tools.TestCase):
 
@@ -273,8 +274,6 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			""")
 
 	def test_customGenerator_isCalled(self):
-		from markdown.util import etree
-		calls = []
 		def custom(_parent):
 			etree.SubElement(_parent, 'custom')
 
@@ -292,8 +291,6 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			))
 
 	def test_customGenerator_returnsEtree(self):
-		from markdown.util import etree
-		calls = []
 		def custom():
 			return etree.Element("custom")
 
@@ -311,8 +308,6 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			))
 
 	def test_customGenerator_returnsBytes(self):
-		from markdown.util import etree
-		calls = []
 		def custom():
 			return "<custom></custom>".encode('utf8')
 
@@ -330,8 +325,6 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			))
 
 	def test_customGenerator_returnsString(self):
-		from markdown.util import etree
-		calls = []
 		def custom():
 			return "<custom></custom>"
 
