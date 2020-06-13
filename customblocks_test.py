@@ -279,7 +279,26 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			etree.SubElement(_parent, 'custom')
 
 		self.assertMarkdown("""\
-			::: custom 
+			::: custom
+		""","""\
+			<custom></custom>
+			""",
+			extension_configs = dict(
+				customblocks = dict(
+					renderers = dict(
+						custom = custom,
+					)
+				),
+			))
+
+	def test_customGenerator_returnsEtree(self):
+		from markdown.util import etree
+		calls = []
+		def custom(*args, _type, _parser, _parent, _content, **kwds):
+			return etree.Element("custom")
+
+		self.assertMarkdown("""\
+			::: custom
 		""","""\
 			<custom></custom>
 			""",

@@ -107,7 +107,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		typeGenerators.update(self.config['renderers'])
 
 		generator = typeGenerators.get(_type, container)
-		generator(
+		result = generator(
 			_type=_type,
 			_parent=parent,
 			_content=content,
@@ -115,6 +115,9 @@ class CustomBlocksProcessor(BlockProcessor):
 			*args,
 			**kwds,
 		)
+		if result is None:
+			return True
+		parent.append(result)
 		return True
 
 """
