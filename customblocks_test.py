@@ -310,6 +310,44 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				),
 			))
 
+	def test_customGenerator_returnsBytes(self):
+		from markdown.util import etree
+		calls = []
+		def custom(*args, _type, _parser, _parent, _content, **kwds):
+			return "<custom></custom>".encode('utf8')
+
+		self.assertMarkdown("""\
+			::: custom
+		""","""\
+			<custom></custom>
+			""",
+			extension_configs = dict(
+				customblocks = dict(
+					renderers = dict(
+						custom = custom,
+					)
+				),
+			))
+
+	def test_customGenerator_returnsString(self):
+		from markdown.util import etree
+		calls = []
+		def custom(*args, _type, _parser, _parent, _content, **kwds):
+			return "<custom></custom>"
+
+		self.assertMarkdown("""\
+			::: custom
+		""","""\
+			<custom></custom>
+			""",
+			extension_configs = dict(
+				customblocks = dict(
+					renderers = dict(
+						custom = custom,
+					)
+				),
+			))
+
 
 
 

@@ -117,6 +117,10 @@ class CustomBlocksProcessor(BlockProcessor):
 		)
 		if result is None:
 			return True
+		if type(result) == type(u''):
+			result = result.encode('utf8')
+		if type(result) == type(b''):
+			result = etree.XML(result)
 		parent.append(result)
 		return True
 
