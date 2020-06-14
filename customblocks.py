@@ -120,7 +120,7 @@ class CustomBlocksProcessor(BlockProcessor):
 				_content=content,
 				_parser=self.parser,
 				*args,
-				**kwds,
+				**kwds
 			)
 		if result is None:
 			return True
