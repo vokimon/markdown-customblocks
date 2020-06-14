@@ -1,5 +1,8 @@
 # Custom blocks for Markdown
 
+[![Build Status](https://travis-ci.org/vokimon/markdown-customblocks.svg?branch=master)](https://travis-ci.org/vokimon/markdown-customblocks)
+
+
 A [Python-Markdown] extension to define custom block types
 using an uniform, parametrizable and nestable syntax.
 
