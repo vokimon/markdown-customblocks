@@ -12,6 +12,15 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			],
 		)
 
+	def setupCustomBlocks(self, **kwds):
+		(
+			self.default_kwargs
+				.setdefault('extension_configs',{})
+				.setdefault('customblocks', {})
+				.setdefault('renderers', {})
+				.update(kwds)
+		)
+
 	def assertMarkdown(self, markdown, html, **kwds):
 		self.assertMarkdownRenders(
 			self.dedent(markdown),
@@ -273,60 +282,56 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</div>
 			""")
 
-	def customRenderers(self, **kwds):
-		return dict(
-			extension_configs = dict(
-				customblocks = dict(
-					renderers = kwds,
-			)))
-			
-
 	def test_customGenerator_returnsEtree(self):
 		def custom():
 			return etree.Element("custom")
+
+		self.setupCustomBlocks(custom=custom)
 
 		self.assertMarkdown("""\
 			::: custom
 			""",
 			"""\
 			<custom></custom>
-			""",
-			**self.customRenderers(custom=custom))
+			""")
 
 	def test_customGenerator_returnsBytes(self):
 		def custom():
 			return "<custom></custom>".encode('utf8')
 
+		self.setupCustomBlocks(custom=custom)
+
 		self.assertMarkdown("""\
 			::: custom
 			""",
 			"""\
 			<custom></custom>
-			""",
-			**self.customRenderers(custom=custom))
+			""")
 
 	def test_customGenerator_returnsString(self):
 		def custom():
 			return "<custom></custom>"
 
+		self.setupCustomBlocks(custom=custom)
+
 		self.assertMarkdown("""\
 			::: custom
 			""",
 			"""\
 			<custom></custom>
-			""",
-			**self.customRenderers(custom=custom))
+			""")
 
 
 	def test_customGenerator_receivesParent(self):
 		def custom(_parent):
 			etree.SubElement(_parent, 'custom')
 
+		self.setupCustomBlocks(custom=custom)
+
 		self.assertMarkdown("""\
 			::: custom
 			""",
 			"""\
 			<custom></custom>
-			""",
-			**self.customRenderers(custom=custom))
+			""")
 
