@@ -1,23 +1,20 @@
-# Custom blocks
+# Custom blocks for Markdown
 
-A [Python-Markdown] extension to define custom block types using
-an uniform, parametrizable and nestable syntax.
+A [Python-Markdown] extension to define custom block types
+using an uniform, parametrizable and nestable syntax.
 
 [Python-Markdown]: https://python-markdown.github.io/
 
-> **This extension is still in its first development stages.**
+> **This extension is still in its early development stages.**
 > It is a proposal open to debate.
 > While the debate goes on, the marks and the extension API could not be stable.
 
-This is a markdown extension to simplify the use and definition
-of new types of blocks, by means of a common syntax.
+This markdown extension simplifies the definition and use
+of new types of blocks, by means of a common syntax for them.
 It defines a common way of specify the type of the block,
 the parameters and the content and deals with the parsing part.
-Block types are defined by a function taking the parameters
+Block types can be defined by a function taking the parameters
 and the content and generating the resulting html.
-
-This way is very easy to define your own block types or even
-redefine existing ones to suit your needs.
 
 It also provides several useful examples of blocks types:
 
@@ -27,9 +24,7 @@ It also provides several useful examples of blocks types:
 - Embeded videos from youtube, vimeo...
 - External links cards (like Facebook and Twitter do, when you post a link)
 
-## Common markdown syntax
-
-All blocks can be used using a syntax similar to this:
+## General markdown syntax
 
 ```markdown
 ::: mytype param1 "param with many words" key1=value2 key2="value2 with words"
@@ -38,16 +33,17 @@ All blocks can be used using a syntax similar to this:
 	The block ends whenever the indentation stops
 This is out of the block
 ```
-This will be interpreted as follows:
+
+In the previous example you can identify the following elements:
 
 - first a block marker, by default `:::`
 - the mandatory type, `mytype`,
-- then positional and keyword parameters
-- optionally, several lines of indented content
+- then positional and keyword parameters, they can be enclosed by quotes
+- optionally, several lines of indented content follow
 - unindented lines are not considered part of the block content
 
-As a block type may interpret the content as markdown,
-blocks can be nested by indentation:
+As a block type may interpret the content as markdown as well,
+blocks can be nested by indentation. For example:
 
 ```markdown
 ::: recipe
