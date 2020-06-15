@@ -18,6 +18,8 @@ setup(
 		'markdown',
 		'nose',
 		'rednose',
+		'yamlns',
+		'beautifulsoup4',
 	],
     license='MIT License',
 	test_suite='nose.collector',

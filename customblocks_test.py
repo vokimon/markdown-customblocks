@@ -323,8 +323,8 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 
 
 	def test_customGenerator_receivesParent(self):
-		def custom(_parent):
-			etree.SubElement(_parent, 'custom')
+		def custom(ctx):
+			etree.SubElement(ctx.parent, 'custom')
 
 		self.setupCustomBlocks(custom=custom)
 
@@ -333,5 +333,33 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			""",
 			"""\
 			<custom></custom>
+			""")
+
+	def test_customGenerator_keyword(self):
+		def custom(ctx, key):
+			div = etree.SubElement(ctx.parent, 'custom')
+			div.set('key', key)
+
+		self.setupCustomBlocks(custom=custom)
+
+		self.assertMarkdown("""\
+			::: custom key=value
+			""",
+			"""\
+			<custom key="value"></custom>
+			""")
+
+	def test_customGenerator_positional(self):
+		def custom(ctx, key):
+			div = etree.SubElement(ctx.parent, 'custom')
+			div.set('key', key)
+
+		self.setupCustomBlocks(custom=custom)
+
+		self.assertMarkdown("""\
+			::: custom value
+			""",
+			"""\
+			<custom key="value"></custom>
 			""")
 

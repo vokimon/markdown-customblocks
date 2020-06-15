@@ -104,14 +104,16 @@ class CustomBlocksProcessor(BlockProcessor):
 		if blocks:
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 
-		print(self.config)
 		#typeGenerators.update(self.config['renderers'])
 		generator = self.config['renderers'].get(_type)
 		if generator:
 			signature = inspect.signature(generator)
-			if '_parent' in signature.parameters:
-				kwds['_parent'] = parent
-			result = generator(**kwds)
+			ctx = ns()
+			if 'ctx' in signature.parameters:
+				ctx.parent = parent
+				result = generator(ctx, *args, **kwds)
+			else:
+				result = generator(*args, **kwds)
 		else:
 			generator = typeGenerators.get(_type, container)
 			result = generator(
