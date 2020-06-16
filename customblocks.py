@@ -4,6 +4,7 @@ from markdown.extensions import Extension
 from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
 import re
+from yamlns import namespace as ns
 import inspect
 
 def container(*args, _type, _parser, _parent, _content, **kwds):
