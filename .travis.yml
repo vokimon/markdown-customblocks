@@ -9,7 +9,7 @@ install:
 - pip install pytest
 - pip install coveralls
 script:
-- coverage run --source customblocks -m pytest.run -v
+- coverage run --source customblocks -m pytest -v
 after_success:
 - coveralls
 
