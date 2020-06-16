@@ -1,7 +1,19 @@
 # Custom blocks for Markdown
 
-[![Build Status](https://travis-ci.org/vokimon/markdown-customblocks.svg?branch=master)](https://travis-ci.org/vokimon/markdown-customblocks)
-[![Coverage Status](https://img.shields.io/coveralls/vokimon/markdown-customblocks/master.svg?style=flat)](https://coveralls.io/r/vokimon/markdown-customblocks?branch=master)
+**Test Status:**
+[![image](https://img.shields.io/travis/vokimon/markdown-customblocks/master.svg?style=flat-square&label=TravisCI)](https://travis-ci.org/vokimon/markdown-customblocks)
+[![image](https://img.shields.io/coveralls/vokimon/markdown-customblocks/master.svg?style=flat-square&label=Coverage)](https://coveralls.io/r/vokimon/markdown-customblocks)
+
+<!--
+**Version Info:**
+[![image](https://img.shields.io/pypi/v/markdown-customblocks.svg?style=flat-square&label=PyPI)](https://pypi.org/project/markdown-customblocks/)
+[![image](https://img.shields.io/pypi/dm/markdown-customblocks.svg?style=flat-square&label=PyPI%20Downloads)](https://pypi.org/project/markdown-customblocks/)
+
+**Compatibility:**
+[![image](https://img.shields.io/pypi/pyversions/markdown-customblocks.svg?style=flat-square&label=Python%20Versions)](https://pypi.org/project/markdown-customblocks/)
+[![image](https://img.shields.io/pypi/implementation/markdown-customblocks.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/markdown-customblocks/)
+-->
+
 
 A [Python-Markdown] extension to define custom block types
 using an uniform, parametrizable and nestable syntax.
