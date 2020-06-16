@@ -16,13 +16,12 @@ setup(
     packages=find_packages(exclude=['test*']),
     install_requires=[
 		'markdown',
-		'nose',
-		'rednose',
+		'pytest',
 		'yamlns',
 		'beautifulsoup4',
 	],
     license='MIT License',
-	test_suite='nose.collector',
+	test_suite='customblocks',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
