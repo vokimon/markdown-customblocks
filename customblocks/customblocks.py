@@ -144,7 +144,10 @@ class CustomBlocksProcessor(BlockProcessor):
 					if not args:
 						warnings.warn(
 							f"In block '{_type}', missing mandatory attribute '{name}'")
-					outargs.append(args.pop(0) if args else '')
+					outargs.append(
+						args.pop(0) if args
+						else param.default if param.default is not param.empty
+						else "")
 					continue
 				if args and param.kind not in (
 					param.KEYWORD_ONLY,

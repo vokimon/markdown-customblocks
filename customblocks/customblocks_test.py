@@ -541,6 +541,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 		self.assertEqual(format(ctx.warning),
 			"In block 'custom', ignoring unexpected parameter 'args'")
 
+	def test_customGenerator_onlyPositional_unsetWithDefaults(self):
+		def custom(param='default', /):
+			return "<custom param='{}'></custom>".format(param)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""",
+			"""\
+			<custom param="default"></custom>
+			""")
+
 
 """
 + VAR_KEYWORD
@@ -550,7 +562,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 + VAR_POSITIONAL
 + Only positional
 + Only keyword
-- Only positional by keyword
++ Only positional by keyword
 + Only keyword by position
 - Positional (only) with defaults
 - key presence in args means = True if type(defaut) is bool
