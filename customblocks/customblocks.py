@@ -8,21 +8,21 @@ from yamlns import namespace as ns
 import inspect
 import warnings
 
-def container(*args, _type, _parser, _parent, _content, **kwds):
-	div = etree.SubElement(_parent, 'div')
+def container(ctx, *args, **kwds):
+	div = etree.SubElement(ctx.parent, 'div')
 	div.set('class', '%s' % (' '.join(
 		'-'.join(cl.split())
-		for cl in [_type]+list(args)
+		for cl in [ctx.type]+list(args)
 	)))
 	for k,v in kwds.items():
 		div.set(k,v)
-	_parser.parseChunk(div, _content)
+	ctx.parser.parseChunk(div, ctx.content)
 
-def admonition(title=None, *args, _type, _parser, _parent, _content, **kwds):
-	div = etree.SubElement(_parent, 'div')
+def admonition(ctx, title=None, *args, **kwds):
+	div = etree.SubElement(ctx.parent, 'div')
 	div.set('class', 'admonition %s' % (' '.join(
 		'-'.join(cl.split())
-		for cl in [_type]+list(args)
+		for cl in [ctx.type]+list(args)
 	)))
 	if title: 
 		titlediv = etree.SubElement(div, 'div')
@@ -30,7 +30,7 @@ def admonition(title=None, *args, _type, _parser, _parent, _content, **kwds):
 		titlediv.text = title
 	for k,v in kwds.items():
 		div.set(k,v)
-	_parser.parseChunk(div, _content)
+	ctx.parser.parseChunk(div, ctx.content)
 
 typeGenerators = dict(
 	notice=admonition,
@@ -200,28 +200,19 @@ class CustomBlocksProcessor(BlockProcessor):
 		if blocks:
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 
-		#typeGenerators.update(self.config['renderers'])
-		generator = self.config['renderers'].get(_type)
-		if generator:
-			ctx = ns()
-			ctx.type = _type
-			ctx.parent = parent
-			ctx.content = content
-			ctx.parser = self.parser
+		typeGenerators.update(self.config['renderers'])
+		generator = typeGenerators.get(_type, container)
 
-			outargs, kwds = self._adaptParams(_type, generator, ctx, args, kwds)
+		ctx = ns()
+		ctx.type = _type
+		ctx.parent = parent
+		ctx.content = content
+		ctx.parser = self.parser
 
-			result = generator(*outargs, **kwds)
-		else:
-			generator = typeGenerators.get(_type, container)
-			result = generator(
-				_type=_type,
-				_parent=parent,
-				_content=content,
-				_parser=self.parser,
-				*args,
-				**kwds
-			)
+		outargs, kwds = self._adaptParams(_type, generator, ctx, args, kwds)
+
+		result = generator(*outargs, **kwds)
+
 		if result is None:
 			return True
 		if type(result) == type(u''):
