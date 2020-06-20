@@ -634,6 +634,24 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			this is too</custom><p>this is not</p>
 			""")
 
+	def test_customGenerator_parserReceived(self):
+		def custom(ctx):
+			div = etree.Element('custom')
+			ctx.parser.parseChunk(div, ctx.content)
+			return div
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+				this is content
+
+				this is too
+			this is not
+			""",
+			"""\
+			<custom><p>this is content</p><p>this is too</p></custom><p>this is not</p>
+			""")
+
 
 """
 + VAR_KEYWORD
