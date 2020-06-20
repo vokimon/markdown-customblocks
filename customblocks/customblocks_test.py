@@ -496,6 +496,52 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			"In block 'custom', missing mandatory attribute 'key'")
 
 
+	def test_customGenerator_onlyPositionalByKey(self):
+		def custom(param, /):
+			return "<custom>{}</custom>".format(param)
+
+		self.setupCustomBlocks(custom=custom)
+		with self.assertWarns(UserWarning) as ctx:
+			self.assertMarkdown("""\
+				::: custom param=value
+				""",
+				"""\
+				<custom></custom>
+				""")
+		self.assertEqual(format(ctx.warning),
+			"In block 'custom', ignoring unexpected parameter 'param'")
+
+	def test_customGenerator_varKeywordCannotBeSet(self):
+		def custom(**kwd):
+			result = etree.Element('custom')
+			for key, value in kwd.items():
+				result.set(key, value)
+			return result
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom kwd=value
+			""",
+			"""\
+			<custom kwd="value"></custom>
+			""")
+
+	def test_customGenerator_varPositionalCannotBeSet(self):
+		def custom(*args):
+			return "<custom>{}</custom>".format(", ".join(args))
+
+		self.setupCustomBlocks(custom=custom)
+		with self.assertWarns(UserWarning) as ctx:
+			self.assertMarkdown("""\
+				::: custom args=value
+				""",
+				"""\
+				<custom></custom>
+				""")
+		self.assertEqual(format(ctx.warning),
+			"In block 'custom', ignoring unexpected parameter 'args'")
+
+
 """
 + VAR_KEYWORD
 + Unfilled
@@ -503,9 +549,10 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 + too many pos
 + VAR_POSITIONAL
 + Only positional
-- Only keyword
++ Only keyword
 - Only positional by keyword
-- Only keyword by position
++ Only keyword by position
+- Positional (only) with defaults
 - key presence in args means = True if type(defaut) is bool
 - key presence in args means = True if annotation is bool
 - ctx in any place other than the first should fail??
