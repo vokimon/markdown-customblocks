@@ -142,6 +142,10 @@ class CustomBlocksProcessor(BlockProcessor):
 				warnings.warn(
 					f"In block '{_type}', missing mandatory attribute '{name}'")
 				kwds[name] = ""
+			for arg in list(args):
+				warnings.warn(
+					f"In block '{_type}', ignored extra attribute '{arg}'")
+				args =[]
 
 			if 'ctx' in signature.parameters:
 				ctx = ns()

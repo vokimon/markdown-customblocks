@@ -429,10 +429,35 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom key="default"></custom>
 			""")
 
+	def test_customGenerator_tooManyPositionals(self):
+		def custom():
+			return "<custom></custom>"
+
+		self.setupCustomBlocks(custom=custom)
+		with self.assertWarns(UserWarning) as ctx:
+			self.assertMarkdown("""\
+				::: custom value
+				""",
+				"""\
+				<custom></custom>
+				""")
+		self.assertEqual(format(ctx.warning),
+			"In block 'custom', ignored extra attribute 'value'")
 
 
-# VAR_KEYWORD
-# Unfilled
-# Unfilled with default
-# VAR_POSITIONAL
+
+# + VAR_KEYWORD
+# + Unfilled
+# + Unfilled with default
+# + too many pos
+# - VAR_POSITIONAL
+# - Only positional
+# - key presence in args means = True if type(defaut) is bool
+# - key presence in args means = True if annotation is bool
+# - ctx in any place other than the first should fail??
+
+
+
+
+
 
