@@ -170,6 +170,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
 		if 'ctx' in signature.parameters:
 			outargs.insert(0, ctx)
+
 		return outargs, kwds
 
 	def run(self, parent, blocks):
@@ -191,6 +192,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		if generator:
 			ctx = ns()
 			ctx.parent = parent
+			ctx.content = content
 			outargs, kwds = self._adaptParams(_type, generator, ctx, args, kwds)
 
 			result = generator(*outargs, **kwds)

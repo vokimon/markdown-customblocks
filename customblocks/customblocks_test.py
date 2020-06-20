@@ -616,6 +616,24 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom flag="False"></custom>
 			""")
 
+	def test_customGenerator_unparsedContentReceived(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.content)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+				this is content
+
+				this is too
+			this is not
+			""",
+			"""\
+			<custom>this is content
+
+			this is too</custom><p>this is not</p>
+			""")
+
 
 """
 + VAR_KEYWORD
