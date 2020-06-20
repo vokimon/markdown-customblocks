@@ -114,6 +114,7 @@ class CustomBlocksProcessor(BlockProcessor):
 				for name, parameter in signature.parameters.items()
 				if parameter.kind in (
 					parameter.POSITIONAL_OR_KEYWORD,
+					parameter.KEYWORD_ONLY,
 				)
 			]
 			for key in list(kwds):

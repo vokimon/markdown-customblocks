@@ -379,6 +379,17 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			"Ignoring unexpected parameter 'unexpected' "
 			"in 'custom' block at line 1")
 
+	def test_customGenerator_keyOnlyParam(self):
+		def custom(*, key):
+			return "<custom key='{}'></custom>".format(key)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom key=value
+			""",
+			"""\
+			<custom key="value"></custom>
+			""")
 
 
 
