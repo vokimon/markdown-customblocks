@@ -592,8 +592,20 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom flag="True"></custom>
 			""")
 
-	def test_customGenerator_noflag_markedWithBoolDefault(self):
+	def test_customGenerator_noflag_markedAsBoolDefault(self):
 		def custom(*, flag=True):
+			return "<custom flag='{}'></custom>".format(flag)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom noflag
+			""",
+			"""\
+			<custom flag="False"></custom>
+			""")
+
+	def test_customGenerator_noflag_markedAsAnotation(self):
+		def custom(*, flag:bool):
 			return "<custom flag='{}'></custom>".format(flag)
 
 		self.setupCustomBlocks(custom=custom)

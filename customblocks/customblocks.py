@@ -120,6 +120,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
 			if 'no'+name in args and (
 				type(param.default) == bool
+				or param.annotation == bool
 			):
 				args.remove('no'+name)
 				kwds[name]=False
