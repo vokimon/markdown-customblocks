@@ -127,6 +127,19 @@ class CustomBlocksProcessor(BlockProcessor):
 						f"In block '{_type}', ignoring unexpected parameter '{key}'")
 					del kwds[key]
 
+			for name, param in signature.parameters.items():
+				if name == 'ctx': continue
+				if name in kwds: continue
+				if param.kind in (
+					param.VAR_KEYWORD,
+				): continue
+				if args:
+					kwds[name] = args.pop(0)
+					continue
+				warnings.warn(
+					f"In block '{_type}', missing mandatory attribute '{name}'")
+				kwds[name] = ""
+
 			if 'ctx' in signature.parameters:
 				ctx = ns()
 				ctx.parent = parent
