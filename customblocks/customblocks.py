@@ -93,6 +93,8 @@ class CustomBlocksProcessor(BlockProcessor):
 		return args, kwd
 
 	def _adaptParams(self, _type, callback, ctx, args, kwds):
+		def warn(message):
+			warnings.warn(f"In block '{ctx.type}', " + message)
 
 		signature = inspect.signature(callback)
 		acceptedKeywords = [name
@@ -126,8 +128,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
 		for key in list(kwds):
 			if not acceptAnyKey and key not in acceptedKeywords:
-				warnings.warn(
-					f"In block '{_type}', ignoring unexpected parameter '{key}'")
+				warn(f"ignoring unexpected parameter '{key}'")
 				del kwds[key]
 		outargs = []
 		for name, param in signature.parameters.items():
@@ -141,8 +142,7 @@ class CustomBlocksProcessor(BlockProcessor):
 				param.POSITIONAL_ONLY,
 			):
 				if not args and param.default is param.empty:
-					warnings.warn(
-						f"In block '{_type}', missing mandatory attribute '{name}'")
+					warn(f"missing mandatory attribute '{name}'")
 				outargs.append(
 					args.pop(0) if args
 					else param.default if param.default is not param.empty
@@ -156,16 +156,14 @@ class CustomBlocksProcessor(BlockProcessor):
 			if param.default is not param.empty:
 				kwds[name] = param.default
 				continue
-			warnings.warn(
-				f"In block '{_type}', missing mandatory attribute '{name}'")
+			warn(f"missing mandatory attribute '{name}'")
 			kwds[name] = ""
 
 		if acceptAnyPos:
 			outargs.extend(args)
 		else:
 			for arg in list(args):
-				warnings.warn(
-					f"In block '{_type}', ignored extra attribute '{arg}'")
+				warn(f"ignored extra attribute '{arg}'")
 
 		if 'ctx' in signature.parameters:
 			outargs.insert(0, ctx)
