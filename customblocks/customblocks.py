@@ -132,7 +132,9 @@ class CustomBlocksProcessor(BlockProcessor):
 				del kwds[key]
 		outargs = []
 		for name, param in signature.parameters.items():
-			if name == 'ctx': continue
+			if name == 'ctx':
+				outargs.append(ctx)
+				continue
 			if name in kwds: continue
 			if param.kind in (
 				param.VAR_KEYWORD,
@@ -164,9 +166,6 @@ class CustomBlocksProcessor(BlockProcessor):
 		else:
 			for arg in list(args):
 				warn(f"ignored extra attribute '{arg}'")
-
-		if 'ctx' in signature.parameters:
-			outargs.insert(0, ctx)
 
 		return outargs, kwds
 
