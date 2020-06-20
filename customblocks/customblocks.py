@@ -92,6 +92,71 @@ class CustomBlocksProcessor(BlockProcessor):
 				args.append(param)
 		return args, kwd
 
+	def _adaptParams(self, _type, callback, ctx, args, kwds):
+
+		signature = inspect.signature(callback)
+		acceptedKeywords = [name
+			for name, parameter in signature.parameters.items()
+			if parameter.kind in (
+				parameter.POSITIONAL_OR_KEYWORD,
+				parameter.KEYWORD_ONLY,
+			)
+		]
+		acceptAnyKey = any(
+			parameter.kind == parameter.VAR_KEYWORD
+			for parameter in signature.parameters.values()
+		)
+		acceptAnyPos = any(
+			parameter.kind == parameter.VAR_POSITIONAL
+			for parameter in signature.parameters.values()
+		)
+		for key in list(kwds):
+			if not acceptAnyKey and key not in acceptedKeywords:
+				warnings.warn(
+					f"In block '{_type}', ignoring unexpected parameter '{key}'")
+				del kwds[key]
+		outargs = []
+		for name, param in signature.parameters.items():
+			if name == 'ctx': continue
+			if name in kwds: continue
+			if param.kind in (
+				param.VAR_KEYWORD,
+				param.VAR_POSITIONAL,
+			): continue
+			if param.kind in (
+				param.POSITIONAL_ONLY,
+			):
+				if not args:
+					warnings.warn(
+						f"In block '{_type}', missing mandatory attribute '{name}'")
+				outargs.append(
+					args.pop(0) if args
+					else param.default if param.default is not param.empty
+					else "")
+				continue
+			if args and param.kind not in (
+				param.KEYWORD_ONLY,
+			):
+				kwds[name] = args.pop(0)
+				continue
+			if param.default is not param.empty:
+				kwds[name] = param.default
+				continue
+			warnings.warn(
+				f"In block '{_type}', missing mandatory attribute '{name}'")
+			kwds[name] = ""
+
+		if acceptAnyPos:
+			outargs.extend(args)
+		else:
+			for arg in list(args):
+				warnings.warn(
+					f"In block '{_type}', ignored extra attribute '{arg}'")
+
+		if 'ctx' in signature.parameters:
+			outargs.insert(0, ctx)
+		return outargs, kwds
+
 	def run(self, parent, blocks):
 		block = blocks[0]
 		match = self.RE.search(block)
@@ -109,69 +174,9 @@ class CustomBlocksProcessor(BlockProcessor):
 		#typeGenerators.update(self.config['renderers'])
 		generator = self.config['renderers'].get(_type)
 		if generator:
-			signature = inspect.signature(generator)
-			acceptedKeywords = [name
-				for name, parameter in signature.parameters.items()
-				if parameter.kind in (
-					parameter.POSITIONAL_OR_KEYWORD,
-					parameter.KEYWORD_ONLY,
-				)
-			]
-			acceptAnyKey = any(
-				parameter.kind == parameter.VAR_KEYWORD
-				for parameter in signature.parameters.values()
-			)
-			acceptAnyPos = any(
-				parameter.kind == parameter.VAR_POSITIONAL
-				for parameter in signature.parameters.values()
-			)
-			for key in list(kwds):
-				if not acceptAnyKey and key not in acceptedKeywords:
-					warnings.warn(
-						f"In block '{_type}', ignoring unexpected parameter '{key}'")
-					del kwds[key]
-			outargs = []
-			for name, param in signature.parameters.items():
-				if name == 'ctx': continue
-				if name in kwds: continue
-				if param.kind in (
-					param.VAR_KEYWORD,
-					param.VAR_POSITIONAL,
-				): continue
-				if param.kind in (
-					param.POSITIONAL_ONLY,
-				):
-					if not args:
-						warnings.warn(
-							f"In block '{_type}', missing mandatory attribute '{name}'")
-					outargs.append(
-						args.pop(0) if args
-						else param.default if param.default is not param.empty
-						else "")
-					continue
-				if args and param.kind not in (
-					param.KEYWORD_ONLY,
-				):
-					kwds[name] = args.pop(0)
-					continue
-				if param.default is not param.empty:
-					kwds[name] = param.default
-					continue
-				warnings.warn(
-					f"In block '{_type}', missing mandatory attribute '{name}'")
-				kwds[name] = ""
-
-			if acceptAnyPos:
-				outargs.extend(args)
-			else:
-				for arg in list(args):
-					warnings.warn(
-						f"In block '{_type}', ignored extra attribute '{arg}'")
-
 			ctx = ns()
 			ctx.parent = parent
-			if 'ctx' in signature.parameters:
-				outargs.insert(0, ctx)
+			outargs, kwds = self._adaptParams(_type, generator, ctx, args, kwds)
 
 			result = generator(*outargs, **kwds)
 		else:
