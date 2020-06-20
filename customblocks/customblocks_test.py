@@ -553,17 +553,33 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom param="default"></custom>
 			""")
 
-	def test_customGenerator_boolDefaults_enablesKeywordMention(self):
+	def test_customGenerator_flag_withBoolDefault(self):
 		def custom(*, flag=False):
-			return "<custom flag='{}'></custom>".format('yes' if flag is True else 'no')
+			return "<custom flag='{}'></custom>".format(flag)
 
 		self.setupCustomBlocks(custom=custom)
 		self.assertMarkdown("""\
 			::: custom flag
 			""",
 			"""\
-			<custom flag="yes"></custom>
+			<custom flag="True"></custom>
 			""")
+
+	def test_customGenerator_flag_undetectedWithNoBoolDefault(self):
+		def custom(*, flag='default'):
+			return "<custom flag='{}'></custom>".format(flag)
+
+		self.setupCustomBlocks(custom=custom)
+		with self.assertWarns(UserWarning) as ctx:
+			self.assertMarkdown("""\
+				::: custom flag
+				""",
+				"""\
+				<custom flag="default"></custom>
+				""")
+		self.assertEqual(format(ctx.warning),
+			"In block 'custom', ignored extra attribute 'flag'")
+
 
 """
 + VAR_KEYWORD
