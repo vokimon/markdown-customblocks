@@ -121,6 +121,10 @@ class CustomBlocksProcessor(BlockProcessor):
 				parameter.kind == parameter.VAR_KEYWORD
 				for parameter in signature.parameters.values()
 			)
+			acceptAnyPos = any(
+				parameter.kind == parameter.VAR_POSITIONAL
+				for parameter in signature.parameters.values()
+			)
 			for key in list(kwds):
 				if not acceptAnyKey and key not in acceptedKeywords:
 					warnings.warn(
@@ -132,6 +136,7 @@ class CustomBlocksProcessor(BlockProcessor):
 				if name in kwds: continue
 				if param.kind in (
 					param.VAR_KEYWORD,
+					param.VAR_POSITIONAL,
 				): continue
 				if args:
 					kwds[name] = args.pop(0)
@@ -142,10 +147,12 @@ class CustomBlocksProcessor(BlockProcessor):
 				warnings.warn(
 					f"In block '{_type}', missing mandatory attribute '{name}'")
 				kwds[name] = ""
-			for arg in list(args):
-				warnings.warn(
-					f"In block '{_type}', ignored extra attribute '{arg}'")
-				args =[]
+
+			if not acceptAnyPos:
+				for arg in list(args):
+					warnings.warn(
+						f"In block '{_type}', ignored extra attribute '{arg}'")
+					args =[]
 
 			if 'ctx' in signature.parameters:
 				ctx = ns()

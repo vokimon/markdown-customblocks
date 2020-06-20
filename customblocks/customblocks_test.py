@@ -444,6 +444,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 		self.assertEqual(format(ctx.warning),
 			"In block 'custom', ignored extra attribute 'value'")
 
+	def test_customGenerator_varPositional(self):
+		def custom(*args):
+			return "<custom>{}</custom>".format(", ".join(args))
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom extra "another extra"
+			""",
+			"""\
+			<custom>extra, another extra</custom>
+			""")
+
 
 
 # + VAR_KEYWORD
@@ -455,6 +467,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 # - key presence in args means = True if type(defaut) is bool
 # - key presence in args means = True if annotation is bool
 # - ctx in any place other than the first should fail??
+# - More than one warning
 
 
 
