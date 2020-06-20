@@ -111,17 +111,16 @@ class CustomBlocksProcessor(BlockProcessor):
 			for parameter in signature.parameters.values()
 		)
 		for name, param in signature.parameters.items():
-			if name in args and (
-				type(param.default) == bool
-				or param.annotation == bool
-			):
+			if (
+				type(param.default) != bool and
+				param.annotation != bool
+			): continue
+
+			if name in args:
 				args.remove(name)
 				kwds[name]=True
 
-			if 'no'+name in args and (
-				type(param.default) == bool
-				or param.annotation == bool
-			):
+			if 'no'+name in args:
 				args.remove('no'+name)
 				kwds[name]=False
 
