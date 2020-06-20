@@ -118,6 +118,12 @@ class CustomBlocksProcessor(BlockProcessor):
 				args.remove(name)
 				kwds[name]=True
 
+			if 'no'+name in args and (
+				type(param.default) == bool
+			):
+				args.remove('no'+name)
+				kwds[name]=False
+
 		for key in list(kwds):
 			if not acceptAnyKey and key not in acceptedKeywords:
 				warnings.warn(

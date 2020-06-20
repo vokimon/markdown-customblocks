@@ -592,6 +592,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom flag="True"></custom>
 			""")
 
+	def test_customGenerator_noflag_markedWithBoolDefault(self):
+		def custom(*, flag=True):
+			return "<custom flag='{}'></custom>".format(flag)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom noflag
+			""",
+			"""\
+			<custom flag="False"></custom>
+			""")
+
 
 """
 + VAR_KEYWORD
