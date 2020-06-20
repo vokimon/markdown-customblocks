@@ -92,7 +92,7 @@ class CustomBlocksProcessor(BlockProcessor):
 				args.append(param)
 		return args, kwd
 
-	def _adaptParams(self, _type, callback, ctx, args, kwds):
+	def _adaptParams(self, callback, ctx, args, kwds):
 		def warn(message):
 			warnings.warn(f"In block '{ctx.type}', " + message)
 
@@ -209,7 +209,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		ctx.content = content
 		ctx.parser = self.parser
 
-		outargs, kwds = self._adaptParams(_type, generator, ctx, args, kwds)
+		outargs, kwds = self._adaptParams(generator, ctx, args, kwds)
 
 		result = generator(*outargs, **kwds)
 
