@@ -143,7 +143,9 @@ class CustomBlocksProcessor(BlockProcessor):
 				):
 					outargs.append(args.pop(0))
 					continue
-				if args:
+				if args and param.kind not in (
+					param.KEYWORD_ONLY,
+				):
 					kwds[name] = args.pop(0)
 					continue
 				if param.default is not param.empty:
