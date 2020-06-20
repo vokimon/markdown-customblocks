@@ -666,23 +666,8 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 
 
 """
-+ VAR_KEYWORD
-+ Unfilled
-+ Unfilled with default
-+ too many pos
-+ VAR_POSITIONAL
-+ Only positional
-+ Only keyword
-+ Only positional by keyword
-+ Only keyword by position
-+ Positional (only) with defaults
-- key presence in args means = True if type(defaut) is bool
-- key presence in args means = True if annotation is bool
-- nokey presence in args means = True if type(defaut) is bool
-- nokey presence in args means = True if annotation is bool
 - ctx in any place other than the first should fail??
 - More than one warning
-- content
 """
 
 

@@ -195,6 +195,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			ctx.parent = parent
 			ctx.content = content
 			ctx.parser = self.parser
+
 			outargs, kwds = self._adaptParams(_type, generator, ctx, args, kwds)
 
 			result = generator(*outargs, **kwds)
