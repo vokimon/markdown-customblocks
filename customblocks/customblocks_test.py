@@ -436,13 +436,13 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 		self.setupCustomBlocks(custom=custom)
 		with self.assertWarns(UserWarning) as ctx:
 			self.assertMarkdown("""\
-				::: custom value
+				::: custom extra
 				""",
 				"""\
 				<custom></custom>
 				""")
 		self.assertEqual(format(ctx.warning),
-			"In block 'custom', ignored extra attribute 'value'")
+			"In block 'custom', ignored extra attribute 'extra'")
 
 	def test_customGenerator_varPositional(self):
 		def custom(*args):
