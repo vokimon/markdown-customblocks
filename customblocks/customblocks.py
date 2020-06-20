@@ -110,6 +110,12 @@ class CustomBlocksProcessor(BlockProcessor):
 			parameter.kind == parameter.VAR_POSITIONAL
 			for parameter in signature.parameters.values()
 		)
+		for name, param in signature.parameters.items():
+			#if name not in acceptedKeywords: continue
+			if name in args and type(param.default) == bool:
+				args.remove(name)
+				kwds[name]=True
+
 		for key in list(kwds):
 			if not acceptAnyKey and key not in acceptedKeywords:
 				warnings.warn(

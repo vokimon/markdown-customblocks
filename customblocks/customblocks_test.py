@@ -553,6 +553,17 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom param="default"></custom>
 			""")
 
+	def test_customGenerator_boolDefaults_enablesKeywordMention(self):
+		def custom(*, flag=False):
+			return "<custom flag='{}'></custom>".format('yes' if flag is True else 'no')
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom flag
+			""",
+			"""\
+			<custom flag="yes"></custom>
+			""")
 
 """
 + VAR_KEYWORD
@@ -567,6 +578,8 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 + Positional (only) with defaults
 - key presence in args means = True if type(defaut) is bool
 - key presence in args means = True if annotation is bool
+- nokey presence in args means = True if type(defaut) is bool
+- nokey presence in args means = True if annotation is bool
 - ctx in any place other than the first should fail??
 - More than one warning
 - content
