@@ -480,7 +480,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom key="value"></custom>
 			""")
 
-	def test_customGenerator_onlyKeywordByPos_complains(self):
+	def test_customGenerator_onlyKeyword_cannotBeSetByPos(self):
 		def custom(*, key):
 			return "<custom key='{}'></custom>".format(key)
 
@@ -496,7 +496,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			"In block 'custom', missing mandatory attribute 'key'")
 
 
-	def test_customGenerator_onlyPositionalByKey(self):
+	def test_customGenerator_onlyPositional_cannotBeSetByKey(self):
 		def custom(param, /):
 			return "<custom>{}</custom>".format(param)
 
@@ -511,7 +511,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 		self.assertEqual(format(ctx.warning),
 			"In block 'custom', ignoring unexpected parameter 'param'")
 
-	def test_customGenerator_varKeywordCannotBeSet(self):
+	def test_customGenerator_varKeyword_cannotBeSetByKey(self):
 		def custom(**kwd):
 			result = etree.Element('custom')
 			for key, value in kwd.items():
@@ -526,7 +526,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom kwd="value"></custom>
 			""")
 
-	def test_customGenerator_varPositionalCannotBeSet(self):
+	def test_customGenerator_varPositional_cannotBeSetByKey(self):
 		def custom(*args):
 			return "<custom>{}</custom>".format(", ".join(args))
 
