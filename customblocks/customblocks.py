@@ -124,8 +124,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			for key in list(kwds):
 				if not acceptAnyKey and key not in acceptedKeywords:
 					warnings.warn(
-						f"Ignoring unexpected parameter '{key}' "
-						f"in '{_type}' block")
+						f"In block '{_type}', ignoring unexpected parameter '{key}'")
 					del kwds[key]
 
 			if 'ctx' in signature.parameters:
