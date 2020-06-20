@@ -468,21 +468,35 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom>positional</custom>
 			""")
 
+	def test_customGenerator_onlyKeyword(self):
+		def custom(*, key):
+			return "<custom key='{}'></custom>".format(key)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom key=value
+			""",
+			"""\
+			<custom key="value"></custom>
+			""")
 
 
-# + VAR_KEYWORD
-# + Unfilled
-# + Unfilled with default
-# + too many pos
-# + VAR_POSITIONAL
-# - Only positional
-# - Only keyword
-# - key presence in args means = True if type(defaut) is bool
-# - key presence in args means = True if annotation is bool
-# - ctx in any place other than the first should fail??
-# - More than one warning
-# - content
-
+"""
++ VAR_KEYWORD
++ Unfilled
++ Unfilled with default
++ too many pos
++ VAR_POSITIONAL
++ Only positional
+- Only keyword
+- Only positional by keyword
+- Only keyword by position
+- key presence in args means = True if type(defaut) is bool
+- key presence in args means = True if annotation is bool
+- ctx in any place other than the first should fail??
+- More than one warning
+- content
+"""
 
 
 
