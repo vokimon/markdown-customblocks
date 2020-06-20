@@ -376,8 +376,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				<custom></custom>
 				""")
 		self.assertEqual(format(ctx.warning),
-			"Ignoring unexpected parameter 'unexpected' "
-			"in 'custom' block at line 1")
+			"Ignoring unexpected parameter 'unexpected' in 'custom' block")
 
 	def test_customGenerator_keyOnlyParam(self):
 		def custom(*, key):
