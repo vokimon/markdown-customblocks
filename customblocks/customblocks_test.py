@@ -580,6 +580,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 		self.assertEqual(format(ctx.warning),
 			"In block 'custom', ignored extra attribute 'flag'")
 
+	def test_customGenerator_flag_markedAsAnnotation(self):
+		def custom(*, flag:bool):
+			return "<custom flag='{}'></custom>".format(flag)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom flag
+			""",
+			"""\
+			<custom flag="True"></custom>
+			""")
+
 
 """
 + VAR_KEYWORD
