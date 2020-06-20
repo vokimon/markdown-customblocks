@@ -417,6 +417,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 		self.assertEqual(format(ctx.warning),
 			"In block 'custom', missing mandatory attribute 'key'")
 
+	def test_customGenerator_missingKeyWithDefault(self):
+		def custom(key='default'):
+			return "<custom key='{}'></custom>".format(key)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""",
+			"""\
+			<custom key="default"></custom>
+			""")
+
 
 
 # VAR_KEYWORD

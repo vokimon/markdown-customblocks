@@ -136,6 +136,9 @@ class CustomBlocksProcessor(BlockProcessor):
 				if args:
 					kwds[name] = args.pop(0)
 					continue
+				if param.default is not param.empty:
+					kwds[name] = param.default
+					continue
 				warnings.warn(
 					f"In block '{_type}', missing mandatory attribute '{name}'")
 				kwds[name] = ""
