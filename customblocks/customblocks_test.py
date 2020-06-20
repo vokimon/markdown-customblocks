@@ -390,5 +390,21 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom key="value"></custom>
 			""")
 
+	def test_customGenerator_varKeywordTakesAll(self):
+		def custom(**kwds):
+			return "<custom key='{key}'></custom>".format(**kwds)
 
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom key=value
+			""",
+			"""\
+			<custom key="value"></custom>
+			""")
+
+
+
+# VAR_KEYWORD
+# Unfilled
+# Unfilled with default
 

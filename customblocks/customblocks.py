@@ -117,8 +117,12 @@ class CustomBlocksProcessor(BlockProcessor):
 					parameter.KEYWORD_ONLY,
 				)
 			]
+			acceptAnyKey = any(
+				parameter.kind == parameter.VAR_KEYWORD
+				for parameter in signature.parameters.values())
+
 			for key in list(kwds):
-				if key not in acceptedKeywords:
+				if not acceptAnyKey and key not in acceptedKeywords:
 					warnings.warn(
 						f"Ignoring unexpected parameter '{key}' "
 						f"in '{_type}' block")
