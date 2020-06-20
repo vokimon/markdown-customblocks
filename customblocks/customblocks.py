@@ -168,12 +168,12 @@ class CustomBlocksProcessor(BlockProcessor):
 					warnings.warn(
 						f"In block '{_type}', ignored extra attribute '{arg}'")
 
+			ctx = ns()
+			ctx.parent = parent
 			if 'ctx' in signature.parameters:
-				ctx = ns()
-				ctx.parent = parent
-				result = generator(ctx, *outargs, **kwds)
-			else:
-				result = generator(*outargs, **kwds)
+				outargs.insert(0, ctx)
+
+			result = generator(*outargs, **kwds)
 		else:
 			generator = typeGenerators.get(_type, container)
 			result = generator(

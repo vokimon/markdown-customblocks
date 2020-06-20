@@ -564,7 +564,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 + Only keyword
 + Only positional by keyword
 + Only keyword by position
-- Positional (only) with defaults
++ Positional (only) with defaults
 - key presence in args means = True if type(defaut) is bool
 - key presence in args means = True if annotation is bool
 - ctx in any place other than the first should fail??
