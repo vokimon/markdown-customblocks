@@ -664,6 +664,25 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom></custom>
 			""")
 
+	def test_customGenerator_positionalWithExcess(self):
+		def custom(ctx, positional=None, *args):
+			return (
+				"<custom>\n"
+				f"positional={positional}\n"
+				f"args={args}\n"
+				"</custom>\n"
+			)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom "A title" super
+				content
+			""", """\
+			<custom>
+			positional=A title
+			args=('super',)
+			</custom>
+			""")
 
 """
 - ctx in any place other than the first should fail??

@@ -130,12 +130,13 @@ class CustomBlocksProcessor(BlockProcessor):
 			if not acceptAnyKey and key not in acceptedKeywords:
 				warn(f"ignoring unexpected parameter '{key}'")
 				del kwds[key]
+
 		outargs = []
+		outkwds = {}
 		for name, param in signature.parameters.items():
 			if name == 'ctx':
 				outargs.append(ctx)
 				continue
-			if name in kwds: continue
 			if param.kind in (
 				param.VAR_KEYWORD,
 				param.VAR_POSITIONAL,
@@ -150,24 +151,40 @@ class CustomBlocksProcessor(BlockProcessor):
 					else param.default if param.default is not param.empty
 					else "")
 				continue
-			if args and param.kind not in (
+			if param.kind in (
 				param.KEYWORD_ONLY,
 			):
-				kwds[name] = args.pop(0)
+				if name not in kwds and param.default is param.empty:
+					warn(f"missing mandatory attribute '{name}'")
+				outkwds[name] = (
+					kwds.pop(name) if name in kwds
+					else param.default if param.default is not param.empty
+					else ""
+				)
 				continue
-			if param.default is not param.empty:
-				kwds[name] = param.default
+			else:
+				if name not in kwds and not args and param.default is param.empty:
+					warn(f"missing mandatory attribute '{name}'")
+				outargs.append(
+					kwds.pop(name) if name in kwds
+					else args.pop(0) if args
+					else param.default if param.default is not param.empty
+					else ""
+				)
 				continue
-			warn(f"missing mandatory attribute '{name}'")
-			kwds[name] = ""
 
 		if acceptAnyPos:
 			outargs.extend(args)
 		else:
-			for arg in list(args):
+			for arg in args:
+				warn(f"ignored extra attribute '{arg}'")
+		if acceptAnyKey:
+			outkwds.update(kwds)
+		else:
+			for key in kwds:
 				warn(f"ignored extra attribute '{arg}'")
 
-		return outargs, kwds
+		return outargs, outkwds
 
 	def run(self, parent, blocks):
 		block = blocks[0]
