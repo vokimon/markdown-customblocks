@@ -6,6 +6,7 @@ from markdown.util import etree
 import re
 from yamlns import namespace as ns
 import inspect
+import warnings
 
 def container(*args, _type, _parser, _parent, _content, **kwds):
 	div = etree.SubElement(_parent, 'div')
@@ -109,8 +110,21 @@ class CustomBlocksProcessor(BlockProcessor):
 		generator = self.config['renderers'].get(_type)
 		if generator:
 			signature = inspect.signature(generator)
-			ctx = ns()
+			acceptedKeywords = [name
+				for name, parameter in signature.parameters.items()
+				if parameter.kind in (
+					parameter.POSITIONAL_OR_KEYWORD,
+				)
+			]
+			for key in list(kwds):
+				if key not in acceptedKeywords:
+					warnings.warn(
+						f"Ignoring unexpected parameter '{key}' "
+						f"in '{_type}' block at line 1")
+					del kwds[key]
+
 			if 'ctx' in signature.parameters:
+				ctx = ns()
 				ctx.parent = parent
 				result = generator(ctx, *args, **kwds)
 			else:
