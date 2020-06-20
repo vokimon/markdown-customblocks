@@ -130,7 +130,7 @@ class CustomBlocksProcessor(BlockProcessor):
 					warnings.warn(
 						f"In block '{_type}', ignoring unexpected parameter '{key}'")
 					del kwds[key]
-
+			outargs = []
 			for name, param in signature.parameters.items():
 				if name == 'ctx': continue
 				if name in kwds: continue
@@ -138,6 +138,11 @@ class CustomBlocksProcessor(BlockProcessor):
 					param.VAR_KEYWORD,
 					param.VAR_POSITIONAL,
 				): continue
+				if param.kind in (
+					param.POSITIONAL_ONLY,
+				):
+					outargs.append(args.pop(0))
+					continue
 				if args:
 					kwds[name] = args.pop(0)
 					continue
@@ -152,14 +157,15 @@ class CustomBlocksProcessor(BlockProcessor):
 				for arg in list(args):
 					warnings.warn(
 						f"In block '{_type}', ignored extra attribute '{arg}'")
-					args =[]
+			else:
+				outargs.extend(args)
 
 			if 'ctx' in signature.parameters:
 				ctx = ns()
 				ctx.parent = parent
-				result = generator(ctx, *args, **kwds)
+				result = generator(ctx, *outargs, **kwds)
 			else:
-				result = generator(*args, **kwds)
+				result = generator(*outargs, **kwds)
 		else:
 			generator = typeGenerators.get(_type, container)
 			result = generator(
