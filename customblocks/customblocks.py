@@ -191,6 +191,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		generator = self.config['renderers'].get(_type)
 		if generator:
 			ctx = ns()
+			ctx.type = _type
 			ctx.parent = parent
 			ctx.content = content
 			ctx.parser = self.parser

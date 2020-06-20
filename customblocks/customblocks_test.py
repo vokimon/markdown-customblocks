@@ -652,6 +652,18 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<custom><p>this is content</p><p>this is too</p></custom><p>this is not</p>
 			""")
 
+	def test_customGenerator_typeReceived(self):
+		def custom(ctx):
+			return etree.Element(ctx.type)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""",
+			"""\
+			<custom></custom>
+			""")
+
 
 """
 + VAR_KEYWORD
