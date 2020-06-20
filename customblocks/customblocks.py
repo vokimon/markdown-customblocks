@@ -68,6 +68,11 @@ class CustomBlocksProcessor(BlockProcessor):
 		return self.RE.search(block)
 
 	def _indentedContent(self, blocks):
+		"""
+		Extracts all the indented content from blocks
+		until the first line that is not indented.
+		Returns the indented lines removing the indentations.
+		"""
 		content = []
 		while blocks:
 			block = blocks.pop(0)
@@ -80,6 +85,15 @@ class CustomBlocksProcessor(BlockProcessor):
 		return '\n\n'.join(content)
 
 	def _processParams(self, params):
+		"""Parses the block head line to extract parameters,
+		Parameters are values consisting on single word o
+		double quoted multiple words, that may be preceded
+		by a single word key and an equality sign without
+		no spaces in between.
+		The method returns a tuple of a list with all keyless
+		parameters and a dict with all keyword parameters.
+		"""
+
 		RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\w\-]+)')
 		args =[]
 		kwd = {}
@@ -93,6 +107,10 @@ class CustomBlocksProcessor(BlockProcessor):
 		return args, kwd
 
 	def _adaptParams(self, callback, ctx, args, kwds):
+		"""
+		Takes args and kwds extracted from custom block head line
+		and adapts them to the signature of the callback.
+		"""
 		def warn(message):
 			warnings.warn(f"In block '{ctx.type}', " + message)
 
