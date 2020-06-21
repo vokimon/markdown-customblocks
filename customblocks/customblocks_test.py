@@ -711,7 +711,11 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			""")
 
 """
-- ctx in any place other than the first should fail??
+- what to do with dashed keys
+- Flags given values are turned into bool
+- complementary flags are assigned by order
+- other type annotations and conversions
+- test ctx in any place other than the first one. should it fail??
 - More than one warning
 """
 
