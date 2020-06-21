@@ -8,36 +8,6 @@ from yamlns import namespace as ns
 import inspect
 import warnings
 
-def container(ctx, *args, **kwds):
-	div = etree.SubElement(ctx.parent, 'div')
-	div.set('class', '%s' % (' '.join(
-		'-'.join(cl.split())
-		for cl in [ctx.type]+list(args)
-	)))
-	for k,v in kwds.items():
-		div.set(k,v)
-	ctx.parser.parseChunk(div, ctx.content)
-
-def admonition(ctx, title=None, *args, **kwds):
-	div = etree.SubElement(ctx.parent, 'div')
-	div.set('class', 'admonition %s' % (' '.join(
-		'-'.join(cl.split())
-		for cl in [ctx.type]+list(args)
-	)))
-	if title: 
-		titlediv = etree.SubElement(div, 'div')
-		titlediv.set('class', 'admonition-title')
-		titlediv.text = title
-	for k,v in kwds.items():
-		div.set(k,v)
-	ctx.parser.parseChunk(div, ctx.content)
-
-typeGenerators = dict(
-	notice=admonition,
-	danger=admonition,
-	info=admonition,
-)
-
 class CustomBlocksExtension(Extension):
     """ CustomBlocks extension for Python-Markdown. """
 
@@ -247,6 +217,35 @@ class CustomBlocksProcessor(BlockProcessor):
 - generalize interface
 """
 
+def container(ctx, *args, **kwds):
+	div = etree.SubElement(ctx.parent, 'div')
+	div.set('class', '%s' % (' '.join(
+		'-'.join(cl.split())
+		for cl in [ctx.type]+list(args)
+	)))
+	for k,v in kwds.items():
+		div.set(k,v)
+	ctx.parser.parseChunk(div, ctx.content)
+
+def admonition(ctx, title=None, *args, **kwds):
+	div = etree.SubElement(ctx.parent, 'div')
+	div.set('class', 'admonition %s' % (' '.join(
+		'-'.join(cl.split())
+		for cl in [ctx.type]+list(args)
+	)))
+	if title:
+		titlediv = etree.SubElement(div, 'div')
+		titlediv.set('class', 'admonition-title')
+		titlediv.text = title
+	for k,v in kwds.items():
+		div.set(k,v)
+	ctx.parser.parseChunk(div, ctx.content)
+
+typeGenerators = dict(
+	notice=admonition,
+	danger=admonition,
+	info=admonition,
+)
 
 
 
