@@ -249,6 +249,21 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			<div class="myblock" key="value \nwith eols"></div>
 			""")
 
+	def test_param_nonalphanumeric(self):
+		self.assertMarkdown("""\
+			::: myblock http://lala.com/~alice
+			""", """\
+			<div class="myblock http://lala.com/~alice"></div>
+			""")
+
+	def test_keyParam_nonalphanumeric(self):
+		self.assertMarkdown("""\
+			::: myblock url=http://lala.com/~alice
+			""", """\
+			<div class="myblock" url="http://lala.com/~alice"></div>
+			""")
+
+
 	def test_admonition(self):
 		self.assertMarkdown("""\
 			::: notice title="A title"

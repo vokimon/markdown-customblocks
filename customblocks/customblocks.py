@@ -61,7 +61,7 @@ class CustomBlocksExtension(Extension):
 
 
 class CustomBlocksProcessor(BlockProcessor):
-	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\w\-]+))*(?:\n|$)')
+	RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*(?:\n|$)')
 	RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
 
 	def test(self, parent, block):
@@ -93,8 +93,8 @@ class CustomBlocksProcessor(BlockProcessor):
 		The method returns a tuple of a list with all keyless
 		parameters and a dict with all keyword parameters.
 		"""
-
-		RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\w\-]+)')
+		print(params)
+		RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\S]+)')
 		args =[]
 		kwd = {}
 		for key, param in RE_PARAM.findall(params):
@@ -219,6 +219,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 
 		typeGenerators.update(self.config['renderers'])
+
 		generator = typeGenerators.get(_type, container)
 
 		ctx = ns()
