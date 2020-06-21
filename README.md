@@ -158,10 +158,17 @@ Function arguments annotated as `bool` (or having True or False as defaults) are
 If the specified type does not match with any generator, this is the default generator.
 
 Creates `<div>` elements with the type name as class. 
-Any keyless value is turned into additional classes.
-Any keyed value is turned into html attribute.
-
 It can be used to structure html with markdown content inside.
+
+
+`*args`
+: added as additional classes for the outter div
+
+`**kwds`
+: added as attributes for the outter div
+
+
+The following example:
 
 ```markdown
 ::: sidebar left style="width: 30em"
@@ -188,6 +195,42 @@ Will generate:
 </div>
 ```
 
+### Admonition (`customblocks.admonition`)
+
+An admonition is a specially formatted text out of the main flow
+which remarks a piece of text, often in a box or with a side
+icon to identify it as that special type of text.
+
+
+Admonition generator is, by default, assigned to the following types:
+`attention`, `caution`, `danger`, `error`, `hint`, `important`, `note`, `tip`, `warning`.
+
+So you can write:
+
+```markdown
+::: danger
+	Do not try to do this at home
+```
+
+In order to generate:
+
+```html
+<div class="admonition danger">
+<div class="admonition-title">Danger</div>
+<p>Do not try to do this at home</p>
+</div
+```
+
+`title`
+: in the title box show that text instead of the 
+
+`*args`
+: added as additional classes for the outter div
+
+`**kwds`
+: added as attributes for the outter div
+
+
 
 ### Link cards (`customblocks.example.linkcard`)
 
@@ -208,7 +251,7 @@ Featured image, title, description...
 This generator generates an embeded youtube video.
 
 ```markdown
-::: youtube HUBNt18RFbo center noprivacy
+::: youtube HUBNt18RFbo nocontrols left-align
 ```
 
 `autoplay` (flag, default False)
@@ -220,8 +263,12 @@ This generator generates an embeded youtube video.
 `controls` (flag, default True)
 : show the controls
 
-Any additional keyless value is added as class.
-Any additional key value is added as attribute.
+`*args`
+: added as additional class for the outter div
+
+`**kwds`
+: added as attributes for the outter div
+
 Content is ignored.
 
 
