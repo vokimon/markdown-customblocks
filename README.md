@@ -69,9 +69,9 @@ Also some values may specify a target parameter with the _key_.
 After the _headline_, several lines of indented _content_ may follow.
 It stops at the very first line back to the previous indentation.
 
->> By using indentation you don't need a clossing tag,
->> but if you miss it, you might place a clossing `:::` at the same
->> level of the headline.
+> By using indentation you don't need a clossing tag,
+> but if you miss it, you might place a clossing `:::` at the same
+> level of the headline.
 
 A block type may interpret the content as markdown as well.
 In such cases, indentation enables nesting.
@@ -88,7 +88,7 @@ For example:
 
 ## Implementing a custom block type
 
->> This is still a draft. Conventions are likely to change until first stable version.
+> This is still a draft. Conventions are likely to change until first stable version.
 
 A new block type can be defined just by defining a function:
 
@@ -108,8 +108,9 @@ You might not define it, but it is useful if you want to receive some context pa
 
 The rest of the parameters are filled using values from the _head line_.
 
-- First, key values are assigned to function arguments directly by name
-- Remaining function arguments are filled in order with keyless values
+- First, key values are assigned to function arguments directly by name with the key
+- Also flags (explained below) are assigned by name
+- Values without key and matching no flag are assigned in order to the unassigned function arguments
 - Any keyword-only and positional-only parameters will receive only values from either key or keyless values
 - Remaining key and keyless values are assigned to the key (`**kwds`) and positional (`*args`) varidic arguments, if they are specified in the signature
 
@@ -123,7 +124,6 @@ Function arguments annotated as `bool` (or having True or False as defaults) are
 
 - Flags are set to True if there is a keyless value matching its name. In the example `myflag`
 - Flags are set to False if there is a keyless value matching its name prefixed with `no`. In the example, `nomyflag`
-
 
 
 ## Usage examples of predefined block types
