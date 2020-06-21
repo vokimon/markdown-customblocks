@@ -233,10 +233,11 @@ def admonition(ctx, title=None, *args, **kwds):
 		'-'.join(cl.split())
 		for cl in [ctx.type]+list(args)
 	)))
-	if title:
-		titlediv = etree.SubElement(div, 'div')
-		titlediv.set('class', 'admonition-title')
-		titlediv.text = title
+	if title is None:
+		title = ctx.type.title()
+	titlediv = etree.SubElement(div, 'div')
+	titlediv.set('class', 'admonition-title')
+	titlediv.text = title
 	for k,v in kwds.items():
 		div.set(k,v)
 	ctx.parser.parseChunk(div, ctx.content)

@@ -297,6 +297,17 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			</div>
 			""")
 
+	def test_admonition_noTitle(self):
+		self.assertMarkdown("""\
+			::: notice style="float:left;width:30%"
+				content
+			""", """\
+			<div class="admonition notice" style="float:left;width:30%">
+			<div class="admonition-title">Notice</div>
+			<p>content</p>
+			</div>
+			""")
+
 	def test_customGenerator_returnsEtree(self):
 		def custom():
 			return etree.Element("custom")
