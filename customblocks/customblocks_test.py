@@ -535,7 +535,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				<custom></custom>
 				""")
 		self.assertEqual(format(ctx.warning),
-			"In block 'custom', ignoring unexpected parameter 'param'")
+			"In block 'custom', missing mandatory attribute 'param'")
 
 	def test_customGenerator_varKeyword_cannotBeSetByKey(self):
 		def custom(**kwd):

@@ -114,11 +114,6 @@ class CustomBlocksProcessor(BlockProcessor):
 				args.remove('no'+name)
 				kwds[name]=False
 
-		for key in list(kwds):
-			if not acceptAnyKey and key not in acceptedKeywords:
-				warn(f"ignoring unexpected parameter '{key}'")
-				del kwds[key]
-
 		outargs = []
 		outkwds = {}
 		for name, param in signature.parameters.items():
@@ -135,9 +130,7 @@ class CustomBlocksProcessor(BlockProcessor):
 				else param.default if param.default is not param.empty
 				else warn(f"missing mandatory attribute '{name}'") or ""
 			)
-			if param.kind in (
-				param.KEYWORD_ONLY,
-			):
+			if param.kind == param.KEYWORD_ONLY:
 				outkwds[name] = value
 			else:
 				outargs.append(value)
@@ -151,7 +144,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			outkwds.update(kwds)
 		else:
 			for key in kwds:
-				warn(f"ignored extra attribute '{arg}'")
+				warn(f"ignoring unexpected parameter '{key}'")
 
 		return outargs, outkwds
 
