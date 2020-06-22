@@ -134,6 +134,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			):
 				value = (
 					kwds.pop(name) if name in kwds
+					else args.pop(0) if args and param.kind != param.KEYWORD_ONLY
 					else param.default if param.default is not param.empty
 					else warn(f"missing mandatory attribute '{name}'") or ""
 				)
@@ -141,7 +142,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			else:
 				value = (
 					kwds.pop(name) if name in kwds and param.kind != param.POSITIONAL_ONLY
-					else args.pop(0) if args
+					else args.pop(0) if args and param.kind != param.KEYWORD_ONLY
 					else param.default if param.default is not param.empty
 					else warn(f"missing mandatory attribute '{name}'") or ""
 				)
