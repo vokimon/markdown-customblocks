@@ -130,15 +130,6 @@ class CustomBlocksProcessor(BlockProcessor):
 				param.VAR_POSITIONAL,
 			): continue
 			if param.kind in (
-				param.POSITIONAL_ONLY,
-			):
-				if not args and param.default is param.empty:
-					warn(f"missing mandatory attribute '{name}'")
-				outargs.append(
-					args.pop(0) if args
-					else param.default if param.default is not param.empty
-					else "")
-			elif param.kind in (
 				param.KEYWORD_ONLY,
 			):
 				if name not in kwds and param.default is param.empty:
@@ -148,6 +139,15 @@ class CustomBlocksProcessor(BlockProcessor):
 					else param.default if param.default is not param.empty
 					else ""
 				)
+			elif param.kind in (
+				param.POSITIONAL_ONLY,
+			):
+				if not args and param.default is param.empty:
+					warn(f"missing mandatory attribute '{name}'")
+				outargs.append(
+					args.pop(0) if args
+					else param.default if param.default is not param.empty
+					else "")
 			else:
 				if name not in kwds and not args and param.default is param.empty:
 					warn(f"missing mandatory attribute '{name}'")
