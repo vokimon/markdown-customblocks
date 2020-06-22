@@ -1,44 +1,40 @@
 # Custom blocks for Markdown
 
-**Test Status:**
 [![image](https://img.shields.io/travis/vokimon/markdown-customblocks/master.svg?style=flat-square&label=TravisCI)](https://travis-ci.org/vokimon/markdown-customblocks)
 [![image](https://img.shields.io/coveralls/vokimon/markdown-customblocks/master.svg?style=flat-square&label=Coverage)](https://coveralls.io/r/vokimon/markdown-customblocks)
-
-**Version Info:**
 [![image](https://img.shields.io/pypi/v/markdown-customblocks.svg?style=flat-square&label=PyPI)](https://pypi.org/project/markdown-customblocks/)
+<!--
 [![image](https://img.shields.io/pypi/dm/markdown-customblocks.svg?style=flat-square&label=PyPI%20Downloads)](https://pypi.org/project/markdown-customblocks/)
-
-**Compatibility:**
 [![image](https://img.shields.io/pypi/pyversions/markdown-customblocks.svg?style=flat-square&label=Python%20Versions)](https://pypi.org/project/markdown-customblocks/)
 [![image](https://img.shields.io/pypi/implementation/markdown-customblocks.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/markdown-customblocks/)
-
+-->
 
 A [Python-Markdown] extension to define custom block types
 using an uniform, parametrizable and nestable syntax.
 
 [Python-Markdown]: https://python-markdown.github.io/
 
-> **This extension is still in its early development stages.**
-> It is a proposal still open to debate.
-> While the debate goes on, the markup syntax and the extension API could not be stable.
-
 [TOC]
 
 ## What is it?
+
+> **This extension is still in its early development stages.**
+> It is a proposal still open to discussion.
+> Markup syntax and generators API could not be stable.
 
 This markdown extension simplifies the definition and use
 of new types of block, by defining a common syntax for them.
 That is, a common way to specify the type of the block,
 the parameters and the content.
 
-The extension deals with markdown parsing.
-You just need to define a generator function for your block type.
-That function will receive, as function arguments, the attributes and the inner content
-and it should generate the proper html.
+Because the extension deals with markdown parsing,
+you just need to define a generator function for your block type
+that receives as parameters the attributes and the inner content written in markdown,
+and generates the html.
 
-The plugin also provides several useful examples of block type functions:
+The extension also provides several useful examples of generators:
 
-- `container`: The default one, a classed div with specifiable attributes and content.
+- `container`: The default one, a classed div with arbitrary classes, attributes and content.
 - `figure`: Figures with caption, thumbnail and lightbox like visualization
 - `admonition`: Admonitions (quite similar to the [standard extra extension][ExtraAdmonitions])
 - `twitter`: Embeded tweets
@@ -46,7 +42,6 @@ The plugin also provides several useful examples of block type functions:
 - `linkcard`: External link cards (like Facebook and Twitter do, when you post a link)
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
-
 
 While they are quite convenient you can overwrite them all by defining your own function...
 Or your could contribute to enhance them. :-)
@@ -153,13 +148,14 @@ Function arguments annotated as `bool` (or having True or False as defaults) are
 	of the protein sources.
 ```
 
-### Container (`customblocks.container`)
+### Container (`customblocks.generator.container`)
 
-If the specified type does not match with any generator, this is the default generator.
+This is the default generator when no other generator matches the block type.
+It can be used to generate html div document structure with markdown.
 
-Creates `<div>` elements with the type name as class. 
-It can be used to structure html with markdown content inside.
-
+It creates a `<div>` element with the type name as class.
+Keyless values are added as additional classes and
+key values are added as attributes for the `div` element.
 
 `*args`
 : added as additional classes for the outter div
@@ -180,7 +176,7 @@ The following example:
 		...
 ```
 
-Will generate:
+Renders as:
 
 ```html
 <div class='sidebar left' style="width: 30em">
@@ -195,12 +191,11 @@ Will generate:
 </div>
 ```
 
-### Admonition (`customblocks.admonition`)
+### Admonition (`customblocks.generators.admonition`)
 
 An admonition is a specially formatted text out of the main flow
 which remarks a piece of text, often in a box or with a side
 icon to identify it as that special type of text.
-
 
 Admonition generator is, by default, assigned to the following types:
 `attention`, `caution`, `danger`, `error`, `hint`, `important`, `note`, `tip`, `warning`.
@@ -221,18 +216,19 @@ In order to generate:
 </div
 ```
 
-`title`
-: in the title box show that text instead of the 
+::: parameters
+	`title`
+	: in the title box show that text instead of the 
 
-`*args`
-: added as additional classes for the outter div
+	`*args`
+	: added as additional classes for the outter div
 
-`**kwds`
-: added as attributes for the outter div
+	`**kwds`
+	: added as attributes for the outter div
 
 
 
-### Link cards (`customblocks.example.linkcard`)
+### Link cards (`customblocks.generators.linkcard`)
 
 Link cards are informative blocks to an external source.
 It is similar to the card that popular apps like Facebook, Twitter, Telegram, Slack... do when you post a link.
@@ -246,7 +242,7 @@ Featured image, title, description...
 ::: linkcard http://othersite.com/post/2020-06-01-john-s-work
 ```
 
-### Youtube (`customblocks.example.youtube`)
+### Youtube (`customblocks.generators.youtube`)
 
 This generator generates an embeded youtube video.
 
