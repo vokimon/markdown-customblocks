@@ -25,17 +25,17 @@ using an uniform, parametrizable and nestable syntax.
 This markdown extension simplifies the definition and use
 of new types of block, by defining a common syntax for them.
 That is, a common way to specify the type of the block,
-the parameters and the content.
+attributes and content.
 
-Because the extension deals with markdown parsing,
-you just need to define a generator function for your block type
-that receives as parameters the attributes and the inner content written in markdown,
-and generates the html.
+Custom block types are defined by a simple generator function.
+The extension deals with markdown parsing and
+it passes attributes and inner content as parameters to the generator.
+The generator uses them to generate the desired HTML code.
 
 The extension also provides several useful examples of generators:
 
 - `container`: The default one, a classed div with arbitrary classes, attributes and content.
-- `figure`: Figures with caption, thumbnail and lightbox like visualization
+- `figure`: Figures with caption and more
 - `admonition`: Admonitions (quite similar to the [standard extra extension][ExtraAdmonitions])
 - `twitter`: Embeded tweets
 - `youtube`: Embeded videos from youtube...
@@ -46,7 +46,29 @@ The extension also provides several useful examples of generators:
 While they are quite convenient you can overwrite them all by defining your own function...
 Or your could contribute to enhance them. :-)
 
+## Installation and setup
+
+To install:
+
+```bash
+$ pip install markdown-customblocks
+```
+
+In order to enable it in Markdown:
+
+```python
+MARKDOWN = {
+    'extensions': [
+		'markdown-customblocks',
+	],
+}
+```
+
+
+
 ## General markdown syntax
+
+This is an example of custom block usage:
 
 ```markdown
 ::: mytype param1 key1=value1 "param with many words" key2="value2 with words"
@@ -61,15 +83,15 @@ It specifies, first, the block type and, then, a set of _values_.
 Values can be either single worded or quoted.
 Also some values may specify a target parameter with the _key_.
 
-After the _headline_, several lines of indented _content_ may follow.
-It stops at the very first line back to the previous indentation.
+After the _headline_, several lines of indented _content_ may follow,
+and the block ends at the very first line back to the previous indentation.
 
 > By using indentation you don't need a clossing tag,
 > but if you miss it, you might place a clossing `:::` at the same
 > level of the headline.
 
 A block type may interpret the content as markdown as well.
-In such cases, indentation enables nesting.
+So you can have nesting by adding extra indentation.
 For example:
 
 ```markdown
@@ -85,15 +107,36 @@ For example:
 
 > This is still a draft. Conventions are likely to change until first stable version.
 
-A new block type can be defined just by defining a function:
+A block type can be defined just by defining a generator function:
 
 ```python
 def mytype(ctx, param1, myflag:bool, param2, param3, param4='default2'):
 	...
 ```
 
+You have to register it to a type
+
+```python
+MARKDOWN = {
+	...
+    'extensions_configs': {
+        'markdown-customblocks': {
+			'generators': {
+				'mytype': mytype,
+			}
+        },
+    },
+}
+```
+
+The generator can use several strategies to generate content:
+
+- Return an html string,
+- Return `etree` `Element`, or
+- Manipulate `ctx.parent` and return `None`
+
 The first parameter, `ctx`, is the context.
-You might not define it, but it is useful if you want to receive some context parameters:
+If you don't use it, you can skip it but it is useful if you want to receive some context parameters:
 
 - `ctx.parent`: the parent node
 - `ctx.content`: the indented part of the block, with the indentation removed
@@ -101,19 +144,16 @@ You might not define it, but it is useful if you want to receive some context pa
 - `ctx.type`: the type of the block
 	- If you reuse the same function for different types, this is how you diferentiate them
 
-The rest of the parameters are filled using values from the _head line_.
+The rest of the parameters are filled using values parsed from the _head line_.
 
 - First, key values are assigned to function arguments directly by name with the key
-- Also flags (explained below) are assigned by name
+- Flags (explained below) are also assigned by name
 - Values without key and matching no flag are assigned in order to the unassigned function arguments
-- Any keyword-only and positional-only parameters will receive only values from either key or keyless values
+- Any [keyword-only] and [positional-only] parameters will receive only values from either key or keyless values
 - Remaining key and keyless values are assigned to the key (`**kwds`) and positional (`*args`) varidic arguments, if they are specified in the signature
 
-You can use several strategies to generate content:
-
-- Return html string,
-- Return `etree` `Element`
-- Manipulate `ctx.parent` and return `None`
+[keyword-only]: https://www.python.org/dev/peps/pep-3102/
+[positional-only]: https://www.python.org/dev/peps/pep-0570/
 
 Function arguments annotated as `bool` (or having True or False as defaults) are considered flags
 
@@ -122,6 +162,9 @@ Function arguments annotated as `bool` (or having True or False as defaults) are
 
 
 ## Usage examples of predefined block types
+
+This is a quick reference for the use of the included generators.
+Detailed explanation follow.
 
 ```markdown
 ::: linkcard http://othersite.com/post/2020-06-01-john-s-work
@@ -216,15 +259,14 @@ In order to generate:
 </div
 ```
 
-::: parameters
-	`title`
-	: in the title box show that text instead of the 
+`title`
+: in the title box show that text instead of the 
 
-	`*args`
-	: added as additional classes for the outter div
+`*args`
+: added as additional classes for the outter div
 
-	`**kwds`
-	: added as attributes for the outter div
+`**kwds`
+: added as attributes for the outter div
 
 
 
