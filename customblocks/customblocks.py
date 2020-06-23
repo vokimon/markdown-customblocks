@@ -85,13 +85,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			warnings.warn(f"In block '{ctx.type}', " + message)
 
 		signature = inspect.signature(callback)
-		acceptedKeywords = [name
-			for name, parameter in signature.parameters.items()
-			if parameter.kind in (
-				parameter.POSITIONAL_OR_KEYWORD,
-				parameter.KEYWORD_ONLY,
-			)
-		]
+
 		for name, param in signature.parameters.items():
 			if (
 				type(param.default) != bool and
