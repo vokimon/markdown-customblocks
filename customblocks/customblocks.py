@@ -92,14 +92,6 @@ class CustomBlocksProcessor(BlockProcessor):
 				parameter.KEYWORD_ONLY,
 			)
 		]
-		acceptAnyKey = any(
-			parameter.kind == parameter.VAR_KEYWORD
-			for parameter in signature.parameters.values()
-		)
-		acceptAnyPos = any(
-			parameter.kind == parameter.VAR_POSITIONAL
-			for parameter in signature.parameters.values()
-		)
 		for name, param in signature.parameters.items():
 			if (
 				type(param.default) != bool and
@@ -116,14 +108,18 @@ class CustomBlocksProcessor(BlockProcessor):
 
 		outargs = []
 		outkwds = {}
+		acceptAnyKey = False
+		acceptAnyPos = False
 		for name, param in signature.parameters.items():
 			if name == 'ctx':
 				outargs.append(ctx)
 				continue
-			if param.kind in (
-				param.VAR_KEYWORD,
-				param.VAR_POSITIONAL,
-			): continue
+			if param.kind == param.VAR_KEYWORD:
+				acceptAnyKey = True
+				continue
+			if param.kind == param.VAR_POSITIONAL:
+				acceptAnyPos = True
+				continue
 			value = (
 				kwds.pop(name) if name in kwds and param.kind != param.POSITIONAL_ONLY
 				else args.pop(0) if args and param.kind != param.KEYWORD_ONLY
