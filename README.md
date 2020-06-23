@@ -15,8 +15,6 @@ using an uniform, parametrizable and nestable syntax.
 
 [Python-Markdown]: https://python-markdown.github.io/
 
-[TOC]
-
 ## What is it?
 
 > **This extension is still in its early development stages.**
