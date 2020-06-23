@@ -7,6 +7,7 @@ import re
 from yamlns import namespace as ns
 import inspect
 import warnings
+from .generators import container
 
 class CustomBlocksExtension(Extension):
     """ CustomBlocks extension for Python-Markdown. """
@@ -16,7 +17,7 @@ class CustomBlocksExtension(Extension):
             fallback = [container,
                 "Renderer used when the type is not defined. "
                 "By default, is a div container."],
-            renderers = [{},
+            generators = [{},
                 "Type-renderer bind as a dict, it will update the default map. "
                 "Set a type to None to use the fallback."],
             )
@@ -156,7 +157,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		if blocks:
 			blocks[0] = re.sub(self.RE_END, '', blocks[0])
 
-		typeGenerators.update(self.config['renderers'])
+		typeGenerators.update(self.config['generators'])
 
 		generator = typeGenerators.get(_type, container)
 
@@ -179,41 +180,24 @@ class CustomBlocksProcessor(BlockProcessor):
 		parent.append(result)
 		return True
 
-"""
-# TODO
-- calling custom functions
-- generalize interface
-"""
 
-def container(ctx, *args, **kwds):
-	div = etree.SubElement(ctx.parent, 'div')
-	div.set('class', '%s' % (' '.join(
-		'-'.join(cl.split())
-		for cl in [ctx.type]+list(args)
-	)))
-	for k,v in kwds.items():
-		div.set(k,v)
-	ctx.parser.parseChunk(div, ctx.content)
+from . import generators
 
-def admonition(ctx, title=None, *args, **kwds):
-	div = etree.SubElement(ctx.parent, 'div')
-	div.set('class', 'admonition %s' % (' '.join(
-		'-'.join(cl.split())
-		for cl in [ctx.type]+list(args)
-	)))
-	if title is None:
-		title = ctx.type.title()
-	titlediv = etree.SubElement(div, 'div')
-	titlediv.set('class', 'admonition-title')
-	titlediv.text = title
-	for k,v in kwds.items():
-		div.set(k,v)
-	ctx.parser.parseChunk(div, ctx.content)
 
 typeGenerators = dict(
-	notice=admonition,
-	danger=admonition,
-	info=admonition,
+	attention = generators.admonition,
+	caution = generators.admonition,
+	danger = generators.admonition,
+	error = generators.admonition,
+	hint = generators.admonition,
+	important = generators.admonition,
+	note = generators.admonition,
+	tip = generators.admonition,
+	warning = generators.admonition,
+	youtube = generators.youtube,
+	twitter = generators.twitter,
+	linkcard = generators.linkcard,
+	figure = generators.figure,
 )
 
 

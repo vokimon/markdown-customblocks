@@ -281,7 +281,7 @@ Featured image, title, description...
 [SocialMeta]: https://css-tricks.com/essential-meta-tags-social-media/
 
 ```markdown
-::: linkcard http://othersite.com/post/2020-06-01-john-s-work
+::: linkcard https://css-tricks.com/essential-meta-tags-social-media/
 ```
 
 ### Youtube (`customblocks.generators.youtube`)
@@ -308,6 +308,13 @@ This generator generates an embeded youtube video.
 : added as attributes for the outter div
 
 Content is ignored.
+
+### TODO
+
+- Take aspect ratio and sizes from Youtube api
+- Use covers
+- Privacy safe mode
+
 
 
 ## Motivation

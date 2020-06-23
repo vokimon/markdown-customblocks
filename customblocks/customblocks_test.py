@@ -17,7 +17,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			self.default_kwargs
 				.setdefault('extension_configs',{})
 				.setdefault('customblocks', {})
-				.setdefault('renderers', {})
+				.setdefault('generators', {})
 				.update(kwds)
 		)
 
@@ -266,10 +266,10 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 
 	def test_admonition(self):
 		self.assertMarkdown("""\
-			::: notice title="A title"
+			::: note title="A title"
 				content
 			""", """\
-			<div class="admonition notice">
+			<div class="admonition note">
 			<div class="admonition-title">A title</div>
 			<p>content</p>
 			</div>
@@ -277,10 +277,10 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 
 	def test_admonition_byPosition(self):
 		self.assertMarkdown("""\
-			::: notice "A title"
+			::: note "A title"
 				content
 			""", """\
-			<div class="admonition notice">
+			<div class="admonition note">
 			<div class="admonition-title">A title</div>
 			<p>content</p>
 			</div>
@@ -288,10 +288,10 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 
 	def test_admonition_extra(self):
 		self.assertMarkdown("""\
-			::: notice "A title" super style="float:left;width:30%"
+			::: note "A title" super style="float:left;width:30%"
 				content
 			""", """\
-			<div class="admonition notice super" style="float:left;width:30%">
+			<div class="admonition note super" style="float:left;width:30%">
 			<div class="admonition-title">A title</div>
 			<p>content</p>
 			</div>
@@ -299,11 +299,11 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 
 	def test_admonition_noTitle(self):
 		self.assertMarkdown("""\
-			::: notice style="float:left;width:30%"
+			::: note style="float:left;width:30%"
 				content
 			""", """\
-			<div class="admonition notice" style="float:left;width:30%">
-			<div class="admonition-title">Notice</div>
+			<div class="admonition note" style="float:left;width:30%">
+			<div class="admonition-title">Note</div>
 			<p>content</p>
 			</div>
 			""")
