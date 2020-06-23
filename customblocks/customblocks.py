@@ -86,6 +86,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
 		signature = inspect.signature(callback)
 
+		# Turn flags into boolean keywords
 		for name, param in signature.parameters.items():
 			if (
 				type(param.default) != bool and
@@ -114,6 +115,7 @@ class CustomBlocksProcessor(BlockProcessor):
 			if param.kind == param.VAR_POSITIONAL:
 				acceptAnyPos = True
 				continue
+
 			value = (
 				kwds.pop(name) if name in kwds and param.kind != param.POSITIONAL_ONLY
 				else args.pop(0) if args and param.kind != param.KEYWORD_ONLY
@@ -125,11 +127,13 @@ class CustomBlocksProcessor(BlockProcessor):
 			else:
 				outargs.append(value)
 
+		# Extend var pos
 		if acceptAnyPos:
 			outargs.extend(args)
 		else:
 			for arg in args:
 				warn(f"ignored extra attribute '{arg}'")
+		# Extend var key
 		if acceptAnyKey:
 			outkwds.update(kwds)
 		else:
