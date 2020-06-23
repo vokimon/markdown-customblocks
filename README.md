@@ -59,7 +59,7 @@ In order to enable it in Markdown:
 ```python
 MARKDOWN = {
     'extensions': [
-		'markdown-customblocks',
+		'customblocks',
 	],
 }
 ```
@@ -120,7 +120,7 @@ You have to register it to a type
 MARKDOWN = {
 	...
     'extensions_configs': {
-        'markdown-customblocks': {
+        'customblocks': {
 			'generators': {
 				'mytype': mytype,
 			}
@@ -353,7 +353,7 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## Changes
 
-### markdown-customblocks 0.1.0 (2020-06-22)
+### markdown-customblocks 0.1.0 (2020-06-23)
 
 - First working version
 - Support for function based generators
