@@ -190,7 +190,7 @@ Detailed explanation follow.
 	of the protein sources.
 ```
 
-### Container (`customblocks.generator.container`)
+### Container (`customblocks.generators.container`)
 
 This is the default generator when no other generator matches the block type.
 It can be used to generate html div document structure with markdown.
