@@ -25,6 +25,50 @@ class Examples_Test(test_tools.TestCase):
 			self.dedent(html),
 			**kwds)
 
+	def test_admonition(self):
+		self.assertMarkdown("""\
+			::: note title="A title"
+				content
+			""", """\
+			<div class="admonition note">
+			<div class="admonition-title">A title</div>
+			<p>content</p>
+			</div>
+			""")
+
+	def test_admonition_byPosition(self):
+		self.assertMarkdown("""\
+			::: note "A title"
+				content
+			""", """\
+			<div class="admonition note">
+			<div class="admonition-title">A title</div>
+			<p>content</p>
+			</div>
+			""")
+
+	def test_admonition_extra(self):
+		self.assertMarkdown("""\
+			::: note "A title" super style="float:left;width:30%"
+				content
+			""", """\
+			<div class="admonition note super" style="float:left;width:30%">
+			<div class="admonition-title">A title</div>
+			<p>content</p>
+			</div>
+			""")
+
+	def test_admonition_noTitle(self):
+		self.assertMarkdown("""\
+			::: note style="float:left;width:30%"
+				content
+			""", """\
+			<div class="admonition note" style="float:left;width:30%">
+			<div class="admonition-title">Note</div>
+			<p>content</p>
+			</div>
+			""")
+
 	def test_youtube(self):
 		self.assertMarkdown("""\
 			::: youtube 7SS24_CgwEM
