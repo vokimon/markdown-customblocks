@@ -98,8 +98,8 @@ Also some values may explicit a target parameter with a _key_.
 After the _headline_, several lines of indented _content_ may follow,
 and the block ends at the very first line back to the previous indentation.
 
-> By using indentation you don't need a clossing tag,
-> but if you miss it, you might place a clossing `:::` at the same
+> By using indentation you don't need a closing tag,
+> but if you miss it, you might place a closing `:::` at the same
 > level of the headline.
 
 A block type may interpret the content as markdown as well.
