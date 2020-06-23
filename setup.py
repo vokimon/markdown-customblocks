@@ -4,7 +4,7 @@ with open('README.md') as readme:
 
 setup(
     name='markdown-customblocks',
-    version='0.0.0',
+    version='0.1.0',
     keywords='markdown extension customblocks admonitions container youtube twitter',
     description='Extension pack for Python Markdown.',
     long_description=long_description,
