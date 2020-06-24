@@ -117,12 +117,12 @@ For example:
 
 ## Implementing a custom block type
 
-> This is still a draft. Conventions are likely to change until first stable version.
+> **Warning:** This is still a draft. Conventions are likely to change until first stable version.
 
 A block type can be defined just by defining a generator function:
 
 ```python
-def mytype(ctx, param1, myflag:bool, param2, param3, param4='default2'):
+def mytype(ctx, param1, flag1:bool, param2, param3, flag2=True, param4='default2'):
 	...
 ```
 
@@ -156,22 +156,25 @@ If you don't use it, you can skip it but it is useful if you want to receive som
 - `ctx.type`: the type of the block
 	- If you reuse the same function for different types, this is how you diferentiate them
 
-The rest of the parameters are filled using values parsed from the _head line_.
+Besides `ctx`, the rest of function parameters are filled using values parsed from _head line_.
+Unlike Python, you can interleave in the headline values with and without keys.
+They are resolved as follows:
 
-- First, key values are assigned to function arguments directly by name with the key
-- Flags (explained below) are also assigned by name
-- Values without key and matching no flag are assigned in order to the unassigned function arguments
+- Explicit key: When headline value has as key a function parameter name, is assigned to it
+- Flags: Function arguments annotated as `bool` (like example's `flag1`), or defaulting to `True` or `False`, (like example's `flag2`) are considered flags
+	- Flag parameters are asigned to headline keyless values matching the name of a flag, or the name prefixed by `no`
+	- Example: `flag1` will be valued True if headlines contains `flag1` or `False` if the headline contains `noflag1`.
+- Positional: Remaining headline values and function parameters are assigned one-to-one by position
 - Any [keyword-only] and [positional-only] parameters will receive only values from either key or keyless values
-- Remaining key and keyless values are assigned to the key (`**kwds`) and positional (`*args`) varidic arguments, if they are specified in the signature
+- If the signature contains key (`**kwds`) or positional (`*args`) varidic variables, any remaining key and keyless values from the headline are assigned to them
+
+Following Markdown phylosophy, errors are warned but do not stop the processing, so:
+
+- Unmatched function parameters without a default value will be warned and assigned an empty string.
+- Unmatched headline values will be warned and ignored.
 
 [keyword-only]: https://www.python.org/dev/peps/pep-3102/
 [positional-only]: https://www.python.org/dev/peps/pep-0570/
-
-Function arguments annotated as `bool` (or having True or False as defaults) are considered flags
-
-- Flags are set to True if there is a keyless value matching its name. In the example `myflag`
-- Flags are set to False if there is a keyless value matching its name prefixed with `no`. In the example, `nomyflag`
-
 
 ## Predefined block types
 
@@ -365,9 +368,9 @@ So, it would be nice to:
 
 - Have a common syntax and differentiate block by a semantic name
 - Have a common way to specify parameters
-- Plugins just specify the expected parameters and generate the content
-- Get the extension you like and add the feature you miss
-- Nest them
+- Define the content in a way that you could nest blocks
+- Plugins just specify the expected parameters in the signature and generate the output with them
+- Get the block type you like and add the feature you miss
 
 We all stand on giants' shoulders so take a look at the [long list](doc/inspiration.md)
 of markdown extensions and other software that inspired and influenced this extension.
