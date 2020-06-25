@@ -72,7 +72,6 @@ class CustomBlocksProcessor(BlockProcessor):
         The method returns a tuple of a list with all keyless
         parameters and a dict with all keyword parameters.
         """
-        print(params)
         RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\S]+)')
         args = []
         kwd = {}
@@ -206,6 +205,7 @@ typeGenerators = dict(
     tip = generators.admonition,
     warning = generators.admonition,
     youtube = generators.youtube,
+    vimeo = generators.vimeo,
     twitter = generators.twitter,
     linkcard = generators.linkcard,
     figure = generators.figure,
