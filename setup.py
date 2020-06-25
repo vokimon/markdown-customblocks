@@ -4,7 +4,7 @@ with open('README.md') as readme:
 
 setup(
     name='markdown-customblocks',
-    version='0.1.0',
+    version='0.2.0',
     keywords='markdown extension customblocks admonitions container youtube twitter',
     description='Python Markdown extension to add custom parametrizable and nestable blocks',
     long_description=long_description,
@@ -20,10 +20,10 @@ setup(
         ]
     },
     install_requires=[
-		'markdown',
-		'pytest',
-		'yamlns',
-		'beautifulsoup4',
+        'markdown',
+        'pytest',
+        'yamlns',
+        'beautifulsoup4',
 	],
     license='MIT License',
 	test_suite='customblocks',

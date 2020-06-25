@@ -373,10 +373,11 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## Release history
 
-### Unreleased
+### markdown-customblocks 0.2.0 (2020-06-25)
 
-- Better documentation
-- Receives metadata from `extra.meta`, `full_yaml_metadata` and `yaml_metadata` extensions
+- Improve documentation (parameter passing, toc...)
+- Provide `ctx.metadata` to access Markdown.Meta (from `extra.meta`, `full_yaml_metadata`... extensions)
+- `figure`: link to the image
 
 ### markdown-customblocks 0.1.0 (2020-06-23)
 
