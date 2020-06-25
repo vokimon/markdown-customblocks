@@ -6,7 +6,7 @@ setup(
     name='markdown-customblocks',
     version='0.1.0',
     keywords='markdown extension customblocks admonitions container youtube twitter',
-    description='Extension pack for Python Markdown.',
+    description='Python Markdown extension to add custom parametrizable and nestable blocks',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='David García Garzón',
