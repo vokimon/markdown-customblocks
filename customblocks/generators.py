@@ -44,7 +44,9 @@ def figure(ctx, url, *args, **kwds):
 	for attribute, value in kwds.items():
 		figure.set(attribute, value)
 
-	img = etree.SubElement(figure, 'img')
+	link = etree.SubElement(figure, 'a')
+	link.set('href', url)
+	img = etree.SubElement(link, 'img')
 	img.set('src', url)
 	if title:
 		img.set('title', title)

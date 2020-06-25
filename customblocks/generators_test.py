@@ -134,7 +134,7 @@ class Examples_Test(test_tools.TestCase):
 				This figure is awsome
 			""",
             "<figure>"
-			"""<img src="https://via.placeholder.com/300.png" />"""
+			"""<a href="https://via.placeholder.com/300.png"><img src="https://via.placeholder.com/300.png" /></a>"""
 			"<figcaption>\n"
 			"<p>This figure is awsome</p>\n"
 			"</figcaption>\n"
@@ -147,10 +147,11 @@ class Examples_Test(test_tools.TestCase):
 				This figure is awsome
 			""",
             "<figure>"
+			'<a href="https://via.placeholder.com/300.png">'
 			'<img '
 				'src="https://via.placeholder.com/300.png" '
 				'title="This is a title" '
-			'/>'
+			'/></a>'
 			"<figcaption>\n"
 			"<p>This figure is awsome</p>\n"
 			"</figcaption>\n"
@@ -163,10 +164,11 @@ class Examples_Test(test_tools.TestCase):
 				This figure is awsome
 			""",
             "<figure>"
+			'<a href="https://via.placeholder.com/300.png">'
 			'<img '
 				'alt="This is a title" '
 				'src="https://via.placeholder.com/300.png" '
-			'/>'
+			'/></a>'
 			"<figcaption>\n"
 			"<p>This figure is awsome</p>\n"
 			"</figcaption>\n"
@@ -179,9 +181,10 @@ class Examples_Test(test_tools.TestCase):
 				This figure is awsome
 			""",
             '<figure class="left-align">'
+			'<a href="https://via.placeholder.com/300.png">'
 			'<img '
 				'src="https://via.placeholder.com/300.png" '
-			'/>'
+			'/></a>'
 			"<figcaption>\n"
 			"<p>This figure is awsome</p>\n"
 			"</figcaption>\n"
@@ -195,9 +198,10 @@ class Examples_Test(test_tools.TestCase):
 				This figure is awsome
 			""",
             '<figure style="background: red">'
+			'<a href="https://via.placeholder.com/300.png">'
 			'<img '
 				'src="https://via.placeholder.com/300.png" '
-			'/>'
+			'/></a>'
 			"<figcaption>\n"
 			"<p>This figure is awsome</p>\n"
 			"</figcaption>\n"
