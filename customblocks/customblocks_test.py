@@ -7,10 +7,6 @@ try:
 	import full_yaml_metadata
 except ImportError:
 	full_yaml_metadata = None
-try:
-	import yaml_metadata
-except ImportError:
-	yaml_metadata = None
 
 class CustomBlockExtension_Test(test_tools.TestCase):
 
@@ -765,49 +761,6 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			::: custom
 			""", """\
 			<custom>None</custom>""")
-
-
-	@unittest.skipIf(not yaml_metadata, "Requires full-yaml-metadata")
-	def test_metadata_yamlMetadataExtension(self):
-		def custom(ctx):
-			return "<custom>{}</custom>".format(ctx.metadata)
-
-		self.addExtensions('yaml_metadata')
-		self.setupCustomBlocks(custom=custom)
-		self.assertMarkdown("""\
-			---
-			mymeta: metavalue
-			---
-			::: custom
-			""", """\
-			<custom>{'mymeta': 'metavalue'}</custom>""")
-
-	@unittest.skipIf(not yaml_metadata, "Requires full-yaml-metadata")
-	def test_metadata_yamlMetadataExtension_noMetadata(self):
-		def custom(ctx):
-			return "<custom>{}</custom>".format(ctx.metadata)
-
-		self.addExtensions('yaml_metadata')
-		self.setupCustomBlocks(custom=custom)
-		self.assertMarkdown("""\
-			::: custom
-			""", """\
-			<custom>None</custom>""")
-
-	@unittest.skipIf(not yaml_metadata, "Requires full-yaml-metadata")
-	def test_metadata_yamlMetadataExtension_empty(self):
-		def custom(ctx):
-			return "<custom>{}</custom>".format(ctx.metadata)
-
-		self.addExtensions('yaml_metadata')
-		self.setupCustomBlocks(custom=custom)
-		self.assertMarkdown("""\
-			---
-			...
-			::: custom
-			""", """\
-			<custom>None</custom>""")
-
 
 
 
