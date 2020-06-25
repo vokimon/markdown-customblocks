@@ -150,14 +150,16 @@ def youtube(id, *, autoplay=False, controls=True, loop=False):
     iframe.set('src', url)
     return iframe
 
-def vimeo(ctx, id, *, autoplay=False, loop=False):
-    options=''
-    if loop: options+='&loop=1'
-    if autoplay: options+='&autoplay=1'
+def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=True):
+    options=[]
+    if not byline: options.append("byline=0")
+    options.append('portrait=1')
+    if loop: options.append('loop=1')
+    if autoplay: options.append('autoplay=1')
 
     iframe = etree.SubElement(ctx.parent, 'iframe')
-    iframe.set('src', 'https://player.vimeo.com/video/{}?byline=0&portrait=1{}'
-        .format(id, options))
+    iframe.set('src', 'https://player.vimeo.com/video/{}?{}'
+        .format(id, '&'.join(options)))
     iframe.set('width', "100%")
     iframe.set('height', "300")
     iframe.set('frameborder', "0")
