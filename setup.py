@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 with open('README.md') as readme:
-	long_description = readme.read()
+    long_description = readme.read()
 
 setup(
     name='markdown-customblocks',
@@ -24,16 +24,16 @@ setup(
         'pytest',
         'yamlns',
         'beautifulsoup4',
-	],
+    ],
     license='MIT License',
-	test_suite='customblocks',
+    test_suite='customblocks',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Console',
         'Intended Audience :: Developers',
-		'Intended Audience :: Science/Research',
-		'Intended Audience :: Other Audience',
-		'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+        'Intended Audience :: Science/Research',
+        'Intended Audience :: Other Audience',
+        'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
@@ -48,3 +48,5 @@ setup(
         'Topic :: Text Processing :: Markup :: HTML',
     ]
 )
+
+# vim: et ts=4 sw=4
