@@ -161,18 +161,18 @@ Besides `ctx`, the rest of function parameters are filled using values parsed fr
 Unlike Python, you can interleave in the headline values with and without keys.
 They are resolved as follows:
 
-- Explicit key: When a key in the headline matches a keyable parameter name in the generator, the value is assigned to it
-- Flags: Generator arguments annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`) are considered flags
+- **Explicit key:** When a key in the headline matches a keyable parameter name in the generator, the value is assigned to it
+- **Flag:** Generator arguments annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`) are considered flags
 	- When a keyless value matches a flag name in the generator (`myflag`), `True` is passed
-	- When matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
-- Positional: Remaining headline values and function parameters are assigned one-to-one by position
-- Any [keyword-only] and [positional-only] parameters will receive only values from either key or keyless values
-- If the signature contains key (`**kwds`) or positional (`*args`) varidic variables, any remaining key and keyless values from the headline are assigned to them
+	- When it matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
+- **Positional:** Remaining headline values and function parameters are assigned one-to-one by position
+- **Restricted:** Restrictions on how to receive the values ([keyword-only] and [positional-only]) are respected and they will receive only values from either key or keyless values
+- **Varidics:** If the signature contains key (`**kwds`) or positional (`*args`) varidic variables, any remaining key and keyless values from the headline are assigned to them
 
 Following Markdown phylosophy, errors are warned but do not stop the processing, so:
 
 - Unmatched function parameters without a default value will be warned and assigned an empty string.
-- Unmatched headline values will be warned and ignored.
+- Unused headline values will be warned and ignored.
 
 [keyword-only]: https://www.python.org/dev/peps/pep-3102/
 [positional-only]: https://www.python.org/dev/peps/pep-0570/
