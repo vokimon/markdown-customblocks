@@ -122,7 +122,7 @@ For example:
 A block type can be defined just by defining a generator function:
 
 ```python
-def mytype(ctx, param1, flag1:bool, param2, param3, flag2=True, param4='default2'):
+def mytype(ctx, param1, myflag:bool, param2, param3, yourflag=True, param4='default2'):
 	...
 ```
 
@@ -155,15 +155,16 @@ If you don't use it, you can skip it but it is useful if you want to receive som
 - `ctx.parser`: the markdown parser, can be used to parse the content or any other markdown code
 - `ctx.type`: the type of the block
 	- If you reuse the same function for different types, this is how you diferentiate them
+- `ctx.metadata`: A dictionary with metadata from your metadata plugin.
 
 Besides `ctx`, the rest of function parameters are filled using values parsed from _head line_.
 Unlike Python, you can interleave in the headline values with and without keys.
 They are resolved as follows:
 
-- Explicit key: When headline value has as key a function parameter name, is assigned to it
-- Flags: Function arguments annotated as `bool` (like example's `flag1`), or defaulting to `True` or `False`, (like example's `flag2`) are considered flags
-	- Flag parameters are asigned to headline keyless values matching the name of a flag, or the name prefixed by `no`
-	- Example: `flag1` will be valued True if headlines contains `flag1` or `False` if the headline contains `noflag1`.
+- Explicit key: When a key in the headline matches a keyable parameter name in the generator, the value is assigned to it
+- Flags: Generator arguments annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`) are considered flags
+	- When a keyless value matches a flag name in the generator (`myflag`), `True` is passed
+	- When matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
 - Positional: Remaining headline values and function parameters are assigned one-to-one by position
 - Any [keyword-only] and [positional-only] parameters will receive only values from either key or keyless values
 - If the signature contains key (`**kwds`) or positional (`*args`) varidic variables, any remaining key and keyless values from the headline are assigned to them
