@@ -28,6 +28,7 @@ using an uniform, parametrizable and nestable syntax.
 	- [Twitter (`customblocks.generators.twitter`)](#twitter-customblocks.generators.twitter)
 - [Motivation](#motivation)
 - [Release history](#release-history)
+- [TODO](#todo)
 	
 
 ## What is it?
@@ -372,6 +373,12 @@ of markdown extensions and other software that inspired and influenced this exte
 
 
 ## Release history
+
+### Unreleased
+
+- admonition:
+	- title should be a `<p>` not a `<div>` for ReST styles to work
+
 
 ### markdown-customblocks 0.2.0 (2020-06-25)
 

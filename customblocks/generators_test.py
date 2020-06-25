@@ -31,7 +31,7 @@ class Examples_Test(test_tools.TestCase):
                 content
             """, """\
             <div class="admonition note">
-            <div class="admonition-title">A title</div>
+            <p class="admonition-title">A title</p>
             <p>content</p>
             </div>
             """)
@@ -42,7 +42,7 @@ class Examples_Test(test_tools.TestCase):
                 content
             """, """\
             <div class="admonition note">
-            <div class="admonition-title">A title</div>
+            <p class="admonition-title">A title</p>
             <p>content</p>
             </div>
             """)
@@ -53,7 +53,7 @@ class Examples_Test(test_tools.TestCase):
                 content
             """, """\
             <div class="admonition note super" style="float:left;width:30%">
-            <div class="admonition-title">A title</div>
+            <p class="admonition-title">A title</p>
             <p>content</p>
             </div>
             """)
@@ -64,7 +64,7 @@ class Examples_Test(test_tools.TestCase):
                 content
             """, """\
             <div class="admonition note" style="float:left;width:30%">
-            <div class="admonition-title">Note</div>
+            <p class="admonition-title">Note</p>
             <p>content</p>
             </div>
             """)

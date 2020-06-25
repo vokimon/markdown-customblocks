@@ -23,7 +23,7 @@ def admonition(ctx, title=None, *args, **kwds):
     )))
     if title is None:
         title = ctx.type.title()
-    titlediv = etree.SubElement(div, 'div')
+    titlediv = etree.SubElement(div, 'p')
     titlediv.set('class', 'admonition-title')
     titlediv.text = title
     for k,v in kwds.items():
