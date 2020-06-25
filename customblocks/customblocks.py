@@ -28,6 +28,7 @@ class CustomBlocksExtension(Extension):
         md.registerExtension(self)
         processor = CustomBlocksProcessor(md.parser)
         processor.config = self.getConfigs()
+        processor.md = md
         md.parser.blockprocessors.register(processor, 'customblocks', 105)
 
 
@@ -166,6 +167,7 @@ class CustomBlocksProcessor(BlockProcessor):
 		ctx.parent = parent
 		ctx.content = content
 		ctx.parser = self.parser
+		ctx.metadata = self.parser.md.Meta if hasattr(self.parser.md, "Meta") else None
 
 		outargs, kwds = self._adaptParams(generator, ctx, args, kwds)
 

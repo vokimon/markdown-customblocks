@@ -3,6 +3,15 @@ from markdown import markdown
 from markdown import test_tools
 from markdown.util import etree
 
+try:
+	import full_yaml_metadata
+except ImportError:
+	full_yaml_metadata = None
+try:
+	import yaml_metadata
+except ImportError:
+	yaml_metadata = None
+
 class CustomBlockExtension_Test(test_tools.TestCase):
 
 	def setUp(self):
@@ -20,6 +29,8 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 				.setdefault('generators', {})
 				.update(kwds)
 		)
+	def addExtensions(self, *args):
+		self.default_kwargs['extensions']+=args
 
 	def assertMarkdown(self, markdown, html, **kwds):
 		self.assertMarkdownRenders(
@@ -665,6 +676,140 @@ class CustomBlockExtension_Test(test_tools.TestCase):
 			args=('super',)
 			</custom>
 			""")
+
+	def test_metadata_withNoMetadataExtension(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""", """\
+			<custom>None</custom>""")
+
+	def test_metadata_extraMeta(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('meta')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			---
+			mymeta: metavalue
+			---
+			::: custom
+			""", """\
+			<custom>{'mymeta': ['metavalue']}</custom>""")
+
+	def test_metadata_extraMeta_none(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('meta')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""", """\
+			<custom>{}</custom>""")
+
+	def test_metadata_extraMeta_empty(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('meta')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			---
+			...
+			::: custom
+			""", """\
+			<custom>{}</custom>""")
+
+	@unittest.skipIf(not full_yaml_metadata, "Requires full-yaml-metadata")
+	def test_metadata_fullYamlMetadataExtension(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('full_yaml_metadata')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			---
+			mymeta: metavalue
+			---
+			::: custom
+			""", """\
+			<custom>{'mymeta': 'metavalue'}</custom>""")
+
+	@unittest.skipIf(not full_yaml_metadata, "Requires full-yaml-metadata")
+	def test_metadata_fullYamlMetadataExtension_none(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('full_yaml_metadata')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""", """\
+			<custom>None</custom>""")
+
+	@unittest.skipIf(not full_yaml_metadata, "Requires full-yaml-metadata")
+	def test_metadata_fullYamlMetadataExtension_empty(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('full_yaml_metadata')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			---
+			...
+			::: custom
+			""", """\
+			<custom>None</custom>""")
+
+
+	@unittest.skipIf(not yaml_metadata, "Requires full-yaml-metadata")
+	def test_metadata_yamlMetadataExtension(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('yaml_metadata')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			---
+			mymeta: metavalue
+			---
+			::: custom
+			""", """\
+			<custom>{'mymeta': 'metavalue'}</custom>""")
+
+	@unittest.skipIf(not yaml_metadata, "Requires full-yaml-metadata")
+	def test_metadata_yamlMetadataExtension_noMetadata(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('yaml_metadata')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			::: custom
+			""", """\
+			<custom>None</custom>""")
+
+	@unittest.skipIf(not yaml_metadata, "Requires full-yaml-metadata")
+	def test_metadata_yamlMetadataExtension_empty(self):
+		def custom(ctx):
+			return "<custom>{}</custom>".format(ctx.metadata)
+
+		self.addExtensions('yaml_metadata')
+		self.setupCustomBlocks(custom=custom)
+		self.assertMarkdown("""\
+			---
+			...
+			::: custom
+			""", """\
+			<custom>None</custom>""")
+
+
+
 
 """
 - what to do with dashed keys
