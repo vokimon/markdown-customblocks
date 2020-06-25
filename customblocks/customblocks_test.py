@@ -8,8 +8,8 @@ try:
 except ImportError:
     full_yaml_metadata = None
 
-class CustomBlockExtension_Test(test_tools.TestCase):
 
+class CustomBlockExtension_Test(test_tools.TestCase):
     def setUp(self):
         self.default_kwargs = dict(
             extensions = [
@@ -25,8 +25,9 @@ class CustomBlockExtension_Test(test_tools.TestCase):
                 .setdefault('generators', {})
                 .update(kwds)
         )
+
     def addExtensions(self, *args):
-        self.default_kwargs['extensions']+=args
+        self.default_kwargs['extensions'] += args
 
     def assertMarkdown(self, markdown, html, **kwds):
         self.assertMarkdownRenders(

@@ -5,6 +5,7 @@ from urllib.parse import urlparse, urljoin
 import base64
 from markdown.util import etree
 
+
 def container(ctx, *args, **kwds):
     div = etree.SubElement(ctx.parent, 'div')
     div.set('class', '%s' % (' '.join(
@@ -14,6 +15,7 @@ def container(ctx, *args, **kwds):
     for k,v in kwds.items():
         div.set(k,v)
     ctx.parser.parseChunk(div, ctx.content)
+
 
 def admonition(ctx, title=None, *args, **kwds):
     div = etree.SubElement(ctx.parent, 'div')
@@ -26,10 +28,9 @@ def admonition(ctx, title=None, *args, **kwds):
     titlediv = etree.SubElement(div, 'p')
     titlediv.set('class', 'admonition-title')
     titlediv.text = title
-    for k,v in kwds.items():
-        div.set(k,v)
+    for k, v in kwds.items():
+        div.set(k, v)
     ctx.parser.parseChunk(div, ctx.content)
-
 
 
 def figure(ctx, url, *args, **kwds):
@@ -69,13 +70,17 @@ def linkcard(url, embedimage=False):
         if not metatag:
             return None
         return metatag.get('content')
+
     def tag(name):
         tag = soup.find(name)
-        if not tag: return None
+        if not tag:
+            return None
         return tag.text
+
     def rellink(rel):
         tag = soup.find('link', rel=rel)
-        if not tag: return None
+        if not tag:
+            return None
         return tag.get('href')
 
     parsedurl = urlparse(url)
@@ -113,8 +118,8 @@ def linkcard(url, embedimage=False):
             imageBytes = imageresponse.raw.read()
             b64image = base64.b64encode(imageBytes).decode('ascii')
             # TODO: thumb it
-            image = 'data:image/jpg;base64,'+ b64image
-        
+            image = 'data:image/jpg;base64,' + b64image
+
     return f"""\
 <div class='linkcard'>
 <a href='{url}'><img src='{image}' style="float:right; width=30%" /></a>
@@ -127,12 +132,16 @@ def linkcard(url, embedimage=False):
 </div>
 """
 
+
 def youtube(id, *, autoplay=False, controls=True, loop=False):
     options = []
-    if autoplay: options.append('autoplay=1')
-    if not controls: options.append('controls=0')
-    if loop: options.append('loop=1')
-    options = ('?' + '&'.join(options))  if options else ''
+    if autoplay:
+        options.append('autoplay=1')
+    if not controls:
+        options.append('controls=0')
+    if loop:
+        options.append('loop=1')
+    options = ('?' + '&'.join(options)) if options else ''
     url = f"https://www.youtube.com/embed/{id}{options}"
     iframe = etree.Element('iframe')
     iframe.set('width', '420')
@@ -154,7 +163,9 @@ def twitter(user,
     options += f'&align={align}' if align in ('right', 'center', 'left') else ''
     options += f'&conversation=none' if not conversation else ''
 
-    response = requests.get(f'https://publish.twitter.com/oembed?url=https://twitter.com/{user}/status/{tweet}&dnt=True{options}')
+    response = requests.get(
+        f'https://publish.twitter.com/oembed?url=https://twitter.com/{user}/status/{tweet}&dnt=True{options}'
+    )
     result = ns(response.json())
     #print("oembed result:", result.dump())
     soup = BeautifulSoup(result.html, 'html.parser')

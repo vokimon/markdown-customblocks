@@ -9,18 +9,23 @@ import inspect
 import warnings
 from .generators import container
 
+
 class CustomBlocksExtension(Extension):
     """ CustomBlocks extension for Python-Markdown. """
 
     def __init__(self, **kwargs):
         self.config = dict(
-            fallback = [container,
+            fallback=[
+                container,
                 "Renderer used when the type is not defined. "
-                "By default, is a div container."],
-            generators = [{},
+                "By default, is a div container.",
+            ],
+            generators=[
+                {},
                 "Type-renderer bind as a dict, it will update the default map. "
-                "Set a type to None to use the fallback."],
-            )
+                "Set a type to None to use the fallback.",
+            ],
+        )
         super(CustomBlocksExtension, self).__init__(**kwargs)
 
     def extendMarkdown(self, md):
@@ -33,8 +38,10 @@ class CustomBlocksExtension(Extension):
 
 
 class CustomBlocksProcessor(BlockProcessor):
-    RE = re.compile(r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*(?:\n|$)')
-    RE_END= r'^:::(?:$|\n)' # Explicit end marker, not required but sometimes useful
+    RE = re.compile(
+        r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*(?:\n|$)'
+    )
+    RE_END = r'^:::(?:$|\n)'  # Explicit end marker, not required but sometimes useful
 
     def test(self, parent, block):
         return self.RE.search(block)
@@ -52,7 +59,7 @@ class CustomBlocksProcessor(BlockProcessor):
             if indented:
                 content.append(indented)
             if unindented:
-                blocks.insert(0,unindented)
+                blocks.insert(0, unindented)
                 break
         return '\n\n'.join(content)
 
@@ -67,13 +74,13 @@ class CustomBlocksProcessor(BlockProcessor):
         """
         print(params)
         RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\S]+)')
-        args =[]
+        args = []
         kwd = {}
         for key, param in RE_PARAM.findall(params):
-            if param[0]==param[-1]=='"':
+            if param[0] == param[-1] == '"':
                 param = eval(param)
             if key:
-                kwd[key]=param
+                kwd[key] = param
             else:
                 args.append(param)
         return args, kwd
@@ -83,6 +90,7 @@ class CustomBlocksProcessor(BlockProcessor):
         Takes args and kwds extracted from custom block head line
         and adapts them to the signature of the callback.
         """
+
         def warn(message):
             warnings.warn(f"In block '{ctx.type}', " + message)
 
@@ -90,18 +98,16 @@ class CustomBlocksProcessor(BlockProcessor):
 
         # Turn flags into boolean keywords
         for name, param in signature.parameters.items():
-            if (
-                type(param.default) != bool and
-                param.annotation != bool
-            ): continue
+            if type(param.default) != bool and param.annotation != bool:
+                continue
 
             if name in args:
                 args.remove(name)
-                kwds[name]=True
+                kwds[name] = True
 
-            if 'no'+name in args:
-                args.remove('no'+name)
-                kwds[name]=False
+            if 'no' + name in args:
+                args.remove('no' + name)
+                kwds[name] = False
 
         outargs = []
         outkwds = {}
@@ -119,9 +125,12 @@ class CustomBlocksProcessor(BlockProcessor):
                 continue
 
             value = (
-                kwds.pop(name) if name in kwds and param.kind != param.POSITIONAL_ONLY
-                else args.pop(0) if args and param.kind != param.KEYWORD_ONLY
-                else param.default if param.default is not param.empty
+                kwds.pop(name)
+                if name in kwds and param.kind != param.POSITIONAL_ONLY
+                else args.pop(0)
+                if args and param.kind != param.KEYWORD_ONLY
+                else param.default
+                if param.default is not param.empty
                 else warn(f"missing mandatory attribute '{name}'") or ""
             )
             if param.kind == param.KEYWORD_ONLY:
@@ -147,12 +156,12 @@ class CustomBlocksProcessor(BlockProcessor):
     def run(self, parent, blocks):
         block = blocks[0]
         match = self.RE.search(block)
-        previous = block[:match.start()]
+        previous = block[: match.start()]
         if previous:
             self.parser.parseChunk(parent, previous)
         _type = match.group(1)
-        args, kwds = self._processParams(block[match.end(1): match.end()])
-        blocks[0] = block[match.end():]
+        args, kwds = self._processParams(block[match.end(1) : match.end()])
+        blocks[0] = block[match.end() :]
         content = self._indentedContent(blocks)
         # Remove optional closing if present
         if blocks:
