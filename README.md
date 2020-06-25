@@ -333,12 +333,6 @@ This generator generates an embeded youtube video.
 
 Content is ignored.
 
-### TODO
-
-- Take aspect ratio and sizes from Youtube api
-- Use covers
-- Privacy safe mode
-
 ### Twitter (`customblocks.generators.twitter`)
 
 Not documented yet.
@@ -379,12 +373,39 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## Release history
 
+### Unreleased
+
+- Better documentation
+- Receives metadata from `extra.meta`, `full_yaml_metadata` and `yaml_metadata` extensions
+
 ### markdown-customblocks 0.1.0 (2020-06-23)
 
 - First working version
 - Support for function based generators
 - Default block: container
 - Example blocks: admonition, twitter, youtube, figure, linkcard
+
+
+## TODO
+
+- Make configuration available to generators
+- Generator specific configuration
+- Default css for generators
+- Flags: coerce to bool?
+- Annotations: coerce to any type
+- Figure
+	- Thumbnail generation
+	- lightbox
+	- Deexternalizer
+- Youtube:
+	- Take aspect ratio and sizes from Youtube api
+	- Use covers
+	- Privacy safe mode
+- Twitter
+	- Privacy safe mode
+
+
+
 
 
 
