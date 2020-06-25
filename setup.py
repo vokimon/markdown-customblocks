@@ -14,6 +14,11 @@ setup(
     python_requires='>=2.7',
     url='https://github.com/vokimon/markdown-customblocks',
     packages=find_packages(exclude=['test*']),
+    entry_point={
+        'markdown.extensions': [
+            'customblocks = customblocks:CustomBlocksExtension',
+        ]
+    },
     install_requires=[
 		'markdown',
 		'pytest',
