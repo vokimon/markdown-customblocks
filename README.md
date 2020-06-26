@@ -292,7 +292,21 @@ So, you can benefit from existing styles and themes.
 
 ### Figure (`customblocks.generators.figure`)
 
-Not documented yet.
+An image as captioned figure.
+The content is taken as caption.
+
+`url`
+: the url to the image
+`alt` (keyword only)
+: image alt attribute
+`title` (keyword only)
+: image title attribute
+`*args`
+: additional classes for root `<figure>` tag
+`**kwds`
+: additional attributes for root `<figure>` tag
+
+
 
 
 ### Link card (`customblocks.generators.linkcard`)
