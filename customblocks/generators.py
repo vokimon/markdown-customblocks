@@ -150,10 +150,10 @@ def youtube(id, *, autoplay=False, controls=True, loop=False):
     iframe.set('src', url)
     return iframe
 
-def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=True):
+def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     options=[]
     if not byline: options.append("byline=0")
-    options.append('portrait=1')
+    if not portrait: options.append('portrait=0')
     if loop: options.append('loop=1')
     if autoplay: options.append('autoplay=1')
 
