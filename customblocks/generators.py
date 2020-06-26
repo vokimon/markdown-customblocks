@@ -57,7 +57,6 @@ def figure(ctx, url, *args, **kwds):
     caption = etree.SubElement(figure, 'figcaption')
     content = ctx.parser.parseChunk(caption, ctx.content)
     return figure
-    
 
 def linkcard(url, embedimage=False):
     response = requests.get(url)
@@ -95,7 +94,7 @@ def linkcard(url, embedimage=False):
         siteName
     )
     description = (
-        meta('og:description') or 
+        meta('og:description') or
         meta('twiiter:description') or
         meta('description') or
         ''
