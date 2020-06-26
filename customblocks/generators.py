@@ -165,6 +165,7 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     iframe.set('allow', "autoplay; fullscreen")
     iframe.set('allowfullscreen', 'allowfullscreen')
 
+
 def verkami(ctx, id, *, landscape=False):
     if landscape:
         return (
@@ -182,6 +183,7 @@ def verkami(ctx, id, *, landscape=False):
                 ' src="https://www.verkami.com/projects/{}/widget_portrait"'
                 '></iframe>'
         ).format(id)
+
 
 def goteo(ctx, id):
     return (

@@ -99,7 +99,7 @@ class Examples_Test(test_tools.TestCase):
 
     def test_vimeo(self):
         self.assertMarkdown("""\
-            ::: vimeo 55297514 
+            ::: vimeo 55297514
             """, """\
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?portrait=0" width="100%"></iframe>
             """)
