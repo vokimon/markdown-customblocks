@@ -390,11 +390,9 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ### Unreleased
 
-- New generators:
-	- vimeo
+- New generators: vimeo, verkami, goteo
 - admonition:
 	- title should be a `<p>` not a `<div>` for ReST styles to work
-
 
 ### markdown-customblocks 0.2.0 (2020-06-25)
 
@@ -404,10 +402,10 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ### markdown-customblocks 0.1.0 (2020-06-23)
 
-- First working version
+- First public version
 - Support for function based generators
-- Default block: container
-- Example blocks: admonition, twitter, youtube, figure, linkcard
+- Default generator: container
+- Example generators: admonition, twitter, youtube, figure, linkcard
 
 
 ## TODO
