@@ -132,6 +132,51 @@ class Examples_Test(test_tools.TestCase):
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?" width="100%"></iframe>
             """)
 
+    def test_verkami(self):
+        self.assertMarkdown("""\
+            ::: verkami 7948
+            """,
+            '<iframe'
+            ' allowtransparency="true"'
+            ' class="js-widget-iframe"'
+            ' frameborder="0"'
+            ' id="verkamiPortrait"'
+            ' scrolling="no"'
+            ' src="https://www.verkami.com/projects/7948/widget_portrait"'
+            ' style="width: 240px; height: 350px"'
+            '></iframe>'
+        )
+
+    def test_verkami_landscape(self):
+        self.assertMarkdown("""\
+            ::: verkami 7948 landscape
+            """,
+            '<iframe'
+            ' allowtransparency="true"'
+            ' class="js-widget-iframe"'
+            ' frameborder="0"'
+            ' id="verkamiLandscape"' # this changes
+            ' scrolling="no"'
+            # and the end of this:
+            ' src="https://www.verkami.com/projects/7948/widget_landscape"'
+            # and this (dimensions):
+            ' style="width: 480px; height: 210px"'
+            '></iframe>'
+        )
+
+    def test_goteo(self):
+        self.assertMarkdown("""\
+            ::: goteo my-project
+            """,
+            '<iframe'
+            ' frameborder="0"'
+            ' height="492px"'
+            ' scrolling="no"'
+            ' src="//www.goteo.org/widget/project/my-project"'
+            ' width="300px"'
+            '></iframe>'
+        )
+
     def test_tweet_allOptions(self):
         self.assertMarkdown("""\
             ::: twitter marcmushu 1270395360163307530 theme=dark hideimages align=right conversation

@@ -165,6 +165,30 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     iframe.set('allow', "autoplay; fullscreen")
     iframe.set('allowfullscreen', 'allowfullscreen')
 
+def verkami(ctx, id, *, landscape=False):
+    if landscape:
+        return (
+            '<iframe class="js-widget-iframe" '
+                ' id="verkamiLandscape" allowtransparency="true" frameborder="0" scrolling="no"'
+                ' style="width: 480px; height: 210px"'
+                ' src="https://www.verkami.com/projects/{}/widget_landscape"'
+                '></iframe>'
+        ).format(id)
+    else:
+        return (
+            '<iframe class="js-widget-iframe"'
+                ' id="verkamiPortrait" allowtransparency="true" frameborder="0" scrolling="no"'
+                ' style="width: 240px; height: 350px"'
+                ' src="https://www.verkami.com/projects/{}/widget_portrait"'
+                '></iframe>'
+        ).format(id)
+
+def goteo(ctx, id):
+    return (
+        '<iframe frameborder="0" height="492px"'
+        ' src="//www.goteo.org/widget/project/{}"'
+        ' width="300px" scrolling="no"></iframe>'
+    ).format(id)
 
 
 def twitter(user,
