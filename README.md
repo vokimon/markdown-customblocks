@@ -36,10 +36,6 @@ using an uniform, parametrizable and nestable syntax.
 
 ## What is it?
 
-> **Warning: This extension is still in its early development stages.**\
-> It is a proposal still open to discussion and
-> generators API could be subject of change.
-
 This markdown extension simplifies the definition and use
 of new types of block, by defining a common syntax for them.
 That is, a common way to specify the type of the block,
@@ -57,7 +53,10 @@ The extension also provides several useful examples of generators:
 - `admonition`: Admonitions (quite similar to the [standard extra extension][ExtraAdmonitions])
 - `twitter`: Embeded tweets
 - `youtube`: Embeded videos from youtube...
+- `vimeo`: Embeded videos from vimeo...
 - `linkcard`: External link cards (like Facebook and Twitter do, when you post a link)
+- `verkami`: Fund raising project widget in [Verkami]
+- `goteo`: Fund raising project widget in [Goteo]
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
 
@@ -121,16 +120,15 @@ For example:
 
 ## Implementing a custom block type
 
-> **Warning:** This is still a draft. Conventions are likely to change until first stable version.
-
-A block type can be defined just by defining a generator function:
+A block type can be defined just by defining a **generator** function.
+The signature of the generator will determine the attributes that accept in the headline.
 
 ```python
 def mytype(ctx, param1, myflag:bool, param2, param3, yourflag=True, param4='default2'):
     ...
 ```
 
-You have to register it to a type
+You have to register it to a type:
 
 ```python
 MARKDOWN = {
@@ -138,17 +136,20 @@ MARKDOWN = {
     'extensions_configs': {
         'customblocks': {
             'generators': {
+                # direct symbol reference
                 'mytype': mytype,
+                # using import strings
+                'akamytype': 'myparentmodule.mymodule:mytype',
             }
         },
     },
 }
 ```
 
-The generator can use several strategies to generate content:
+A generator can use several strategies to generate content:
 
-- Return an html string,
-- Return `etree` `Element`, or
+- Return an html string
+- Return `etree` `Element`
 - Manipulate `ctx.parent` and return `None`
 
 The first parameter, `ctx`, is the context.
@@ -208,7 +209,7 @@ Detailed explanation follows.
 ::: figure ethernalbulb.jpg 
 
 ::: important "Remember the milk"
-    Milk and chicken has been the responsibles the demoratization
+    Milk and chicken has been the responsibles the democratization
     of the protein sources.
 ```
 
@@ -502,6 +503,10 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## Release history
 
+### Unreleased
+
+- Register a generator with a string like `'module.submodule:function'`
+
 ### markdown-customblocks 0.3.0 (2020-06-27)
 
 - Provide `ctx.config` from `extension_configs.customblocks.config`
@@ -526,8 +531,8 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## TODO
 
-- Make configuration available to generators
-- Generator specific configuration
+- [x] Make configuration available to generators
+- [x] Configure generators by means of import string
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
