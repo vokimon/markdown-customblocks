@@ -295,6 +295,16 @@ So, you can benefit from existing styles and themes.
 `**kwds`
 : added as attributes for the outter div
 
+**Warning:**
+If you are migrating from `extra.admonition`,
+be careful as `extra` identifies title using the quotes,
+while `customblocks` will take the first parameter as title and next values as additional classes.
+If you like having the classes before, you should explicit the `title` key.
+
+```markdown
+::: danger blinking title="Super danger"
+    Do **not** try to do this at home
+```
 
 ### Figure (`customblocks.generators.figure`)
 
