@@ -175,26 +175,32 @@ class CustomBlocksProcessor(BlockProcessor):
 
         return outargs, outkwds
 
+    def _extractHeadline(self, block):
+        match = self.RE_HEADLINE.search(block)
+        return (
+            block[: match.start()], # pre
+            match.group(1), # type
+            block[match.end(1) : match.end()], # params
+            block[match.end() :], # post
+        )
+
     def run(self, parent, blocks):
         block = blocks[0]
-        match = self.RE_HEADLINE.search(block)
-        previous = block[: match.start()]
-        if previous:
-            self.parser.parseChunk(parent, previous)
-        _type = match.group(1)
-        args, kwds = self._processParams(block[match.end(1) : match.end()])
-        blocks[0] = block[match.end() :]
+        pre, blocktype, params, post = self._extractHeadline(blocks[0])
+        if pre:
+            self.parser.parseChunk(parent, pre)
+        blocks[0] = post
+        args, kwds = self._processParams(params)
         content = self._indentedContent(blocks)
         # Remove optional closing if present
         if blocks:
             blocks[0] = self.RE_END.sub('', blocks[0])
 
         typeGenerators.update(self.config['generators'])
-
-        generator = self._getGenerator(typeGenerators.get(_type, container))
+        generator = self._getGenerator(typeGenerators.get(blocktype, container))
 
         ctx = ns()
-        ctx.type = _type
+        ctx.type = blocktype
         ctx.parent = parent
         ctx.content = content
         ctx.parser = self.parser
