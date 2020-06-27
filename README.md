@@ -160,6 +160,7 @@ If you don't use it, you can skip it but it is useful if you want to receive som
 - `ctx.type`: the type of the block
     - If you reuse the same function for different types, this is how you diferentiate them
 - `ctx.metadata`: A dictionary with metadata from your metadata plugin.
+- `ctx.config`: A dictionary passed from `extension_configs.customblocks.config`
 
 Besides `ctx`, the rest of function parameters are filled using values parsed from _head line_.
 Unlike Python, you can interleave in the headline values with and without keys.
