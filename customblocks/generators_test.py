@@ -73,28 +73,36 @@ class Examples_Test(test_tools.TestCase):
         self.assertMarkdown("""\
             ::: youtube 7SS24_CgwEM
             """, """\
-            <iframe class="youtube" height="315" src="https://www.youtube.com/embed/7SS24_CgwEM" width="420"></iframe>
+            <div class="videowrapper youtube">
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM"></iframe>
+            </div>
             """)
 
     def test_youtube_withAutoplay(self):
         self.assertMarkdown("""\
             ::: youtube 7SS24_CgwEM autoplay
             """, """\
-            <iframe class="youtube" height="315" src="https://www.youtube.com/embed/7SS24_CgwEM?autoplay=1" width="420"></iframe>
+            <div class="videowrapper youtube">
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?autoplay=1"></iframe>
+            </div>
             """)
 
     def test_youtube_withAutoplayAndLoop(self):
         self.assertMarkdown("""\
             ::: youtube 7SS24_CgwEM autoplay loop
             """, """\
-            <iframe class="youtube" height="315" src="https://www.youtube.com/embed/7SS24_CgwEM?autoplay=1&amp;loop=1" width="420"></iframe>
+            <div class="videowrapper youtube">
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?autoplay=1&amp;loop=1"></iframe>
+            </div>
             """)
 
     def test_youtube_nocontrols(self):
         self.assertMarkdown("""\
             ::: youtube 7SS24_CgwEM nocontrols
             """, """\
-            <iframe class="youtube" height="315" src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0" width="420"></iframe>
+            <div class="videowrapper youtube">
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0"></iframe>
+            </div>
             """)
 
     def test_vimeo(self):

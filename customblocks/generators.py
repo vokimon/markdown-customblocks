@@ -142,12 +142,11 @@ def youtube(id, *, autoplay=False, controls=True, loop=False):
         options.append('loop=1')
     options = ('?' + '&'.join(options)) if options else ''
     url = f"https://www.youtube.com/embed/{id}{options}"
-    iframe = etree.Element('iframe')
-    iframe.set('width', '420')
-    iframe.set('height', '315')
-    iframe.set('class', 'youtube')
+    div = etree.Element('div')
+    div.set('class', 'videowrapper youtube')
+    iframe = etree.SubElement(div,'iframe')
     iframe.set('src', url)
-    return iframe
+    return div
 
 def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     options=[]
