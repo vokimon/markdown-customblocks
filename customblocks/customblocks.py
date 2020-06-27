@@ -25,6 +25,10 @@ class CustomBlocksExtension(Extension):
                 "Type-renderer bind as a dict, it will update the default map. "
                 "Set a type to None to use the fallback.",
             ],
+            config=[
+                {},
+                "Generators config parameters.",
+            ],
         )
         super(CustomBlocksExtension, self).__init__(**kwargs)
 
@@ -176,6 +180,7 @@ class CustomBlocksProcessor(BlockProcessor):
         ctx.content = content
         ctx.parser = self.parser
         ctx.metadata = self.parser.md.Meta if hasattr(self.parser.md, "Meta") else None
+        ctx.config = ns(self.config.get('config',{}))
 
         outargs, kwds = self._adaptParams(generator, ctx, args, kwds)
 

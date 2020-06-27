@@ -26,6 +26,15 @@ class CustomBlockExtension_Test(test_tools.TestCase):
                 .update(kwds)
         )
 
+    def setupConfig(self, **kwds):
+        (
+            self.default_kwargs
+                .setdefault('extension_configs',{})
+                .setdefault('customblocks', {})
+                .setdefault('config', {})
+                .update(kwds)
+        )
+
     def addExtensions(self, *args):
         self.default_kwargs['extensions'] += args
 
@@ -762,6 +771,17 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             ::: custom
             """, """\
             <custom>None</custom>""")
+
+    def test_config(self):
+        def custom(ctx):
+            return "<custom>{}</custom>".format(ctx.config.parameter)
+
+        self.setupConfig(parameter='value')
+        self.setupCustomBlocks(custom=custom)
+        self.assertMarkdown("""\
+            ::: custom
+            """, """\
+            <custom>value</custom>""")
 
 
 
