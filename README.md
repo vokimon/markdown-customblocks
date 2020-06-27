@@ -505,10 +505,9 @@ of markdown extensions and other software that inspired and influenced this exte
 
 - Provide `ctx.config` from `extension_configs.customblocks.config`
 - New generators: vimeo, verkami, goteo
-- admonition:
-	- title should be a `<p>` not a `<div>` for ReST styles to work
-- youtube:
-	- responsive/fluid sizing
+- admonition: title should be a `<p>` not a `<div>` for ReST styles to work
+- youtube: responsive/fluid sizing
+- documented all generators
 
 ### markdown-customblocks 0.2.0 (2020-06-25)
 
