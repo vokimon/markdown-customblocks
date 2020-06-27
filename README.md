@@ -277,7 +277,7 @@ In order to generate:
 
 ```html
 <div class="admonition danger">
-<div class="admonition-title">Danger</div>
+<p class="admonition-title">Danger</p>
 <p>Do not try to do this at home</p>
 </div>
 ```
