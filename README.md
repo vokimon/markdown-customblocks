@@ -506,6 +506,7 @@ of markdown extensions and other software that inspired and influenced this exte
 ### Unreleased
 
 - Register a generator with a string like `'module.submodule:function'`
+- Support single quoted values
 
 ### markdown-customblocks 0.3.0 (2020-06-27)
 

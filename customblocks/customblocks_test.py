@@ -259,9 +259,16 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             <div class="myblock" key="value \nwith eols"></div>
             """)
 
-    def test_fenceSymbol(self):
+    def test_singleQuotedValues(self):
         self.assertMarkdown("""\
-            ::: myblock key="value \\nwith eols"
+            ::: myblock key='value with spaces'
+            """, """\
+            <div class="myblock" key="value with spaces"></div>
+            """)
+
+    def test_spacesAtTheEnd(self):
+        self.assertMarkdown("""\
+            ::: myblock key="value \\nwith eols"\t \t
             """, """\
             <div class="myblock" key="value \nwith eols"></div>
             """)

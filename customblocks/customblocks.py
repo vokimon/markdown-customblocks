@@ -47,11 +47,20 @@ class CustomBlocksProcessor(BlockProcessor):
     RE_HEADLINE = re.compile(
         r'(?:^|\n)::: *' # marker
         r'([\w\-]+)' # keyword
-        r'(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*' # params
+        r'(?: +(?:[\w]+=)?(' # params (optional keyword)
+            r"'(?:\\.|[^'])*'|" # single quoted
+            r'"(?:\\.|[^"])*"|' # double quoted
+            r'[\S]+' # single word
+        r'))*'
         r'(?:\n|$)' # ending
     )
     # Extracts every parameter from the headline as (optional) key and value
-    RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\S]+)')
+    RE_PARAM = re.compile(
+        r' (?:([\w\-]+)=)?('
+            r"'(?:\\.|[^'])*'|" # single quoted
+            r'"(?:\\.|[^"])*"|' # double quoted
+            r'[\S]+' # single word
+        r')')
     # Detect optional end markers (to ignore them)
     RE_END = re.compile(r'^:::(?:$|\n)')
 
@@ -100,6 +109,8 @@ class CustomBlocksProcessor(BlockProcessor):
         kwd = {}
         for key, param in self.RE_PARAM.findall(params):
             if param[0] == param[-1] == '"':
+                param = eval(param)
+            if param[0] == param[-1] == "'":
                 param = eval(param)
             if key:
                 kwd[key] = param
