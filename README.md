@@ -10,14 +10,16 @@
 [![image](https://img.shields.io/pypi/implementation/markdown-customblocks.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/markdown-customblocks/)
 -->
 
-A [Python-Markdown] extension to define custom block types
-using an uniform, parametrizable and nestable syntax.
+This [Python-Markdown] extension defines
+a common markup for parametrizable and nestable components that can be extended by defining a plain Python function.
+It also includes components for div containers, admonitions, figures, link cards, and embeds from common sites (youtube, vimeo, twitter...)
 
 [Python-Markdown]: https://python-markdown.github.io/
 
 - [What is it?](#what-is-it)
+- [Why this?](#why-this)
 - [Installation and setup](#installation-and-setup)
-- [General markdown syntax](#general-markdown-syntax)
+- [General markup syntax](#general-markup-syntax)
 - [Implementing a custom block type](#implementing-a-custom-block-type)
 - [Predefined block types](#predefined-block-types)
     - [Container (`customblocks.generators.container`)](#container-customblocksgeneratorscontainer)
@@ -29,26 +31,38 @@ using an uniform, parametrizable and nestable syntax.
     - [Twitter (`customblocks.generators.twitter`)](#twitter-customblocksgeneratorstwitter)
     - [Verkami (`customblocks.generators.verkami`)](#verkami-customblocksgeneratorsverkami)
     - [Goteo (`customblocks.generators.goteo`)](#goteo-customblocksgeneratorsgoteo)
-- [Motivation](#motivation)
 - [Release history](#release-history)
 - [TODO](#todo)
 
-
 ## What is it?
 
-This markdown extension simplifies the definition and use
-of new types of block, by defining a common syntax for them.
-That is, a common way to specify the type of the block,
-its attributes and content.
+This extension parses markup structures like this one:
 
-Custom block types are defined by a simple generator function.
-The extension deals with markdown parsing and
-it passes attributes and inner content as parameters to the generator.
-The generator uses them to generate the desired HTML code.
+```markdown
+::: mytype "value 1" param2=value2
+	Indented content
+```
 
-The extension also provides several useful examples of generators:
+and delegates the HTML generation to custom functions (generators)
+you can define or redefine for the type (`mytype`) to suit your needs.
 
-- `container`: The default one, a classed div with arbitrary classes, attributes and content.
+For example, we could bind `mytype` to this generator:
+
+```python
+def mygenerator(ctx, param1, param2):
+	"""Quick and dirty generator, needs escaping"""
+	return f"""<div attrib1="{param1}" attrib2="{param2}">{ctx.content}</div>"""
+```
+
+This will generate:
+
+```html
+<div attrib1="value 1" attrib2="value2">Indented Content</div>
+```
+
+The extension also provides several useful generators:
+
+- `container`: A classed div with arbitrary classes, attributes and content. This is the default when no type matches.
 - `figure`: Figures with caption and more
 - `admonition`: Admonitions (quite similar to the [standard extra extension][ExtraAdmonitions])
 - `twitter`: Embeded tweets
@@ -60,8 +74,57 @@ The extension also provides several useful examples of generators:
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
 
-While they are quite convenient you can overwrite them all by defining your own function...
-Or your could contribute to enhance them. :-)
+You can always rewrite them to suit your needs.
+Please, contribute back any improvement of general use.
+
+## Why this?
+
+Markdown, has a quite limited set of structures,
+and you often end up writing html by hand:
+A figure, an embed...
+If you use that structure multiple times,
+whenever you find a better way,
+you end up updating the structures in multiple places.
+That's why you should use (or develop) a markdown extension to ease the proces.
+
+There is a catch.
+Each markdown extension has to identify its own markup.
+For new extensions, is hard to find a handy markup no body is using yet.
+Because of that, the trend is having a lot of different markups,
+even for extensions sharing purpose.
+When you find a better extension for your figures,
+again, it is likely you have to edit all your figures, once more,
+because the markup is different.
+
+Also coding an extension is hard.
+Markdown extension API is required to be complex to address many other scenarios.
+But this extension responds to this usual scenario:
+
+> I want to generate this **piece of html** which
+> depends on those **parameters** and maybe it should
+> include a given **content**.
+
+**So, why not using a common markup for all those structures?**
+: This way, we can define a common parser for all them.
+To create a new block type, we have no need to find out an unused markup or developing new parsers.
+
+**So, why not using a type name to identify the structure?**
+: It provides a conceptual link to the block meaning.
+Both when you read the markup and when you change the behaviour.
+We can redefine how the block type behaves by hooking a different behaviour to the type name.
+
+**So, why not defining a common attribute markup?**
+: This way we can set a common way to map attributes to Python functions.
+The extension can delegate HTML generation to the function by looking at the signature. No extra glue required.
+
+**So, why not using indentation to define inner content?**
+: It visually shows the scope of the block and allows nesting.
+If the content is reparsed as Markdown,
+it could still include other components with their inner content a level down.
+
+We all stand on giants' shoulders so take a look at the [long list](doc/inspiration.md)
+of markdown extensions and other software that inspired and influenced this extension.
+Kudos for them.
 
 
 ## Installation and setup
@@ -82,7 +145,7 @@ MARKDOWN = {
 }
 ```
 
-## General markdown syntax
+## General markup syntax
 
 This is an example of custom block usage:
 
@@ -185,34 +248,6 @@ Following Markdown phylosophy, errors are warned but do not stop the processing,
 [positional-only]: https://www.python.org/dev/peps/pep-0570/
 
 ## Predefined block types
-
-This is a quick reference for the use of the included generators.
-Detailed explanation follows.
-
-```markdown
-::: linkcard http://othersite.com/post/2020-06-01-john-s-work
-
-::: youtube HUBNt18RFbo center
-
-::: twitter marcmushu 1270395360163307530
-
-::: twitter marcmushu 1270395360163307530 theme=dark lang=es track=true
-
-::: figure ethernalbulb.jpg left thumb
-    The century old bulb still bringing light.
-
-    This make you think you have been mocked.
-
-::: figure ethernalbulb.jpg right
-
-::: figure ethernalbulb.jpg wide
-
-::: figure ethernalbulb.jpg 
-
-::: important "Remember the milk"
-    Milk and chicken has been the responsibles the democratization
-    of the protein sources.
-```
 
 ### Container (`customblocks.generators.container`)
 
@@ -476,40 +511,6 @@ Embeds a [Goteo] fund raising campaign widget.
 
 `id`
 : The id of the project
-
-
-## Motivation
-
-Each markdown extension has to detect its own markers
-without messing with other extensions.
-Because of that, the trend has been each extension
-using its different unique marking syntax.
-
-Often several extensions implement the same concept
-(say twitter links, figures, thumbnails, admonitions...)
-providing more or less features and using different syntax.
-If you find a better extension for the same feature,
-you end up rewritting your markdown sources.
-
-Also writting an extension is quite hard.
-The extension architecture is complex by need.
-It has to support a wide range of scenarios.
-But a common scenario here is the macro scenario:
-
-> I want to generate this **piece of html** which
-> depends on those **parameters** and maybe it should
-> include a given **content**.
-
-So, it would be nice to:
-
-- Have a common syntax and differentiate block by a semantic name
-- Have a common way to specify parameters
-- Define the content in a way that you could nest blocks
-- Plugins just specify the expected parameters in the signature and generate the output with them
-- Get the block type you like and add the feature you miss
-
-We all stand on giants' shoulders so take a look at the [long list](doc/inspiration.md)
-of markdown extensions and other software that inspired and influenced this extension.
 
 
 ## Release history
