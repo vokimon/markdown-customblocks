@@ -43,10 +43,17 @@ class CustomBlocksExtension(Extension):
 
 
 class CustomBlocksProcessor(BlockProcessor):
+    # Detects headlines
     RE = re.compile(
-        r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*(?:\n|$)'
+        r'(?:^|\n)::: *' # marker
+        r'([\w\-]+)' # keyword
+        r'(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*'
+        r'(?:\n|$)' # ending
     )
-    RE_END = re.compile(r'^:::(?:$|\n)')  # Explicit end marker, not required but sometimes useful
+    # Extracts every parameter from the headline as (optional) key and value
+    RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\S]+)')
+    # Detect optional end markers (to ignore them)
+    RE_END = re.compile(r'^:::(?:$|\n)')
 
     def test(self, parent, block):
         return self.RE.search(block)
@@ -89,10 +96,9 @@ class CustomBlocksProcessor(BlockProcessor):
         The method returns a tuple of a list with all keyless
         parameters and a dict with all keyword parameters.
         """
-        RE_PARAM = re.compile(r' (?:([\w\-]+)=)?("(?:\\.|[^"])*"|[\S]+)')
         args = []
         kwd = {}
-        for key, param in RE_PARAM.findall(params):
+        for key, param in self.RE_PARAM.findall(params):
             if param[0] == param[-1] == '"':
                 param = eval(param)
             if key:
