@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from markdown.extensions import Extension
 from markdown.blockprocessors import BlockProcessor
 from markdown.util import etree
+import importlib
 import re
 from yamlns import namespace as ns
 import inspect
@@ -50,8 +51,17 @@ class CustomBlocksProcessor(BlockProcessor):
     def test(self, parent, block):
         return self.RE.search(block)
 
-    def _getSymbol(self, symbol):
-        return symbol
+    def _getGenerator(self, symbolname):
+        if callable(symbolname):
+            return symbolname
+        modulename, functionname = symbolname.split(':', 1)
+        module = importlib.import_module(modulename)
+        generator = getattr(module, functionname)
+        if not callable(generator):
+            raise ValueError(
+                "{} is not callable".format(symbolname)
+            )
+        return generator
 
     def _indentedContent(self, blocks):
         """
@@ -175,7 +185,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
         typeGenerators.update(self.config['generators'])
 
-        generator = self._getSymbol(typeGenerators.get(_type, container))
+        generator = self._getGenerator(typeGenerators.get(_type, container))
 
         ctx = ns()
         ctx.type = _type

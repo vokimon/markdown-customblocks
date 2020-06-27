@@ -784,6 +784,62 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             <custom>value</custom>""")
 
 
+    def test_customGenerator_byName(self):
+        self.setupConfig(parameter='value')
+        self.setupCustomBlocks(custom='customblocks.customblocks_test:mycustom')
+        self.assertMarkdown("""\
+            ::: custom
+            """, """\
+            <custom></custom>""")
+
+    def test_customGenerator_byName_wrongName(self):
+        self.setupConfig(parameter='value')
+        self.setupCustomBlocks(custom='customblocks.customblocks_test:wrongName')
+        with self.assertRaises(AttributeError) as ctx:
+            self.assertMarkdown("""\
+                ::: custom
+                """, """\
+                Should raise an exception""")
+        self.assertEqual(format(ctx.exception),
+            "module 'customblocks.customblocks_test' has no attribute 'wrongName'")
+
+    def test_customGenerator_byName_wrongModule(self):
+        self.setupConfig(parameter='value')
+        self.setupCustomBlocks(custom='bad_module:mycustom')
+        with self.assertRaises(ModuleNotFoundError) as ctx:
+            self.assertMarkdown("""\
+                ::: custom
+                """, """\
+                Should raise an exception""")
+        self.assertEqual(format(ctx.exception),
+            "No module named 'bad_module'")
+
+    def test_customGenerator_byName_noColon(self):
+        self.setupConfig(parameter='value')
+        self.setupCustomBlocks(custom='customblocks.customblocks_test')
+        with self.assertRaises(ValueError) as ctx:
+            self.assertMarkdown("""\
+                ::: custom
+                """, """\
+                Should raise an exception""")
+        self.assertEqual(format(ctx.exception),
+            "not enough values to unpack (expected 2, got 1)")
+
+    def test_customGenerator_byName_notCallable(self):
+        self.setupConfig(parameter='value')
+        self.setupCustomBlocks(custom='customblocks.customblocks_test:notcallable')
+        with self.assertRaises(ValueError) as ctx:
+            self.assertMarkdown("""\
+                ::: custom
+                """, """\
+                Should raise an exception""")
+        self.assertEqual(format(ctx.exception),
+            "customblocks.customblocks_test:notcallable is not callable")
+
+
+def mycustom():
+    return "<custom></custom>"
+notcallable="can not be called"
 
 """
 - what to do with dashed keys
