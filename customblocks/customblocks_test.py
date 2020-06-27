@@ -266,6 +266,13 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             <div class="myblock" key="value with spaces"></div>
             """)
 
+    def test_singleQuotedValues_escapeQuotes(self):
+        self.assertMarkdown("""\
+            ::: myblock key='value with\\' "quotes"'
+            """, """\
+            <div class="myblock" key="value with' &quot;quotes&quot;"></div>
+            """)
+
     def test_spacesAtTheEnd(self):
         self.assertMarkdown("""\
             ::: myblock key="value \\nwith eols"\t \t
