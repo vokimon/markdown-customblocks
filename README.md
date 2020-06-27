@@ -514,7 +514,7 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## Release history
 
-### Unreleased
+### markdown-customblocks 1.0.0 (2020-06-27)
 
 - Register a generator with a string like `'module.submodule:function'`
 - Support single quoted values
@@ -543,8 +543,6 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## TODO
 
-- [x] Make configuration available to generators
-- [x] Configure generators by means of import string
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
