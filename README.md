@@ -25,7 +25,10 @@ using an uniform, parametrizable and nestable syntax.
 	- [Link card (`customblocks.generators.linkcard`)](#link-card-customblocks.generators.linkcard)
 	- [Figure (`customblocks.generators.figure`)](#figure-customblocks.generators.figure)
 	- [Youtube (`customblocks.generators.youtube`)](#youtube-customblocks.generators.youtube)
+	- [Vimeo (`customblocks.generators.vimeo`)](#vimeo-customblocks.generators.vimeo)
 	- [Twitter (`customblocks.generators.twitter`)](#twitter-customblocks.generators.twitter)
+	- [Verkami (`customblocks.generators.verkami`)](#verkami-customblocks.generators.verkami)
+	- [Goteo (`customblocks.generators.goteo`)](#goteo-customblocks.generators.goteo)
 - [Motivation](#motivation)
 - [Release history](#release-history)
 - [TODO](#todo)
@@ -403,9 +406,64 @@ This generator generates an embeded vimeo video.
 
 Content is ignored.
 
+
 ### Twitter (`customblocks.generators.twitter`)
 
-Not documented yet.
+Embeds a tweet.
+
+```markdown
+::: twitter marcmushu 1270395360163307530 theme=dark lang=es track=true
+```
+
+`user`:
+: the user that wrote the tweet
+
+`tweet`
+: the tweet id (a long number)
+
+`theme` (optional, default `light`)
+: It can be either `dark` or `light`
+
+`hideimages`
+: Do not show attached images in the embedded
+
+`align`
+: `left`, `center` or `right`
+
+`conversation`
+: whether to add or not the full thread
+
+
+### Verkami (`customblocks.generators.verkami`)
+
+Embeds a [Verkami] fund raising campaign widget.
+
+[Verkami]: https://www.verkami.com/
+
+```markdown
+::: verkami 26588 landscape
+```
+
+`id`
+: The id of the project (can be the number or the full id)
+
+`landscape` (Flag, default False)
+: instead of a portrait widget generate a landscape one
+
+
+### Goteo (`customblocks.generators.goteo`)
+
+Embeds a [Goteo] fund raising campaign widget.
+
+[Goteo]: https://goteo.org
+
+```markdown
+::: goteo my-cool-project
+```
+
+`id`
+: The id of the project
+
 
 ## Motivation
 
@@ -443,11 +501,14 @@ of markdown extensions and other software that inspired and influenced this exte
 
 ## Release history
 
-### Unreleased
+### markdown-customblocks 0.3.0 (2020-06-27)
 
+- Provide `ctx.config` from `extension_configs.customblocks.config`
 - New generators: vimeo, verkami, goteo
 - admonition:
 	- title should be a `<p>` not a `<div>` for ReST styles to work
+- youtube:
+	- responsive/fluid sizing
 
 ### markdown-customblocks 0.2.0 (2020-06-25)
 
