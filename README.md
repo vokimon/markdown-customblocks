@@ -20,19 +20,19 @@ using an uniform, parametrizable and nestable syntax.
 - [General markdown syntax](#general-markdown-syntax)
 - [Implementing a custom block type](#implementing-a-custom-block-type)
 - [Predefined block types](#predefined-block-types)
-	- [Container (`customblocks.generators.container`)](#container-customblocks.generators.container)
-	- [Admonition (`customblocks.generators.admonition`)](#admonition-customblocks.generators.admonition)
-	- [Link card (`customblocks.generators.linkcard`)](#link-card-customblocks.generators.linkcard)
-	- [Figure (`customblocks.generators.figure`)](#figure-customblocks.generators.figure)
-	- [Youtube (`customblocks.generators.youtube`)](#youtube-customblocks.generators.youtube)
-	- [Vimeo (`customblocks.generators.vimeo`)](#vimeo-customblocks.generators.vimeo)
-	- [Twitter (`customblocks.generators.twitter`)](#twitter-customblocks.generators.twitter)
-	- [Verkami (`customblocks.generators.verkami`)](#verkami-customblocks.generators.verkami)
-	- [Goteo (`customblocks.generators.goteo`)](#goteo-customblocks.generators.goteo)
+    - [Container (`customblocks.generators.container`)](#container-customblocks.generators.container)
+    - [Admonition (`customblocks.generators.admonition`)](#admonition-customblocks.generators.admonition)
+    - [Link card (`customblocks.generators.linkcard`)](#link-card-customblocks.generators.linkcard)
+    - [Figure (`customblocks.generators.figure`)](#figure-customblocks.generators.figure)
+    - [Youtube (`customblocks.generators.youtube`)](#youtube-customblocks.generators.youtube)
+    - [Vimeo (`customblocks.generators.vimeo`)](#vimeo-customblocks.generators.vimeo)
+    - [Twitter (`customblocks.generators.twitter`)](#twitter-customblocks.generators.twitter)
+    - [Verkami (`customblocks.generators.verkami`)](#verkami-customblocks.generators.verkami)
+    - [Goteo (`customblocks.generators.goteo`)](#goteo-customblocks.generators.goteo)
 - [Motivation](#motivation)
 - [Release history](#release-history)
 - [TODO](#todo)
-	
+
 
 ## What is it?
 
@@ -78,8 +78,8 @@ In order to enable it in Markdown:
 ```python
 MARKDOWN = {
     'extensions': [
-		'customblocks',
-	],
+        'customblocks',
+    ],
 }
 ```
 
@@ -89,9 +89,9 @@ This is an example of custom block usage:
 
 ```markdown
 ::: mytype param1 key1=value1 "param with many words" key2="value2 with words"
-	Indented **content**
+    Indented **content**
 
-	The block ends whenever the indentation stops
+    The block ends whenever the indentation stops
 This unindented line is not considered part of the block
 ```
 
@@ -112,11 +112,11 @@ For example:
 
 ```markdown
 ::: recipe
-	# Sweet water
-	::: ingredients "4 persons"
-		- two spons of suggar
-		- a glass of tap water
-	Drop the suggar into the glass. Stir.
+    # Sweet water
+    ::: ingredients "4 persons"
+        - two spons of suggar
+        - a glass of tap water
+    Drop the suggar into the glass. Stir.
 ```
 
 ## Implementing a custom block type
@@ -127,19 +127,19 @@ A block type can be defined just by defining a generator function:
 
 ```python
 def mytype(ctx, param1, myflag:bool, param2, param3, yourflag=True, param4='default2'):
-	...
+    ...
 ```
 
 You have to register it to a type
 
 ```python
 MARKDOWN = {
-	...
+    ...
     'extensions_configs': {
         'customblocks': {
-			'generators': {
-				'mytype': mytype,
-			}
+            'generators': {
+                'mytype': mytype,
+            }
         },
     },
 }
@@ -158,7 +158,7 @@ If you don't use it, you can skip it but it is useful if you want to receive som
 - `ctx.content`: the indented part of the block, with the indentation removed
 - `ctx.parser`: the markdown parser, can be used to parse the content or any other markdown code
 - `ctx.type`: the type of the block
-	- If you reuse the same function for different types, this is how you diferentiate them
+    - If you reuse the same function for different types, this is how you diferentiate them
 - `ctx.metadata`: A dictionary with metadata from your metadata plugin.
 
 Besides `ctx`, the rest of function parameters are filled using values parsed from _head line_.
@@ -167,8 +167,8 @@ They are resolved as follows:
 
 - **Explicit key:** When a key in the headline matches a keyable parameter name in the generator, the value is assigned to it
 - **Flag:** Generator arguments annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`) are considered flags
-	- When a keyless value matches a flag name in the generator (`myflag`), `True` is passed
-	- When it matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
+    - When a keyless value matches a flag name in the generator (`myflag`), `True` is passed
+    - When it matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
 - **Positional:** Remaining headline values and function parameters are assigned one-to-one by position
 - **Restricted:** Restrictions on how to receive the values ([keyword-only] and [positional-only]) are respected and they will receive only values from either key or keyless values
 - **Varidics:** If the signature contains key (`**kwds`) or positional (`*args`) varidic variables, any remaining key and keyless values from the headline are assigned to them
@@ -196,9 +196,9 @@ Detailed explanation follows.
 ::: twitter marcmushu 1270395360163307530 theme=dark lang=es track=true
 
 ::: figure ethernalbulb.jpg left thumb
-	The century old bulb still bringing light.
+    The century old bulb still bringing light.
 
-	This make you think you have been mocked.
+    This make you think you have been mocked.
 
 ::: figure ethernalbulb.jpg right
 
@@ -207,8 +207,8 @@ Detailed explanation follows.
 ::: figure ethernalbulb.jpg 
 
 ::: important "Remember the milk"
-	Milk and chicken has been the responsibles the demoratization
-	of the protein sources.
+    Milk and chicken has been the responsibles the demoratization
+    of the protein sources.
 ```
 
 ### Container (`customblocks.generators.container`)
@@ -231,26 +231,26 @@ The following example:
 
 ```markdown
 ::: sidebar left style="width: 30em"
-	::: widget
-		# Social
-		...
-	::: widget
-		# Related
-		...
+    ::: widget
+        # Social
+        ...
+    ::: widget
+        # Related
+        ...
 ```
 
 Renders as:
 
 ```html
 <div class='sidebar left' style="width: 30em">
-	<div class='widget'>
-		<h1>Social</h1>
-		<p>...</p>
-	</div>
-	<div class='widget'>
-		<h1>Related</h1>
-		<p>...</p>
-	</div>
+    <div class='widget'>
+        <h1>Social</h1>
+        <p>...</p>
+    </div>
+    <div class='widget'>
+        <h1>Related</h1>
+        <p>...</p>
+    </div>
 </div>
 ```
 
@@ -267,7 +267,7 @@ So you can write:
 
 ```markdown
 ::: danger
-	Do not try to do this at home
+    Do not try to do this at home
 ```
 
 In order to generate:
@@ -359,18 +359,18 @@ Recommended css:
 
 ```css
 .videowrapper {
-	position:relative;
-	padding-bottom:56.25%;
-	overflow:hidden;
-	height:0;
-	width:100%
+    position:relative;
+    padding-bottom:56.25%;
+    overflow:hidden;
+    height:0;
+    width:100%
 }
 .videowrapper iframe {
-	position:absolute;
-	left:0;
-	top:0;
-	width:100%;
-	height:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
 }
 ```
 
@@ -531,15 +531,15 @@ of markdown extensions and other software that inspired and influenced this exte
 - Flags: coerce to bool?
 - Annotations: coerce to any type
 - Figure
-	- Thumbnail generation
-	- lightbox
-	- Deexternalizer
+    - Thumbnail generation
+    - lightbox
+    - Deexternalizer
 - Youtube:
-	- Take aspect ratio and sizes from Youtube api
-	- Use covers
-	- Privacy safe mode
+    - Take aspect ratio and sizes from Youtube api
+    - Use covers
+    - Privacy safe mode
 - Twitter
-	- Privacy safe mode
+    - Privacy safe mode
 
 
 
