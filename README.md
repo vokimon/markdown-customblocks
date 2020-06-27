@@ -350,6 +350,57 @@ This generator generates an embeded youtube video.
 `**kwds`
 : added as attributes for the outter div
 
+Indented content is ignored.
+
+Recommended css:
+
+```css
+.videowrapper {
+	position:relative;
+	padding-bottom:56.25%;
+	overflow:hidden;
+	height:0;
+	width:100%
+}
+.videowrapper iframe {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+}
+```
+
+Or you could set `youtube_inlineFluidStyle` config to `True`
+and the style will be added inline to every video.
+
+
+### Vimeo (`customblocks.generators.vimeo`)
+
+This generator generates an embeded vimeo video.
+
+```markdown
+::: vimeo 139579122  nocontrols left-align
+```
+
+`autoplay` (flag, default False)
+: starts the video as soon as it is loaded
+
+`loop` (flag, default False)
+: restart again the video once finished
+
+`bylabel` (flag, default True)
+: Shows the video author's name
+
+`portrait` (flag, default False)
+: Shows the video author's avatar
+
+`*args`
+: added as additional class for the outter div
+
+`**kwds`
+: added as attributes for the outter div
+
 Content is ignored.
 
 ### Twitter (`customblocks.generators.twitter`)
