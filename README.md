@@ -121,7 +121,7 @@ For example:
 ## Implementing a custom block type
 
 A block type can be defined just by defining a **generator** function.
-The signature of the generator will determine the attributes that accept in the headline.
+The signature of the generator will determine the attributes that accept from the headline.
 
 ```python
 def mytype(ctx, param1, myflag:bool, param2, param3, yourflag=True, param4='default2'):
@@ -153,11 +153,12 @@ A generator can use several strategies to generate content:
 - Manipulate `ctx.parent` and return `None`
 
 The first parameter, `ctx`, is the context.
-If you don't use it, you can skip it but it is useful if you want to receive some context parameters:
+If you don't use it, you can skip it.
+But it is useful if you want to receive some context parameters like:
 
 - `ctx.parent`: the parent node
 - `ctx.content`: the indented part of the block, with the indentation removed
-- `ctx.parser`: the markdown parser, can be used to parse the content or any other markdown code
+- `ctx.parser`: the markdown parser, can be used to parse the inner content or any other markdown code
 - `ctx.type`: the type of the block
     - If you reuse the same function for different types, this is how you diferentiate them
 - `ctx.metadata`: A dictionary with metadata from your metadata plugin.
