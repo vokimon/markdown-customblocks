@@ -178,6 +178,8 @@ For example:
     ::: ingredients "4 persons"
         - two spons of suggar
         - a glass of tap water
+    ::: mealphoto sweetwater.jpg
+        Looks gorgeus!
     Drop the suggar into the glass. Stir.
 ```
 
