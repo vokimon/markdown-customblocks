@@ -46,7 +46,7 @@ class CustomBlocksProcessor(BlockProcessor):
     RE = re.compile(
         r'(?:^|\n)::: *([\w\-]+)(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*(?:\n|$)'
     )
-    RE_END = r'^:::(?:$|\n)'  # Explicit end marker, not required but sometimes useful
+    RE_END = re.compile(r'^:::(?:$|\n)')  # Explicit end marker, not required but sometimes useful
 
     def test(self, parent, block):
         return self.RE.search(block)
@@ -181,7 +181,7 @@ class CustomBlocksProcessor(BlockProcessor):
         content = self._indentedContent(blocks)
         # Remove optional closing if present
         if blocks:
-            blocks[0] = re.sub(self.RE_END, '', blocks[0])
+            blocks[0] = self.RE_END.sub('', blocks[0])
 
         typeGenerators.update(self.config['generators'])
 
