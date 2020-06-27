@@ -50,6 +50,9 @@ class CustomBlocksProcessor(BlockProcessor):
     def test(self, parent, block):
         return self.RE.search(block)
 
+    def _getSymbol(self, symbol):
+        return symbol
+
     def _indentedContent(self, blocks):
         """
         Extracts all the indented content from blocks
@@ -172,7 +175,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
         typeGenerators.update(self.config['generators'])
 
-        generator = typeGenerators.get(_type, container)
+        generator = self._getSymbol(typeGenerators.get(_type, container))
 
         ctx = ns()
         ctx.type = _type
