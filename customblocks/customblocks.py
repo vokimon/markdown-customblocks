@@ -44,10 +44,10 @@ class CustomBlocksExtension(Extension):
 
 class CustomBlocksProcessor(BlockProcessor):
     # Detects headlines
-    RE = re.compile(
+    RE_HEADLINE = re.compile(
         r'(?:^|\n)::: *' # marker
         r'([\w\-]+)' # keyword
-        r'(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*'
+        r'(?: +(?:[\w]+=)?("(?:\\.|[^"])*"|[\S]+))*' # params
         r'(?:\n|$)' # ending
     )
     # Extracts every parameter from the headline as (optional) key and value
@@ -56,7 +56,7 @@ class CustomBlocksProcessor(BlockProcessor):
     RE_END = re.compile(r'^:::(?:$|\n)')
 
     def test(self, parent, block):
-        return self.RE.search(block)
+        return self.RE_HEADLINE.search(block)
 
     def _getGenerator(self, symbolname):
         if callable(symbolname):
@@ -177,7 +177,7 @@ class CustomBlocksProcessor(BlockProcessor):
 
     def run(self, parent, blocks):
         block = blocks[0]
-        match = self.RE.search(block)
+        match = self.RE_HEADLINE.search(block)
         previous = block[: match.start()]
         if previous:
             self.parser.parseChunk(parent, previous)
