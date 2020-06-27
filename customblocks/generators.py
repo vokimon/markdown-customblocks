@@ -132,8 +132,9 @@ def linkcard(url, embedimage=False):
 """
 
 
-def youtube(id, *, autoplay=False, controls=True, loop=False):
+def youtube(ctx, id, *, autoplay=False, controls=True, loop=False):
     options = []
+    inlineStyle = ctx.config.get('youtube_inlineFluidStyle', False)
     if autoplay:
         options.append('autoplay=1')
     if not controls:
@@ -144,7 +145,16 @@ def youtube(id, *, autoplay=False, controls=True, loop=False):
     url = f"https://www.youtube.com/embed/{id}{options}"
     div = etree.Element('div')
     div.set('class', 'videowrapper youtube')
+    if inlineStyle:
+        div.set('style',
+            'position:relative; padding-bottom:56.25%; '
+            'height:0; overflow:hidden; width:100%')
     iframe = etree.SubElement(div,'iframe')
+    if inlineStyle:
+        iframe.set('style',
+            'position:absolute; '
+            'top:0; left:0; '
+            'width:100%; height:100%;')
     iframe.set('src', url)
     return div
 

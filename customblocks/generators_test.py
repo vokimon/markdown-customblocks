@@ -11,12 +11,15 @@ class Examples_Test(test_tools.TestCase):
             extensions = [
                 'customblocks',
             ],
-            extension_configs = dict(
-                customblocks = dict(
-                    generators = dict(
-                    )
-                ),
-            ),
+        )
+
+    def setupConfig(self, **kwds):
+        (
+            self.default_kwargs
+                .setdefault('extension_configs',{})
+                .setdefault('customblocks', {})
+                .setdefault('config', {})
+                .update(kwds)
         )
 
     def assertMarkdown(self, markdown, html, **kwds):
@@ -102,6 +105,16 @@ class Examples_Test(test_tools.TestCase):
             """, """\
             <div class="videowrapper youtube">
             <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0"></iframe>
+            </div>
+            """)
+
+    def test_youtube_inlineStyles_byConfig(self):
+        self.setupConfig(youtube_inlineFluidStyle=True)
+        self.assertMarkdown("""\
+            ::: youtube 7SS24_CgwEM nocontrols
+            """, """\
+            <div class="videowrapper youtube" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; width:100%">
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0" style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
             </div>
             """)
 
