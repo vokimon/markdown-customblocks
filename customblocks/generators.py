@@ -224,21 +224,5 @@ def twitter(user,
     return type(u'')(soup.find('blockquote'))
 
 
-"""
-if __name__ == '__main__':
-    print(twitter(
-        user = 'marcmushu',
-        tweet = '1270395360163307530',
-        theme = 'dark',
-        hideimages = True,
-        align = 'right',
-        conversation = True,
-    ))
-
-
-    print(link('https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html'))
-    print(link('https://twitter.com/marcmushu/status/1270395360163307530'))
-    print(link('https://twitter.com/BESTIAFOSCARET1/status/1270668511807930374'))
-"""
 
 # vim: et ts=4 sw=4
