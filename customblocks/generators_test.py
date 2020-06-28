@@ -275,6 +275,37 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    def test_linkcard_image(self):
+        self.assertMarkdown("""
+            ::: linkcard image=cached.jpg https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
+            ""","""\
+<div class="linkcard">
+<div class="linkcard-featured-image">
+<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">
+<img src="cached.jpg" />""" # the difference is here
+"""
+</a>
+</div>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<div class="linkcard-excerpt">
+<p>
+La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al textoMAPA | Los municipios y barrios más afectados por la pobreza en España que pretende combatir el ingreso mínimo vital
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+</p>
+</div>
+<div class="linkcard-footer">
+<div class="linkcard-site-title">
+<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.ico" width="32" />
+<span>ELDIARIO.ES</span>
+</a>
+</div>
+<div class="linkcard-meta">
+</div>
+</div>
+</div>
+""")
+
     def test_figure(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png"

@@ -59,7 +59,7 @@ def figure(ctx, url, *args, **kwds):
     content = ctx.parser.parseChunk(caption, ctx.content)
     return figure
 
-def linkcard(url, *, wideimage=True, embedimage=False):
+def linkcard(url, *, wideimage=True, embedimage=False, image=None):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     #print(soup)
@@ -108,6 +108,7 @@ def linkcard(url, *, wideimage=True, embedimage=False):
         None
     )
     image = (
+        image or
         meta('og:image') or
         meta('twitter:image') or
         websiteicon
