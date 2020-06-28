@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin
 import base64
 from markdown.util import etree
+import html
 
 
 def container(ctx, *args, **kwds):
@@ -58,7 +59,7 @@ def figure(ctx, url, *args, **kwds):
     content = ctx.parser.parseChunk(caption, ctx.content)
     return figure
 
-def linkcard(url, embedimage=False):
+def linkcard(url, *, wideimage=True, embedimage=False):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     #print(soup)
@@ -88,6 +89,7 @@ def linkcard(url, embedimage=False):
         parsedurl.hostname or
         ''
     )
+    siteurl = parsedurl.scheme + '://' + parsedurl.netloc
     title = (
         meta('og:title') or
         tag('title') or
@@ -118,16 +120,35 @@ def linkcard(url, embedimage=False):
             b64image = base64.b64encode(imageBytes).decode('ascii')
             # TODO: thumb it
             image = 'data:image/jpg;base64,' + b64image
+    else:
+        image = html.escape(image)
+
+    imageClass = '' if wideimage else ' square'
 
     return f"""\
 <div class='linkcard'>
-<a href='{url}'><img src='{image}' style="float:right; width=30%" /></a>
-<div class='link-sitename'>{siteName.upper()}</div>
-<h3><a href='{url}'>{title}</a></h3>
-<div class='linkcard-description'>
-<p>{description}</p>
+<div class='linkcard-featured-image{imageClass}'>
+<a href='{url}'>
+<img src="{image}" />
+</a>
 </div>
-<div class='readmore'><a href='{url}'>Read More</a></div>
+<p class='linkcard-heading'><a href='{url}'>{title}</a></p>
+<div class='linkcard-excerpt'>
+<p>
+{description}
+<span class='linkcard-more'><a href='{url}'>Read more</a></span>
+</p>
+</div>
+<div class='linkcard-footer'>
+<div class='linkcard-site-title'>
+<a class='linkcard-site-icon' href='{siteurl}'>
+<img class='linkcard-site-icon' height='32' src='{websiteicon}' width='32' />
+<span>{siteName.upper()}</span>
+</a>
+</div>
+<div class='linkcard-meta'>
+</div>
+</div>
 </div>
 """
 
