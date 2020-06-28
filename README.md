@@ -12,7 +12,8 @@
 
 This [Python-Markdown] extension defines
 a common markup for parametrizable and nestable components that can be extended by defining a plain Python function.
-It also includes components for div containers, admonitions, figures, link cards, and embeds from common sites (youtube, vimeo, twitter...)
+
+It also includes components for div containers, admonitions, figures, link cards... and embeds from common sites (youtube, vimeo, twitter...)
 
 [Python-Markdown]: https://python-markdown.github.io/
 
@@ -20,7 +21,7 @@ It also includes components for div containers, admonitions, figures, link cards
 - [Why this?](#why-this)
 - [Installation and setup](#installation-and-setup)
 - [General markup syntax](#general-markup-syntax)
-- [Implementing a custom block type](#implementing-a-custom-block-type)
+- [Implementing a generator](#implementing-a-generator)
 - [Predefined block types](#predefined-block-types)
     - [Container (`customblocks.generators.container`)](#container-customblocksgeneratorscontainer)
     - [Admonition (`customblocks.generators.admonition`)](#admonition-customblocksgeneratorsdmonition)
@@ -40,21 +41,20 @@ This extension parses markup structures like this one:
 
 ```markdown
 ::: mytype "value 1" param2=value2
-	Indented content
+    Indented content
 ```
 
-and delegates the HTML generation to custom functions (generators)
-you can define or redefine for the type (`mytype`) to suit your needs.
-
+delegating the HTML generation to custom functions (generators)
+you can define or redefine for the type (`mytype`, in the example) to suit your needs.
 For example, we could bind `mytype` to this generator:
 
 ```python
 def mygenerator(ctx, param1, param2):
-	"""Quick and dirty generator, needs escaping"""
-	return f"""<div attrib1="{param1}" attrib2="{param2}">{ctx.content}</div>"""
+    """Quick and dirty generator, needs escaping"""
+    return f"""<div attrib1="{param1}" attrib2="{param2}">{ctx.content}</div>"""
 ```
 
-This will generate:
+and the previous markdown will generate:
 
 ```html
 <div attrib1="value 1" attrib2="value2">Indented Content</div>
@@ -62,7 +62,7 @@ This will generate:
 
 The extension also provides several useful generators:
 
-- `container`: A classed div with arbitrary classes, attributes and content. This is the default when no type matches.
+- `container`: A classed div with arbitrary classes, attributes and content (This is the default when no type matches)
 - `figure`: Figures with caption and more
 - `admonition`: Admonitions (quite similar to the [standard extra extension][ExtraAdmonitions])
 - `twitter`: Embeded tweets
@@ -74,8 +74,7 @@ The extension also provides several useful generators:
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
 
-You can always rewrite them to suit your needs.
-Please, contribute back any improvement of general use.
+They are examples, you can always rewrite them to suit your needs.
 
 ## Why this?
 
@@ -147,7 +146,7 @@ MARKDOWN = {
 
 ## General markup syntax
 
-This is an example of custom block usage:
+This is a more complete example of custom block usage:
 
 ```markdown
 ::: mytype param1 key1=value1 "param with many words" key2="value2 with words"
@@ -161,8 +160,10 @@ The line starting with `:::` is the _headline_.
 It specifies, first, the block type (`mytype`) followed by a set of _values_.
 Such values can be either single worded or quoted.
 Also some values may explicit a target parameter with a _key_.
+
 After the _headline_, several lines of indented _content_ may follow,
 and the block ends at the very first line back to the previous indentation.
+Emtpy lines are included and there is no need of an empty line to end the block.
 
 > By using indentation you don't need a closing tag,
 > but if you miss it, you might place a closing `:::` at the same
@@ -183,17 +184,9 @@ For example:
     Drop the suggar into the glass. Stir.
 ```
 
-## Implementing a custom block type
+## Implementing a generator
 
-A block type can be defined just by defining a **generator** function.
-The signature of the generator will determine the attributes that accept from the headline.
-
-```python
-def mytype(ctx, param1, myflag:bool, param2, param3, yourflag=True, param4='default2'):
-    ...
-```
-
-You have to register it to a type:
+A block type can be defined just by hooking the **generator** function to the type.
 
 ```python
 MARKDOWN = {
@@ -201,21 +194,23 @@ MARKDOWN = {
     'extensions_configs': {
         'customblocks': {
             'generators': {
-                # direct symbol reference
-                'mytype': mytype,
-                # using import strings
-                'akamytype': 'myparentmodule.mymodule:mytype',
+                # by direct symbol reference
+                'mytype': myparentmodule.mymodule.mytype,
+                # or using import strings (notice the colon)
+                'aka_mytype': 'myparentmodule.mymodule:mytype',
             }
         },
     },
 }
 ```
 
-A generator can use several strategies to generate content:
 
-- Return an html string
-- Return `etree` `Element`
-- Manipulate `ctx.parent` and return `None`
+The signature of the generator will determine the attributes taken from the headline.
+
+```python
+def mytype(ctx, param1, myflag:bool, param2, param3, yourflag=True, param4='default2'):
+    ...
+```
 
 The first parameter, `ctx`, is the context.
 If you don't use it, you can skip it.
@@ -248,6 +243,12 @@ Following Markdown phylosophy, errors are warned but do not stop the processing,
 
 [keyword-only]: https://www.python.org/dev/peps/pep-3102/
 [positional-only]: https://www.python.org/dev/peps/pep-0570/
+
+A generator can use several strategies to generate content:
+
+- Return an html string (single root node)
+- Return a `markdown.etree` `Element` object
+- Manipulate `ctx.parent` to add the content and return `None`
 
 ## Predefined block types
 
@@ -553,6 +554,9 @@ Embeds a [Goteo] fund raising campaign widget.
     - Thumbnail generation
     - lightbox
     - Deexternalizer
+- Linkcard:
+    - Offline behavior
+    - Cache downloaded data
 - Youtube:
     - Take aspect ratio and sizes from Youtube api
     - Use covers
