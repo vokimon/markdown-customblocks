@@ -53,6 +53,12 @@ class ETest(unittest.TestCase):
 			<div attr1="a&amp;&lt;&gt;&quot;'z" />
 		""")
 
+	def test_child(self):
+		e = E('', E('child'))
+		self.assertXml(e, """\
+			<div><child /></div>
+		""")
+
 
 
 
