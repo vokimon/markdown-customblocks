@@ -149,6 +149,18 @@ class ETest(unittest.TestCase):
             <div class="aclass" />
         """)
 
+    def test_child_list_processedRecursively(self):
+        e = E('', [E("first"), E("second")])
+        self.assertXml(e, """\
+            <div><first /><second /></div>
+        """)
+
+    def test_child_areKeptGrandchild(self):
+        e = E('grandpa', E("dad", E("child")))
+        self.assertXml(e, """\
+            <grandpa><dad><child /></dad></grandpa>
+        """)
+
 
 
 

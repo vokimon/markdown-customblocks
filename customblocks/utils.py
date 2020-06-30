@@ -36,6 +36,9 @@ def E(tag, *children, **attribs):
             return
         if type(child) == etree.Element:
             element.append(child)
+            return
+        for item in child:
+            appendChild(item)
  
     for child in children:
         appendChild(child)
