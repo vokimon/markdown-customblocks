@@ -7,7 +7,9 @@ def E(tag, *children, **attribs):
 
 	def blend(adict):
 		if '_class' in adict:
-			classes.append(adict.pop('_class'))
+			aclass = adict.pop('_class')
+			if aclass:
+				classes.append(aclass)
 		attributes.update(adict)
 
 	for child in children:

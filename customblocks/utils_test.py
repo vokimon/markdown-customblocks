@@ -143,6 +143,12 @@ class ETest(unittest.TestCase):
 			<div class="aclass myclass" />
 		""")
 
+	def test_classNone(self):
+		e = E('.aclass', dict(_class=None))
+		self.assertXml(e, """\
+			<div class="aclass" />
+		""")
+
 
 
 
