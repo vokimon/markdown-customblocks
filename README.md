@@ -13,7 +13,7 @@
 This [Python-Markdown] extension defines
 a common markup for parametrizable and nestable components that can be extended by defining a plain Python function.
 
-It also includes components for div containers, admonitions, figures, link cards... and embeds from common sites (youtube, vimeo, twitter...)
+Includes some sample components for div containers, admonitions, figures, link cards... and embeds from common sites (youtube, vimeo, twitter...)
 
 [Python-Markdown]: https://python-markdown.github.io/
 
@@ -369,8 +369,10 @@ The content is taken as caption.
 
 ### Link card (`customblocks.generators.linkcard`)
 
-A link cards is a informative box about an external source.
-It is similar to the card that popular apps like Facebook, Twitter, Telegram, Slack... generate when you post a link.
+A link card is a informative box about an external source.
+It is similar to the card that popular apps like
+Wordpress, Facebook, Twitter, Telegram, Slack...
+generate when you embed/post a link.
 
 The generator downloads the target url and extracts social [metadata][SocialMeta]:
 Featured image, title, description...
@@ -380,6 +382,20 @@ Featured image, title, description...
 ```markdown
 ::: linkcard https://css-tricks.com/essential-meta-tags-social-media/
 ```
+
+`url`
+: The url to embed as card
+
+`wideimage` (Flag, default True)
+: Whether the featured image will be shown wide, if not, a small thumb will be shown
+
+`image` (key only)
+: If specified, that will be the feature image instead of the one specified in the page
+
+Content, if provided will be used as excerpt instead of the summary in the page.
+
+If both, image and content are provided,
+the link is not fetched at all.
 
 ### Youtube (`customblocks.generators.youtube`)
 
@@ -550,11 +566,15 @@ Embeds a [Goteo] fund raising campaign widget.
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
+- Using a nicer etree building api in generators
 - Figure
     - Thumbnail generation
     - lightbox
     - Deexternalizer
 - Linkcard:
+	- Testing with non-fragile emulated requests
+	- Prepend site url to relative ones (ie. wikipedia)
+	- Look for short description by class (ie wikipedia)
     - Offline behavior
     - Cache downloaded data
 - Youtube:
