@@ -137,6 +137,12 @@ class ETest(unittest.TestCase):
 			<div class="myclass" />
 		""")
 
+	def test_classchild_additive(self):
+		e = E('.aclass', dict(_class='myclass'))
+		self.assertXml(e, """\
+			<div class="aclass myclass" />
+		""")
+
 
 
 
