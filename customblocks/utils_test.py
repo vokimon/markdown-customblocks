@@ -125,6 +125,12 @@ class ETest(unittest.TestCase):
 			<div class="myclass" />
 		""")
 
+	def test_class_additive(self):
+		e = E('.myclass', _class='other')
+		self.assertXml(e, """\
+			<div class="myclass other" />
+		""")
+
 
 
 
