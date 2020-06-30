@@ -8,6 +8,8 @@ def E(tag, *children, **attribs):
 	for child in children:
 		if not isinstance(child, dict):
 			continue
+		if '_class' in child:
+			classes.append(child.pop('_class'))
 		attributes.update(child)
 	if '_class' in attribs:
 		classes.append(attribs.pop('_class'))

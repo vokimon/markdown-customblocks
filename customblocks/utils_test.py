@@ -119,16 +119,22 @@ class ETest(unittest.TestCase):
 			<div />
 		""")
 
-	def test_class_specialUnderline(self):
+	def test_classkey_specialUnderline(self):
 		e = E('', _class='myclass')
 		self.assertXml(e, """\
 			<div class="myclass" />
 		""")
 
-	def test_class_additive(self):
+	def test_classkey_additive(self):
 		e = E('.myclass', _class='other')
 		self.assertXml(e, """\
 			<div class="myclass other" />
+		""")
+
+	def test_classchild(self):
+		e = E('', dict(_class='myclass'))
+		self.assertXml(e, """\
+			<div class="myclass" />
 		""")
 
 
