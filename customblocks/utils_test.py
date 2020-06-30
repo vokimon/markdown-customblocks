@@ -17,5 +17,11 @@ class ETest(unittest.TestCase):
 			<div />
 		""")
 
+	def test_tagless(self):
+		e = E('')
+		self.assertXml(e, """\
+			<div />
+		""")
+
 
 # vim: et ts=4 sw=4
