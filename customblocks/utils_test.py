@@ -101,6 +101,18 @@ class ETest(unittest.TestCase):
 			<div attrib="value" />
 		""")
 
+	def test_attrib_keywordWins(self):
+		e = E('', dict(attrib="value1"), attrib="value2")
+		self.assertXml(e, """\
+			<div attrib="value2" />
+		""")
+
+	def test_attrib_settwice_laterWins(self):
+		e = E('', dict(attrib="value1"), dict(attrib="value2"))
+		self.assertXml(e, """\
+			<div attrib="value2" />
+		""")
+
 
 
 

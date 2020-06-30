@@ -3,11 +3,21 @@ from markdown.util import etree
 
 def E(tag, *children, **attribs):
 	tag, *classes = tag.split('.')
+
+	attributes = dict()
+	for child in children:
+		if not isinstance(child, dict):
+			continue
+		attributes.update(child)
+	attributes.update(attribs)
+
 	element = etree.Element(tag or 'div',
 		{'class': ' '.join(classes)} if classes else {},
-		**{k:format(v) for k,v in attribs.items()}
+		**{k:format(v) for k,v in attributes.items()}
 	)
 	for child in children:
+		if isinstance(child, dict):
+			continue
 		if type(child) == str:
 			if len(element):
 				element[-1].tail = (element[-1].tail or '') + child
@@ -16,9 +26,6 @@ def E(tag, *children, **attribs):
 			continue
 		if type(child) == etree.Element:
 			element.append(child)
-		if isinstance(child, dict):
-			for k,v in child.items():
-				element.set(k,v)
 	return element
 
 
