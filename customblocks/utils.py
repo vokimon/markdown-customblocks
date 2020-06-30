@@ -8,6 +8,9 @@ def E(tag, *children, **attribs):
 		**{k:format(v) for k,v in attribs.items()}
 	)
 	for child in children:
+		if type(child) == str:
+			element.text = child
+			continue
 		element.append(child)
 	return element
 

@@ -59,6 +59,12 @@ class ETest(unittest.TestCase):
 			<div><child /></div>
 		""")
 
+	def test_text(self):
+		e = E('', "content")
+		self.assertXml(e, """\
+			<div>content</div>
+		""")
+
 
 
 
