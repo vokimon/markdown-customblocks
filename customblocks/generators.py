@@ -59,7 +59,7 @@ def figure(ctx, url, *args, **kwds):
     content = ctx.parser.parseChunk(caption, ctx.content)
     return figure
 
-def linkcard(url, *, wideimage=True, embedimage=False, image=None):
+def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     #print(soup)
@@ -95,7 +95,13 @@ def linkcard(url, *, wideimage=True, embedimage=False, image=None):
         tag('title') or
         siteName
     )
-    description = (
+    excerpt = ''
+    if ctx.content.strip():
+        excerpt = etree.Element('div')
+        ctx.parser.parseChunk(excerpt, ctx.content)
+        excerpt = etree.tostring(excerpt, encoding='unicode')
+    excerpt = (
+        excerpt or
         meta('og:description') or
         meta('twiiter:description') or
         meta('description') or
@@ -136,7 +142,7 @@ def linkcard(url, *, wideimage=True, embedimage=False, image=None):
 <p class='linkcard-heading'><a href='{url}'>{title}</a></p>
 <div class='linkcard-excerpt'>
 <p>
-{description}
+{excerpt}
 <span class='linkcard-more'><a href='{url}'>Read more</a></span>
 </p>
 </div>
