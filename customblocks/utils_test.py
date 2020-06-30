@@ -65,10 +65,16 @@ class ETest(unittest.TestCase):
 			<div>content</div>
 		""")
 
-	def test_afterElement(self):
+	def test_text_afterElement(self):
 		e = E('', E('child'), "content")
 		self.assertXml(e, """\
 			<div><child />content</div>
+		""")
+
+	def test_text_twice(self):
+		e = E('', "first", "later")
+		self.assertXml(e, """\
+			<div>firstlater</div>
 		""")
 
 

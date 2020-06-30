@@ -12,7 +12,7 @@ def E(tag, *children, **attribs):
 			if len(element):
 				element[-1].tail = child
 			else:
-				element.text = child
+				element.text = (element.text or '') + child
 			continue
 		element.append(child)
 	return element
