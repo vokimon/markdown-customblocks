@@ -9,6 +9,8 @@ def E(tag, *children, **attribs):
 		if not isinstance(child, dict):
 			continue
 		attributes.update(child)
+	if '_class' in attribs:
+		classes = [attribs.pop('_class')]
 	attributes.update(attribs)
 
 	element = etree.Element(tag or 'div',

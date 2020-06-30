@@ -119,6 +119,12 @@ class ETest(unittest.TestCase):
 			<div />
 		""")
 
+	def test_class_specialUnderline(self):
+		e = E('', _class='myclass')
+		self.assertXml(e, """\
+			<div class="myclass" />
+		""")
+
 
 
 
