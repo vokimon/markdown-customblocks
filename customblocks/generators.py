@@ -5,7 +5,7 @@ from urllib.parse import urlparse, urljoin
 import base64
 from markdown.util import etree
 import html
-from .utils import E
+from .utils import E, Markdown
 
 def container(ctx, *args, **kwds):
     div = etree.SubElement(ctx.parent, 'div')
@@ -35,8 +35,6 @@ def admonition(ctx, title=None, *args, **kwds):
 
 
 def figure(ctx, url, *args, **kwds):
-    caption = E('figcaption')
-    ctx.parser.parseChunk(caption, ctx.content)
     title = kwds.pop('title', None)
     alt = kwds.pop('alt', None)
     return E('figure',
@@ -50,7 +48,9 @@ def figure(ctx, url, *args, **kwds):
                 alt=alt,
             )
         ),
-        caption,
+        E('figcaption',
+            Markdown(ctx.parser, ctx.content)
+        ),
         **kwds
     )
 
