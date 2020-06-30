@@ -1,6 +1,6 @@
 import unittest
 from markdown.util import etree
-from .utils import E
+from .utils import E, Markdown
 from textwrap import dedent
 
 class ETest(unittest.TestCase):
@@ -159,6 +159,15 @@ class ETest(unittest.TestCase):
         e = E('grandpa', E("dad", E("child")))
         self.assertXml(e, """\
             <grandpa><dad><child /></dad></grandpa>
+        """)
+
+
+    def test_markdown(self):
+        import markdown
+        md = markdown.Markdown()
+        e = E('.container', Markdown(md.parser, "inner"))
+        self.assertXml(e, """\
+            <div class="container"><p>inner</p></div>
         """)
 
 

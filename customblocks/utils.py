@@ -48,6 +48,9 @@ def E(tag, *children, **attribs):
         if type(child) == etree.Element:
             element.append(child)
             return
+        if type(child) == Markdown:
+            child.parse(element)
+            return
         for item in child:
             appendChild(item)
  
@@ -55,6 +58,18 @@ def E(tag, *children, **attribs):
         appendChild(child)
 
     return element
+
+class Markdown:
+    """
+    Functional wrapper to insert text reparsed as Markdown into an etree
+    """
+    def __init__(self, parser, text):
+        self.parser = parser
+        self.text = text
+    def parse(self, parent):
+        self.parser.parseChunk(parent, self.text)
+
+
 
 
 # vim: et ts=4 sw=4
