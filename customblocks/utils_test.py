@@ -35,5 +35,14 @@ class ETest(unittest.TestCase):
 			<div class="myclass otherclass" />
 		""")
 
+	def test_attribute(self):
+		e = E('', attr1='value')
+		self.assertXml(e, """\
+			<div attr1="value" />
+		""")
+		
+
+
+
 
 # vim: et ts=4 sw=4
