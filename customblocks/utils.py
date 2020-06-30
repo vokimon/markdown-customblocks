@@ -3,17 +3,17 @@ from markdown.util import etree
 
 def E(tag, *children, **attribs):
 	tag, *classes = tag.split('.')
-
 	attributes = dict()
+
+	def blend(adict):
+		if '_class' in adict:
+			classes.append(adict.pop('_class'))
+		attributes.update(adict)
+
 	for child in children:
-		if not isinstance(child, dict):
-			continue
-		if '_class' in child:
-			classes.append(child.pop('_class'))
-		attributes.update(child)
-	if '_class' in attribs:
-		classes.append(attribs.pop('_class'))
-	attributes.update(attribs)
+		if isinstance(child, dict):
+			blend(child)
+	blend(attribs)
 
 	element = etree.Element(tag or 'div',
 		{'class': ' '.join(classes)} if classes else {},
