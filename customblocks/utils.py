@@ -16,6 +16,7 @@ def E(tag, *children, **attribs):
 		**{
 			k:format(v)
 			for k,v in attributes.items()
+			if v is not None
 		}
 	)
 	for child in children:

@@ -113,6 +113,12 @@ class ETest(unittest.TestCase):
 			<div attrib="value2" />
 		""")
 
+	def test_attrib_none_unsets(self):
+		e = E('', attrib=None)
+		self.assertXml(e, """\
+			<div />
+		""")
+
 
 
 
