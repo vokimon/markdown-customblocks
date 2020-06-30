@@ -83,6 +83,12 @@ class ETest(unittest.TestCase):
 			<div><child />firstlater</div>
 		""")
 
+	def test_text_afterSecondChild(self):
+		e = E('', E('child'), E('sibbling'), "content")
+		self.assertXml(e, """\
+			<div><child /><sibbling />content</div>
+		""")
+
 
 
 
