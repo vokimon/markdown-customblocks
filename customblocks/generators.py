@@ -5,7 +5,7 @@ from urllib.parse import urlparse, urljoin
 import base64
 from markdown.util import etree
 import html
-
+from .utils import E
 
 def container(ctx, *args, **kwds):
     div = etree.SubElement(ctx.parent, 'div')
@@ -170,21 +170,24 @@ def youtube(ctx, id, *, autoplay=False, controls=True, loop=False):
     if loop:
         options.append('loop=1')
     options = ('?' + '&'.join(options)) if options else ''
-    url = f"https://www.youtube.com/embed/{id}{options}"
-    div = etree.Element('div')
-    div.set('class', 'videowrapper youtube')
-    if inlineStyle:
-        div.set('style',
+    wrapperStyle = (
             'position:relative; padding-bottom:56.25%; '
-            'height:0; overflow:hidden; width:100%')
-    iframe = etree.SubElement(div,'iframe')
-    if inlineStyle:
-        iframe.set('style',
+            'height:0; overflow:hidden; width:100%'
+        ) if inlineStyle else None
+    iframeStyle = (
             'position:absolute; '
             'top:0; left:0; '
-            'width:100%; height:100%;')
-    iframe.set('src', url)
-    return div
+            'width:100%; height:100%;'
+        ) if inlineStyle else None
+
+    url = f"https://www.youtube.com/embed/{id}{options}"
+    return E('.videowrapper.youtube',
+        E('iframe',
+            src=url,
+            style=iframeStyle,
+        ),
+        style=wrapperStyle,
+    )
 
 def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     options=[]
@@ -193,15 +196,15 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     if loop: options.append('loop=1')
     if autoplay: options.append('autoplay=1')
 
-    iframe = etree.SubElement(ctx.parent, 'iframe')
-    iframe.set('src', 'https://player.vimeo.com/video/{}?{}'
-        .format(id, '&'.join(options)))
-    iframe.set('width', "100%")
-    iframe.set('height', "300")
-    iframe.set('frameborder', "0")
-    iframe.set('allow', "autoplay; fullscreen")
-    iframe.set('allowfullscreen', 'allowfullscreen')
-
+    return E('iframe',
+        src = "https://player.vimeo.com/video/{}?{}"
+            .format(id, '&'.join(options)),
+        width="100%",
+        height="300",
+        frameborder="0",
+        allow="autoplay; fullscreen",
+        allowfullscreen="allowfullscreen",
+    )
 
 def verkami(ctx, id, *, landscape=False):
     if landscape:
