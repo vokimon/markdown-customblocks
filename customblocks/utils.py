@@ -9,7 +9,10 @@ def E(tag, *children, **attribs):
 	)
 	for child in children:
 		if type(child) == str:
-			element.text = child
+			if len(element):
+				element[-1].tail = child
+			else:
+				element.text = child
 			continue
 		element.append(child)
 	return element
