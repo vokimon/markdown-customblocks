@@ -14,7 +14,11 @@ def E(tag, *children, **attribs):
 			else:
 				element.text = (element.text or '') + child
 			continue
-		element.append(child)
+		if type(child) == etree.Element:
+			element.append(child)
+		if isinstance(child, dict):
+			for k,v in child.items():
+				element.set(k,v)
 	return element
 
 

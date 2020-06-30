@@ -89,6 +89,18 @@ class ETest(unittest.TestCase):
 			<div><child /><sibbling />content</div>
 		""")
 
+	def test_text_interChildren(self):
+		e = E('', E('child'), "content", E('sibbling'))
+		self.assertXml(e, """\
+			<div><child />content<sibbling /></div>
+		""")
+
+	def test_attrib_asChildren(self):
+		e = E('', dict(attrib="value"))
+		self.assertXml(e, """\
+			<div attrib="value" />
+		""")
+
 
 
 
