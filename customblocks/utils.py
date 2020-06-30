@@ -2,9 +2,9 @@ from markdown.util import etree
 
 
 def E(tag):
-	tag, *classes = tag.split('.',1)
+	tag, *classes = tag.split('.')
 	return etree.Element(tag or 'div',
-		{'class': classes[0]} if classes else {}
+		{'class': ' '.join(classes)} if classes else {}
 	)
 
 

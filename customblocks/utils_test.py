@@ -29,5 +29,11 @@ class ETest(unittest.TestCase):
 			<div class="myclass" />
 		""")
 
+	def test_tag_manyClasses(self):
+		e = E('.myclass.otherclass')
+		self.assertXml(e, """\
+			<div class="myclass otherclass" />
+		""")
+
 
 # vim: et ts=4 sw=4
