@@ -11,16 +11,22 @@ class ETest(unittest.TestCase):
 			dedent(expected.strip()))
 		
 
-	def test_simpleNode(self):
+	def test_tag_named(self):
 		e = E('div')
 		self.assertXml(e, """\
 			<div />
 		""")
 
-	def test_tagless(self):
+	def test_tag_noName(self):
 		e = E('')
 		self.assertXml(e, """\
 			<div />
+		""")
+
+	def test_tag_class(self):
+		e = E('.myclass')
+		self.assertXml(e, """\
+			<div class="myclass" />
 		""")
 
 
