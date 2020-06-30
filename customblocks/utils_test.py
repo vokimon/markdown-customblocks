@@ -47,6 +47,12 @@ class ETest(unittest.TestCase):
 			<div attr1="200" />
 		""")
 
+	def test_attribute_attributeEncode(self):
+		e = E('', attr1="""a&<>"'z""")
+		self.assertXml(e, """\
+			<div attr1="a&amp;&lt;&gt;&quot;'z" />
+		""")
+
 
 
 
