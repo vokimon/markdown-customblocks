@@ -40,7 +40,12 @@ class ETest(unittest.TestCase):
 		self.assertXml(e, """\
 			<div attr1="value" />
 		""")
-		
+
+	def test_attribute_integer(self):
+		e = E('', attr1=200)
+		self.assertXml(e, """\
+			<div attr1="200" />
+		""")
 
 
 
