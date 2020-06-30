@@ -2,6 +2,17 @@ from markdown.util import etree
 
 
 def E(tag, *children, **attribs):
+    """
+    Functional builder of an etree.
+    If the tag is empty, a div is considered.
+    Tag can be appended with dot separated class names.
+    Keywords and dict children are turned into attributes.
+    Later children which are dict attributes overwrite previous values.
+    Keyword attributes overwrite any value set by children dict
+    Class attributes are exception to the former being added instead of replaced.
+    Text children are turn into text nodes.
+    Items of children being lists and generators are inlined as childs of the element.
+    """
     tag, *classes = tag.split('.')
     attributes = dict()
 
