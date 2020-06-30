@@ -10,7 +10,7 @@ def E(tag, *children, **attribs):
 	for child in children:
 		if type(child) == str:
 			if len(element):
-				element[0].tail = child
+				element[0].tail = (element[0].tail or '') + child
 			else:
 				element.text = (element.text or '') + child
 			continue
