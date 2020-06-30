@@ -13,7 +13,10 @@ def E(tag, *children, **attribs):
 
 	element = etree.Element(tag or 'div',
 		{'class': ' '.join(classes)} if classes else {},
-		**{k:format(v) for k,v in attributes.items()}
+		**{
+			k:format(v)
+			for k,v in attributes.items()
+		}
 	)
 	for child in children:
 		if isinstance(child, dict):
