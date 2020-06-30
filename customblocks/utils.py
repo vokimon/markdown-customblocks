@@ -25,17 +25,21 @@ def E(tag, *children, **attribs):
             if v is not None
         }
     )
-    for child in children:
+    def appendChild(child):
         if isinstance(child, dict):
-            continue
+            return
         if type(child) == str:
             if len(element):
                 element[-1].tail = (element[-1].tail or '') + child
             else:
                 element.text = (element.text or '') + child
-            continue
+            return
         if type(child) == etree.Element:
             element.append(child)
+ 
+    for child in children:
+        appendChild(child)
+
     return element
 
 
