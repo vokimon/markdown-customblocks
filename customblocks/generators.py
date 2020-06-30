@@ -46,8 +46,8 @@ def figure(ctx, url, *args, **kwds):
         E('a', dict(href = url),
             E('img',
                 src=url,
-                title = title,
-                alt = alt,
+                title=title,
+                alt=alt,
             )
         ),
         caption,
@@ -202,30 +202,29 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
     )
 
 def verkami(ctx, id, *, landscape=False):
-    if landscape:
-        return (
-            '<iframe class="js-widget-iframe" '
-                ' id="verkamiLandscape" allowtransparency="true" frameborder="0" scrolling="no"'
-                ' style="width: 480px; height: 210px"'
-                ' src="https://www.verkami.com/projects/{}/widget_landscape"'
-                '></iframe>'
-        ).format(id)
-    else:
-        return (
-            '<iframe class="js-widget-iframe"'
-                ' id="verkamiPortrait" allowtransparency="true" frameborder="0" scrolling="no"'
-                ' style="width: 240px; height: 350px"'
-                ' src="https://www.verkami.com/projects/{}/widget_portrait"'
-                '></iframe>'
-        ).format(id)
-
+    orientation = 'landscape' if landscape else 'portrait'
+    style = (
+        "width: 480px; height: 210px"
+        if landscape else
+        "width: 240px; height: 350px"
+    )
+    return E('iframe.js-widget-iframe',
+        id='verkami{}'.format(orientation.title()),
+        allowtransparency="true",
+        style=style,
+        frameborder="0",
+        scrolling="no",
+        src="https://www.verkami.com/projects/{}/widget_{}".format(id,orientation),
+    )
 
 def goteo(ctx, id):
-    return (
-        '<iframe frameborder="0" height="492px"'
-        ' src="//www.goteo.org/widget/project/{}"'
-        ' width="300px" scrolling="no"></iframe>'
-    ).format(id)
+    return E('iframe',
+        frameborder="0",
+        height="492px",
+        src="//www.goteo.org/widget/project/{}".format(id),
+        width="300px",
+        scrolling="no"
+    )
 
 
 def twitter(user,
