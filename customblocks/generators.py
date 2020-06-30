@@ -35,29 +35,24 @@ def admonition(ctx, title=None, *args, **kwds):
 
 
 def figure(ctx, url, *args, **kwds):
-    figure = etree.Element('figure')
-
+    caption = E('figcaption')
+    ctx.parser.parseChunk(caption, ctx.content)
     title = kwds.pop('title', None)
     alt = kwds.pop('alt', None)
-
-    classes = ' '.join(args)
-    if classes:
-        figure.set('class', classes)
-    for attribute, value in kwds.items():
-        figure.set(attribute, value)
-
-    link = etree.SubElement(figure, 'a')
-    link.set('href', url)
-    img = etree.SubElement(link, 'img')
-    img.set('src', url)
-    if title:
-        img.set('title', title)
-    if alt:
-        img.set('alt', alt)
-
-    caption = etree.SubElement(figure, 'figcaption')
-    content = ctx.parser.parseChunk(caption, ctx.content)
-    return figure
+    return E('figure',
+        dict(
+            _class = ' '.join(args) or None,
+        ),
+        E('a', dict(href = url),
+            E('img',
+                src=url,
+                title = title,
+                alt = alt,
+            )
+        ),
+        caption,
+        **kwds
+    )
 
 def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     response = requests.get(url)
