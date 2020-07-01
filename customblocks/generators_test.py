@@ -60,6 +60,17 @@ class Examples_Test(test_tools.TestCase):
             </div>
             """)
 
+    def test_admonition_sluggify(self):
+        self.assertMarkdown("""\
+            ::: note "A title" "super monition" style="float:left;width:30%"
+                content
+            """, """\
+            <div class="admonition note super-monition" style="float:left;width:30%">
+            <p class="admonition-title">A title</p>
+            <p>content</p>
+            </div>
+            """)
+
     def test_admonition_noTitle(self):
         self.assertMarkdown("""\
             ::: note style="float:left;width:30%"

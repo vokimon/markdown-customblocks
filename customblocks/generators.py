@@ -8,31 +8,21 @@ import html
 from .utils import E, Markdown
 
 def container(ctx, *args, **kwds):
-    div = etree.SubElement(ctx.parent, 'div')
-    div.set('class', '%s' % (' '.join(
-        '-'.join(cl.split())
-        for cl in [ctx.type]+list(args)
-    )))
-    for k,v in kwds.items():
-        div.set(k,v)
-    ctx.parser.parseChunk(div, ctx.content)
-
+    args = [ '-'.join(arg.split()) for arg in args ]
+    return E('.'+ctx.type,
+        dict(_class=' '.join(args)),
+        Markdown(ctx.content, ctx.parser),
+        **kwds
+    )
 
 def admonition(ctx, title=None, *args, **kwds):
-    div = etree.SubElement(ctx.parent, 'div')
-    div.set('class', 'admonition %s' % (' '.join(
-        '-'.join(cl.split())
-        for cl in [ctx.type]+list(args)
-    )))
-    if title is None:
-        title = ctx.type.title()
-    titlediv = etree.SubElement(div, 'p')
-    titlediv.set('class', 'admonition-title')
-    titlediv.text = title
-    for k, v in kwds.items():
-        div.set(k, v)
-    ctx.parser.parseChunk(div, ctx.content)
-
+    args = [ '-'.join(arg.split()) for arg in args ] # Untested case
+    return E('.admonition.'+ctx.type,
+        dict(_class=' '.join(list(args))),
+        E('p.admonition-title', title or ctx.type.title()),
+        Markdown(ctx.content, ctx.parser),
+        **kwds
+    )
 
 def figure(ctx, url, *args, **kwds):
     title = kwds.pop('title', None)
