@@ -17,7 +17,7 @@ def E(tag, *children, **attribs):
     tag, *classes = tag.split('.')
     attributes = dict()
 
-    def blend(adict):
+    def blendAttrs(adict):
         if '_class' in adict:
             aclass = adict.pop('_class')
             if aclass:
@@ -26,8 +26,8 @@ def E(tag, *children, **attribs):
 
     for child in children:
         if isinstance(child, dict):
-            blend(child)
-    blend(attribs)
+            blendAttrs(child)
+    blendAttrs(attribs)
 
     element = etree.Element(tag or 'div',
         {'class': ' '.join(classes)} if classes else {},
