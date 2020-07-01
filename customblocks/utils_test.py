@@ -170,6 +170,12 @@ class ETest(unittest.TestCase):
             <ul><li>A</li><li>B</li><li>C</li></ul>
         """)
 
+    def test_child_none(self):
+        e = E('', None, 'hola', None)
+        self.assertXml(e, """\
+            <div>hola</div>
+        """)
+
 
     def test_markdown_defaultParser(self):
         e = E('.container',

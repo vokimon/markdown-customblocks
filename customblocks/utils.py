@@ -38,6 +38,8 @@ def E(tag, *children, **attribs):
         }
     )
     def appendChild(child):
+        if child is None:
+            return
         if isinstance(child, dict):
             return
         if type(child) == str:
