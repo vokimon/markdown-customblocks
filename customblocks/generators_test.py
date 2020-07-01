@@ -2,7 +2,7 @@ import unittest
 from markdown import markdown
 from markdown import test_tools
 
-class Examples_Test(test_tools.TestCase):
+class Generators_Test(test_tools.TestCase):
 
     def setUp(self):
         self.maxDiff = None
