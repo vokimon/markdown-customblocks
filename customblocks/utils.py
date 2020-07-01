@@ -1,4 +1,5 @@
 from markdown.util import etree
+import markdown
 
 
 def E(tag, *children, **attribs):
@@ -61,11 +62,13 @@ def E(tag, *children, **attribs):
 
 class Markdown:
     """
-    Functional wrapper to insert text reparsed as Markdown into an etree
+    Functional Buidler to insert text reparsed as Markdown into an etree
     """
-    def __init__(self, parser, text):
-        self.parser = parser
+
+    def __init__(self, text, parser=None):
+        self.parser = parser or markdown.Markdown().parser
         self.text = text
+
     def parse(self, parent):
         self.parser.parseChunk(parent, self.text)
 

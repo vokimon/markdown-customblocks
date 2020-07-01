@@ -49,7 +49,7 @@ def figure(ctx, url, *args, **kwds):
             )
         ),
         E('figcaption',
-            Markdown(ctx.parser, ctx.content)
+            Markdown(ctx.content, parser=ctx.parser)
         ),
         **kwds
     )

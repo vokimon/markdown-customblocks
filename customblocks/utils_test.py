@@ -161,13 +161,37 @@ class ETest(unittest.TestCase):
             <grandpa><dad><child /></dad></grandpa>
         """)
 
-
-    def test_markdown(self):
-        import markdown
-        md = markdown.Markdown()
-        e = E('.container', Markdown(md.parser, "inner"))
+    def test_child_iterators(self):
+        e = E('ul', (
+                E('li', item)
+                for item in 'ABC'
+            ))
         self.assertXml(e, """\
-            <div class="container"><p>inner</p></div>
+            <ul><li>A</li><li>B</li><li>C</li></ul>
+        """)
+
+
+    def test_markdown_defaultParser(self):
+        e = E('.container',
+            Markdown(
+                """!!! danger "Caution"\nshit happens""",
+            )
+        )
+        self.assertXml(e, """\
+            <div class="container"><p>!!! danger "Caution"\nshit happens</p></div>
+        """)
+
+    def test_markdown_customParser(self):
+        import markdown
+        md = markdown.Markdown(extensions=['admonition'])
+        e = E('',
+            Markdown(
+                """!!! danger "Caution"\nshit happens""",
+                parser=md.parser
+            )
+        )
+        self.assertXml(e, """\
+            <div><div class="admonition danger"><p class="admonition-title">Caution</p></div><p>shit happens</p></div>
         """)
 
 
