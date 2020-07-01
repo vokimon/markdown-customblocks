@@ -29,10 +29,10 @@ def E(tag, *children, **attribs):
             blendAttrs(child)
     blendAttrs(attribs)
 
-    element = etree.Element(tag or 'div',
-        {'class': ' '.join(classes)} if classes else {},
+    element = etree.Element(tag or 'div', {
+        'class': ' '.join(classes)} if classes else {},
         **{
-            k:format(v)
+            k: format(v)
             for k,v in attributes.items()
             if v is not None
         }
