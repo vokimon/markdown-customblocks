@@ -532,7 +532,62 @@ Embeds a [Goteo] fund raising campaign widget.
 : The id of the project
 
 
+## Generator tools
+
+### Hyperscript generation
+
+You can generate html with strings or using `etree`; but there is a more elegant option.
+
+[Hyperscript] is the idea of writing code that generates html/xml
+as nested function calls that look like the the actual xml structure.
+This can be done by using the `customblocks.util.E` function which has this signature:
+
+```
+def E(tag, *children, **attributes): ...
+```
+
+`tag` is the name of the tag (`pre`, `div`, `strong`...).
+An empty string is equivalent to `div`.
+It can have appended several `.classname` that will be added as element class.
+
+Any keyword parameter will be taken as element attributes.
+You can use the special `_class` attribute to append more classes.
+Notice the underline, as `class` is a reserved word in Python.
+
+`children` takes the keyless parameters and they can be:
+
+- `None`: then it will be ignored
+- `dict`: it will be merged with the attributes
+- `str`: it will be added as text
+- `etree.Element`: it will be added as child node
+- `customblocks.util.Markdown`: will append parsed markdown (see below)
+- Any `tuple`, `list` or iterable will go for the 
+
+```python
+def mygenerator(ctx, image):
+	return (
+		E('.mytype',
+			dict(style="width: 30%; align: left"),
+			E('a', dict(href=image),
+				E('img', src=image),
+			),
+			Markdown(ctx.content, ctx.parser),
+		)
+	)
+```
+
+[Hyperscript]: http://hyperhype.github.io/hyperscript/
+
 ## Release history
+
+### unreleased
+
+- `linkcard`: Fixed behaviour
+- `linkcard`: Example style emulating Wordpress' embedded link
+- `linkcard`: Explicit image, excerpt, title
+- `utils.E`: Helper to generate blocks using hyperscript idiom
+- `utils.Markdown`: Helper to include markdown in hyperscript
+
 
 ### markdown-customblocks 1.0.0 (2020-06-27)
 
