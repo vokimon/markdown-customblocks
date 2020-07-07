@@ -1,5 +1,5 @@
 import unittest
-from markdown.util import etree
+from xml.etree import ElementTree as etree
 from .utils import E, Markdown
 from textwrap import dedent
 

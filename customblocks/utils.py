@@ -1,4 +1,4 @@
-from markdown.util import etree
+from xml.etree import ElementTree as etree
 import markdown
 
 

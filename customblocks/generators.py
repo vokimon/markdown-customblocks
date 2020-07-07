@@ -3,7 +3,7 @@ from yamlns import namespace as ns
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin
 import base64
-from markdown.util import etree
+from xml.etree import ElementTree as etree
 import html
 from .utils import E, Markdown
 

@@ -1,7 +1,7 @@
 import unittest
 from markdown import markdown
 from markdown import test_tools
-from markdown.util import etree
+from xml.etree import ElementTree as etree
 
 try:
     import full_yaml_metadata
