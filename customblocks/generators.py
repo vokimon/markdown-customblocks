@@ -95,9 +95,11 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     websiteicon = (
         rellink('icon') or
         rellink('shortcut icon') or # legacy
-        urljoin(url, '/favicon.ico') or
+        '/favicon.ico' or
         None
     )
+    if websiteicon:
+        websiteicon = urljoin(url, websiteicon)
     image = (
         image or
         meta('og:image') or
