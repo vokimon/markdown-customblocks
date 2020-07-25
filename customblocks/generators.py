@@ -136,7 +136,7 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
 <div class='linkcard-footer'>
 <div class='linkcard-site-title'>
 <a class='linkcard-site-icon' href='{siteurl}'>
-<img class='linkcard-site-icon' height='32' src='{websiteicon}' width='32' />
+<img height='32' src='{websiteicon}' width='32' />
 <span>{siteName.upper()}</span>
 </a>
 </div>
