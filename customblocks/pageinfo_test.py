@@ -264,5 +264,18 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.image, "og.jpg")
 
+    def test_image_fromTwitter(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='twitter:image',
+                        content='twitter.jpg',
+                    ),
+                )
+            )
+        ))
+        self.assertEqual(info.image, "twitter.jpg")
+
 
 # vim: et ts=4 sw=4
