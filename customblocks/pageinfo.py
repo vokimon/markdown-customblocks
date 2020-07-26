@@ -34,7 +34,11 @@ class PageInfo:
 
     @property
     def description(self):
-        return self._meta('description') or ''
+        return (
+            self._meta('twitter:description') or
+            self._meta('description') or
+            ''
+        )
 
 
 

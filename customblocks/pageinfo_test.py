@@ -120,11 +120,28 @@ class PageInfo_Test(unittest.TestCase):
                     E('meta',
                         property='description',
                         content='HTML Description',
-                    )
+                    ),
                 )
             )
         ))
         self.assertEqual(info.description, "HTML Description")
+
+    def test_description_fromTwitterMeta(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='description',
+                        content='HTML Description',
+                    ),
+                    E('meta',
+                        property='twitter:description',
+                        content='Twitter Description',
+                    ),
+                )
+            )
+        ))
+        self.assertEqual(info.description, "Twitter Description")
 
 
 
