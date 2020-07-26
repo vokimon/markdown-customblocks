@@ -34,7 +34,7 @@ class PageInfo:
 
     @property
     def description(self):
-        return ""
+        return self._meta('description') or ''
 
 
 

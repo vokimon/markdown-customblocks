@@ -113,6 +113,20 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.description, "")
 
+    def test_description_fromMeta(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='description',
+                        content='HTML Description',
+                    )
+                )
+            )
+        ))
+        self.assertEqual(info.description, "HTML Description")
+
+
 
 
 
