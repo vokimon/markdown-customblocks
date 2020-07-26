@@ -1,6 +1,6 @@
 from yamlns import namespace as ns
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urlparse, urljoin, urlunsplit
 
 class PageInfo:
 
@@ -21,6 +21,10 @@ class PageInfo:
     @property
     def site(self):
         return self._meta('og:site') or self._url.hostname
+
+    @property
+    def siteurl(self):
+        return urlunsplit((self._url.scheme, self._url.netloc,'','','')) or None
 
     @property
     def title(self):

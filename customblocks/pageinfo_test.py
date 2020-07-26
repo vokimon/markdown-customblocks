@@ -92,6 +92,21 @@ class PageInfo_Test(unittest.TestCase):
         ), url='http://www.mydomain.com/page/subpage')
         self.assertEqual(info.title, 'www.mydomain.com')
 
+    def test_siteurl(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ), url='http://www.mydomain.com/page/subpage')
+        self.assertEqual(info.siteurl, 'http://www.mydomain.com')
+
+    def test_siteurl_noUrlProvided(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ))
+        self.assertEqual(info.siteurl, None)
+
+
 
 
 # vim: et ts=4 sw=4
