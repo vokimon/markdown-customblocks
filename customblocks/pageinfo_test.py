@@ -164,7 +164,7 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.description, "OG Description")
 
-    def test_siteicon(self):
+    def test_siteicon_takesFirst(self):
         info = PageInfo(self.html(
             E('html',
                 E('head',
@@ -173,13 +173,26 @@ class PageInfo_Test(unittest.TestCase):
                         href='siteicon.png',
                     ),
                     E('link',
+                        rel='icon',
+                        href='secondicon.png',
+                    ),
+                ),
+            )
+        ))
+        self.assertEqual(info.siteicon, "siteicon.png")
+
+    def test_siteicon_shortcuticon(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('link',
                         rel='shortcut icon',
                         href='shortcuticon.png',
                     ),
                 ),
             )
         ))
-        self.assertEqual(info.siteicon, "siteicon.png")
+        self.assertEqual(info.siteicon, "shortcuticon.png")
 
 
 # vim: et ts=4 sw=4
