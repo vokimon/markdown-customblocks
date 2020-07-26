@@ -77,5 +77,14 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.site, "www.mydomain.com")
 
+    def test_site_noSource(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ))
+
+        self.assertEqual(info.site, None)
+
+
 
 # vim: et ts=4 sw=4
