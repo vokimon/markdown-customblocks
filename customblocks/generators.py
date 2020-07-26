@@ -1,7 +1,6 @@
 import requests
 from yamlns import namespace as ns
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse, urljoin
 import base64
 from xml.etree import ElementTree as etree
 import html
@@ -49,7 +48,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     response = requests.get(url)
     info = PageInfo(response.text, url)
 
-    parsedurl = urlparse(url)
     siteName = info.sitename
     siteurl = info.siteurl
     title = info.title
