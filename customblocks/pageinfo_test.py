@@ -303,6 +303,13 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.title, "Overriden title")
 
+    def test_description_override(self):
+        info = PageInfo(self.html(
+                E('html', E('head', E('meta', property='description', content='Not shown')))
+            ), description='Overriden description')
+
+        self.assertEqual(info.description, "Overriden description")
+
 
 
 

@@ -58,6 +58,7 @@ class PageInfo:
     @property
     def description(self):
         return (
+            self._overrides.get('description') or
             self._meta('og:description') or
             self._meta('twitter:description') or
             self._meta('description') or
