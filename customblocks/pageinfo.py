@@ -11,11 +11,17 @@ class PageInfo:
         tag = self._soup.find(name)
         if tag: return tag.text
 
+    def _meta(self, name):
+        meta = self._soup.find('meta', property=name)
+        if meta: return meta.get('content')
+
+
     @property
     def title(self):
-        ogtitle = self._soup.find('meta', property='og:title')
-        if ogtitle: return ogtitle.get('content')
+        ogtitle = self._meta('og:title')
+        if ogtitle: return ogtitle
         return self._tag('title')
+
 
 
 # vim: et ts=4 sw=4
