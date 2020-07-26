@@ -28,9 +28,11 @@ class PageInfo:
 
     @property
     def title(self):
-        ogtitle = self._meta('og:title')
-        if ogtitle: return ogtitle
-        return self._tag('title') or self.sitename
+        return (
+            self._meta('og:title') or
+            self._tag('title') or
+            self.sitename
+        )
 
     @property
     def description(self):
