@@ -5,3 +5,5 @@ def extractInfo(html):
         title = "My title",
     )
 
+
+# vim et ts=4 sw=4

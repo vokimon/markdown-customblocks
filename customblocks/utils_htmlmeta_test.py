@@ -23,6 +23,4 @@ class HtmlMeta_Test(unittest.TestCase):
             title: My title
             """)
 
-
-
-
+# vim et ts=4 sw=4
