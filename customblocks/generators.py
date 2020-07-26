@@ -50,13 +50,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     info = PageInfo(response.text, url)
     soup = BeautifulSoup(response.text, 'html.parser')
     #print(soup)
-    def meta(property):
-        metatag = soup.find('meta', property=property)
-        if not metatag:
-            metatag = soup.find('meta', attrs=dict(name=property))
-        if not metatag:
-            return None
-        return metatag.get('content')
 
     parsedurl = urlparse(url)
     siteName = info.sitename
