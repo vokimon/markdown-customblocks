@@ -23,6 +23,10 @@ class PageInfo:
         if not rel: return
         return rel.get('href')
 
+    def based(self, relative):
+        if not self._fullurl: return relative
+        return urljoin(self._fullurl, relative)
+
     @property
     def sitename(self):
         return self._meta('og:site_name') or self._url.hostname
@@ -33,10 +37,10 @@ class PageInfo:
 
     @property
     def siteicon(self):
-        icon = self._rel('icon') or '/favicon.ico' 
-        if self._fullurl:
-            return urljoin(self._fullurl, icon)
-        return icon
+        return self.based(
+            self._rel('icon') or
+            '/favicon.ico'
+        )
 
     @property
     def title(self):
