@@ -20,4 +20,12 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.title, "My title")
 
+
+    def test_title_withNoTitle(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ))
+        self.assertEqual(info.title, None)
+
 # vim: et ts=4 sw=4
