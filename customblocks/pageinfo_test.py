@@ -164,8 +164,22 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.description, "OG Description")
 
-
-
+    def test_siteicon(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('link',
+                        rel='icon',
+                        href='siteicon.png',
+                    ),
+                    E('link',
+                        rel='shortcut icon',
+                        href='shortcuticon.png',
+                    ),
+                ),
+            )
+        ))
+        self.assertEqual(info.siteicon, "siteicon.png")
 
 
 # vim: et ts=4 sw=4

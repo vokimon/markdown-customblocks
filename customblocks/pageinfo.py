@@ -27,6 +27,10 @@ class PageInfo:
         return urlunsplit((self._url.scheme, self._url.netloc,'','','')) or None
 
     @property
+    def siteicon(self):
+        return "siteicon.png"
+
+    @property
     def title(self):
         return (
             self._meta('og:title') or
