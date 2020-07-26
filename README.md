@@ -22,7 +22,7 @@ Includes some sample components for div containers, admonitions, figures, link c
 - [Installation and setup](#installation-and-setup)
 - [General markup syntax](#general-markup-syntax)
 - [Implementing a generator](#implementing-a-generator)
-- [Predefined block types](#predefined-block-types)
+- [Predefined generators](#predefined-generators)
     - [Container (`customblocks.generators.container`)](#container-customblocksgeneratorscontainer)
     - [Admonition (`customblocks.generators.admonition`)](#admonition-customblocksgeneratorsdmonition)
     - [Link card (`customblocks.generators.linkcard`)](#link-card-customblocksgeneratorsinkcard)
@@ -32,6 +32,9 @@ Includes some sample components for div containers, admonitions, figures, link c
     - [Twitter (`customblocks.generators.twitter`)](#twitter-customblocksgeneratorstwitter)
     - [Verkami (`customblocks.generators.verkami`)](#verkami-customblocksgeneratorsverkami)
     - [Goteo (`customblocks.generators.goteo`)](#goteo-customblocksgeneratorsgoteo)
+- [Generator tools](#generator-tools)
+	- [Hyperscript generation](#hyperscript-generation)
+	- [PageInfo](#pageinfo)
 - [Release history](#release-history)
 - [TODO](#todo)
 
@@ -250,7 +253,7 @@ A generator can use several strategies to generate content:
 - Return a `markdown.etree` `Element` object
 - Manipulate `ctx.parent` to add the content and return `None`
 
-## Predefined block types
+## Predefined generators
 
 ### Container (`customblocks.generators.container`)
 
@@ -578,13 +581,37 @@ def mygenerator(ctx, image):
 
 [Hyperscript]: http://hyperhype.github.io/hyperscript/
 
+### PageInfo
+
+`utils.pageinfo.PageInfo` is a class that retrieves
+meta information from html pages by means of its properties.
+
+Properties are cached so you once you use them for one page,
+later uses, have litle impact.
+
+Any attribute you explicit on the constructor will override
+the ones derived from actual content.
+
+```python
+info = PageInfo(html, url='http://site.com/path/page.html')
+info.sitename # the name of the site (meta og:site_name or the domain
+info.siteicon # the favicon or similar
+info.siteurl  # the base url of the site (not the page)
+info.title    # page title (from og:title meta or `<title>` content)
+info.description # short description (from og:description or twitter:description)
+info.image    # featured image (from og:image or twitter:image, or site image)
+```
+
+
 ## Release history
 
 ### unreleased
 
 - `linkcard`: Fixed behaviour
 - `linkcard`: Example style emulating Wordpress' embedded link
-- `linkcard`: Explicit image, excerpt, title
+- `linkcard`: Explicit image, description, title...
+- `linkcard`: Cached properties
+- `utils.PageInfo`: Page information retrieval helper
 - `utils.E`: Helper to generate blocks using hyperscript idiom
 - `utils.Markdown`: Helper to include markdown in hyperscript
 
