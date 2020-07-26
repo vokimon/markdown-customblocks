@@ -45,10 +45,12 @@ class PageInfo:
 
     @property
     def siteicon(self):
-        return self.absolute(
+        return (
             self._overrides.get('siteicon') or
-            self._rel('icon') or
-            '/favicon.ico'
+            self.absolute(
+                self._rel('icon') or
+                '/favicon.ico'
+            )
         )
 
     @property

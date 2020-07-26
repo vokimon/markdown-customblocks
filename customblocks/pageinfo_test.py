@@ -324,6 +324,13 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.siteicon, "overriden.png")
 
+    def test_siteicon_override_withUrl(self):
+        info = PageInfo(self.html(
+                E('html')
+            ), siteicon='overriden.png', url='http://site.com/path/file.html')
+
+        self.assertEqual(info.siteicon, "overriden.png")
+
 
 
 
