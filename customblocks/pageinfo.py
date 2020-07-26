@@ -33,7 +33,11 @@ class PageInfo:
 
     @property
     def sitename(self):
-        return self._meta('og:site_name') or self._url.hostname
+        return (
+            self._overrides.get('sitename') or
+            self._meta('og:site_name') or
+            self._url.hostname
+        )
 
     @property
     def siteurl(self):

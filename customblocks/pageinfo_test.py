@@ -310,6 +310,13 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.description, "Overriden description")
 
+    def test_sitename_override(self):
+        info = PageInfo(self.html(
+                E('html', E('head', E('meta', property='og:site_name', content='Not shown')))
+            ), sitename='Overriden sitename')
+
+        self.assertEqual(info.sitename, "Overriden sitename")
+
 
 
 
