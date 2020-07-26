@@ -47,18 +47,20 @@ def figure(ctx, url, *args, **kwds):
 
 def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
     response = requests.get(url)
+
+    if ctx.content.strip():
+        dummyroot = etree.Element('div')
+        ctx.parser.parseChunk(dummyroot, ctx.content)
+        overrides.update(
+            description = etree.tostring(dummyroot, encoding='unicode'),
+        )
+
     info = PageInfo(response.text, url, **overrides)
 
     siteName = info.sitename
     siteurl = info.siteurl
     title = info.title
-    excerpt = ''
-    if ctx.content.strip():
-        excerpt = etree.Element('div')
-        ctx.parser.parseChunk(excerpt, ctx.content)
-        excerpt = etree.tostring(excerpt, encoding='unicode')
-    if not excerpt:
-        excerpt = info.description
+    excerpt = info.description
 
     websiteicon = info.siteicon
     image = info.image
