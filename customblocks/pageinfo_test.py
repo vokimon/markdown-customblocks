@@ -212,7 +212,9 @@ class PageInfo_Test(unittest.TestCase):
                 ),
             )
         ), url='http://site.com/path/page.html')
-        self.assertEqual(info.siteicon, "http://site.com/icon.png")
+
+        self.assertEqual(info.siteicon,
+            "http://site.com/icon.png")
 
     def test_siteicon_relativeToPage(self):
         info = PageInfo(self.html(
@@ -225,7 +227,9 @@ class PageInfo_Test(unittest.TestCase):
                 ),
             )
         ), url='http://site.com/path/page.html')
-        self.assertEqual(info.siteicon, "http://site.com/path/icon.png")
+
+        self.assertEqual(info.siteicon,
+            "http://site.com/path/icon.png")
 
     def test_siteicon_absolute(self):
         info = PageInfo(self.html(
@@ -238,7 +242,9 @@ class PageInfo_Test(unittest.TestCase):
                 ),
             )
         ), url='http://site.com/path/page.html')
-        self.assertEqual(info.siteicon, "http://othersite.com/icon.png")
+
+        self.assertEqual(info.siteicon,
+            "http://othersite.com/icon.png")
 
 
 # vim: et ts=4 sw=4
