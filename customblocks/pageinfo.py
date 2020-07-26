@@ -29,7 +29,9 @@ class PageInfo:
     @property
     def siteicon(self):
         link = self._soup.find('link', rel='icon')
-        return link.get('href')
+        if link:
+            return link.get('href')
+        return '/favicon.ico'
 
     @property
     def title(self):

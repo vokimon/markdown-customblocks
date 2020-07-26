@@ -194,5 +194,12 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.siteicon, "shortcuticon.png")
 
+    def test_siteicon_noIcon(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ))
+        self.assertEqual(info.siteicon, "/favicon.ico")
+
 
 # vim: et ts=4 sw=4
