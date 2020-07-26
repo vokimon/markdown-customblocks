@@ -82,12 +82,7 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     if not excerpt:
         excerpt = info.description
 
-    websiteicon = (
-        rellink('icon') or
-        rellink('shortcut icon') or # legacy
-        '/favicon.ico' or
-        None
-    )
+    websiteicon = info.siteicon
     if websiteicon:
         websiteicon = urljoin(url, websiteicon)
     image = (
