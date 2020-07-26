@@ -1,13 +1,6 @@
 from yamlns import namespace as ns
 from bs4 import BeautifulSoup
 
-def extractInfo(html):
-    soup = BeautifulSoup(html, 'html.parser')
-    titleElement = soup.find('title')
-    return ns(
-        title = titleElement.text,
-    )
-
 class PageInfo:
 
     def __init__(self, html):
