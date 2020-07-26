@@ -48,8 +48,6 @@ def figure(ctx, url, *args, **kwds):
 def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     response = requests.get(url)
     info = PageInfo(response.text, url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    #print(soup)
 
     parsedurl = urlparse(url)
     siteName = info.sitename
