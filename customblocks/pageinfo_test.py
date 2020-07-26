@@ -284,5 +284,21 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.image, "/favicon.ico")
 
+    def test_image_usingUrl(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='og:image',
+                        content='og.jpg',
+                    ),
+                )
+            )
+        ), url='http://site.com/path/page.html')
+
+        self.assertEqual(info.image, "http://site.com/path/og.jpg")
+
+
+
 
 # vim: et ts=4 sw=4

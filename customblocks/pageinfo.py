@@ -61,7 +61,7 @@ class PageInfo:
 
     @property
     def image(self):
-        return (
+        return self.based(
             self._meta('og:image') or
             self._meta('twitter:image') or
             self.siteicon
