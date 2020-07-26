@@ -59,6 +59,11 @@ class PageInfo:
             ''
         )
 
+    @property
+    def image(self):
+        return (
+            self._meta('og:image')
+        )
 
 
 # vim: et ts=4 sw=4

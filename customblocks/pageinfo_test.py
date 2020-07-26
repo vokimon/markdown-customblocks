@@ -247,4 +247,22 @@ class PageInfo_Test(unittest.TestCase):
             "http://othersite.com/icon.png")
 
 
+    def test_image_fromOpenGraph(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='twitter:image',
+                        content='twitter.jpg',
+                    ),
+                    E('meta',
+                        property='og:image',
+                        content='og.jpg',
+                    ),
+                )
+            )
+        ))
+        self.assertEqual(info.image, "og.jpg")
+
+
 # vim: et ts=4 sw=4
