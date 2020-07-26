@@ -27,10 +27,6 @@ class PageInfo:
         if not self._fullurl: return relative
         return urljoin(self._fullurl, relative)
 
-    def based(self, relative):
-        if not self._fullurl: return relative
-        return urljoin(self._fullurl, relative)
-
     @property
     def sitename(self):
         return self._meta('og:site_name') or self._url.hostname
@@ -41,7 +37,7 @@ class PageInfo:
 
     @property
     def siteicon(self):
-        return self.based(
+        return self.absolute(
             self._rel('icon') or
             '/favicon.ico'
         )
@@ -65,7 +61,7 @@ class PageInfo:
 
     @property
     def image(self):
-        return self.based(
+        return self.absolute(
             self._meta('og:image') or
             self._meta('twitter:image') or
             self.siteicon

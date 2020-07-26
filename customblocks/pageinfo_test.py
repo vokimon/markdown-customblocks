@@ -229,22 +229,7 @@ class PageInfo_Test(unittest.TestCase):
             "https://othersite.org/next.html"
             )
 
-    def test_siteicon_relativeToRoot(self):
-        info = PageInfo(self.html(
-            E('html',
-                E('head',
-                    E('link',
-                        rel='icon',
-                        href='/icon.png',
-                    ),
-                ),
-            )
-        ), url='http://site.com/path/page.html')
-
-        self.assertEqual(info.siteicon,
-            "http://site.com/icon.png")
-
-    def test_siteicon_relativeToPage(self):
+    def test_siteicon_withUrl(self):
         info = PageInfo(self.html(
             E('html',
                 E('head',
@@ -258,21 +243,6 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.siteicon,
             "http://site.com/path/icon.png")
-
-    def test_siteicon_absolute(self):
-        info = PageInfo(self.html(
-            E('html',
-                E('head',
-                    E('link',
-                        rel='icon',
-                        href='http://othersite.com/icon.png',
-                    ),
-                ),
-            )
-        ), url='http://site.com/path/page.html')
-
-        self.assertEqual(info.siteicon,
-            "http://othersite.com/icon.png")
 
 
     def test_image_fromOpenGraph(self):
@@ -312,7 +282,7 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.image, "/favicon.ico")
 
-    def test_image_usingUrl(self):
+    def test_image_withUrl(self):
         info = PageInfo(self.html(
             E('html',
                 E('head',
