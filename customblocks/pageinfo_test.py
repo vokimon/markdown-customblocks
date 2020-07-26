@@ -201,6 +201,13 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.siteicon, "/favicon.ico")
 
+    def test_absolute_nourl_unmodified(self):
+        info = PageInfo("<html />", url=None)
+        self.assertEqual(
+            info.absolute("next.html"),
+            "next.html"
+            )
+
     def test_siteicon_relativeToRoot(self):
         info = PageInfo(self.html(
             E('html',

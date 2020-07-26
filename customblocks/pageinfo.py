@@ -23,6 +23,9 @@ class PageInfo:
         if not rel: return
         return rel.get('href')
 
+    def absolute(self, relative):
+        return relative
+
     def based(self, relative):
         if not self._fullurl: return relative
         return urljoin(self._fullurl, relative)
