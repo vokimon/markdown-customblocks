@@ -45,9 +45,9 @@ def figure(ctx, url, *args, **kwds):
         **kwds
     )
 
-def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
+def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
     response = requests.get(url)
-    info = PageInfo(response.text, url)
+    info = PageInfo(response.text, url, **overrides)
 
     siteName = info.sitename
     siteurl = info.siteurl
@@ -61,7 +61,7 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
         excerpt = info.description
 
     websiteicon = info.siteicon
-    image = image or info.image
+    image = info.image
 
     if embedimage:
         imageresponse = requests.get(image, stream=True)
