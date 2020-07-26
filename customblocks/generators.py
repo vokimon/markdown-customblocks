@@ -82,7 +82,7 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     excerpt = (
         excerpt or
         meta('og:description') or
-        meta('twiiter:description') or
+        meta('twitter:description') or
         meta('description') or
         ''
     )
