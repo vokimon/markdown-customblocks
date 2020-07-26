@@ -26,7 +26,7 @@ class PageInfo:
     def title(self):
         ogtitle = self._meta('og:title')
         if ogtitle: return ogtitle
-        return self._tag('title')
+        return self._tag('title') or self.site
 
 
 

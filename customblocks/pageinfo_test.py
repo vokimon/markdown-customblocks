@@ -85,6 +85,13 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.site, None)
 
+    def test_title_whenNoSource_takeSiteName(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ), url='http://www.mydomain.com/page/subpage')
+        self.assertEqual(info.title, 'www.mydomain.com')
+
 
 
 # vim: et ts=4 sw=4
