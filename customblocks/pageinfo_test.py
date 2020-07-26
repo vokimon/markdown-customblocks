@@ -1,5 +1,5 @@
 import unittest
-from .utils_htmlmeta import PageInfo
+from .pageinfo import PageInfo
 from .utils import E
 from xml.etree import ElementTree as etree
 
