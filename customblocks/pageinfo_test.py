@@ -126,7 +126,7 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.description, "HTML Description")
 
-    def test_description_fromTwitterMeta(self):
+    def test_description_fromTwitter(self):
         info = PageInfo(self.html(
             E('html',
                 E('head',
@@ -142,6 +142,27 @@ class PageInfo_Test(unittest.TestCase):
             )
         ))
         self.assertEqual(info.description, "Twitter Description")
+
+    def test_description_fromOpenGraph(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='description',
+                        content='HTML Description',
+                    ),
+                    E('meta',
+                        property='twitter:description',
+                        content='Twitter Description',
+                    ),
+                    E('meta',
+                        property='og:description',
+                        content='OG Description',
+                    ),
+                )
+            )
+        ))
+        self.assertEqual(info.description, "OG Description")
 
 
 
