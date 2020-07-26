@@ -28,4 +28,17 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.title, None)
 
+    def test_title_openGraphTitle(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='og:title',
+                        content='OG Title',
+                    )
+                )
+            )
+        ))
+        self.assertEqual(info.title, "OG Title")
+
 # vim: et ts=4 sw=4
