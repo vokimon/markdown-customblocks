@@ -83,8 +83,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
         excerpt = info.description
 
     websiteicon = info.siteicon
-    if websiteicon:
-        websiteicon = urljoin(url, websiteicon)
     image = (
         image or
         meta('og:image') or
