@@ -8,6 +8,7 @@ class PageInfo:
         self._html = html
         self._soup = BeautifulSoup(html, 'html.parser')
         self._url = urlparse(url)
+        self._fullurl = url
 
     def _tag(self, name):
         tag = self._soup.find(name)
@@ -22,7 +23,6 @@ class PageInfo:
         if not rel: return
         return rel.get('href')
 
-
     @property
     def sitename(self):
         return self._meta('og:site_name') or self._url.hostname
@@ -33,7 +33,10 @@ class PageInfo:
 
     @property
     def siteicon(self):
-        return self._rel('icon') or '/favicon.ico'
+        icon = self._rel('icon') or '/favicon.ico' 
+        if self._fullurl:
+            return urljoin(self._fullurl, icon)
+        return icon
 
     @property
     def title(self):

@@ -201,5 +201,44 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.siteicon, "/favicon.ico")
 
+    def test_siteicon_relativeToRoot(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('link',
+                        rel='icon',
+                        href='/icon.png',
+                    ),
+                ),
+            )
+        ), url='http://site.com/path/page.html')
+        self.assertEqual(info.siteicon, "http://site.com/icon.png")
+
+    def test_siteicon_relativeToPage(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('link',
+                        rel='icon',
+                        href='icon.png',
+                    ),
+                ),
+            )
+        ), url='http://site.com/path/page.html')
+        self.assertEqual(info.siteicon, "http://site.com/path/icon.png")
+
+    def test_siteicon_absolute(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('link',
+                        rel='icon',
+                        href='http://othersite.com/icon.png',
+                    ),
+                ),
+            )
+        ), url='http://site.com/path/page.html')
+        self.assertEqual(info.siteicon, "http://othersite.com/icon.png")
+
 
 # vim: et ts=4 sw=4
