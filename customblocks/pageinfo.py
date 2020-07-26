@@ -32,6 +32,10 @@ class PageInfo:
         if ogtitle: return ogtitle
         return self._tag('title') or self.sitename
 
+    @property
+    def description(self):
+        return ""
+
 
 
 # vim: et ts=4 sw=4

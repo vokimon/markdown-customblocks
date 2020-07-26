@@ -106,6 +106,13 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.siteurl, None)
 
+    def test_description_noDescription(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ))
+        self.assertEqual(info.description, "")
+
 
 
 
