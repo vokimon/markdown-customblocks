@@ -296,6 +296,16 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.image, "http://site.com/path/og.jpg")
 
+    def test_title_override(self):
+        info = PageInfo(self.html(
+                E('html', E('head', E('title', 'Not shown')))
+            ), title='Overriden title')
+
+        self.assertEqual(info.title, "Overriden title")
+
+
+
+
 
 
 

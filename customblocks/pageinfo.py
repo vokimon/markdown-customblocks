@@ -7,11 +7,12 @@ class PageInfo:
     featured image, site icon, site name...
     """
 
-    def __init__(self, html, url=None):
+    def __init__(self, html, url=None, **overrides):
         self._fullurl = url
         self._url = urlparse(url)
         self._html = html
         self._soup = BeautifulSoup(html, 'html.parser')
+        self._overrides = overrides
 
     def _tag(self, name):
         tag = self._soup.find(name)
@@ -48,6 +49,7 @@ class PageInfo:
     @property
     def title(self):
         return (
+            self._overrides.get('title') or
             self._meta('og:title') or
             self._tag('title') or
             self.sitename
