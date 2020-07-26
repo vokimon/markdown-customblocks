@@ -19,8 +19,8 @@ class PageInfo:
 
 
     @property
-    def site(self):
-        return self._meta('og:site') or self._url.hostname
+    def sitename(self):
+        return self._meta('og:site_name') or self._url.hostname
 
     @property
     def siteurl(self):
@@ -30,7 +30,7 @@ class PageInfo:
     def title(self):
         ogtitle = self._meta('og:title')
         if ogtitle: return ogtitle
-        return self._tag('title') or self.site
+        return self._tag('title') or self.sitename
 
 
 

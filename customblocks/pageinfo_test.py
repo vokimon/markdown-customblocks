@@ -55,35 +55,35 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.title, "OG Title")
 
-    def test_site_fromMeta(self):
+    def test_sitename_fromMeta(self):
         info = PageInfo(self.html(
             E('html',
                 E('head',
                     E('meta',
-                        property='og:site',
+                        property='og:site_name',
                         content='OG Site',
                     )
                 )
             )
         ), url='http://www.mydomain.com/page/subpage')
 
-        self.assertEqual(info.site, "OG Site")
+        self.assertEqual(info.sitename, "OG Site")
 
-    def test_site_fromDomain(self):
+    def test_sitename_fromDomain(self):
         info = PageInfo(self.html(
             E('html',
             )
         ), url='http://www.mydomain.com/page/subpage')
 
-        self.assertEqual(info.site, "www.mydomain.com")
+        self.assertEqual(info.sitename, "www.mydomain.com")
 
-    def test_site_noSource(self):
+    def test_sitename_noSource(self):
         info = PageInfo(self.html(
             E('html',
             )
         ))
 
-        self.assertEqual(info.site, None)
+        self.assertEqual(info.sitename, None)
 
     def test_title_whenNoSource_takeSiteName(self):
         info = PageInfo(self.html(
