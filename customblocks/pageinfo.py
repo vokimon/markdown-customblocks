@@ -5,10 +5,11 @@ from decorator import decorator
 
 @decorator
 def cached(f, self):
+    """After the property decorator, makes the property cached"""
     propname = f.__name__
-    if propname not in self._overrides:
-        self._overrides[propname] = f(self)
-    return self._overrides.get(propname)
+    if propname not in self._cache:
+        self._cache[propname] = f(self)
+    return self._cache.get(propname)
 
 class PageInfo:
     """Retrieves metadata information from a webpage: title, description,
@@ -19,7 +20,7 @@ class PageInfo:
         self._fullurl = url
         self._url = urlparse(url)
         self._html = html
-        self._overrides = overrides
+        self._cache = overrides
 
     @property
     @cached
