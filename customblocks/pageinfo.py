@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin, urlunsplit
 
 class PageInfo:
+    """Retrieves metadata information from a webpage: title, description,
+    featured image, site icon, site name...
+    """
 
     def __init__(self, html, url=None):
         self._fullurl = url
