@@ -6,6 +6,7 @@ import base64
 from xml.etree import ElementTree as etree
 import html
 from .utils import E, Markdown
+from .pageinfo import PageInfo
 
 def container(ctx, *args, **kwds):
     args = [ '-'.join(arg.split()) for arg in args ]
@@ -46,6 +47,7 @@ def figure(ctx, url, *args, **kwds):
 
 def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
     response = requests.get(url)
+    info = PageInfo(response.text, url)
     soup = BeautifulSoup(response.text, 'html.parser')
     #print(soup)
     def meta(property):
@@ -69,17 +71,9 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
         return tag.get('href')
 
     parsedurl = urlparse(url)
-    siteName = (
-        meta('og:site_name') or
-        parsedurl.hostname or
-        ''
-    )
-    siteurl = parsedurl.scheme + '://' + parsedurl.netloc
-    title = (
-        meta('og:title') or
-        tag('title') or
-        siteName
-    )
+    siteName = info.sitename
+    siteurl = info.siteurl
+    title = info.title
     excerpt = ''
     if ctx.content.strip():
         excerpt = etree.Element('div')
