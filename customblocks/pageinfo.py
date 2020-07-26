@@ -17,6 +17,11 @@ class PageInfo:
         meta = self._soup.find('meta', property=name)
         if meta: return meta.get('content')
 
+    def _rel(self, name):
+        rel = self._soup.find('link', rel=name)
+        if not rel: return
+        return rel.get('href')
+
 
     @property
     def sitename(self):
@@ -28,10 +33,7 @@ class PageInfo:
 
     @property
     def siteicon(self):
-        link = self._soup.find('link', rel='icon')
-        if link:
-            return link.get('href')
-        return '/favicon.ico'
+        return self._rel('icon') or '/favicon.ico'
 
     @property
     def title(self):
