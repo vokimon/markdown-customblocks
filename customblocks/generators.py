@@ -1,9 +1,10 @@
-import requests
-from yamlns import namespace as ns
-from bs4 import BeautifulSoup
 import base64
-from xml.etree import ElementTree as etree
 import html
+import requests
+from bs4 import BeautifulSoup
+from xml.etree import ElementTree as etree
+from yamlns import namespace as ns
+
 from .utils import E, Markdown
 from .pageinfo import PageInfo
 
