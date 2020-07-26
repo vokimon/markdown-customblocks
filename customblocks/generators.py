@@ -58,18 +58,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
             return None
         return metatag.get('content')
 
-    def tag(name):
-        tag = soup.find(name)
-        if not tag:
-            return None
-        return tag.text
-
-    def rellink(rel):
-        tag = soup.find('link', rel=rel)
-        if not tag:
-            return None
-        return tag.get('href')
-
     parsedurl = urlparse(url)
     siteName = info.sitename
     siteurl = info.siteurl
