@@ -74,6 +74,8 @@ class PageInfo:
 
     @property
     def image(self):
+        if 'image' in self._overrides:
+            return self._overrides.get('image')
         return self.absolute(
             self._meta('og:image') or
             self._meta('twitter:image') or

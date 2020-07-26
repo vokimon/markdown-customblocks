@@ -331,6 +331,13 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.siteicon, "overriden.png")
 
+    def test_image_override_withUrl(self):
+        info = PageInfo(self.html(
+                E('html', E('head', E('meta', property='og:image', content='notshown.jpg')))
+            ), image='overriden.jpg', url='http://site.com/path/file.html')
+
+        self.assertEqual(info.image, "overriden.jpg")
+
 
 
 
