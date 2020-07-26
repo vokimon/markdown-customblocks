@@ -1,9 +1,9 @@
 import unittest
-from . import utils_htmlmeta
+from .utils_htmlmeta import PageInfo, extractInfo
 from .utils import E
 from xml.etree import ElementTree as etree
 
-class HtmlMeta_Test(unittest.TestCase):
+class PageInfo_Test(unittest.TestCase):
 
     def html(self, e):
         return etree.tostring(e, 'unicode')
@@ -18,9 +18,19 @@ class HtmlMeta_Test(unittest.TestCase):
                 )
             )
         )
-        info = utils_htmlmeta.extractInfo(snippet)
+        info = extractInfo(snippet)
         self.assertNsEqual(info, """\
             title: My title
             """)
+
+    def test_title_fromTitleTag(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('title','My title')
+                )
+            )
+        ))
+        self.assertEqual(info.title, "My title")
 
 # vim: et ts=4 sw=4
