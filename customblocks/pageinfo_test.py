@@ -208,6 +208,27 @@ class PageInfo_Test(unittest.TestCase):
             "next.html"
             )
 
+    def test_absolute_relativeToPage(self):
+        info = PageInfo("<html />", url='http://site.com/path/page.html')
+        self.assertEqual(
+            info.absolute("next.html"),
+            "http://site.com/path/next.html"
+            )
+
+    def test_absolute_relativeToRoot(self):
+        info = PageInfo("<html />", url='http://site.com/path/page.html')
+        self.assertEqual(
+            info.absolute("/next.html"),
+            "http://site.com/next.html"
+            )
+
+    def test_absolute_alreadyAbsolute(self):
+        info = PageInfo("<html />", url='http://site.com/path/page.html')
+        self.assertEqual(
+            info.absolute("https://othersite.org/next.html"),
+            "https://othersite.org/next.html"
+            )
+
     def test_siteicon_relativeToRoot(self):
         info = PageInfo(self.html(
             E('html',
