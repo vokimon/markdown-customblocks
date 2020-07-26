@@ -24,6 +24,7 @@ setup(
         'pytest',
         'yamlns',
         'beautifulsoup4',
+        'decorator',
     ],
     license='MIT License',
     test_suite='customblocks',

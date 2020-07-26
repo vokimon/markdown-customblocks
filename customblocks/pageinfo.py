@@ -1,6 +1,14 @@
 from yamlns import namespace as ns
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin, urlunsplit
+from decorator import decorator
+
+@decorator
+def cached(f, self):
+    propname = f.__name__
+    if propname not in self._overrides:
+        return f(self)
+    return self._overrides.get(propname)
 
 class PageInfo:
     """Retrieves metadata information from a webpage: title, description,
@@ -32,9 +40,9 @@ class PageInfo:
         return urljoin(self._fullurl, relative)
 
     @property
+    @cached
     def sitename(self):
         return (
-            self._overrides.get('sitename') or
             self._meta('og:site_name') or
             self._url.hostname
         )
@@ -44,9 +52,9 @@ class PageInfo:
         return urlunsplit((self._url.scheme, self._url.netloc,'','','')) or None
 
     @property
+    @cached
     def siteicon(self):
         return (
-            self._overrides.get('siteicon') or
             self.absolute(
                 self._rel('icon') or
                 '/favicon.ico'
@@ -54,18 +62,18 @@ class PageInfo:
         )
 
     @property
+    @cached
     def title(self):
         return (
-            self._overrides.get('title') or
             self._meta('og:title') or
             self._tag('title') or
             self.sitename
         )
 
     @property
+    @cached
     def description(self):
         return (
-            self._overrides.get('description') or
             self._meta('og:description') or
             self._meta('twitter:description') or
             self._meta('description') or
@@ -73,9 +81,8 @@ class PageInfo:
         )
 
     @property
+    @cached
     def image(self):
-        if 'image' in self._overrides:
-            return self._overrides.get('image')
         return self.absolute(
             self._meta('og:image') or
             self._meta('twitter:image') or
