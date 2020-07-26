@@ -1,11 +1,13 @@
 from yamlns import namespace as ns
 from bs4 import BeautifulSoup
+from urllib.parse import urlparse, urljoin
 
 class PageInfo:
 
     def __init__(self, html, url=None):
         self._html = html
         self._soup = BeautifulSoup(html, 'html.parser')
+        self._url = urlparse(url)
 
     def _tag(self, name):
         tag = self._soup.find(name)
@@ -18,7 +20,7 @@ class PageInfo:
 
     @property
     def site(self):
-        return self._meta('og:site')
+        return self._meta('og:site') or self._url.hostname
 
     @property
     def title(self):

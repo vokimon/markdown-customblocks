@@ -69,5 +69,13 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.site, "OG Site")
 
+    def test_site_fromDomain(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ), url='http://www.mydomain.com/page/subpage')
+
+        self.assertEqual(info.site, "www.mydomain.com")
+
 
 # vim: et ts=4 sw=4
