@@ -79,13 +79,9 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
         excerpt = etree.Element('div')
         ctx.parser.parseChunk(excerpt, ctx.content)
         excerpt = etree.tostring(excerpt, encoding='unicode')
-    excerpt = (
-        excerpt or
-        meta('og:description') or
-        meta('twitter:description') or
-        meta('description') or
-        ''
-    )
+    if not excerpt:
+        excerpt = info.description
+
     websiteicon = (
         rellink('icon') or
         rellink('shortcut icon') or # legacy
