@@ -19,8 +19,12 @@ class PageInfo:
         self._fullurl = url
         self._url = urlparse(url)
         self._html = html
-        self._soup = BeautifulSoup(html, 'html.parser')
         self._overrides = overrides
+
+    @property
+    @cached
+    def _soup(self):
+        return BeautifulSoup(self._html, 'html.parser')
 
     def _tag(self, name):
         tag = self._soup.find(name)
