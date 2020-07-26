@@ -7,7 +7,7 @@ from decorator import decorator
 def cached(f, self):
     propname = f.__name__
     if propname not in self._overrides:
-        return f(self)
+        self._overrides[propname] = f(self)
     return self._overrides.get(propname)
 
 class PageInfo:

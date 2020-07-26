@@ -338,7 +338,17 @@ class PageInfo_Test(unittest.TestCase):
 
         self.assertEqual(info.image, "overriden.jpg")
 
+    def test_image_cached(self):
+        info = PageInfo(self.html(
+                E('html', E('head', E('meta', property='og:image', content='image.jpg')))
+            ), url='http://site.com/path/file.html')
 
+        info.image # this should cache
+
+        # this should change the result if not cached
+        info._fullurl='https://other.org/folder/page.html'
+
+        self.assertEqual(info.image, "http://site.com/path/image.jpg")
 
 
 
