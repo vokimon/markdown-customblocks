@@ -9,10 +9,10 @@ class PageInfo:
 
     @property
     def title(self):
-        title = self._soup.find('title')
-        if title: return title.text
         ogtitle = self._soup.find('meta', property='og:title')
         if ogtitle: return ogtitle.get('content')
+        title = self._soup.find('title')
+        if title: return title.text
 
 
 # vim: et ts=4 sw=4

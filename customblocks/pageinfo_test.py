@@ -14,7 +14,7 @@ class PageInfo_Test(unittest.TestCase):
         info = PageInfo(self.html(
             E('html',
                 E('head',
-                    E('title','My title')
+                    E('title','My title'),
                 )
             )
         ))
@@ -32,6 +32,20 @@ class PageInfo_Test(unittest.TestCase):
         info = PageInfo(self.html(
             E('html',
                 E('head',
+                    E('meta',
+                        property='og:title',
+                        content='OG Title',
+                    )
+                )
+            )
+        ))
+        self.assertEqual(info.title, "OG Title")
+
+    def test_title_openGraphPrioritized(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('title','My title'),
                     E('meta',
                         property='og:title',
                         content='OG Title',
