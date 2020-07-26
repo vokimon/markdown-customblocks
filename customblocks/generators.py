@@ -71,12 +71,7 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, image=None):
         excerpt = info.description
 
     websiteicon = info.siteicon
-    image = (
-        image or
-        meta('og:image') or
-        meta('twitter:image') or
-        websiteicon
-    )
+    image = image or info.image
 
     if embedimage:
         imageresponse = requests.get(image, stream=True)
