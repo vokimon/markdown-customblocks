@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 class PageInfo:
 
-    def __init__(self, html):
+    def __init__(self, html, url=None):
         self._html = html
         self._soup = BeautifulSoup(html, 'html.parser')
 
@@ -15,6 +15,10 @@ class PageInfo:
         meta = self._soup.find('meta', property=name)
         if meta: return meta.get('content')
 
+
+    @property
+    def site(self):
+        return self._meta('og:site')
 
     @property
     def title(self):

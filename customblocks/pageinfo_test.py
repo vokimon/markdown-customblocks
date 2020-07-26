@@ -55,4 +55,19 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.title, "OG Title")
 
+    def test_site_fromMeta(self):
+        info = PageInfo(self.html(
+            E('html',
+                E('head',
+                    E('meta',
+                        property='og:site',
+                        content='OG Site',
+                    )
+                )
+            )
+        ), url='http://www.mydomain.com/page/subpage')
+
+        self.assertEqual(info.site, "OG Site")
+
+
 # vim: et ts=4 sw=4
