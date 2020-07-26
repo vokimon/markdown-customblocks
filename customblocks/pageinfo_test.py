@@ -277,5 +277,12 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.image, "twitter.jpg")
 
+    def test_image_noImage_takesSiteImage(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ))
+        self.assertEqual(info.image, "/favicon.ico")
+
 
 # vim: et ts=4 sw=4
