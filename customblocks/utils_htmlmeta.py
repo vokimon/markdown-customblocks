@@ -12,10 +12,11 @@ class PageInfo:
 
     def __init__(self, html):
         self._html = html
+        self._soup = BeautifulSoup(html, 'html.parser')
 
     @property
     def title(self):
-        return extractInfo(self._html).title
+        return self._soup.find('title').text
 
 
 # vim: et ts=4 sw=4
