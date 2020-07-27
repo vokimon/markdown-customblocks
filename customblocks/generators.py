@@ -48,13 +48,6 @@ def figure(ctx, url, *args, **kwds):
 def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
     response = requests.get(url)
 
-    if ctx.content.strip():
-        dummyroot = etree.Element('div')
-        ctx.parser.parseChunk(dummyroot, ctx.content)
-        overrides.update(
-            description = etree.tostring(dummyroot, encoding='unicode'),
-        )
-
     info = PageInfo(response.text, url, **overrides)
 
     siteName = info.sitename
@@ -75,34 +68,36 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
     else:
         image = html.escape(image)
 
-    imageClass = '' if wideimage else ' square'
-
-    return f"""\
-<div class='linkcard'>
-<div class='linkcard-featured-image{imageClass}'>
-<a href='{url}'>
-<img src="{image}" />
-</a>
-</div>
-<p class='linkcard-heading'><a href='{url}'>{title}</a></p>
-<div class='linkcard-excerpt'>
-<p>
-{excerpt}
-<span class='linkcard-more'><a href='{url}'>Read more</a></span>
-</p>
-</div>
-<div class='linkcard-footer'>
-<div class='linkcard-site-title'>
-<a class='linkcard-site-icon' href='{siteurl}'>
-<img height='32' src='{websiteicon}' width='32' />
-<span>{siteName.upper()}</span>
-</a>
-</div>
-<div class='linkcard-meta'>
-</div>
-</div>
-</div>
-"""
+    nl='\n'
+    return E('.linkcard',
+        E('.linkcard-featured-image' + ('.square' if not wideimage else ''), nl,
+            E('a', dict(href=url), nl,
+                E('img', src=image), nl,
+            ), nl,
+        ), nl,
+        E('p.linkcard-heading',
+            E('a', title, href=url),
+        ), nl,
+        E('.linkcard-excerpt', nl,
+            Markdown(ctx.content) if ctx.content.strip()
+            else E('p', nl, info.description, nl), nl,
+            E('span.linkcard-more', E('a', 'Read more', href=url)), nl,
+        ), nl,
+        E('.linkcard-footer', nl,
+            E('.linkcard-site-title', nl,
+                E('a.linkcard-site-icon',
+                    dict(href=siteurl), nl,
+                    E('img.linkcard-site-icon',
+                        height='32',
+                        src=websiteicon,
+                        width='32',
+                    ), nl,
+                    E('span', siteName.upper()), nl,
+                ), nl,
+            ), nl,
+            E('.linkcard-meta', nl)
+        ),
+    )
 
 
 def youtube(ctx, id, *, autoplay=False, controls=True, loop=False):

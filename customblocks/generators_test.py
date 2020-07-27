@@ -238,13 +238,13 @@ class Generators_Test(test_tools.TestCase):
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
 </p>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
 <a class="linkcard-site-icon" href="https://www.eldiario.es">
-<img height="32" src="https://www.eldiario.es/favicon.png" width="32" />
+<img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
 </div>
@@ -269,13 +269,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
 </p>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
 <a class="linkcard-site-icon" href="https://www.eldiario.es">
-<img height="32" src="https://www.eldiario.es/favicon.png" width="32" />
+<img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
 </div>
@@ -300,13 +300,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
 </p>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
 <a class="linkcard-site-icon" href="https://www.eldiario.es">
-<img height="32" src="https://www.eldiario.es/favicon.png" width="32" />
+<img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
 </div>
@@ -331,17 +331,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <div class="linkcard-excerpt">"""
 # difference is the following lines
 """
-<p>
-<div>
 <p>This is my description</p>
-</div>
 <span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
-</p>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
 <a class="linkcard-site-icon" href="https://www.eldiario.es">
-<img height="32" src="https://www.eldiario.es/favicon.png" width="32" />
+<img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
 </div>
@@ -368,18 +364,14 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <div class="linkcard-excerpt">"""
 # difference is the following lines
 """
-<p>
-<div>
 <p>This is my <strong>description</strong></p>
 <p>And has two lines</p>
-</div>
 <span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
-</p>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
 <a class="linkcard-site-icon" href="https://www.eldiario.es">
-<img height="32" src="https://www.eldiario.es/favicon.png" width="32" />
+<img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
 </div>
