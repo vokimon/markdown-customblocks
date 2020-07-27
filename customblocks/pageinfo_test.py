@@ -275,12 +275,12 @@ class PageInfo_Test(unittest.TestCase):
         ))
         self.assertEqual(info.image, "twitter.jpg")
 
-    def test_image_noImage_takesSiteImage(self):
+    def test_image_noImage(self):
         info = PageInfo(self.html(
             E('html',
             )
         ))
-        self.assertEqual(info.image, "/favicon.ico")
+        self.assertEqual(info.image, None)
 
     def test_image_withUrl(self):
         info = PageInfo(self.html(
@@ -349,8 +349,6 @@ class PageInfo_Test(unittest.TestCase):
         info._fullurl='https://other.org/folder/page.html'
 
         self.assertEqual(info.image, "http://site.com/path/image.jpg")
-
-
 
 
 

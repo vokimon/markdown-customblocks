@@ -91,7 +91,7 @@ class PageInfo:
         return self.absolute(
             self._meta('og:image') or
             self._meta('twitter:image') or
-            self.siteicon
+            None
         )
 
 
