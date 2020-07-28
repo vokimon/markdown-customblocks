@@ -229,6 +229,13 @@ class PageInfo_Test(unittest.TestCase):
             "https://othersite.org/next.html"
             )
 
+    def test_absolute_none(self):
+        info = PageInfo("<html />", url='http://site.com/path/page.html')
+        self.assertEqual(
+            info.absolute(None),
+            None,
+            )
+
     def test_siteicon_withUrl(self):
         info = PageInfo(self.html(
             E('html',
@@ -280,6 +287,13 @@ class PageInfo_Test(unittest.TestCase):
             E('html',
             )
         ))
+        self.assertEqual(info.image, None)
+
+    def test_image_noImage_withUrl(self):
+        info = PageInfo(self.html(
+            E('html',
+            )
+        ), url='http://site.com/path/page.html')
         self.assertEqual(info.image, None)
 
     def test_image_withUrl(self):

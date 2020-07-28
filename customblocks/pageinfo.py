@@ -41,6 +41,7 @@ class PageInfo:
         return rel.get('href')
 
     def absolute(self, relative):
+        if relative is None: return None
         if not self._fullurl: return relative
         return urljoin(self._fullurl, relative)
 
