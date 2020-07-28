@@ -1,5 +1,4 @@
 import base64
-import html
 import requests
 from bs4 import BeautifulSoup
 from xml.etree import ElementTree as etree
@@ -59,8 +58,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
             b64image = base64.b64encode(imageBytes).decode('ascii')
             # TODO: thumb it
             image = 'data:image/jpg;base64,' + b64image
-    else:
-        image = html.escape(image)
 
     nl='\n'
     return E('.linkcard',
