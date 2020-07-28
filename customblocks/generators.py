@@ -5,7 +5,7 @@ from xml.etree import ElementTree as etree
 from yamlns import namespace as ns
 
 from .utils import E, Markdown
-from .pageinfo import PageInfo
+from .utils import PageInfo
 
 def container(ctx, *args, **kwds):
     args = [ '-'.join(arg.split()) for arg in args ]

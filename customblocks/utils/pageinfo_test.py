@@ -1,6 +1,6 @@
 import unittest
 from .pageinfo import PageInfo
-from .utils import E
+from .hyperscript import E
 from xml.etree import ElementTree as etree
 
 class PageInfo_Test(unittest.TestCase):

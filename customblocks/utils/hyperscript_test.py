@@ -1,6 +1,6 @@
 import unittest
 from xml.etree import ElementTree as etree
-from .utils import E, Markdown
+from .hyperscript import E, Markdown
 from textwrap import dedent
 
 class ETest(unittest.TestCase):
