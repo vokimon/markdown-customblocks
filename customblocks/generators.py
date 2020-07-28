@@ -49,8 +49,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
 
     info = PageInfo(response.text, url, **overrides)
 
-    image = info.image
-
     if embedimage:
         imageresponse = requests.get(image, stream=True)
         if imageresponse.ok:
@@ -61,9 +59,9 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
 
     nl='\n'
     return E('.linkcard',
-        E('.linkcard-featured-image' + ('.square' if not wideimage else ''), nl,
+        info.image and E('.linkcard-featured-image' + ('.square' if not wideimage else ''), nl,
             E('a', dict(href=url), nl,
-                E('img', src=image), nl,
+                E('img', src=info.image), nl,
             ), nl,
         ), nl,
         E('p.linkcard-heading',
