@@ -50,12 +50,6 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
 
     info = PageInfo(response.text, url, **overrides)
 
-    siteName = info.sitename
-    siteurl = info.siteurl
-    title = info.title
-    excerpt = info.description
-
-    websiteicon = info.siteicon
     image = info.image
 
     if embedimage:
@@ -76,7 +70,7 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
             ), nl,
         ), nl,
         E('p.linkcard-heading',
-            E('a', title, href=url),
+            E('a', info.title, href=url),
         ), nl,
         E('.linkcard-excerpt', nl,
             Markdown(ctx.content) if ctx.content.strip()
@@ -86,13 +80,13 @@ def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
         E('.linkcard-footer', nl,
             E('.linkcard-site-title', nl,
                 E('a.linkcard-site-icon',
-                    dict(href=siteurl), nl,
+                    dict(href=info.siteurl), nl,
                     E('img.linkcard-site-icon',
                         height='32',
-                        src=websiteicon,
+                        src=info.siteicon,
                         width='32',
                     ), nl,
-                    E('span', siteName.upper()), nl,
+                    E('span', info.sitename.upper()), nl,
                 ), nl,
             ), nl,
             E('.linkcard-meta', nl)
