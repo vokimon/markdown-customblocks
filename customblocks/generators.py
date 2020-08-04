@@ -44,18 +44,10 @@ def figure(ctx, url, *args, **kwds):
         **kwds
     )
 
-def linkcard(ctx, url, *, wideimage=True, embedimage=False, **overrides):
+def linkcard(ctx, url, *, wideimage=True, **overrides):
     response = requests.get(url)
 
     info = PageInfo(response.text, url, **overrides)
-
-    if embedimage:
-        imageresponse = requests.get(image, stream=True)
-        if imageresponse.ok:
-            imageBytes = imageresponse.raw.read()
-            b64image = base64.b64encode(imageBytes).decode('ascii')
-            # TODO: thumb it
-            image = 'data:image/jpg;base64,' + b64image
 
     nl='\n'
     return E('.linkcard',
