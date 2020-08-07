@@ -15,12 +15,17 @@ class Fetcher:
             )
 
     def _response2namespace(self, response):
-        return ns(
+        result = ns(
             url=response.url,
             headers=ns(response.headers),
             status_code=response.status_code,
-            text=response.text,
         )
+        if 'text' in response.headers['Content-Type']:
+            result.update(text=response.text)
+        else:
+            result.update(content=response.content)
+
+        return result
 
     def get(self, url):
         response = requests.get(url)

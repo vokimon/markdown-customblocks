@@ -1,8 +1,9 @@
-import unittest
+import base64
 import requests
 import responses
-from yamlns import namespace as ns
+import unittest
 from pathlib import Path
+from yamlns import namespace as ns
 from .fetcher import Fetcher
 
 offline=False
@@ -141,6 +142,31 @@ class Fetcher_Test(unittest.TestCase):
             headers:
               Content-Type: text/plain
             text: hello world
+        """)
+
+    @responses.activate
+    def test_response2namespace_binary(self):
+        image = base64.b64decode(
+            """iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI"""
+            """WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII="""
+        )
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://mysite.com/path/page',
+            status=200,
+            body=image,
+            content_type='image/png',
+            )
+        response = requests.get('http://mysite.com/path/page')
+        self.assertNsEqual(f._response2namespace(response), """\
+            url: http://mysite.com/path/page # this changes
+            status_code: 200
+            headers:
+              Content-Type: image/png
+            content: !!binary |
+                iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI
+                WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
         """)
 
 
