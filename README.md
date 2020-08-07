@@ -607,14 +607,14 @@ info.image    # featured image (from og:image or twitter:image, or site image)
 
 ### unreleased
 
-- `linkcard`: Fixed behaviour
 - `linkcard`: Example style emulating Wordpress' embedded link
 - `linkcard`: Explicit image, description, title...
+- `linkcard`: Fix: relative links to images and icons
 - `linkcard`: Cached properties
+- `linkcard`: Removed half implemented embedimage flag
 - `utils.PageInfo`: Page information retrieval helper
 - `utils.E`: Helper to generate blocks using hyperscript idiom
 - `utils.Markdown`: Helper to include markdown in hyperscript
-
 
 ### markdown-customblocks 1.0.0 (2020-06-27)
 
@@ -648,14 +648,10 @@ info.image    # featured image (from og:image or twitter:image, or site image)
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
-- Using a nicer etree building api in generators
-- Figure
-    - Thumbnail generation
-    - lightbox
-    - Deexternalizer
++ Using a nicer etree building api in generators
 - Linkcard:
 	- Testing with non-fragile emulated requests
-	- Prepend site url to relative ones (ie. wikipedia)
+	+ Prepend site url to relative ones (ie. wikipedia)
 	- Look for short description by class (ie wikipedia)
     - Offline behavior
     - Cache downloaded data
@@ -665,6 +661,29 @@ info.image    # featured image (from og:image or twitter:image, or site image)
     - Privacy safe mode
 - Twitter
     - Privacy safe mode
+- Cache download
+- Figure flags:
+	- no flag
+		- Un modified url
+	- local (when remote url)
+		- download
+		- place it on a given dir
+		- set url to local path
+	- inline
+		- download
+		- detect mime type
+		- compute base 64
+		- set url to data url
+	- thumb
+		- download
+		- generate a thumb
+		- place the thumb on thumb dir
+		- when combined with 'inline'
+			- url to the local path
+		- when combined with 'local'
+			- link to the image
+	- lightbox
+	- sized
 
 
 
