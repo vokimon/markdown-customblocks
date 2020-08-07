@@ -4,7 +4,7 @@ from yamlns import namespace as ns
 from pathlib import Path
 from .fetcher import Fetcher
 
-class InlineResource_Test(unittest.TestCase):
+class Fetcher_Test(unittest.TestCase):
 
     from yamlns.testutils import assertNsEqual
 
