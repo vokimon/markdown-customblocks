@@ -28,17 +28,7 @@ class Fetcher_Test(unittest.TestCase):
                 item.unlink()
 
     def assertResponseEqual(self, response, expected):
-        result = ns(
-            status=response.status_code,
-            headers=ns(response.headers),
-        )
-        if 'text' in response.headers['Content-Type']:
-            result.update(text=response.text)
-        elif 'json' in response.headers['Content-Type']:
-            result.update(json=response.json())
-        else:
-            result.update(content=response.content)
-
+        result = Fetcher._response2namespace(response)
         self.assertNsEqual(result, expected)
 
     @unittest.skipIf(offline, 'this test requires network connection')
@@ -47,7 +37,7 @@ class Fetcher_Test(unittest.TestCase):
         f = Fetcher(cache=self.cachedir)
         response = f.get('https://httpbin.org/base64/Q3VzdG9tQmxvY2tzIHJvY2tzIQ==')
         self.assertResponseEqual(response, """\
-            status: 200
+            url: 'https://httpbin.org/base64/Q3VzdG9tQmxvY2tzIHJvY2tzIQ=='
             headers:
               Content-Type: text/plain
               Access-Control-Allow-Credentials: 'true'
@@ -57,7 +47,7 @@ class Fetcher_Test(unittest.TestCase):
               Content-Type: text/html; charset=utf-8
               Date: {Date}
               Server: gunicorn/19.9.0
-            status: 200
+            status_code: 200
             text: CustomBlocks rocks!
         """.format(**response.headers))
 
@@ -67,7 +57,8 @@ class Fetcher_Test(unittest.TestCase):
         f = Fetcher(cache=self.cachedir)
         response = f.get('https://dummyimage.com/6x4/f00/f00')
         self.assertResponseEqual(response, """\
-        status: 200
+        url: https://dummyimage.com/6x4/f00/f00
+        status_code: 200
         content: !!binary |
           iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI
           WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
@@ -101,7 +92,8 @@ class Fetcher_Test(unittest.TestCase):
             )
         response = f.get('http://google.com')
         self.assertResponseEqual(response, """\
-            status: 200
+            url: http://google.com/
+            status_code: 200
             headers:
               Content-Type: text/plain
             text: hello world
