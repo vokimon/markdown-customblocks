@@ -1,4 +1,5 @@
 import unittest
+import requests
 import responses
 from yamlns import namespace as ns
 from pathlib import Path
@@ -118,6 +119,25 @@ class Fetcher_Test(unittest.TestCase):
         self.assertEqual(
             f._url2path('https://www.google.com/path/file'),
             self.cachedir / 'https_www.google.com_path_file')
+
+    @responses.activate
+    def test_response2namespace_text(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url=('http://mysite.com/path/page'),
+            status=200,
+            body=u"hello world",
+            content_type='text/plain',
+            )
+        response = requests.get('http://mysite.com/path/page')
+        self.assertNsEqual(f._response2namespace(response), """\
+            url: http://mysite.com/path/page # this changes
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
+        """)
 
 
 # vim: et ts=4 sw=4
