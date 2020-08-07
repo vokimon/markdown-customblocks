@@ -21,10 +21,11 @@ setup(
     },
     install_requires=[
         'markdown',
-        'pytest',
         'yamlns',
         'beautifulsoup4',
         'decorator',
+        'pytest', # testing
+        'responses', # testing
     ],
     license='MIT License',
     test_suite='customblocks',
