@@ -28,9 +28,7 @@ class InlineResource_Test(unittest.TestCase):
             status=response.status_code,
             headers=ns(response.headers),
         )
-        if (
-            'text' in response.headers['Content-Type']
-        ):
+        if 'text' in response.headers['Content-Type']:
             result.update(text=response.text)
         elif 'json' in response.headers['Content-Type']:
             result.update(json=response.json())
