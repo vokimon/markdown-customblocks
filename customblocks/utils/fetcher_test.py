@@ -169,8 +169,7 @@ class Fetcher_Test(unittest.TestCase):
             method='GET',
             url='http://mysite.com/path/page',
             status=200,
-            body='{"data":"value"}',
-            content_type='application/json',
+            json=dict(data='value'),
             )
         response = requests.get('http://mysite.com/path/page')
         self.assertNsEqual(f._response2namespace(response), """\
@@ -201,7 +200,6 @@ class Fetcher_Test(unittest.TestCase):
             encoding: ISO-8859-1
         """)
 
-    @responses.activate
     def test_namespace2response_binary(self):
         namespace = ns.loads("""\
             url: http://mysite.com/path/page
@@ -250,7 +248,6 @@ class Fetcher_Test(unittest.TestCase):
             url='http://google.com',
             status=200,
             body=u"hello world",
-            content_type='text/plain',
             )
         response = f.get('http://google.com')
         cacheFile = f._url2path('http://google.com')
@@ -262,6 +259,28 @@ class Fetcher_Test(unittest.TestCase):
               Content-Type: text/plain
             text: hello world
             encoding: ISO-8859-1
+        """)
+        self.assertEqual(len(responses.calls), 1)
+
+    @responses.activate
+    def test_get_unicode(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://google.com',
+            status=200,
+            body=u"La caña",
+        )
+        response = f.get('http://google.com')
+        cacheFile = f._url2path('http://google.com')
+        cached = ns.load(str(cacheFile))
+        self.assertNsEqual(cached, """\
+            url: http://google.com/
+            status_code: 200
+            headers:
+              Content-Type: text/plain; charset=utf-8
+            text: La caña
+            encoding: utf-8
         """)
         self.assertEqual(len(responses.calls), 1)
 
