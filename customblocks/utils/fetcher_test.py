@@ -1,11 +1,28 @@
 import unittest
 import responses
 from yamlns import namespace as ns
+from pathlib import Path
 from .fetcher import Fetcher
 
 class InlineResource_Test(unittest.TestCase):
 
     from yamlns.testutils import assertNsEqual
+
+    def setUp(self):
+        self.cachedir = Path('testcache')
+        self.clearCache()
+        self.cachedir.mkdir(parents=True)
+
+    def tearDown(self):
+        self.clearCache()
+
+    def clearCache(self):
+        if not self.cachedir.exists(): return
+        for item in reversed(list(self.cachedir.glob('**'))):
+            if item.is_dir():
+                item.rmdir()
+            else:
+                item.unlink()
 
     def assertResponseEqual(self, response, expected):
         result = ns(
@@ -25,7 +42,7 @@ class InlineResource_Test(unittest.TestCase):
 
     def test_get_real_text(self):
         self.maxDiff = None
-        f = Fetcher(cache='fetchdir')
+        f = Fetcher(cache=self.cachedir)
         response = f.get('https://httpbin.org/base64/Q3VzdG9tQmxvY2tzIHJvY2tzIQ==')
         self.assertResponseEqual(response, """\
             status: 200
@@ -44,7 +61,7 @@ class InlineResource_Test(unittest.TestCase):
 
     def test_get_real_binary(self):
         self.maxDiff = None
-        f = Fetcher(cache='fetchdir')
+        f = Fetcher(cache=self.cachedir)
         response = f.get('https://dummyimage.com/6x4/f00/f00')
         self.assertResponseEqual(response, """\
         status: 200
@@ -71,7 +88,7 @@ class InlineResource_Test(unittest.TestCase):
  
     @responses.activate
     def test_get_faked(self):
-        f = Fetcher(cache='fetchdir')
+        f = Fetcher(cache=self.cachedir)
         responses.add(
             method='GET',
             url=('http://google.com'),
