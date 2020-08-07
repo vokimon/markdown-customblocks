@@ -17,7 +17,6 @@ class InlineResource_Test(unittest.TestCase):
         self.clearCache()
 
     def clearCache(self):
-        if not self.cachedir.exists(): return
         for item in reversed(list(self.cachedir.glob('**'))):
             if item.is_dir():
                 item.rmdir()
