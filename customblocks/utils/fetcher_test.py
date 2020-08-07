@@ -104,5 +104,23 @@ class InlineResource_Test(unittest.TestCase):
         text: hello world 
         """)
 
+    def test_url2path_justDomain(self):
+        f = Fetcher(cache=self.cachedir)
+        self.assertEqual(
+            f._url2path('https://www.google.com'),
+            self.cachedir / 'https_www.google.com')
+
+    def test_url2path_noSchema(self):
+        f = Fetcher(cache=self.cachedir)
+        self.assertEqual(
+            f._url2path('//www.google.com'),
+            self.cachedir / '_www.google.com')
+
+    def test_url2path_justDomain(self):
+        f = Fetcher(cache=self.cachedir)
+        self.assertEqual(
+            f._url2path('https://www.google.com/path/file'),
+            self.cachedir / 'https_www.google.com_path_file')
+
 
 # vim: et ts=4 sw=4
