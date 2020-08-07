@@ -39,7 +39,6 @@ class Fetcher_Test(unittest.TestCase):
         self.assertResponseEqual(response, """\
             url: 'https://httpbin.org/base64/Q3VzdG9tQmxvY2tzIHJvY2tzIQ=='
             headers:
-              Content-Type: text/plain
               Access-Control-Allow-Credentials: 'true'
               Access-Control-Allow-Origin: '*'
               Connection: keep-alive
