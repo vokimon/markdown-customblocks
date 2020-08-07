@@ -130,7 +130,7 @@ class Fetcher_Test(unittest.TestCase):
             )
         response = requests.get('http://mysite.com/path/page')
         self.assertNsEqual(f._response2namespace(response), """\
-            url: http://mysite.com/path/page # this changes
+            url: http://mysite.com/path/page
             status_code: 200
             headers:
               Content-Type: text/plain
@@ -154,7 +154,7 @@ class Fetcher_Test(unittest.TestCase):
             )
         response = requests.get('http://mysite.com/path/page')
         self.assertNsEqual(f._response2namespace(response), """\
-            url: http://mysite.com/path/page # this changes
+            url: http://mysite.com/path/page
             status_code: 200
             headers:
               Content-Type: image/png
@@ -175,7 +175,7 @@ class Fetcher_Test(unittest.TestCase):
             )
         response = requests.get('http://mysite.com/path/page')
         self.assertNsEqual(f._response2namespace(response), """\
-            url: http://mysite.com/path/page # this changes
+            url: http://mysite.com/path/page
             status_code: 200
             headers:
               Content-Type: application/json
