@@ -21,11 +21,13 @@ class Fetcher_Test(unittest.TestCase):
         self.clearCache()
 
     def clearCache(self):
-        for item in reversed(list(self.cachedir.glob('**'))):
+        for item in list(self.cachedir.glob('**/*'))[::-1]:
             if item.is_dir():
                 item.rmdir()
             else:
                 item.unlink()
+        if self.cachedir.exists():
+            self.cachedir.rmdir()
 
     def assertResponseEqual(self, response, expected):
         result = Fetcher._response2namespace(response)
@@ -243,5 +245,27 @@ class Fetcher_Test(unittest.TestCase):
               data: value
         """)
  
+    @responses.activate
+    def test_get_storesCache(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://google.com',
+            status=200,
+            body=u"hello world",
+            content_type='text/plain',
+            )
+        response = f.get('http://google.com')
+        cacheFile = f._url2path('http://google.com')
+        cached = cacheFile.read_text(encoding='utf8')
+        self.assertNsEqual(cached, """\
+            url: http://google.com/
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
+            encoding: ISO-8859-1
+        """)
+
 
 # vim: et ts=4 sw=4

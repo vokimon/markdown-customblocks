@@ -50,6 +50,7 @@ class Fetcher:
 
     def get(self, url):
         response = requests.get(url)
+        self._response2namespace(response).dump(self._url2path(url))
         return response
 
 # vim: et ts=4 sw=4
