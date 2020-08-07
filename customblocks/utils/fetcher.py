@@ -67,4 +67,8 @@ class Fetcher:
         self._response2namespace(response).dump(self._url2path(url))
         return response
 
+    def remove(self, url):
+        cachefile = self._url2path(url)
+        cachefile.unlink()
+
 # vim: et ts=4 sw=4

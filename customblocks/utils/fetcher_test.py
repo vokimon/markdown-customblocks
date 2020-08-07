@@ -298,6 +298,40 @@ class Fetcher_Test(unittest.TestCase):
         """)
         self.assertEqual(len(responses.calls), 0)
 
+    @responses.activate
+    def test_remove(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://google.com',
+            status=200,
+            body=u"hello world",
+            content_type='text/plain',
+            )
+        cacheFile = f._url2path('http://google.com')
+        cacheFile.write_text(
+            encoding='utf8',
+            data="""\
+                url: http://google.com/
+                status_code: 200
+                headers:
+                  Content-Type: text/plain
+                text: A DIFFERENT TEXT
+                encoding: ISO-8859-1
+            """,
+        )
+        f.remove('http://google.com')
+        response = f.get('http://google.com')
+        self.assertResponseEqual(response, """\
+            url: http://google.com/
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
+            encoding: ISO-8859-1
+        """)
+        self.assertEqual(len(responses.calls), 1)
+
     def test_clear(self):
         f = Fetcher(cache=self.cachedir)
         f._url2path('http://google.com').touch()
