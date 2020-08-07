@@ -312,5 +312,10 @@ class Fetcher_Test(unittest.TestCase):
         f.clear()
         self.assertEqual(len(list(self.cachedir.glob('*'))), 0)
 
+    def test_init_createsDirIfMissing(self):
+        self.cachedir.rmdir()
+        f = Fetcher(cache=self.cachedir)
+        self.assertTrue(self.cachedir.exists())
+
 
 # vim: et ts=4 sw=4

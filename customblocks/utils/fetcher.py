@@ -6,6 +6,8 @@ class Fetcher:
 
     def __init__(self, cache):
         self.cachedir = cache
+        if not self.cachedir.exists():
+            self.cachedir.mkdir(parents=True)
 
     def _url2path(self, url):
         return self.cachedir / (
