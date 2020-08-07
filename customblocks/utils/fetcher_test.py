@@ -266,6 +266,40 @@ class Fetcher_Test(unittest.TestCase):
             text: hello world
             encoding: ISO-8859-1
         """)
+        self.assertEqual(len(responses.calls), 1)
+
+    @responses.activate
+    def test_get_usesCache(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://google.com',
+            status=200,
+            body=u"hello world",
+            content_type='text/plain',
+            )
+        cacheFile = f._url2path('http://google.com')
+        cacheFile.write_text(
+            encoding='utf8',
+            data="""\
+                url: http://google.com/
+                status_code: 200
+                headers:
+                  Content-Type: text/plain
+                text: A DIFFERENT TEXT
+                encoding: ISO-8859-1
+            """,
+        )
+        response = f.get('http://google.com')
+        self.assertResponseEqual(response, """\
+            url: http://google.com/
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: A DIFFERENT TEXT
+            encoding: ISO-8859-1
+        """)
+        self.assertEqual(len(responses.calls), 0)
 
 
 # vim: et ts=4 sw=4

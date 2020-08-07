@@ -35,6 +35,7 @@ class Fetcher:
 
         return result
 
+    @staticmethod
     def _namespace2response(namespace):
         result = requests.Response()
         for key in namespace:
@@ -49,6 +50,10 @@ class Fetcher:
         return result
 
     def get(self, url):
+        cachefile = self._url2path(url)
+        if cachefile.exists():
+            info = ns.load(str(cachefile))
+            return self._namespace2response(info)
         response = requests.get(url)
         self._response2namespace(response).dump(self._url2path(url))
         return response
