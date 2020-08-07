@@ -1,11 +1,12 @@
+import json
+from pathlib import Path
 import requests
 from yamlns import namespace as ns
-import json
 
 class Fetcher:
 
     def __init__(self, cache):
-        self.cachedir = cache
+        self.cachedir = Path(cache)
         if not self.cachedir.exists():
             self.cachedir.mkdir(parents=True)
 

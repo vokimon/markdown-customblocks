@@ -351,5 +351,11 @@ class Fetcher_Test(unittest.TestCase):
         f = Fetcher(cache=self.cachedir)
         self.assertTrue(self.cachedir.exists())
 
+    def test_init_takesStrings(self):
+        f = Fetcher(cache=str(self.cachedir))
+        self.assertEqual(
+            f._url2path('https://www.google.com'),
+            self.cachedir / 'https_www.google.com')
+
 
 # vim: et ts=4 sw=4
