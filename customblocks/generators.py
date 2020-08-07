@@ -168,7 +168,8 @@ def twitter(user,
     options += f'&align={align}' if align in ('right', 'center', 'left') else ''
     options += f'&conversation=none' if not conversation else ''
 
-    response = requests.get(
+    fetcher = Fetcher('fetchercache/twitter')
+    response = fetcher.get(
         f'https://publish.twitter.com/oembed?url=https://twitter.com/{user}/status/{tweet}&dnt=True{options}'
     )
     result = ns(response.json())
