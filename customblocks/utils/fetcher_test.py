@@ -94,17 +94,17 @@ class Fetcher_Test(unittest.TestCase):
         f = Fetcher(cache=self.cachedir)
         responses.add(
             method='GET',
-            url=('http://google.com'),
+            url='http://google.com',
             status=200,
             body=u"hello world",
             content_type='text/plain',
             )
         response = f.get('http://google.com')
         self.assertResponseEqual(response, """\
-        status: 200
-        headers:
-          Content-Type: text/plain
-        text: hello world 
+            status: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
         """)
 
     def test_url2path_justDomain(self):
@@ -130,7 +130,7 @@ class Fetcher_Test(unittest.TestCase):
         f = Fetcher(cache=self.cachedir)
         responses.add(
             method='GET',
-            url=('http://mysite.com/path/page'),
+            url='http://mysite.com/path/page',
             status=200,
             body=u"hello world",
             content_type='text/plain',
