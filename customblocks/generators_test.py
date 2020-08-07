@@ -1,6 +1,8 @@
 import unittest
 from markdown import markdown
 from markdown import test_tools
+import responses
+from pathlib import Path
 
 class Generators_Test(test_tools.TestCase):
 
@@ -224,7 +226,17 @@ class Generators_Test(test_tools.TestCase):
             <p dir="ltr" lang="ca">Sóc l'únic que creu que els pares s'haurien de gastar tots els seus diners en el que vulguin (ja que s'ho han currat durant anys) abans de morir en comptes de deixar res d'herència?</p>— marc (@marcmushu) <a href="https://twitter.com/marcmushu/status/1270395360163307530?ref_src=twsrc%5Etfw">June 9, 2020</a></blockquote>
             """)
 
+    def setupResponse(self):
+        responses.add(
+            method='GET',
+            url='https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html',
+            status=200,
+            body=Path('testdata/ingresominimo.html').read_text(encoding='utf8'),
+        )
+
+    @responses.activate
     def test_linkcard(self):
+        self.setupResponse()
         self.assertMarkdown("""
             ::: linkcard https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
             ""","""\
@@ -254,7 +266,9 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    @responses.activate
     def test_linkcard_noImage(self):
+        self.setupResponse()
         self.assertMarkdown("""
             ::: linkcard image='' https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
             ""","""\
@@ -281,7 +295,9 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    @responses.activate
     def test_linkcard_nowideimage(self):
+        self.setupResponse()
         self.assertMarkdown("""
             ::: linkcard nowideimage https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
             ""","""\
@@ -312,7 +328,9 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    @responses.activate
     def test_linkcard_image(self):
+        self.setupResponse()
         self.assertMarkdown("""
             ::: linkcard image=cached.jpg https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
             ""","""\
@@ -343,7 +361,9 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    @responses.activate
     def test_linkcard_content_asExcerpt(self):
+        self.setupResponse()
         self.assertMarkdown("""
             ::: linkcard https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
                 This is my description
@@ -374,7 +394,9 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    @responses.activate
     def test_linkcard_content_withMarkdown(self):
+        self.setupResponse()
         self.assertMarkdown("""
             ::: linkcard https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
                 This is my **description**

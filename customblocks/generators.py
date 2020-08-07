@@ -6,6 +6,7 @@ from yamlns import namespace as ns
 
 from .utils import E, Markdown
 from .utils import PageInfo
+from .utils import Fetcher
 
 def container(ctx, *args, **kwds):
     args = [ '-'.join(arg.split()) for arg in args ]
@@ -45,7 +46,8 @@ def figure(ctx, url, *args, **kwds):
     )
 
 def linkcard(ctx, url, *, wideimage=True, **overrides):
-    response = requests.get(url)
+    fetcher = Fetcher('fetchercache/linkcard') # TODO: Configurable
+    response = fetcher.get(url)
 
     info = PageInfo(response.text, url, **overrides)
 
