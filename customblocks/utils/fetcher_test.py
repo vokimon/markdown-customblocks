@@ -111,7 +111,7 @@ class Fetcher_Test(unittest.TestCase):
             f._url2path('//www.google.com'),
             self.cachedir / '_www.google.com')
 
-    def test_url2path_justDomain(self):
+    def test_url2path_withPath(self):
         f = Fetcher(cache=self.cachedir)
         self.assertEqual(
             f._url2path('https://www.google.com/path/file'),
