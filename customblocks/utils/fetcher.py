@@ -20,10 +20,13 @@ class Fetcher:
             headers=ns(response.headers),
             status_code=response.status_code,
         )
-        if 'text' in response.headers['Content-Type']:
-            result.update(text=response.text)
-        else:
-            result.update(content=response.content)
+        try:
+            result.update(json=response.json())
+        except Exception:
+            if 'text' in response.headers['Content-Type']:
+                result.update(text=response.text)
+            else:
+                result.update(content=response.content)
 
         return result
 

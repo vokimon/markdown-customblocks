@@ -169,5 +169,25 @@ class Fetcher_Test(unittest.TestCase):
                 WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
         """)
 
+    @responses.activate
+    def test_response2namespace_json(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://mysite.com/path/page',
+            status=200,
+            body='{"data":"value"}',
+            content_type='application/json',
+            )
+        response = requests.get('http://mysite.com/path/page')
+        self.assertNsEqual(f._response2namespace(response), """\
+            url: http://mysite.com/path/page # this changes
+            status_code: 200
+            headers:
+              Content-Type: application/json
+            json:
+              data: value
+        """)
+
 
 # vim: et ts=4 sw=4
