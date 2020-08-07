@@ -22,10 +22,7 @@ class Fetcher_Test(unittest.TestCase):
 
     def clearCache(self):
         for item in list(self.cachedir.glob('**/*'))[::-1]:
-            if item.is_dir():
-                item.rmdir()
-            else:
-                item.unlink()
+            item.unlink()
         if self.cachedir.exists():
             self.cachedir.rmdir()
 
