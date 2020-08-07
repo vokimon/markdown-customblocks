@@ -1,5 +1,6 @@
 import requests
 from yamlns import namespace as ns
+import json
 
 class Fetcher:
 
@@ -32,6 +33,19 @@ class Fetcher:
             else:
                 result.update(content=response.content)
 
+        return result
+
+    def _namespace2response(namespace):
+        result = requests.Response()
+        for key in namespace:
+            if key in ('content', 'text', 'json'): continue
+            setattr(result, key, namespace[key])
+        if 'text' in namespace:
+            result._content = namespace.text.encode(namespace.encoding)
+        elif 'json' in namespace:
+            result._content = json.dumps(namespace.json).encode('utf8')
+        else:
+            result._content = namespace.content
         return result
 
     def get(self, url):

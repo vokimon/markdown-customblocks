@@ -183,5 +183,65 @@ class Fetcher_Test(unittest.TestCase):
               data: value
         """)
 
+    def test_namespace2response_text(self):
+        namespace = ns.loads("""\
+            url: http://mysite.com/path/page
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
+            encoding: ISO-8859-1
+        """)
+        response = Fetcher._namespace2response(namespace)
+        self.assertResponseEqual(response, """\
+            url: http://mysite.com/path/page
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
+            encoding: ISO-8859-1
+        """)
+
+    @responses.activate
+    def test_namespace2response_binary(self):
+        namespace = ns.loads("""\
+            url: http://mysite.com/path/page
+            status_code: 200
+            headers:
+              Content-Type: image/png
+            content: !!binary |
+                iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI
+                WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
+        """)
+        response = Fetcher._namespace2response(namespace)
+        self.assertResponseEqual(response, """\
+            url: http://mysite.com/path/page
+            status_code: 200
+            headers:
+              Content-Type: image/png
+            content: !!binary |
+                iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI
+                WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
+        """)
+
+    def test_namespace2response_json(self):
+        namespace = ns.loads("""\
+            url: http://mysite.com/path/page
+            status_code: 200
+            headers:
+              Content-Type: application/json
+            json:
+              data: value
+        """)
+        response = Fetcher._namespace2response(namespace)
+        self.assertResponseEqual(response, """\
+            url: http://mysite.com/path/page
+            status_code: 200
+            headers:
+              Content-Type: application/json
+            json:
+              data: value
+        """)
+ 
 
 # vim: et ts=4 sw=4
