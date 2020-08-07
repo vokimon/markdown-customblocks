@@ -5,6 +5,8 @@ from yamlns import namespace as ns
 from pathlib import Path
 from .fetcher import Fetcher
 
+offline=False
+
 class Fetcher_Test(unittest.TestCase):
 
     from yamlns.testutils import assertNsEqual
@@ -38,6 +40,7 @@ class Fetcher_Test(unittest.TestCase):
 
         self.assertNsEqual(result, expected)
 
+    @unittest.skipIf(offline, 'this test requires network connection')
     def test_get_real_text(self):
         self.maxDiff = None
         f = Fetcher(cache=self.cachedir)
@@ -57,6 +60,7 @@ class Fetcher_Test(unittest.TestCase):
             text: CustomBlocks rocks!
         """.format(**response.headers))
 
+    @unittest.skipIf(offline, 'this test requires network connection')
     def test_get_real_binary(self):
         self.maxDiff = None
         f = Fetcher(cache=self.cachedir)
