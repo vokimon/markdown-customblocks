@@ -14,7 +14,8 @@ class Fetcher:
                 .replace('/','_')
             )
 
-    def _response2namespace(self, response):
+    @staticmethod
+    def _response2namespace(response):
         result = ns(
             url=response.url,
             headers=ns(response.headers),
