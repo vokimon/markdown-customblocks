@@ -49,6 +49,7 @@ class Fetcher_Test(unittest.TestCase):
               Server: gunicorn/19.9.0
             status_code: 200
             text: CustomBlocks rocks!
+            encoding: utf-8
         """.format(**response.headers))
 
     @unittest.skipIf(offline, 'this test requires network connection')
@@ -97,6 +98,7 @@ class Fetcher_Test(unittest.TestCase):
             headers:
               Content-Type: text/plain
             text: hello world
+            encoding: ISO-8859-1
         """)
 
     def test_url2path_justDomain(self):
@@ -134,6 +136,7 @@ class Fetcher_Test(unittest.TestCase):
             headers:
               Content-Type: text/plain
             text: hello world
+            encoding: ISO-8859-1
         """)
 
     @responses.activate

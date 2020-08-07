@@ -25,7 +25,10 @@ class Fetcher:
             result.update(json=response.json())
         except Exception:
             if 'text' in response.headers['Content-Type']:
-                result.update(text=response.text)
+                result.update(
+                    text=response.text,
+                    encoding=response.encoding,
+                )
             else:
                 result.update(content=response.content)
 
