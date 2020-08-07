@@ -15,6 +15,13 @@ class Fetcher:
                 .replace('/','_')
             )
 
+    def clear(self):
+        for item in self.cachedir.glob('*'):
+            item.unlink()
+        if self.cachedir.exists():
+            self.cachedir.rmdir()
+
+
     @staticmethod
     def _response2namespace(response):
         result = ns(

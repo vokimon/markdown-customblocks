@@ -298,5 +298,19 @@ class Fetcher_Test(unittest.TestCase):
         """)
         self.assertEqual(len(responses.calls), 0)
 
+    def test_clear(self):
+        f = Fetcher(cache=self.cachedir)
+        f._url2path('http://google.com').touch()
+        f._url2path('http://amazon.com').touch()
+        f.clear()
+        self.assertEqual(len(list(self.cachedir.glob('*'))), 0)
+        self.assertFalse(self.cachedir.exists())
+
+    def test_clear_missing(self):
+        f = Fetcher(cache=self.cachedir)
+        self.cachedir.rmdir()
+        f.clear()
+        self.assertEqual(len(list(self.cachedir.glob('*'))), 0)
+
 
 # vim: et ts=4 sw=4
