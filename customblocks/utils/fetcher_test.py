@@ -376,5 +376,35 @@ class Fetcher_Test(unittest.TestCase):
             f._url2path('https://www.google.com'),
             self.cachedir / 'https_www.google.com')
 
+    @responses.activate
+    def test_get_doNotCatchFailures(self):
+        f = Fetcher(cache=self.cachedir)
+        responses.add(
+            method='GET',
+            url='http://google.com',
+            status=400,
+            body=u"bad request",
+            content_type='text/plain',
+            )
+        responses.add(
+            method='GET',
+            url='http://google.com',
+            status=200,
+            body=u"hello world",
+            content_type='text/plain',
+            )
+        response = f.get('http://google.com')
+        response = f.get('http://google.com')
+        self.assertResponseEqual(response, """\
+            url: http://google.com/
+            status_code: 200
+            headers:
+              Content-Type: text/plain
+            text: hello world
+            encoding: ISO-8859-1
+        """)
+        self.assertEqual(len(responses.calls), 2)
+
+
 
 # vim: et ts=4 sw=4

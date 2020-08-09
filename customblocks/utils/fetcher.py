@@ -65,7 +65,8 @@ class Fetcher:
             info = ns.load(str(cachefile))
             return self._namespace2response(info)
         response = requests.get(url)
-        self._response2namespace(response).dump(self._url2path(url))
+        if response.ok:
+            self._response2namespace(response).dump(self._url2path(url))
         return response
 
     def remove(self, url):
