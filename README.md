@@ -574,9 +574,11 @@ Notice the underline, as `class` is a reserved word in Python.
 - `str`: it will be added as text
 - `etree.Element`: it will be added as child node
 - `customblocks.utils.Markdown`: will append parsed markdown (see below)
-- Any `tuple`, `list` or iterable will go for the 
+- Any `tuple`, `list` or iterable: will add each item following previous rules
 
 ```python
+from customblocks.utils import E, Markdown
+
 def mygenerator(ctx, image):
 	return (
 		E('.mytype',
