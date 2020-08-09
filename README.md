@@ -679,6 +679,7 @@ fetcher.remove('https://canvoki.net/codder')
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
+- Fetcher: configurable cache dir
 - Linkcard:
 	- Look for short description by class (ie wikipedia)
 - Youtube:
