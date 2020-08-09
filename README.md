@@ -392,13 +392,17 @@ Featured image, title, description...
 `wideimage` (Flag, default True)
 : Whether the featured image will be shown wide, if not, a small thumb will be shown
 
-`image` (key only)
-: If specified, that will be the feature image instead of the one specified in the page
-
 Content, if provided will be used as excerpt instead of the summary in the page.
 
-If both, image and content are provided,
-the link is not fetched at all.
+Additionally you can provide the following keyword parameters
+to override information extracted from the url:
+
+- `image`: the image heading the card
+- `title`: the caption
+- `description`: the text describing the link
+- `siteurl`: a link to the main site
+- `sitename`: the name of the main site
+- `siteicon`: the site icon
 
 ### Youtube (`customblocks.generators.youtube`)
 
