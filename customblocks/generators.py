@@ -1,7 +1,4 @@
-import base64
-import requests
 from bs4 import BeautifulSoup
-from xml.etree import ElementTree as etree
 from yamlns import namespace as ns
 
 from .utils import E, Markdown
@@ -173,7 +170,6 @@ def twitter(user,
         f'https://publish.twitter.com/oembed?url=https://twitter.com/{user}/status/{tweet}&dnt=True{options}'
     )
     result = ns(response.json())
-    #print("oembed result:", result.dump())
     soup = BeautifulSoup(result.html, 'html.parser')
     return type(u'')(soup.find('blockquote'))
 
