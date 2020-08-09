@@ -602,19 +602,39 @@ info.description # short description (from og:description or twitter:description
 info.image    # featured image (from og:image or twitter:image, or site image)
 ```
 
+### Fetcher
+
+A fetcher object is a wrapper around the `requests` library
+that uses caching to avoid downloading once and again remote resource
+each time you compile the markdown file.
+
+The first time a resource is succesfully downloaded by a fetcher
+the request response is stored in the provided folder in a yaml file
+which has the mangled url as name.
+Successive tries to download it just take the content of that file
+to construct a query.
+
+```python
+from customblocks.utils import Fetcher
+
+fetcher = Fetcher('mycachedir')
+response = fetcher.get('https://canvoki.net/codder')
+# to force next call
+fetcher.remove('https://canvoki.net/codder')
+```
 
 ## Release history
 
 ### unreleased
 
-- `linkcard`: Example style emulating Wordpress' embedded link
-- `linkcard`: Explicit image, description, title...
-- `linkcard`: Fix: relative links to images and icons
-- `linkcard`: Cached properties
-- `linkcard`: Removed half implemented embedimage flag
+- `utils.Fetcher`: Helper for catched downloads
 - `utils.PageInfo`: Page information retrieval helper
 - `utils.E`: Helper to generate blocks using hyperscript idiom
 - `utils.Markdown`: Helper to include markdown in hyperscript
+- `linkcard`: Example style emulating Wordpress' embedded link
+- `linkcard`: Explicit image, description, title...
+- `linkcard`: Fix: relative links to images and icons
+- `linkcard`: Removed half implemented embedimage flag
 
 ### markdown-customblocks 1.0.0 (2020-06-27)
 
