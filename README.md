@@ -645,6 +645,10 @@ fetcher.remove('https://canvoki.net/codder')
 
 ## Release history
 
+### markdown-customblocks 1.1.1 (2020-08-08)
+
+- documentation fixes
+
 ### markdown-customblocks 1.1.0 (2020-08-08)
 
 - `utils.Fetcher`: Helper for catched downloads
