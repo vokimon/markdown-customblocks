@@ -633,12 +633,13 @@ fetcher.remove('https://canvoki.net/codder')
 
 - `utils.Fetcher`: Helper for catched downloads
 - `utils.PageInfo`: Page information retrieval helper
-- `utils.E`: Helper to generate blocks using hyperscript idiom
+- `utils.E`: Helper to generate HTML using hyperscript idiom
 - `utils.Markdown`: Helper to include markdown in hyperscript
 - `linkcard`: Example style emulating Wordpress' embedded link
 - `linkcard`: Explicit image, description, title...
 - `linkcard`: Fix: relative links to images and icons
 - `linkcard`: Removed half implemented embedimage flag
+- `twitter`: Cache twitter info downloads
 
 ### markdown-customblocks 1.0.0 (2020-06-27)
 
@@ -672,20 +673,14 @@ fetcher.remove('https://canvoki.net/codder')
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
-+ Using a nicer etree building api in generators
 - Linkcard:
-	- Testing with non-fragile emulated requests
-	+ Prepend site url to relative ones (ie. wikipedia)
 	- Look for short description by class (ie wikipedia)
-    - Offline behavior
-    - Cache downloaded data
 - Youtube:
     - Take aspect ratio and sizes from Youtube api
     - Use covers
     - Privacy safe mode
 - Twitter
     - Privacy safe mode
-- Cache download
 - Figure flags:
 	- no flag
 		- Un modified url
