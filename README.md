@@ -629,7 +629,7 @@ fetcher.remove('https://canvoki.net/codder')
 
 ## Release history
 
-### unreleased
+### markdown-customblocks 1.1.0 (2020-08-08)
 
 - `utils.Fetcher`: Helper for catched downloads
 - `utils.PageInfo`: Page information retrieval helper
