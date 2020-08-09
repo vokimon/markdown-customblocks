@@ -253,6 +253,11 @@ A generator can use several strategies to generate content:
 - Return a `markdown.etree` `Element` object
 - Manipulate `ctx.parent` to add the content and return `None`
 
+In order to construct an ElementTree,
+we recommend using the [Hyperscript utility](#hyperscript-generation).
+Resulting code will be more compact and readable and
+makes proper escaping when injecting values.
+
 ## Predefined generators
 
 ### Container (`customblocks.generators.container`)
