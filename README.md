@@ -35,6 +35,7 @@ Includes some sample components for div containers, admonitions, figures, link c
 - [Generator tools](#generator-tools)
 	- [Hyperscript generation](#hyperscript-generation)
 	- [PageInfo](#pageinfo)
+	- [Fetcher](#fetcher)
 - [Release history](#release-history)
 - [TODO](#todo)
 
