@@ -552,7 +552,7 @@ You can generate html with strings or using `etree`; but there is a more elegant
 
 [Hyperscript] is the idea of writing code that generates html/xml
 as nested function calls that look like the the actual xml structure.
-This can be done by using the `customblocks.util.E` function which has this signature:
+This can be done by using the `customblocks.utils.E` function which has this signature:
 
 ```
 def E(tag, *children, **attributes): ...
@@ -572,7 +572,7 @@ Notice the underline, as `class` is a reserved word in Python.
 - `dict`: it will be merged with the attributes
 - `str`: it will be added as text
 - `etree.Element`: it will be added as child node
-- `customblocks.util.Markdown`: will append parsed markdown (see below)
+- `customblocks.utils.Markdown`: will append parsed markdown (see below)
 - Any `tuple`, `list` or iterable will go for the 
 
 ```python
