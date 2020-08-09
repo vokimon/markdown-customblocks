@@ -547,6 +547,14 @@ Embeds a [Goteo] fund raising campaign widget.
 
 ## Generator tools
 
+Common code has been extracted from predefined generators.
+If you need this functionality you are encouraged to use them.
+
+- Hyperscript: to generate html
+- PageInfo: to extract metadata from a webpage
+- Fetcher: to download resources with file based cache
+
+
 ### Hyperscript generation
 
 You can generate html with strings or using `etree`; but there is a more elegant option.
