@@ -92,7 +92,7 @@ That's why you should use (or develop) a markdown extension to ease the proces.
 
 There is a catch.
 Each markdown extension has to identify its own markup.
-For new extensions, is hard to find a handy markup no body is using yet.
+For new extensions, is hard to find a handy markup that no other extension is using yet.
 Because of that, the trend is having a lot of different markups,
 even for extensions sharing purpose.
 When you find a better extension for your figures,
@@ -101,33 +101,35 @@ because the markup is different.
 
 Also coding an extension is hard.
 Markdown extension API is required to be complex to address many other scenarios.
-But this extension responds to this usual scenario:
+But this extension responds just to this common scenario:
 
 > I want to generate this **piece of html** which
 > depends on those **parameters** and maybe it should
 > include a given **content**.
 
-**So, why not using a common markup for all those structures?**
-: This way, we can define a common parser for all them.
-To create a new block type, we have no need to find out an unused markup or developing new parsers.
+**So, what about using a common markup for all those structures?** \
+This way, markup syntax explosion is avoided,
+and users do not have to learn a new syntax.
+Besides, developing new block types is easier if you can reuse the same parser.
 
-**So, why not using a type name to identify the structure?**
-: It provides a conceptual link to the block meaning.
-Both when you read the markup and when you change the behaviour.
-We can redefine how the block type behaves by hooking a different behaviour to the type name.
+**So, what about using a type name to identify the structure?** \
+A name as part of the markup clarifies the block meaning on reading.
+Also provides a hook to change the behaviour while keeping the semantics.
 
-**So, why not defining a common attribute markup?**
-: This way we can set a common way to map attributes to Python functions.
-The extension can delegate HTML generation to the function by looking at the signature. No extra glue required.
+**So, what about defining a common attribute markup?** \
+This way, a general mapping from such attributes to the parameters
+of a Python function can be stablished.
+So, the generator function signature defines the attributes that can be used
+and the extension does the mapping with no extra glue required.
 
-**So, why not using indentation to define inner content?**
-: It visually shows the scope of the block and allows nesting.
+**So, what about using indentation to define inner content?** \
+It visually shows the scope of the block and allows nesting.
 If the content is reparsed as Markdown,
 it could still include other components with their inner content a level down.
 
 We all stand on giants' shoulders so take a look at the [long list](doc/inspiration.md)
-of markdown extensions and other software that inspired and influenced this extension.
-Kudos for them.
+of markdown extensions and other software that inspired and influenced ideas for this extension.
+Kudos for all of them.
 
 
 ## Installation and setup
@@ -693,7 +695,10 @@ fetcher.remove('https://canvoki.net/codder')
 - Default css for generators
 - Flags: coerce to bool?
 - Annotations: coerce to any type
-- Fetcher: configurable cache dir
+- Fetcher:
+	- configurable cache dir
+	- file name too long
+	- handle connection errors
 - Linkcard:
 	- Look for short description by class (ie wikipedia)
 - Youtube:
