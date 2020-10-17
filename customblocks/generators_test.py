@@ -212,18 +212,18 @@ class Generators_Test(test_tools.TestCase):
 
     def test_tweet_allOptions(self):
         self.assertMarkdown("""\
-            ::: twitter marcmushu 1270395360163307530 theme=dark hideimages align=right conversation
+            ::: twitter maaarcv 1270395360163307530 theme=dark hideimages align=right conversation
             """, """\
             <blockquote align="right" class="twitter-tweet" data-dnt="true" data-theme="dark">
-            <p dir="ltr" lang="ca">Sóc l'únic que creu que els pares s'haurien de gastar tots els seus diners en el que vulguin (ja que s'ho han currat durant anys) abans de morir en comptes de deixar res d'herència?</p>— marc (@marcmushu) <a href="https://twitter.com/marcmushu/status/1270395360163307530?ref_src=twsrc%5Etfw">June 9, 2020</a></blockquote>
+            <p dir="ltr" lang="ca">Sóc l'únic que creu que els pares s'haurien de gastar tots els seus diners en el que vulguin (ja que s'ho han currat durant anys) abans de morir en comptes de deixar res d'herència?</p>— marc (@maaarcv) <a href="https://twitter.com/maaarcv/status/1270395360163307530?ref_src=twsrc%5Etfw">June 9, 2020</a></blockquote>
             """)
 
     def test_tweet(self):
         self.assertMarkdown("""\
-            ::: twitter marcmushu 1270395360163307530
+            ::: twitter maaarcv 1270395360163307530
             """, """\
             <blockquote class="twitter-tweet" data-dnt="true">
-            <p dir="ltr" lang="ca">Sóc l'únic que creu que els pares s'haurien de gastar tots els seus diners en el que vulguin (ja que s'ho han currat durant anys) abans de morir en comptes de deixar res d'herència?</p>— marc (@marcmushu) <a href="https://twitter.com/marcmushu/status/1270395360163307530?ref_src=twsrc%5Etfw">June 9, 2020</a></blockquote>
+            <p dir="ltr" lang="ca">Sóc l'únic que creu que els pares s'haurien de gastar tots els seus diners en el que vulguin (ja que s'ho han currat durant anys) abans de morir en comptes de deixar res d'herència?</p>— marc (@maaarcv) <a href="https://twitter.com/maaarcv/status/1270395360163307530?ref_src=twsrc%5Etfw">June 9, 2020</a></blockquote>
             """)
 
     def setupResponse(self):
