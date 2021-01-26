@@ -65,7 +65,7 @@ def linkcard(ctx, url, *, wideimage=True, **overrides):
         ), nl,
         E('.linkcard-footer', nl,
             E('.linkcard-site-title', nl,
-                E('a.linkcard-site-icon',
+                E('a',
                     dict(href=info.siteurl), nl,
                     E('img.linkcard-site-icon',
                         height='32',

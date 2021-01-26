@@ -255,7 +255,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<a href="https://www.eldiario.es">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -284,7 +284,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<a href="https://www.eldiario.es">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -317,7 +317,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<a href="https://www.eldiario.es">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -350,7 +350,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<a href="https://www.eldiario.es">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -383,7 +383,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<a href="https://www.eldiario.es">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -419,7 +419,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a class="linkcard-site-icon" href="https://www.eldiario.es">
+<a href="https://www.eldiario.es">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
