@@ -62,21 +62,36 @@ class Fetcher_Test(unittest.TestCase):
           iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI
           WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
         headers:
+          Accept-Ranges: bytes
           Content-Type: image/png
-          Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
-          Access-Control-Allow-Methods: GET, POST, OPTIONS
-          Access-Control-Allow-Origin: '*'
-          Access-Control-Expose-Headers: Content-Length,Content-Range
-          Cache-Control: public, max-age=7776000
+          access-control-allow-headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
+          access-control-allow-methods: GET, POST, OPTIONS
+          access-control-allow-origin: '*'
+          access-control-expose-headers: Content-Length,Content-Range
+          cache-control: public, max-age=7776000
           Connection: keep-alive
           Content-Length: '107'
           Content-Type: image/png
           Date: {Date} # always change
-          Expires: {Expires} # always change
-          Last-Modified: {Date} # always change but equal to Date
-          Server: nginx
-          X-SRCache-Fetch-Status: MISS
-          X-SRCache-Store-Status: STORE
+          expires: {expires} # always change
+          last-modified: {last-modified} # always change but equal to Date
+          Server: cloudflare
+          referrer-policy: no-referrer, strict-origin-when-cross-origin
+          Age: '{Age}'
+          CF-Cache-Status: HIT
+          CF-RAY: {CF-RAY}
+          Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+          NEL: '{{"success_fraction":0,"report_to":"cf-nel","max_age":604800}}'
+          Report-To: '{Report-To}'
+          Server: cloudflare
+          Vary: Accept-Encoding
+          alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400, h3-28=":443"; ma=86400, h3-27=":443";
+            ma=86400
+          x-content-type-options: nosniff
+          x-download-options: noopen
+          x-frame-options: SAMEORIGIN
+          x-powered-by: WordOps
+          x-xss-protection: 1; mode=block
         """.format(**response.headers))
  
     @responses.activate
