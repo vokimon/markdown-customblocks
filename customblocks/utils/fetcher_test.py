@@ -55,7 +55,7 @@ class Fetcher_Test(unittest.TestCase):
         self.maxDiff = None
         f = Fetcher(cache=self.cachedir)
         response = f.get('https://dummyimage.com/6x4/f00/f00')
-        response.headers.setdefault('Age', 0)
+        response.headers.setdefault('Age', '0')
         self.assertResponseEqual(response, """\
         url: https://dummyimage.com/6x4/f00/f00
         status_code: 200
