@@ -107,22 +107,22 @@ But this extension responds just to this common scenario:
 > depends on those **parameters** and maybe it should
 > include a given **content**.
 
-**So, what about using a common markup for all those structures?** \
+**So, why am i using a common markup for all those structures?** \
 This way, markup syntax explosion is avoided,
 and users do not have to learn a new syntax.
 Besides, developing new block types is easier if you can reuse the same parser.
 
-**So, what about using a type name to identify the structure?** \
+**So, why am i using a type name to identify the structure?** \
 A name as part of the markup clarifies the block meaning on reading.
 Also provides a hook to change the behaviour while keeping the semantics.
 
-**So, what about defining a common attribute markup?** \
+**So, why am i defining a common attribute markup?** \
 This way, a general mapping from such attributes to the parameters
 of a Python function can be stablished.
 So, the generator function signature defines the attributes that can be used
 and the extension does the mapping with no extra glue required.
 
-**So, what about using indentation to define inner content?** \
+**So, why am i using indentation to define inner content?** \
 It visually shows the scope of the block and allows nesting.
 If the content is reparsed as Markdown,
 it could still include other components with their inner content a level down.
