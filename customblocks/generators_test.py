@@ -135,7 +135,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM custom-class
             """, """\
             <div class="videowrapper youtube custom-class">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0"></iframe>
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM"></iframe>
             </div>
             """)
 
