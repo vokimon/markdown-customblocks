@@ -39,7 +39,7 @@ jobs:
             coveralls
       - name: Unit tests
         run: |
-          pytest --cov=customblocks
+          pytest
       - name: Coveralls
         uses: AndreMiras/coveralls-python-action@develop
         with:
