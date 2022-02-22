@@ -102,7 +102,7 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False):
 
     url = f"https://www.youtube.com/embed/{id}{options}"
     return E(
-        ''.join(f'.{cls}' for cls in ('youtube', 'videowrapper', *args)),
+        ''.join(f'.{cls}' for cls in ('videowrapper', 'youtube', *args)),
         E('iframe',
             src=url,
             style=iframeStyle,
