@@ -80,7 +80,7 @@ def linkcard(ctx, url, *, wideimage=True, **overrides):
     )
 
 
-def youtube(ctx, id, *, autoplay=False, controls=True, loop=False):
+def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False):
     options = []
     inlineStyle = ctx.config.get('youtube_inlineFluidStyle', False)
     if autoplay:
@@ -101,7 +101,8 @@ def youtube(ctx, id, *, autoplay=False, controls=True, loop=False):
         ) if inlineStyle else None
 
     url = f"https://www.youtube.com/embed/{id}{options}"
-    return E('.videowrapper.youtube',
+    return E(
+        ''.join(f'.{cls}' for cls in ('youtube', 'videowrapper', *args)),
         E('iframe',
             src=url,
             style=iframeStyle,

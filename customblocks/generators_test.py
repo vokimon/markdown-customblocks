@@ -130,6 +130,15 @@ class Generators_Test(test_tools.TestCase):
             </div>
             """)
 
+    def test_youtube_custom_classes(self):
+        self.assertMarkdown("""\
+            ::: youtube 7SS24_CgwEM custom-class
+            """, """\
+            <div class="videowrapper youtube custom-class">
+            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0"></iframe>
+            </div>
+            """)
+
     def test_vimeo(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514
