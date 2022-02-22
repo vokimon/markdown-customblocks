@@ -1,5 +1,9 @@
 # Release history
 
+## markdown-customblocks 1.1.3 (2022-02-22)
+
+- Metadata fix: The license is Affero not MIT
+
 ## markdown-customblocks 1.1.2 (2022-02-22)
 
 - FIX: youtube custom classes were not added (PR #05, Alexey Leshchenko @leshchenko1979, thanks!)
