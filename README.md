@@ -54,11 +54,11 @@ For example, we could bind `mytype` to this generator:
 
 ```python
 def mygenerator(ctx, param1, param2):
-    """Quick and dirty generator, needs escaping"""
+   """Quick and dirty generator, would need escaping"""
     return f"""<div attrib1="{param1}" attrib2="{param2}">{ctx.content}</div>"""
 ```
 
-and the previous markdown will generate:
+With the previous markdown, it will generate:
 
 ```html
 <div attrib1="value 1" attrib2="value2">Indented Content</div>
@@ -87,12 +87,11 @@ and you often end up writing html by hand:
 A figure, an embed...
 If you use that structure multiple times,
 whenever you find a better way,
-you end up updating the structures in multiple places.
+you end up updating the structures in many places.
 That's why you should use (or develop) a markdown extension to ease the proces.
 
 There is a catch.
-Each markdown extension has to identify its own markup.
-For new extensions, is hard to find a handy markup that no other extension is using yet.
+Extensions struggle to use a unique markup to avoid conflicts with other extensions.
 Because of that, the trend is having a lot of different markups,
 even for extensions sharing purpose.
 When you find a better extension for your figures,
@@ -100,32 +99,34 @@ again, it is likely you have to edit all your figures, once more,
 because the markup is different.
 
 Also coding an extension is hard.
-Markdown extension API is required to be complex to address many other scenarios.
-But this extension responds just to this common scenario:
+Markdown extension API is necessarily complex to address many scenarios.
+But this extension responds just to this single but general scenario:
 
 > I want to generate this **piece of html** which
-> depends on those **parameters** and maybe it should
+> depends on those **parameters** and might
 > include a given **content**.
 
-**So, why am i using a common markup for all those structures?** \
+So...
+
+**Why using a common markup for that many different structures?** \
 This way, markup syntax explosion is avoided,
 and users do not have to learn a new syntax.
-Besides, developing new block types is easier if you can reuse the same parser.
+Also, developing new block types is easier if you can reuse the same parser.
 
-**So, why am i using a type name to identify the structure?** \
+**Why using a type name to identify the structure?** \
 A name as part of the markup clarifies the block meaning on reading.
 Also provides a hook to change the behaviour while keeping the semantics.
 
-**So, why am i defining a common attribute markup?** \
-This way, a general mapping from such attributes to the parameters
-of a Python function can be stablished.
-So, the generator function signature defines the attributes that can be used
+**Why defining a common attribute markup?** \
+A common attribute markup is useful to stablish a general mapping
+between markup attributes and Python function parameters.
+The generator function signature defines the attributes that can be used
 and the extension does the mapping with no extra glue required.
 
-**So, why am i using indentation to define inner content?** \
+**Why using indentation to indicate inner content?** \
 It visually shows the scope of the block and allows nesting.
 If the content is reparsed as Markdown,
-it could still include other components with their inner content a level down.
+it could still include other components with their inner content a level deeper.
 
 We all stand on giants' shoulders so take a look at the [long list](doc/inspiration.md)
 of markdown extensions and other software that inspired and influenced ideas for this extension.
@@ -140,7 +141,27 @@ To install:
 $ pip install markdown-customblocks
 ```
 
-In order to enable it in Markdown:
+From command line:
+
+```bash
+markdown -x customblocks ...
+```
+
+From Python:
+
+```python
+import markdown
+md = markdown.Markdown(
+    extensions=["customblocks"],
+    extension_configs=dict(
+        customblocks={
+           ...
+	}
+    ),
+md.convert(markdowncontent)
+```
+
+In order to enable it in Pelican:
 
 ```python
 MARKDOWN = {
