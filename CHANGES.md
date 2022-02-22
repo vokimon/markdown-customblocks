@@ -1,8 +1,9 @@
 # Release history
 
-## unreleased
+## markdown-customblocks 1.1.2 (2022-02-22)
 
 - FIX: youtube custom classes were not added (PR #05, Alexey Leshchenko @leshchenko1979, thanks!)
+- FIX: linkcard: link-card-site-icon class was set twice
 - workflows for continuous integration and release
 
 ## markdown-customblocks 1.1.1 (2020-08-08)
