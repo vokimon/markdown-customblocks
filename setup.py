@@ -27,7 +27,6 @@ setup(
         'pytest', # testing
         'responses', # testing
     ],
-    license='MIT License',
     test_suite='customblocks',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
