@@ -1,5 +1,10 @@
 # Changelog
 
+## unreleased
+
+- FIX: youtube custom classes were not added (PR #05, Alexey Leshchenko @leshchenko1979, thanks!)
+- workflows for continuous integration and release
+
 ## markdown-customblocks 1.1.1 (2020-08-08)
 
 - documentation fixes
