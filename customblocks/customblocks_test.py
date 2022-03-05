@@ -231,6 +231,14 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             <div class="myblock param1 param2"></div>
             """)
 
+    def test_noParams_trailingSpaces(self):
+        # There is a space after myblock
+        self.assertMarkdown("""\
+            ::: myblock 
+            """, """\
+            <div class="myblock"></div>
+            """)
+
     def test_keyParam(self):
         self.assertMarkdown("""\
             ::: myblock key=value
