@@ -52,7 +52,7 @@ class CustomBlocksProcessor(BlockProcessor):
             r'"(?:\\.|[^"])*"|' # double quoted
             r'[\S]+' # single word
         r'))*'
-        r'(?: *\n|$)' # ending
+        r'\s*(?:\n|$)' # ending
     )
     # Extracts every parameter from the headline as (optional) key and value
     RE_PARAM = re.compile(
