@@ -1,5 +1,9 @@
 # Release history
 
+## markdown-customblocks 1.1.4 (2022-03-05)
+
+- FIX: match trailing spaces after the header. Fixes #6
+
 ## markdown-customblocks 1.1.3 (2022-02-22)
 
 - Metadata fix: The license is Affero not MIT
