@@ -380,6 +380,21 @@ If you like having the classes before, you should explicit the `title` key.
 
 An image as captioned figure.
 The content is taken as caption.
+```markdown
+::: figure images/myimage.jpg alt='an image' nice
+    This is a **nice** image.
+```
+
+Renders into:
+
+```html
+<figure class="nice">
+  <a href="images/myimage.jpg alt='an image' nice"><img src="images/myimage.jpg" alt="an image" /></a>
+  <figcaption>
+    <p>This is a <b>nice</b> image</p>
+  </figcaption>
+</figure>
+```
 
 `url`
 : the url to the image
@@ -395,8 +410,6 @@ The content is taken as caption.
 
 `**kwds`
 : additional attributes for root `<figure>` tag
-
-
 
 
 ### Link card (`customblocks.generators.linkcard`)
