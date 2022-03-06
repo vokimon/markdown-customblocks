@@ -389,7 +389,9 @@ Renders into:
 
 ```html
 <figure class="nice">
-  <a href="images/myimage.jpg alt='an image' nice"><img src="images/myimage.jpg" alt="an image" /></a>
+  <a href="images/myimage.jpg alt='an image' nice">
+    <img src="images/myimage.jpg" alt="an image" />
+  </a>
   <figcaption>
     <p>This is a <b>nice</b> image</p>
   </figcaption>
