@@ -111,11 +111,13 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False):
     )
 
 def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
-    options=[]
-    if not byline: options.append("byline=0")
-    if not portrait: options.append('portrait=0')
-    if loop: options.append('loop=1')
-    if autoplay: options.append('autoplay=1')
+    options=[o for o in [
+        'dnt=1', # cookieless (GDPR compliant)
+        'byline=0' if not byline else '',
+        'portrait=0' if not portrait else '',
+        'loop=1' if loop else '',
+        'autoplay=1' if autoplay else '',
+    ] if o]
 
     return E('iframe',
         src = "https://player.vimeo.com/video/{}?{}"

@@ -143,35 +143,35 @@ class Generators_Test(test_tools.TestCase):
         self.assertMarkdown("""\
             ::: vimeo 55297514
             """, """\
-            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?portrait=0" width="100%"></iframe>
+            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;portrait=0" width="100%"></iframe>
             """)
 
     def test_vimeo_loop(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 loop
             """, """\
-            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?portrait=0&amp;loop=1" width="100%"></iframe>
+            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;portrait=0&amp;loop=1" width="100%"></iframe>
             """)
 
     def test_vimeo_autoplay(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 autoplay
             """, """\
-            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?portrait=0&amp;autoplay=1" width="100%"></iframe>
+            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;portrait=0&amp;autoplay=1" width="100%"></iframe>
             """)
 
     def test_vimeo_nobyline(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 nobyline
             """, """\
-            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?byline=0&amp;portrait=0" width="100%"></iframe>
+            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;byline=0&amp;portrait=0" width="100%"></iframe>
             """)
 
     def test_vimeo_portrait(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 portrait
             """, """\
-            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?" width="100%"></iframe>
+            <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1" width="100%"></iframe>
             """)
 
     def test_verkami(self):
