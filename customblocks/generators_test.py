@@ -89,7 +89,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM
             """, """\
             <div class="videowrapper youtube">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM"></iframe>
             </div>
             """)
 
@@ -98,7 +98,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM autoplay
             """, """\
             <div class="videowrapper youtube">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?autoplay=1"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM?autoplay=1"></iframe>
             </div>
             """)
 
@@ -107,7 +107,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM autoplay loop
             """, """\
             <div class="videowrapper youtube">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?autoplay=1&amp;loop=1"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM?autoplay=1&amp;loop=1"></iframe>
             </div>
             """)
 
@@ -116,7 +116,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM nocontrols
             """, """\
             <div class="videowrapper youtube">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM?controls=0"></iframe>
             </div>
             """)
 
@@ -126,7 +126,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM nocontrols
             """, """\
             <div class="videowrapper youtube" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; width:100%">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM?controls=0" style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM?controls=0" style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
             </div>
             """)
 
@@ -135,7 +135,7 @@ class Generators_Test(test_tools.TestCase):
             ::: youtube 7SS24_CgwEM custom-class
             """, """\
             <div class="videowrapper youtube custom-class">
-            <iframe src="https://www.youtube.com/embed/7SS24_CgwEM"></iframe>
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM"></iframe>
             </div>
             """)
 

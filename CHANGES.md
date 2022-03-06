@@ -1,5 +1,9 @@
 # Release history
 
+## unreleased
+
+- Use youtube-nocookie.com to avoid youtube cookies
+
 ## markdown-customblocks 1.1.4 (2022-03-05)
 
 - FIX: match trailing spaces after the header. Fixes #6

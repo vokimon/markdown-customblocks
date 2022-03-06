@@ -100,7 +100,7 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False):
             'width:100%; height:100%;'
         ) if inlineStyle else None
 
-    url = f"https://www.youtube.com/embed/{id}{options}"
+    url = f"https://www.youtube-nocookie.com/embed/{id}{options}"
     return E(
         ''.join(f'.{cls}' for cls in ('videowrapper', 'youtube', *args)),
         E('iframe',
