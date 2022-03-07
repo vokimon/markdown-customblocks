@@ -389,7 +389,7 @@ Renders into:
 
 ```html
 <figure class="nice">
-  <a href="images/myimage.jpg alt='an image' nice">
+  <a href="images/myimage.jpg">
     <img src="images/myimage.jpg" alt="an image" />
   </a>
   <figcaption>
@@ -413,6 +413,7 @@ Renders into:
 `**kwds`
 : additional attributes for root `<figure>` tag
 
+TODO: Thumbnails, lightbox, figure enumeration, fetch external images.
 
 ### Link card (`customblocks.generators.linkcard`)
 
