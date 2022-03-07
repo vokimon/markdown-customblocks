@@ -389,7 +389,7 @@ Renders into:
 
 ```html
 <figure class="nice">
-  <a href="images/myimage.jpg">
+  <a href="images/myimage.jpg target="_blank">
     <img src="images/myimage.jpg" alt="an image" />
   </a>
   <figcaption>
@@ -407,13 +407,88 @@ Renders into:
 `title` (keyword only)
 : image title attribute
 
+`lightbox` (bool)
+: whether to open a lightbox on click or not
+
 `*args`
 : additional classes for root `<figure>` tag
 
 `**kwds`
 : additional attributes for root `<figure>` tag
 
-TODO: Thumbnails, lightbox, figure enumeration, fetch external images.
+In order `lightbox` to work you must add the following css to your page:
+
+```css
+/* this is aesthetic */
+figure {
+ border: 1pt solid lightgrey;
+ background: #efefef;
+ color: #111;
+ padding: 3pt;
+}
+figure {
+ display: inline-block;
+}
+figure figcaption {
+ width: 100%;
+ text-align: center;
+}
+figure img {
+ object-fit: contain;
+ margin: auto 0;
+ max-width: 100%;
+ max-height: 100%;
+ width: 100%;
+}
+figure.centered {
+ display: block;
+ margin: auto;
+ text-align: center;
+}
+figure.lightbox {
+ transition: 0.5s;
+ transition-property: background;
+}
+figure.lightbox:target {
+ transition: 0.5s;
+ transition-property: background;
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ background: black;
+ background: rgba(0,0,0,.98);
+ color: grey;
+ height: 100% !important;
+ width: 100% !important;
+ padding: 0;
+ margin: 0;
+}
+figure.lightbox .lightbox-background {
+ display: none;
+}
+figure.lightbox:target .lightbox-background {
+ position: fixed;
+ display: block;
+ width: 100%;
+ position: absolute;
+ height: 100%;
+}
+figure.lightbox:target img {
+ display: block;
+ margin: 2% auto;
+ width: 100vw;
+ height: auto;
+ max-width: 90%;
+ max-height: 80%;
+}
+
+```
+
+
+
+TODO: Thumbnails, figure enumeration, fetch external images.
 
 ### Link card (`customblocks.generators.linkcard`)
 

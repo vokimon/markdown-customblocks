@@ -446,7 +446,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 This figure is awsome
             """,
             "<figure>"
-            """<a href="https://via.placeholder.com/300.png"><img src="https://via.placeholder.com/300.png" /></a>"""
+            """<a href="https://via.placeholder.com/300.png" target="_blank"><img src="https://via.placeholder.com/300.png" /></a>"""
             "<figcaption>\n"
             "<p>This figure is awsome</p>\n"
             "</figcaption>\n"
@@ -459,7 +459,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 This figure is awsome
             """,
             "<figure>"
-            '<a href="https://via.placeholder.com/300.png">'
+            '<a href="https://via.placeholder.com/300.png" target="_blank">'
             '<img '
                 'src="https://via.placeholder.com/300.png" '
                 'title="This is a title" '
@@ -476,7 +476,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 This figure is awsome
             """,
             "<figure>"
-            '<a href="https://via.placeholder.com/300.png">'
+            '<a href="https://via.placeholder.com/300.png" target="_blank">'
             '<img '
                 'alt="This is a title" '
                 'src="https://via.placeholder.com/300.png" '
@@ -493,7 +493,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 This figure is awsome
             """,
             '<figure class="left-align">'
-            '<a href="https://via.placeholder.com/300.png">'
+            '<a href="https://via.placeholder.com/300.png" target="_blank">'
             '<img '
                 'src="https://via.placeholder.com/300.png" '
             '/></a>'
@@ -510,7 +510,24 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 This figure is awsome
             """,
             '<figure style="background: red">'
-            '<a href="https://via.placeholder.com/300.png">'
+            '<a href="https://via.placeholder.com/300.png" target="_blank">'
+            '<img '
+                'src="https://via.placeholder.com/300.png" '
+            '/></a>'
+            "<figcaption>\n"
+            "<p>This figure is awsome</p>\n"
+            "</figcaption>\n"
+            "</figure>"
+            )
+
+    def test_figure_lightbox(self):
+        self.assertMarkdown("""
+            ::: figure "https://via.placeholder.com/300.png" lightbox id=myimage
+                This figure is awsome
+            """,
+            '<figure class="lightbox" id="myimage">' # added id
+            '<a class="lightbox-background" href="javascript:history.back()"></a>' # this is new
+            '<a href="#myimage">' # No target, href is the id
             '<img '
                 'src="https://via.placeholder.com/300.png" '
             '/></a>'

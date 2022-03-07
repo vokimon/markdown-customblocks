@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from yamlns import namespace as ns
+import uuid
 
 from .utils import E, Markdown
 from .utils import PageInfo
@@ -22,14 +23,24 @@ def admonition(ctx, title=None, *args, **kwds):
         **kwds
     )
 
-def figure(ctx, url, *args, **kwds):
+def figure(ctx, url, *args, lightbox:bool=None, **kwds):
     title = kwds.pop('title', None)
     alt = kwds.pop('alt', None)
+    id = kwds.pop('id',None) or (str(uuid.uuid4()) if lightbox else None)
+    classes = list(args)
+    print("lightbox", lightbox)
+    if lightbox: classes.append('lightbox')
     return E('figure',
         dict(
-            _class = ' '.join(args) or None,
+            _class = ' '.join(classes) or None,
+            id = id,
         ),
-        E('a', dict(href = url),
+        E('a.lightbox-background', href="javascript:history.back()") if lightbox else '',
+        E('a',
+            dict(
+                href = f'#{id}' if lightbox else url,
+                target = None if lightbox else '_blank'
+            ),
             E('img',
                 src=url,
                 title=title,
