@@ -645,8 +645,8 @@ def mygenerator(ctx, image):
 `utils.pageinfo.PageInfo` is a class that retrieves
 meta information from html pages by means of its properties.
 
-Properties are cached so you once you use them for one page,
-later uses, have litle impact.
+Properties are computed lazily and use cache.
+Once you get one property for a given page, later uses will have little impact.
 
 Any attribute you explicit on the constructor will override
 the ones derived from actual content.
@@ -700,8 +700,7 @@ See [CHANGES.md](CHANGES.md)
 	- Look for short description by class (ie wikipedia)
 - Youtube:
     - Take aspect ratio and sizes from Youtube api
-    - Use covers
-    - Privacy safe mode
+    - Use covers https://i.ytimg.com/vi/{code}/hqdefault.jpg
 - Twitter
     - Privacy safe mode
 - Figure flags:

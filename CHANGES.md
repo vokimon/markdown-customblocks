@@ -2,7 +2,9 @@
 
 ## unreleased
 
-- Use youtube-nocookie.com to avoid youtube cookies
+- GDPR friendly embeds:
+  - youtube: Use youtube-nocookie.com to avoid youtube cookies
+  - vimeo: Use dnt=1 option to avoid vimeo cookies
 
 ## markdown-customblocks 1.1.4 (2022-03-05)
 
