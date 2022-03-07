@@ -2,6 +2,8 @@
 
 ## unreleased
 
+- Figures open the image in a new window
+- Figures lightbox visualization (requires some css)
 - GDPR friendly embeds:
   - youtube: Use youtube-nocookie.com to avoid youtube cookies
   - vimeo: Use dnt=1 option to avoid vimeo cookies
