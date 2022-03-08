@@ -1,6 +1,6 @@
 # Release history
 
-## unreleased
+## markdown-customblocks 1.2.0 (2022-03-08)
 
 - Figures open the image in a new window
 - Figures lightbox visualization (requires some css)
