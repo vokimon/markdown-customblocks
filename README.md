@@ -128,7 +128,7 @@ It visually shows the scope of the block and allows nesting.
 If the content is reparsed as Markdown,
 it could still include other components with their inner content a level deeper.
 
-We all stand on giants' shoulders so take a look at the [long list](doc/inspiration.md)
+We all stand on giants' shoulders so take a look at the [long list](docs/inspiration.md)
 of markdown extensions and other software that inspired and influenced ideas for this extension.
 Kudos for all of them.
 
