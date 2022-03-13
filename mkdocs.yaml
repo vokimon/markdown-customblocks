@@ -1,0 +1,21 @@
+site_name: Markdown Custom Blocks
+site_url: https://vokimon.github.io/markdown-customblocks
+site_author: vokimon
+site_description: Parametrizable and nestable custom components for Markdown
+repo_url: https://github.com/vokimon/markdown-customblocks/
+nav:
+  - Custom Blocks for Markdown: README.md
+markdown_extensions:
+  - customblocks
+extra_css:
+  - css/figure.css
+  - css/linkcard.css
+  - css/videowrapper.css
+  - css/admonition.css
+theme:
+  name: readthedocs
+  extra:
+    include_toc: true
+  highlightjs: true
+  hljs_languages:
+    - yaml

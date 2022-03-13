@@ -1,4 +1,4 @@
-# Custom blocks for Markdown
+# Customblocks for Markdown
 
 [![CI](https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml/badge.svg)](https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml)
 [![Coverage](https://img.shields.io/coveralls/vokimon/markdown-customblocks/master.svg?style=flat-square&label=Coverage)](https://coveralls.io/r/vokimon/markdown-customblocks)
@@ -10,22 +10,24 @@
 [![image](https://img.shields.io/pypi/implementation/markdown-customblocks.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/markdown-customblocks/)
 -->
 
-This [Python-Markdown] extension defines
-a common markup for parametrizable and nestable components that can be extended by defining a plain Python function.
+Customblocks is an extension for [Python-Markdown] that defines
+a **common markup** for **parametrizable and nestable components**
+that can be **user defined** with a simple Python function.
 
-Includes some sample components for div containers, admonitions, figures, link cards... and embeds from common sites (youtube, vimeo, twitter...)
+The extension also provides sample components that can be used off-the-shelf:
+div containers, admonitions, figures, link cards... and embeds from common sites (youtube, vimeo, twitter...)
 
 [Python-Markdown]: https://python-markdown.github.io/
 
-- [What is it?](#what-is-it)
-- [Why this?](#why-this)
+- [Introduction](#introduction)
+- [Motivation](#motivation)
 - [Installation and setup](#installation-and-setup)
 - [General markup syntax](#general-markup-syntax)
 - [Implementing a generator](#implementing-a-generator)
 - [Predefined generators](#predefined-generators)
     - [Container (`customblocks.generators.container`)](#container-customblocksgeneratorscontainer)
-    - [Admonition (`customblocks.generators.admonition`)](#admonition-customblocksgeneratorsdmonition)
-    - [Link card (`customblocks.generators.linkcard`)](#link-card-customblocksgeneratorsinkcard)
+    - [Admonition (`customblocks.generators.admonition`)](#admonition-customblocksgeneratorsadmonition)
+    - [Link card (`customblocks.generators.linkcard`)](#link-card-customblocksgeneratorslinkcard)
     - [Figure (`customblocks.generators.figure`)](#figure-customblocksgeneratorsfigure)
     - [Youtube (`customblocks.generators.youtube`)](#youtube-customblocksgeneratorsyoutube)
     - [Vimeo (`customblocks.generators.vimeo`)](#vimeo-customblocksgeneratorsvimeo)
@@ -39,94 +41,53 @@ Includes some sample components for div containers, admonitions, figures, link c
 - [Release history](#release-history)
 - [TODO](#todo)
 
-## What is it?
+## Introduction
 
-This extension parses markup structures like this one:
+The extension parses markup structures like this one:
 
 ```markdown
 ::: mytype "value 1" param2=value2
     Indented content
 ```
 
-delegating the HTML generation to custom functions (generators)
-you can define or redefine for the type (`mytype`, in the example) to suit your needs.
-For example, we could bind `mytype` to this generator:
+and then delegates HTML generation to custom python functions (_generators_)
+you can write and bind to the type (`mytype`, in the example).
+
+For instance, we could bind `mytype` to the following generator:
 
 ```python
 def mygenerator(ctx, param1, param2):
-   """Quick and dirty generator, would need escaping"""
     return f"""<div attrib1="{param1}" attrib2="{param2}">{ctx.content}</div>"""
 ```
 
-With the previous markdown, it will generate:
+So that, the previous markdown would generate:
 
 ```html
 <div attrib1="value 1" attrib2="value2">Indented Content</div>
 ```
 
-The extension also provides several useful generators:
+Generating html with f-strings like this,
+without the proper escaping,
+is not a good idea.
+Don't hesitate.
+The extension provides utilities you can use in you generators to make all that painless.
 
-- `container`: A classed div with arbitrary classes, attributes and content (This is the default when no type matches)
-- `figure`: Figures with caption and more
-- `admonition`: Admonitions (quite similar to the [standard extra extension][ExtraAdmonitions])
+
+The extension also provides several useful generators you can use out of the box:
+
+- `container`: A div element with arbitrary classes, attributes and content (This is the default when no type matches)
+- `admonition`: Admonitions, boxes for notes, warnings... (quite similar to the [standard extra extension][ExtraAdmonitions])
+- `figure`: Full featured figures with captions, lightbox...
+- `linkcard`: External link cards (like Facebook and Twitter do, when you post a link)
 - `twitter`: Embeded tweets
 - `youtube`: Embeded videos from youtube...
 - `vimeo`: Embeded videos from vimeo...
-- `linkcard`: External link cards (like Facebook and Twitter do, when you post a link)
 - `verkami`: Fund raising project widget in [Verkami]
 - `goteo`: Fund raising project widget in [Goteo]
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
 
 They are examples, you can always rewrite them to suit your needs.
-
-## Why this?
-
-Markdown, has a quite limited set of structures,
-and you often end up writing html by hand:
-A figure, an embed...
-If you use that structure multiple times,
-whenever you find a better way,
-you end up updating the structures in many places.
-That's why you should use (or develop) a markdown extension to ease the proces.
-
-There is a catch.
-Extensions struggle to use a unique markup to avoid conflicts with other extensions.
-Because of that, the trend is having a lot of different markups,
-even for extensions sharing purpose.
-When you find a better extension for your figures,
-again, it is likely you have to edit all your figures, once more,
-because the markup is different.
-
-Also coding an extension is hard.
-Markdown extension API is necessarily complex to address many scenarios.
-But this extension responds just to this single but general scenario:
-
-> I want to generate this **piece of html** which
-> depends on those **parameters** and might
-> include a given **content**.
-
-So...
-
-**Why using a common markup for that many different structures?** \
-This way, markup syntax explosion is avoided,
-and users do not have to learn a new syntax.
-Also, developing new block types is easier if you can reuse the same parser.
-
-**Why using a type name to identify the structure?** \
-A name as part of the markup clarifies the block meaning on reading.
-Also provides a hook to change the behaviour while keeping the semantics.
-
-**Why defining a common attribute markup?** \
-A common attribute markup is useful to stablish a general mapping
-between markup attributes and Python function parameters.
-The generator function signature defines the attributes that can be used
-and the extension does the mapping with no extra glue required.
-
-**Why using indentation to indicate inner content?** \
-It visually shows the scope of the block and allows nesting.
-If the content is reparsed as Markdown,
-it could still include other components with their inner content a level deeper.
 
 We all stand on giants' shoulders so take a look at the [long list](docs/inspiration.md)
 of markdown extensions and other software that inspired and influenced ideas for this extension.
@@ -185,16 +146,14 @@ This unindented line is not considered part of the block
 
 The line starting with `:::` is the _headline_.
 It specifies, first, the block type (`mytype`) followed by a set of _values_.
-Such values can be either single worded or quoted.
+Such values can be either single worded or multi word by quoting them.
+
 Also some values may explicit a target parameter with a _key_.
+From the available block parameters, key values are set first,
+and then the remaining unset parameters are filled by position.
 
-After the _headline_, several lines of indented _content_ may follow,
-and the block ends at the very first line back to the previous indentation.
-Emtpy lines are included and there is no need of an empty line to end the block.
-
-> By using indentation you don't need a closing tag,
-> but if you miss it, you might place a closing `:::` at the same
-> level of the headline.
+After the _headline_, several lines of indented _content_ may follow.
+The content ends with the very first non-emtpy line back on the previous indentation.
 
 A block type may interpret the content as markdown as well.
 So you can have nested blocks by adding extra indentation.
@@ -210,6 +169,46 @@ For example:
         Looks gorgeus!
     Drop the suggar into the glass. Stir.
 ```
+
+::: note
+	By using indentation, you don't need a closing tag in most cases.
+	You can use, a closing `:::` at the same level of the headline.
+
+```markdown
+::: mealphoto sweetwater.jpg
+	Looks gorgeus!
+:::
+	This is an indented code
+```
+
+## Parameter matching
+
+Besides `ctx`, the rest of function parameters are filled using values parsed from _head line_.
+Unlike Python, you can interleave in the headline values with and without keys.
+They are resolved as follows:
+
+- **Explicit key:** When a key in the headline matches a keyable parameter name in the generator, the value is assigned to it
+- **Flag:** Generator arguments annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`) are considered flags
+    - When a keyless value matches a flag name in the generator (`myflag`), `True` is passed
+    - When it matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
+- **Positional:** Remaining headline values and function parameters are assigned one-to-one by position
+- **Restricted:** Restrictions on how to receive the values ([keyword-only] and [positional-only]) are respected and they will receive only values from either key or keyless values
+- **Varidics:** If the signature contains key (`**kwds`) or positional (`*args`) varidic variables, any remaining key and keyless values from the headline are assigned to them
+
+Following Markdown phylosophy, errors are warned but do not stop the processing, so:
+
+- Unmatched function parameters without a default value will be warned and assigned an empty string.
+- Unused headline values will be warned and ignored.
+
+[keyword-only]: https://www.python.org/dev/peps/pep-3102/
+[positional-only]: https://www.python.org/dev/peps/pep-0570/
+
+A generator can use several strategies to generate content:
+
+- Return an html string (single root node)
+- Return a `markdown.etree` `Element` object
+- Manipulate `ctx.parent` to add the content and return `None`
+
 
 ## Implementing a generator
 
@@ -286,12 +285,19 @@ makes proper escaping when injecting values.
 
 ### Container (`customblocks.generators.container`)
 
-This is the default generator when no other generator matches the block type.
-It can be used to generate html div document structure with markdown.
+This is the default generator if no generator
+is associated to the type.
 
-It creates a `<div>` element with the type name as class.
-Keyless values are added as additional classes and
-key values are added as attributes for the `div` element.
+It generates a `<div>` element
+with the typename as class.
+It also appends any positional parameter as additional classes
+and keyword arguments as attributes.
+The content is reinterpreted as markdown.
+
+This is quite useful to create a 'div' structure
+in the html document.
+
+#### Options
 
 `*args`
 : added as additional classes for the outter div
@@ -299,6 +305,10 @@ key values are added as attributes for the `div` element.
 `**kwds`
 : added as attributes for the outter div
 
+content:
+: reparsed as markdown
+
+#### Example
 
 The following example:
 
@@ -352,9 +362,14 @@ In order to generate:
 </div>
 ```
 
+::: danger
+    Do not try to do this at home
+
 Generated code emulates the one generated by ReST admonitions
 (which is also emulated by `markdown.extra.admonition`).
 So, you can benefit from existing styles and themes.
+
+#### Options
 
 `title`
 : in the title box show that text instead of the 
@@ -364,6 +379,9 @@ So, you can benefit from existing styles and themes.
 
 `**kwds`
 : added as attributes for the outter div
+
+content:
+: reparsed as markdown
 
 **Warning:**
 If you are migrating from `extra.admonition`,
@@ -375,6 +393,80 @@ If you like having the classes before, you should explicit the `title` key.
 ::: danger blinking title="Super danger"
     Do **not** try to do this at home
 ```
+
+#### Examples
+
+By using this [recommended style](css/admonition.css)
+from .
+
+```markdown
+::: note
+	This is a note
+
+::: note "Custom note title" style="border-radius:6px"
+	This is a note with customized style
+
+	- item
+	- item
+
+::: important
+	This is important
+
+::: warning
+	This is a warning
+
+::: caution
+	This is a caution
+
+::: attention
+	Something to be attended
+
+::: danger
+	This is a danger
+
+::: error
+	This is a error
+
+::: hint
+	This is a hint
+
+::: tip
+	This is a tip
+```
+
+::: note
+	This is a note
+
+::: note "Custom note title" style="border-radius:6px"
+	This is a note with customized style
+
+	- item
+	- item
+
+::: important
+	This is important
+
+::: warning
+	This is a warning
+
+::: caution
+	This is a caution
+
+::: attention
+	Something to be attended
+
+::: danger
+	This is a danger
+
+::: error
+	This is a error
+
+::: hint
+	This is a hint
+
+::: tip
+	This is a tip
+
 
 ### Figure (`customblocks.generators.figure`)
 
@@ -416,79 +508,41 @@ Renders into:
 `**kwds`
 : additional attributes for root `<figure>` tag
 
-In order `lightbox` to work you must add the following css to your page:
+The `lightbox` option generates a slighty different markup:
 
-```css
-/* this is aesthetic */
-figure {
- border: 1pt solid lightgrey;
- background: #efefef;
- color: #111;
- padding: 3pt;
-}
-figure {
- display: inline-block;
-}
-figure figcaption {
- width: 100%;
- text-align: center;
-}
-figure img {
- object-fit: contain;
- margin: auto 0;
- max-width: 100%;
- max-height: 100%;
- width: 100%;
-}
-figure.centered {
- display: block;
- margin: auto;
- text-align: center;
-}
-figure.lightbox {
- transition: 0.5s;
- transition-property: background;
-}
-figure.lightbox:target {
- transition: 0.5s;
- transition-property: background;
- position: fixed;
- top: 0;
- bottom: 0;
- left: 0;
- right: 0;
- background: black;
- background: rgba(0,0,0,.98);
- color: grey;
- height: 100% !important;
- width: 100% !important;
- padding: 0;
- margin: 0;
-}
-figure.lightbox .lightbox-background {
- display: none;
-}
-figure.lightbox:target .lightbox-background {
- position: fixed;
- display: block;
- width: 100%;
- position: absolute;
- height: 100%;
-}
-figure.lightbox:target img {
- display: block;
- margin: 2% auto;
- width: 100vw;
- height: auto;
- max-width: 90%;
- max-height: 80%;
-}
+```markdown
+:::figure lightbox https://www.w3schools.com/howto/img_lights.jpg pull-right style="width:40%"
+    what a gorgeus image
+```
+
+```html
+<figure class="lightbox pull-right" id="fafb8273-ef7c-47b4-a31f-57d9e0387fc1" style="width:40%">
+  <a class="lightbox-background" href="javascript:history.back()"></a>
+  <a href="#fafb8273-ef7c-47b4-a31f-57d9e0387fc1">
+    <img src="https://www.w3schools.com/howto/img_snow.jpg" />
+  </a>
+  <figcaption>
+    <p>what a gorgeus image</p>
+  </figcaption>
+</figure>
 
 ```
 
+:::figure https://www.w3schools.com/howto/img_lights.jpg lightbox pull-right style="width:40%"
+    what a gorgeus image
+
+The `lightbox` relies heavily on css in order to work.
+So, in this case, you are encoraged to use the recommended [figure css](css/figure.css).
 
 
-TODO: Thumbnails, figure enumeration, fetch external images.
+TODO (you can help!):
+
+- global configuration
+- figure enumeration ("Figure N:")
+- thumbnails
+- fetch external images to make them local
+- css for placement classes (left, centered, right...)
+- improve css
 
 ### Link card (`customblocks.generators.linkcard`)
 
@@ -497,14 +551,21 @@ It is similar to the card that popular apps like
 Wordpress, Facebook, Twitter, Telegram, Slack...
 generate when you embed/post a link.
 
-The generator downloads the target url and extracts social [metadata][SocialMeta]:
+In order to build the box,
+the generator downloads the target url and extracts social [metadata][SocialMeta]:
 Featured image, title, description...
+The download page is cached so that first non-failing download will avoid further downloads.
 
 [SocialMeta]: https://css-tricks.com/essential-meta-tags-social-media/
 
 ```markdown
 ::: linkcard https://css-tricks.com/essential-meta-tags-social-media/
 ```
+
+::: linkcard https://css-tricks.com/essential-meta-tags-social-media/
+
+The above example uses [this css](css/linkcard.css).
+
 
 `url`
 : The url to embed as card
@@ -519,18 +580,37 @@ to override information extracted from the url:
 
 - `image`: the image heading the card
 - `title`: the caption
-- `description`: the text describing the link
+- `description`: the text describing the link (though using content is recommended)
 - `siteurl`: a link to the main site
 - `sitename`: the name of the main site
 - `siteicon`: the site icon
+
+This generator uses the `fetcher` helper.
+So, that the first fetch will cached for later generations.
 
 ### Youtube (`customblocks.generators.youtube`)
 
 This generator generates an embeded youtube video.
 
+#### Example
+
 ```markdown
-::: youtube HUBNt18RFbo nocontrols left-align
+::: youtube HUBNt18RFbo
 ```
+
+```html
+<div class="videowrapper youtube">
+  <iframe src="https://www.youtube-nocookie.com/embed/HUBNt18RFbo"></iframe>
+</div>
+```
+
+::: youtube HUBNt18RFbo
+
+::: warning
+	Even though, youtube-nocookie.com is suposed to avoid tracing cookies,
+	google sets some tracing cookies from one of the included javascript files.
+
+#### Options
 
 `autoplay` (flag, default False)
 : starts the video as soon as it is loaded
@@ -549,24 +629,7 @@ This generator generates an embeded youtube video.
 
 Indented content is ignored.
 
-Recommended css:
-
-```css
-.videowrapper {
-    position:relative;
-    padding-bottom:56.25%;
-    overflow:hidden;
-    height:0;
-    width:100%
-}
-.videowrapper iframe {
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-}
-```
+[Recommended css](css/videowrapper.css)
 
 Or you could set `youtube_inlineFluidStyle` config to `True`
 and the style will be added inline to every video.
@@ -577,8 +640,12 @@ and the style will be added inline to every video.
 This generator generates an embeded vimeo video.
 
 ```markdown
-::: vimeo 139579122  nocontrols left-align
+::: vimeo 139579122 
 ```
+
+::: vimeo 139579122
+
+#### Options
 
 `autoplay` (flag, default False)
 : starts the video as soon as it is loaded
@@ -608,6 +675,8 @@ Embeds a tweet.
 ```markdown
 ::: twitter marcmushu 1270395360163307530 theme=dark lang=es track=true
 ```
+
+#### Options
 
 `user`:
 : the user that wrote the tweet
@@ -674,7 +743,7 @@ If you need this functionality you are encouraged to use them.
 You can generate html with strings or using `etree`; but there is a more elegant option.
 
 [Hyperscript] is the idea of writing code that generates html/xml
-as nested function calls that look like the the actual xml structure.
+as nested function calls that look like the actual xml structure.
 This can be done by using the `customblocks.utils.E` function which has this signature:
 
 ```
@@ -772,12 +841,17 @@ See [CHANGES.md](CHANGES.md)
 	- file name too long
 	- handle connection errors
 - Linkcard:
-	- Look for short description by class (ie wikipedia)
+	- Mediawiki: Short description and main image: https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts|pageimages&exintro=&explaintext=&titles=Sant%20Joan%20Desp%C3%AD
 - Youtube:
     - Take aspect ratio and sizes from Youtube api
     - Use covers https://i.ytimg.com/vi/{code}/hqdefault.jpg
 - Twitter
     - Privacy safe mode
+- Instagram
+- peertube
+```html
+<iframe title="Onion Rice from 1977: The Instruction the Recipe Submitter gives is Priceless!" src="https://tilvids.com/videos/embed/bb6057d2-427b-4c31-9b8c-0a8c7d0a29c9?start=4m51s&amp;stop=5m1s&amp;loop=1&amp;autoplay=1&amp;muted=1" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups" width="560" height="315" frameborder="0"></iframe>
+```
 - Figure flags:
 	- no flag
 		- Un modified url
