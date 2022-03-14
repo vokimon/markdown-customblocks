@@ -139,6 +139,15 @@ class Generators_Test(test_tools.TestCase):
             </div>
             """)
 
+    def test_youtube_custom_attribs(self):
+        self.assertMarkdown("""\
+            ::: youtube 7SS24_CgwEM attrib=value
+            """, """\
+            <div attrib="value" class="videowrapper youtube">
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM"></iframe>
+            </div>
+            """)
+
     def test_vimeo(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514

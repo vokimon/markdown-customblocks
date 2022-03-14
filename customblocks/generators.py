@@ -91,7 +91,7 @@ def linkcard(ctx, url, *, wideimage=True, **overrides):
     )
 
 
-def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False):
+def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False, **kwds):
     options = []
     inlineStyle = ctx.config.get('youtube_inlineFluidStyle', False)
     if autoplay:
@@ -119,6 +119,7 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False):
             style=iframeStyle,
         ),
         style=wrapperStyle,
+        **kwds
     )
 
 def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
