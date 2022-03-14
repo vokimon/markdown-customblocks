@@ -251,20 +251,20 @@ class Generators_Test(test_tools.TestCase):
             ""","""\
 <div class="linkcard">
 <div class="linkcard-featured-image">
-<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">
+<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">
 <img src="https://static.eldiario.es/clip/79066be9-947d-4b83-bab9-a0d092bb391f_facebook-watermarked-aspect-ratio_default_0.jpg" />
 </a>
 </div>
-<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
 </p>
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a href="https://www.eldiario.es">
+<a href="https://www.eldiario.es" target="_blank">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -284,16 +284,16 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <div class="linkcard">
 """ # No image here
 """\
-<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
 </p>
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a href="https://www.eldiario.es">
+<a href="https://www.eldiario.es" target="_blank">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -313,20 +313,20 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <div class="linkcard">
 <div class="linkcard-featured-image square">""" # difference here
 """
-<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">
+<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">
 <img src="https://static.eldiario.es/clip/79066be9-947d-4b83-bab9-a0d092bb391f_facebook-watermarked-aspect-ratio_default_0.jpg" />
 </a>
 </div>
-<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
 </p>
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a href="https://www.eldiario.es">
+<a href="https://www.eldiario.es" target="_blank">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -345,21 +345,21 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             ""","""\
 <div class="linkcard">
 <div class="linkcard-featured-image">
-<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">
+<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">
 <img src="cached.jpg" />""" # the difference is here
 """
 </a>
 </div>
-<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
 <div class="linkcard-excerpt">
 <p>
 La nueva renta mínima estatal se tramitará como proyecto de ley, para que los grupos parlamentarios puedan incluir y debatir enmiendas al texto
 </p>
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a href="https://www.eldiario.es">
+<a href="https://www.eldiario.es" target="_blank">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -379,20 +379,20 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             ""","""\
 <div class="linkcard">
 <div class="linkcard-featured-image">
-<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">
+<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">
 <img src="https://static.eldiario.es/clip/79066be9-947d-4b83-bab9-a0d092bb391f_facebook-watermarked-aspect-ratio_default_0.jpg" />
 </a>
 </div>
-<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
 <div class="linkcard-excerpt">"""
 # difference is the following lines
 """
 <p>This is my description</p>
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a href="https://www.eldiario.es">
+<a href="https://www.eldiario.es" target="_blank">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
@@ -414,21 +414,21 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             ""","""\
 <div class="linkcard">
 <div class="linkcard-featured-image">
-<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">
+<a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">
 <img src="https://static.eldiario.es/clip/79066be9-947d-4b83-bab9-a0d092bb391f_facebook-watermarked-aspect-ratio_default_0.jpg" />
 </a>
 </div>
-<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
+<p class="linkcard-heading"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">El ingreso mínimo vital contra la pobreza sale adelante en el Congreso con el apoyo de todos los partidos excepto Vox</a></p>
 <div class="linkcard-excerpt">"""
 # difference is the following lines
 """
 <p>This is my <strong>description</strong></p>
 <p>And has two lines</p>
-<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html">Read more</a></span>
+<span class="linkcard-more"><a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">Read more</a></span>
 </div>
 <div class="linkcard-footer">
 <div class="linkcard-site-title">
-<a href="https://www.eldiario.es">
+<a href="https://www.eldiario.es" target="_blank">
 <img class="linkcard-site-icon" height="32" src="https://www.eldiario.es/favicon.png" width="32" />
 <span>ELDIARIO</span>
 </a>
