@@ -778,7 +778,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
         self.assertMarkdown("""\
             ::: custom
             """, """\
-            <custom>None</custom>""")
+            <custom>{}</custom>""")
 
     @unittest.skipIf(not full_yaml_metadata, "Requires full-yaml-metadata")
     def test_metadata_fullYamlMetadataExtension_empty(self):
@@ -792,7 +792,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             ...
             ::: custom
             """, """\
-            <custom>None</custom>""")
+            <custom>{}</custom>""")
 
     def test_config(self):
         def custom(ctx):
