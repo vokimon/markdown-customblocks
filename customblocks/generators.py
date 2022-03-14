@@ -91,7 +91,7 @@ def linkcard(ctx, url, *, wideimage=True, **overrides):
     )
 
 
-def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False, **kwds):
+def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False, style=None, **kwds):
     options = []
     inlineStyle = ctx.config.get('youtube_inlineFluidStyle', False)
     if autoplay:
@@ -110,6 +110,9 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False, **kwds):
             'top:0; left:0; '
             'width:100%; height:100%;'
         ) if inlineStyle else None
+    if style:
+        if wrapperStyle: wrapperStyle = "; ".join((wrapperStyle, style))
+        else: wrapperStyle = style
 
     url = f"https://www.youtube-nocookie.com/embed/{id}{options}"
     return E(

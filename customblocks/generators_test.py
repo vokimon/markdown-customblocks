@@ -130,7 +130,7 @@ class Generators_Test(test_tools.TestCase):
             </div>
             """)
 
-    def test_youtube_custom_classes(self):
+    def test_youtube_customClasses(self):
         self.assertMarkdown("""\
             ::: youtube 7SS24_CgwEM custom-class
             """, """\
@@ -139,12 +139,31 @@ class Generators_Test(test_tools.TestCase):
             </div>
             """)
 
-    def test_youtube_custom_attribs(self):
+    def test_youtube_customAttribs(self):
         self.assertMarkdown("""\
             ::: youtube 7SS24_CgwEM attrib=value
             """, """\
             <div attrib="value" class="videowrapper youtube">
             <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM"></iframe>
+            </div>
+            """)
+
+    def test_youtube_customStyle(self):
+        self.assertMarkdown("""\
+            ::: youtube 7SS24_CgwEM style="width:80%"
+            """, """\
+            <div class="videowrapper youtube" style="width:80%">
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM"></iframe>
+            </div>
+            """)
+
+    def test_youtube_inlineStyles_byConfig_mergeCustomStyles(self):
+        self.setupConfig(youtube_inlineFluidStyle=True)
+        self.assertMarkdown("""\
+            ::: youtube 7SS24_CgwEM nocontrols style="background: red"
+            """, """\
+            <div class="videowrapper youtube" style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; width:100%; background: red">
+            <iframe src="https://www.youtube-nocookie.com/embed/7SS24_CgwEM?controls=0" style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
             </div>
             """)
 
