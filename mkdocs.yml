@@ -1,0 +1,43 @@
+site_name: Markdown Custom Blocks
+site_url: https://vokimon.github.io/markdown-customblocks
+site_author: vokimon
+site_description: Parametrizable and nestable custom components for Markdown
+repo_url: https://github.com/vokimon/markdown-customblocks/
+nav:
+  - Getting started: README.md
+  - Predefined generators: predefined-generators.md
+  - About:
+    - Motivation and design choices: motivation.md
+    - Inspiration: inspiration.md
+markdown_extensions:
+  - customblocks
+extra_css:
+  - css/figure.css
+  - css/linkcard.css
+  - css/videowrapper.css
+#  - css/admonition.css
+theme:
+  name: material
+  language: en
+  extra:
+    include_toc: true
+  highlightjs: true
+  hljs_languages:
+    - yaml
+extra:
+  version:
+    provider: mike
+  features:
+    - navigation.instant # load content instead of refreshing the page
+    - navigation.sections
+  plugins:
+    - mike:
+        # these fields are all optional; the defaults are as below...
+        version_selector: true   # set to false to leave out the version selector
+        css_dir: css             # the directory to put the version selector's CSS
+        javascript_dir: js       # the directory to put the version selector's JS
+        canonical_version: null  # the version for <link rel="canonical">; `null`
+         # uses the version specified via `mike deploy`
+    - offline 
+
+
