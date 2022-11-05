@@ -183,9 +183,11 @@ def twitter(user,
     options += f'&conversation=none' if not conversation else ''
 
     fetcher = Fetcher('fetchercache/twitter')
-    response = fetcher.get(
-        f'https://publish.twitter.com/oembed?url=https://twitter.com/{user}/status/{tweet}&dnt=True{options}'
+    oembedurl = (
+        f'https://publish.twitter.com/oembed?'
+        f'url=https://twitter.com/{user}/status/{tweet}&dnt=True{options}'
     )
+    response = fetcher.get(oembedurl)
     result = ns(response.json())
     soup = BeautifulSoup(result.html, 'html.parser')
     return type(u'')(soup.find('blockquote'))
