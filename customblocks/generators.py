@@ -148,7 +148,7 @@ def verkami(ctx, id, *, landscape=False):
     style = (
         "width: 480px; height: 210px"
         if landscape else
-        "width: 240px; height: 350px"
+        "width: 240px; height: 490px"
     )
     return E('iframe.js-widget-iframe',
         id='verkami{}'.format(orientation.title()),
