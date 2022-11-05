@@ -1,3 +1,5 @@
+![Logo](img/logo-customblocks.svg)
+
 # Customblocks for Markdown
 
 [![CI](https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml/badge.svg)](https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml)
