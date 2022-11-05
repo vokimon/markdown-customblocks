@@ -11,6 +11,12 @@ nav:
     - Inspiration: inspiration.md
 markdown_extensions:
   - customblocks
+  - def_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 extra_css:
   - css/figure.css
   - css/linkcard.css
