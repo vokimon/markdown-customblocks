@@ -1,0 +1,1321 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Parametrizable and nestable custom components for Markdown">
+      
+      
+        <meta name="author" content="vokimon">
+      
+      
+        <link rel="canonical" href="https://vokimon.github.io/markdown-customblocks/">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.8">
+    
+    
+      
+        <title>Markdown Custom Blocks</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.815d1a91.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="css/figure.css">
+    
+      <link rel="stylesheet" href="css/linkcard.css">
+    
+      <link rel="stylesheet" href="css/videowrapper.css">
+    
+      <link rel="stylesheet" href=".">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#customblocks-for-markdown" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Markdown Custom Blocks" class="md-header__button md-logo" aria-label="Markdown Custom Blocks" data-md-component="logo">
+      
+  <img src="img/logo-customblocks-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Markdown Custom Blocks
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting started
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+          
+            <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vokimon/markdown-customblocks/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Markdown Custom Blocks" class="md-nav__button md-logo" aria-label="Markdown Custom Blocks" data-md-component="logo">
+      
+  <img src="img/logo-customblocks-white.svg" alt="logo">
+
+    </a>
+    Markdown Custom Blocks
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vokimon/markdown-customblocks/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Getting started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Getting started
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-setup" class="md-nav__link">
+    Installation and setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-generators" class="md-nav__link">
+    Built-in generators
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-markup-syntax" class="md-nav__link">
+    General markup syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameter-mapping" class="md-nav__link">
+    Parameter mapping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-a-generator" class="md-nav__link">
+    Implementing a generator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generator-tools" class="md-nav__link">
+    Generator tools
+  </a>
+  
+    <nav class="md-nav" aria-label="Generator tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyperscript-generation" class="md-nav__link">
+    Hyperscript generation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pageinfo" class="md-nav__link">
+    PageInfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetcher" class="md-nav__link">
+    Fetcher
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-history" class="md-nav__link">
+    Release history
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    TODO
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usage.md" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Built-in generators
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Built-in generators" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Built-in generators
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-container/" class="md-nav__link">
+        Container
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-admonition/" class="md-nav__link">
+        Admonition
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-figure/" class="md-nav__link">
+        Figure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-map/" class="md-nav__link">
+        Map
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-linkcard/" class="md-nav__link">
+        Linkcard
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-youtube/" class="md-nav__link">
+        Youtube
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-vimeo/" class="md-nav__link">
+        Vimeo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-twitter/" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-instagram/" class="md-nav__link">
+        Instagram
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-facebook/" class="md-nav__link">
+        Facebook
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-verkami/" class="md-nav__link">
+        Verkami
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generators-goteo/" class="md-nav__link">
+        Goteo
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Defining generators
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Defining generators" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Defining generators
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="registering.md" class="md-nav__link">
+        Registering types
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="motivation/" class="md-nav__link">
+        Motivation and design choices
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="inspiration/" class="md-nav__link">
+        Inspiration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-and-setup" class="md-nav__link">
+    Installation and setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-generators" class="md-nav__link">
+    Built-in generators
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-markup-syntax" class="md-nav__link">
+    General markup syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameter-mapping" class="md-nav__link">
+    Parameter mapping
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-a-generator" class="md-nav__link">
+    Implementing a generator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generator-tools" class="md-nav__link">
+    Generator tools
+  </a>
+  
+    <nav class="md-nav" aria-label="Generator tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyperscript-generation" class="md-nav__link">
+    Hyperscript generation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pageinfo" class="md-nav__link">
+    PageInfo
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fetcher" class="md-nav__link">
+    Fetcher
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-history" class="md-nav__link">
+    Release history
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    TODO
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/vokimon/markdown-customblocks/edit/master/docs/README.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<p><img alt="Logo" src="img/logo-customblocks.svg" /></p>
+<h1 id="customblocks-for-markdown">Customblocks for Markdown</h1>
+<p><a href="https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml"><img alt="CI" src="https://github.com/vokimon/markdown-customblocks/actions/workflows/main.yml/badge.svg" /></a>
+<a href="https://coveralls.io/r/vokimon/markdown-customblocks"><img alt="Coverage" src="https://img.shields.io/coveralls/vokimon/markdown-customblocks/master.svg?style=flat-square&amp;label=Coverage" /></a>
+<a href="https://pypi.org/project/markdown-customblocks/"><img alt="PyPi" src="https://img.shields.io/pypi/v/markdown-customblocks.svg?style=flat-square&amp;label=PyPI" /></a>
+<a href="https://www.gnu.org/licenses/agpl-3.0"><img alt="license: AGPL v3" src="https://img.shields.io/badge/License-AGPL%20v3-blue.svg" /></a>
+<a href="https://pypi.org/project/markdown-customblocks/"><img alt="downloads" src="https://img.shields.io/pypi/dm/markdown-customblocks.svg?style=flat-square&amp;label=PyPI%20Downloads" /></a></p>
+<!--
+[![image](https://img.shields.io/pypi/pyversions/markdown-customblocks.svg?style=flat-square&label=Python%20Versions)](https://pypi.org/project/markdown-customblocks/)
+[![image](https://img.shields.io/pypi/implementation/markdown-customblocks.svg?style=flat-square&label=Python%20Implementations)](https://pypi.org/project/markdown-customblocks/)
+-->
+
+<p>Customblocks is an extension for <a href="https://python-markdown.github.io/">Python-Markdown</a>.
+It defines a <strong>common markup</strong> for <strong>parametrizable and nestable components</strong>
+that can be <strong>user defined</strong> by means of a simple Python function.</p>
+<p>Many off-the-shelf components are provided such as
+div-containers, admonitions, figures, link cards, maps...
+and some embeded widgets from common sites (youtube, vimeo, twitter, facebook, instagram, goteo, verkami...)</p>
+<p>It also includes convenience tools for defining your own components:
+hyperscript html generation, cached page fetching and metadata page extraction.</p>
+<h2 id="installation-and-setup">Installation and setup</h2>
+<p>To install:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ pip install markdown-customblocks
+</code></pre></div>
+<p>And then activate it as any other Markdown extension.</p>
+<p>From command line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ markdown -x customblocks ...
+</code></pre></div>
+<p>In Python code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">markdown</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">md</span> <span class="o">=</span> <span class="n">markdown</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span><span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;customblocks&quot;</span><span class="p">])</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">markdowncontent</span><span class="p">)</span>
+</code></pre></div>
+<p>In <a href="https://blog.getpelican.com/">Pelican</a> config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">MARKDOWN</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="s1">&#39;extensions&#39;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="s1">&#39;customblocks&#39;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="p">],</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>For <a href="https://www.mkdocs.org">MkDocs</a>, add this to <code>mkdocs.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">markdown_extensions</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customblocks</span><span class="w"></span>
+</code></pre></div>
+<p>If you need to specify additional parameters for the extension,
+refer to the documentation of your generator.</p>
+<h2 id="basic-usage">Basic usage</h2>
+<p>Customblocks extension parses markup structures like this one:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>::: mytype &quot;value 1&quot; param2=value2
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    Indented content
+</code></pre></div>
+Then, the extension delegates HTML generation to a Python function (<em>generator</em>)
+which is bound to the type name, <code>mytype</code> in the example.</p>
+<p>The extension provides many predefined generators
+and you might define your own for new types or
+redefine existing ones to suit your needs.</p>
+<p>If no generator is bound to the type name,
+the div-container generator is used as fallback,
+generating this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mytype value-1&quot;</span> <span class="na">param2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Indented code<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<p>But we could bind <code>mytype</code> to the following generator:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">mygenerator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;div attrib1=&quot;</span><span class="si">{</span><span class="n">param1</span><span class="si">}</span><span class="s2">&quot; attrib2=&quot;</span><span class="si">{</span><span class="n">param2</span><span class="si">}</span><span class="s2">&quot;&gt;</span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;&quot;&quot;</span>
+</code></pre></div>
+<p>That would generate this HTML:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">attrib1</span><span class="o">=</span><span class="s">&quot;value 1&quot;</span> <span class="na">attrib2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>Indented Content<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Notice that this is a silly example.
+It will work for simple params and text content,
+but it does not escape them properly.
+The <a href="#hyperscript-generation">hyperscript tool</a> can be used to make this painless.</p>
+</div>
+<h2 id="built-in-generators">Built-in generators</h2>
+<p>The extension provides the following predefined generators:</p>
+<ul>
+<li><code>container</code>: A div element with arbitrary classes, attributes and content. This is the default when no type matches.</li>
+<li><code>admonition</code>: Admonitions, boxes for notes, warnings... (quite similar to the <a href="https://python-markdown.github.io/extensions/admonition/">standard extra extension</a>).
+  It is bound to types <code>note</code>,  <code>info</code>, <code>error</code>, <code>warning</code>....</li>
+<li><code>figure</code>: Full featured figures with captions, lightbox...</li>
+<li><code>map</code>: Maps from OpenStreetMaps.org</li>
+<li><code>linkcard</code>: External link cards (like Facebook and Twitter do, when you post a link)</li>
+<li><code>youtube</code>: Embeded videos from youtube...</li>
+<li><code>vimeo</code>: Embeded videos from vimeo...</li>
+<li><code>twitter</code>: Embeded tweets</li>
+<li><code>facebook</code>: Embeded post from facebook...</li>
+<li><code>instagram</code>: Embeded post from instagram...</li>
+<li><code>verkami</code>: Fund raising project widget in [Verkami]</li>
+<li><code>goteo</code>: Fund raising project widget in [Goteo]</li>
+</ul>
+<p>If you wonder why this extension exists and
+why the design choices were taken like this,
+read the <a href="motivation/">motivation</a>.
+We all stand on giants' shoulders so take a look at the <a href="inspiration/">long list</a>
+of markdown extensions and other software that inspired and influenced ideas for this extension.
+Kudos for all of them.</p>
+<h2 id="general-markup-syntax">General markup syntax</h2>
+<p>This is a more complete example of markup:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>::: mytype param1 key1=value1 &quot;other param&quot; key2=&#39;value2 with words&#39; flag1 noflag2
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    Indented <span class="gs">**content**</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    The block ends whenever the indentation stops
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>This unindented line is not considered part of the block
+</code></pre></div>
+<p><strong>The headline:</strong>
+The line starting with <code>:::</code> is the <em>headline</em>.
+It specifies, first, the block type (<code>mytype</code>) followed by a set of <em>values</em>
+that will be passed to the generator as parameters.</p>
+<p><strong>Block type:</strong>
+The type is used to select the generator function.
+If there is no generator bound to the type, the div-container generator, will be used by default.</p>
+<p><strong>Quotes:</strong>
+Muti-word values can be passed by using either single or double quotes.
+You can skip quotes if your value is single worded.</p>
+<p><strong>Explicit keywords:</strong>
+Also some values may target an explicit parameter with a <em>key</em>.
+This works as follows:
+from the available block parameters, values with a key are set first,
+then the remaining unset parameters are filled by position.</p>
+<p><strong>Flags (bools):</strong>
+Boolean parameters (flags) can be set by just adding a value with the name of the flag, like <code>flag1</code> in the example.
+And they can be unset by adding the name with a <code>no</code> prefix, like <code>noflag2</code> in the example.</p>
+<p><strong>Content:</strong>
+After the <em>headline</em>, several lines of indented <em>content</em> may follow.
+The content ends with the very first non-emtpy line back on the previous indentation.</p>
+<p>Indentation is removed from the content for the generator to process it.
+A block type may choose to interpret this content as markdown as well.
+So you can have nested blocks by adding extra indentation.
+For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>::: recipe
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    # Sweet water
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    ::: ingredients &quot;4 persons&quot;
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="k">-</span> two spons of suggar
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="k">-</span> a glass of tap water
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    ::: mealphoto sweetwater.jpg
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        Looks gorgeus!
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    Drop the suggar into the glass. Stir.
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A closing <code>:::</code> tag is optional.
+For most cases, indentation should be enough, visually, and functionally.
+Seldomly, it is necessary like in the following markdown to
+split the mealphoto content from a code block which is also indented.</p>
+<div class="highlight"><pre><span></span><code>::: mealphoto sweetwater.jpg
+    Looks gorgeus!
+:::
+    This is a code block by indentation
+</code></pre></div>
+</div>
+<h2 id="parameter-mapping">Parameter mapping</h2>
+<p>Let's explain a bit deeper on
+how header parameters and python function parameters are matched.</p>
+<p>The signature of the generator will determine the attributes taken from the headline.
+Say you have a generator with the following signature:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span> <span class="nf">mytype</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">myflag</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="n">param3</span><span class="p">,</span> <span class="n">yourflag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">param4</span><span class="o">=</span><span class="s1">&#39;default2&#39;</span><span class="p">):</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="o">...</span>
+</code></pre></div>
+<p>Function parameters are filled using values parsed from <em>head line</em>.
+Unlike Python, you can interleave in the headline values with and without keys.
+They are resolved as follows:</p>
+<ol>
+<li><strong>Explicit keys:</strong> Explicit keys in the headline matching function parameters not defined as '<a href="positional-only">positional only</a>' are matched first.</li>
+<li><strong>Flag:</strong> Generator arguments annotated as <code>bool</code> (like example's <code>myflag</code>), or defaulting to <code>True</code> or <code>False</code>, (like example's <code>yourflag</code>) are considered flags, so:<ul>
+<li>When a keyless value matches a flag name in the generator (<code>myflag</code>), <code>True</code> is passed</li>
+<li>When it matches the flag name prefixed with <code>no</code> (<code>nomyflag</code>), <code>False</code> is passed</li>
+</ul>
+</li>
+<li><strong>Positional:</strong> Remaining keyless values in the headline headline values are assigned one-to-one by position to the remaining parameters not defined as '<a href="keyword-only">keyword only</a>'.</li>
+<li><strong>Varidics:</strong> If the signature contains key (<code>**kwds</code>) or positional (<code>*args</code>) varidic variables, any remaining key and keyless values from the headline are assigned to them</li>
+<li><strong>Unmatched function parameters:</strong> If they have no default value, will be warned and assigned an empty string.</li>
+<li><strong>Unmatched headline parameters:</strong> They will be warned and ignored.</li>
+<li><strong>Context:</strong> The <code>ctx</code> parameter is ignored for parameter matching. See bellow on how to use it.</li>
+</ol>
+<h2 id="implementing-a-generator">Implementing a generator</h2>
+<p>A block type can be defined just by hooking the <strong>generator</strong> function to the type.</p>
+<p>In Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span> <span class="nn">markdown</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">md</span> <span class="o">=</span> <span class="n">markdown</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;customblocks&quot;</span><span class="p">],</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">extension_configs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="n">customblocks</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>            <span class="c1"># by direct symbol reference</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>            <span class="s1">&#39;mytype&#39;</span><span class="p">:</span> <span class="n">myparentmodule</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">mytype</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>            <span class="c1"># or using import strings (notice the colon)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>            <span class="s1">&#39;aka_mytype&#39;</span><span class="p">:</span> <span class="s1">&#39;myparentmodule.mymodule:mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>            <span class="o">...</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>        <span class="p">}</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="p">),</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="p">)</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">markdowncontent</span><span class="p">)</span>
+</code></pre></div>
+<p>In Pelican config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">MARKDOWN</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="o">...</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="s1">&#39;extensions_configs&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="s1">&#39;customblocks&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>            <span class="s1">&#39;generators&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>                <span class="c1"># by direct symbol reference</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>                <span class="s1">&#39;mytype&#39;</span><span class="p">:</span> <span class="n">myparentmodule</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">mytype</span><span class="p">,</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>                <span class="c1"># or using import strings (notice the colon)</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>                <span class="s1">&#39;aka_mytype&#39;</span><span class="p">:</span> <span class="s1">&#39;myparentmodule.mymodule:mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>            <span class="p">}</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        <span class="p">},</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    <span class="p">},</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="p">}</span>
+</code></pre></div>
+<p>The signature of the generator will determine the attributes taken from the headline.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span> <span class="nf">mytype</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">myflag</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="n">param3</span><span class="p">,</span> <span class="n">yourflag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">param4</span><span class="o">=</span><span class="s1">&#39;default2&#39;</span><span class="p">):</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="o">...</span>
+</code></pre></div>
+<p>The first parameter, <code>ctx</code>, is the context.
+If you don't use it, you can skip it.
+But it is useful if you want to receive some context parameters like:</p>
+<ul>
+<li><code>ctx.parent</code>: the parent node</li>
+<li><code>ctx.content</code>: the indented part of the block, with the indentation removed</li>
+<li><code>ctx.parser</code>: the markdown parser, can be used to parse the inner content or any other markdown code</li>
+<li><code>ctx.type</code>: the type of the block<ul>
+<li>If you reuse the same function for different types, this is how you diferentiate them</li>
+</ul>
+</li>
+<li><code>ctx.metadata</code>: A dictionary with metadata from your metadata plugin.</li>
+<li><code>ctx.config</code>: A dictionary passed from <code>extension_configs.customblocks.config</code></li>
+</ul>
+<p>Besides <code>ctx</code>, the rest of function parameters are filled using values parsed from <em>head line</em>.
+Unlike Python, you can interleave in the headline values with and without keys.
+They are resolved as follows:</p>
+<ul>
+<li><strong>Explicit key:</strong> When a key in the headline matches a keyable parameter name in the generator, the value is assigned to it</li>
+<li><strong>Flag:</strong> Generator arguments annotated as <code>bool</code> (like example's <code>myflag</code>), or defaulting to <code>True</code> or <code>False</code>, (like example's <code>yourflag</code>) are considered flags<ul>
+<li>When a keyless value matches a flag name in the generator (<code>myflag</code>), <code>True</code> is passed</li>
+<li>When it matches the flag name prefixed with <code>no</code> (<code>nomyflag</code>), <code>False</code> is passed</li>
+</ul>
+</li>
+<li><strong>Positional:</strong> Remaining headline values and function parameters are assigned one-to-one by position</li>
+<li><strong>Restricted:</strong> Restrictions on how to receive the values (<a href="https://www.python.org/dev/peps/pep-3102/">keyword-only</a> and <a href="https://www.python.org/dev/peps/pep-0570/">positional-only</a>) are respected and they will receive only values from either key or keyless values</li>
+<li><strong>Varidics:</strong> If the signature contains key (<code>**kwds</code>) or positional (<code>*args</code>) varidic variables, any remaining key and keyless values from the headline are assigned to them</li>
+</ul>
+<p>Following Markdown phylosophy, errors are warned but do not stop the processing, so:</p>
+<ul>
+<li>Unmatched function parameters without a default value will be warned and assigned an empty string.</li>
+<li>Unused headline values will be warned and ignored.</li>
+</ul>
+<p>A generator can use several strategies to generate content:</p>
+<ul>
+<li>Return an html string (single root node)</li>
+<li>Return a <code>markdown.etree</code> <code>Element</code> object</li>
+<li>Manipulate <code>ctx.parent</code> to add the content and return <code>None</code></li>
+</ul>
+<p>In order to construct an ElementTree,
+we recommend using the <a href="#hyperscript-generation">Hyperscript utility</a>.
+Resulting code will be more compact and readable and
+makes proper escaping when injecting values.</p>
+<h2 id="generator-tools">Generator tools</h2>
+<p>Common code has been extracted from predefined generators.
+If you need this functionality you are encouraged to use them.</p>
+<ul>
+<li>Hyperscript: to generate html</li>
+<li>PageInfo: to extract metadata from a webpage</li>
+<li>Fetcher: to download resources with file based cache</li>
+</ul>
+<h3 id="hyperscript-generation">Hyperscript generation</h3>
+<p>You can generate html with strings or using <code>etree</code>; but there is a more elegant option.</p>
+<p><a href="http://hyperhype.github.io/hyperscript/">Hyperscript</a> is the idea of writing code that generates html/xml
+as nested function calls that look like the actual xml structure.
+This can be done by using the <code>customblocks.utils.E</code> function which has this signature:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>def E(tag, *children, **attributes): ...
+</code></pre></div>
+<p><code>tag</code> is the name of the tag (<code>pre</code>, <code>div</code>, <code>strong</code>...).
+An empty string is equivalent to <code>div</code>.
+It can have appended several <code>.classname</code> that will be added as element class.</p>
+<p>Any keyword parameter will be taken as element attributes.
+You can use the special <code>_class</code> attribute to append more classes.
+Notice the underline, as <code>class</code> is a reserved word in Python.</p>
+<p><code>children</code> takes the keyless parameters and they can be:</p>
+<ul>
+<li><code>None</code>: then it will be ignored</li>
+<li><code>dict</code>: it will be merged with the attributes</li>
+<li><code>str</code>: it will be added as text</li>
+<li><code>etree.Element</code>: it will be added as child node</li>
+<li><code>customblocks.utils.Markdown</code>: will append parsed markdown (see below)</li>
+<li>Any <code>tuple</code>, <code>list</code> or iterable: will add each item following previous rules</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">def</span> <span class="nf">mygenerator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="n">E</span><span class="p">(</span><span class="s1">&#39;.mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>            <span class="nb">dict</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;width: 30%; align: left&quot;</span><span class="p">),</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>            <span class="n">E</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">href</span><span class="o">=</span><span class="n">image</span><span class="p">),</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>                <span class="n">E</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">image</span><span class="p">),</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>            <span class="p">),</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>            <span class="n">Markdown</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">parser</span><span class="p">),</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>        <span class="p">)</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>    <span class="p">)</span>
+</code></pre></div>
+<h3 id="pageinfo">PageInfo</h3>
+<p><code>utils.pageinfo.PageInfo</code> is a class that retrieves
+meta information from html pages by means of its properties.</p>
+<p>Properties are computed lazily and use cache.
+Once you get one property for a given page, later uses will have little impact.</p>
+<p>Any attribute you explicit on the constructor will override
+the ones derived from actual content.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">info</span> <span class="o">=</span> <span class="n">PageInfo</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://site.com/path/page.html&#39;</span><span class="p">)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">info</span><span class="o">.</span><span class="n">sitename</span> <span class="c1"># the name of the site (meta og:site_name or the domain</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">info</span><span class="o">.</span><span class="n">siteicon</span> <span class="c1"># the favicon or similar</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">info</span><span class="o">.</span><span class="n">siteurl</span>  <span class="c1"># the base url of the site (not the page)</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">info</span><span class="o">.</span><span class="n">title</span>    <span class="c1"># page title (from og:title meta or `&lt;title&gt;` content)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="n">info</span><span class="o">.</span><span class="n">description</span> <span class="c1"># short description (from og:description or twitter:description)</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="n">info</span><span class="o">.</span><span class="n">image</span>    <span class="c1"># featured image (from og:image or twitter:image, or site image)</span>
+</code></pre></div>
+<h3 id="fetcher">Fetcher</h3>
+<p>A fetcher object is a wrapper around the <code>requests</code> library
+that uses caching to avoid downloading once and again remote resource
+each time you compile the markdown file.</p>
+<p>The first time a resource is succesfully downloaded by a fetcher
+the request response is stored in the provided folder in a yaml file
+which has the mangled url as name.
+Successive tries to download it just take the content of that file
+to construct a query.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">Fetcher</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">fetcher</span> <span class="o">=</span> <span class="n">Fetcher</span><span class="p">(</span><span class="s1">&#39;mycachedir&#39;</span><span class="p">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">fetcher</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://canvoki.net/codder&#39;</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1"># to force next call</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="n">fetcher</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;https://canvoki.net/codder&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="release-history">Release history</h2>
+<p>See <a href="CHANGES/">CHANGES.md</a></p>
+<h2 id="todo">TODO</h2>
+<ul>
+<li>Default css for generators</li>
+<li>Flags: coerce to bool?</li>
+<li>Annotations: coerce to any type</li>
+<li>Fetcher:<ul>
+<li>configurable cache dir</li>
+<li>file name too long</li>
+<li>handle connection errors</li>
+</ul>
+</li>
+<li>Linkcard:<ul>
+<li>Mediawiki: Short description and main image: https://en.wikipedia.org/w/api.php?format=json&amp;action=query&amp;prop=extracts|pageimages&amp;exintro=&amp;explaintext=&amp;titles=Sant%20Joan%20Desp%C3%AD</li>
+</ul>
+</li>
+<li>Youtube:<ul>
+<li>Take aspect ratio and sizes from Youtube api</li>
+<li>Use covers https://i.ytimg.com/vi/{code}/hqdefault.jpg</li>
+</ul>
+</li>
+<li>Twitter<ul>
+<li>Privacy safe mode</li>
+</ul>
+</li>
+<li>Instagram</li>
+<li>Map:<ul>
+<li>Adding parameters</li>
+</ul>
+</li>
+<li>peertube
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">&lt;</span><span class="nt">iframe</span> <span class="na">title</span><span class="o">=</span><span class="s">&quot;Onion Rice from 1977: The Instruction the Recipe Submitter gives is Priceless!&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://tilvids.com/videos/embed/bb6057d2-427b-4c31-9b8c-0a8c7d0a29c9?start=4m51s&amp;amp;stop=5m1s&amp;amp;loop=1&amp;amp;autoplay=1&amp;amp;muted=1&quot;</span> <span class="na">allowfullscreen</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">sandbox</span><span class="o">=</span><span class="s">&quot;allow-same-origin allow-scripts allow-popups&quot;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;560&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;315&quot;</span> <span class="na">frameborder</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</code></pre></div></li>
+<li>Figure flags:<ul>
+<li>no flag<ul>
+<li>Un modified url</li>
+</ul>
+</li>
+<li>local (when remote url)<ul>
+<li>download</li>
+<li>place it on a given dir</li>
+<li>set url to local path</li>
+</ul>
+</li>
+<li>inline<ul>
+<li>download</li>
+<li>detect mime type</li>
+<li>compute base 64</li>
+<li>set url to data url</li>
+</ul>
+</li>
+<li>thumb<ul>
+<li>download</li>
+<li>generate a thumb</li>
+<li>place the thumb on thumb dir</li>
+<li>when combined with 'inline'<ul>
+<li>url to the local path</li>
+</ul>
+</li>
+<li>when combined with 'local'<ul>
+<li>link to the image</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>lightbox</li>
+<li>sized</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+      
+        
+        <a href="generators-container/" class="md-footer__link md-footer__link--next" aria-label="Next: Container" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Container
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      
+    
+  </body>
+</html>

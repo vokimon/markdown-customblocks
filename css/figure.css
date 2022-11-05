@@ -1,0 +1,61 @@
+figure {
+ border: 1pt solid lightgrey;
+ background: #efefef;
+ color: #111;
+ padding: 3pt;
+ display: inline-block;
+}
+figure figcaption {
+ width: 100%;
+ text-align: center;
+}
+figure img {
+ object-fit: contain;
+ margin: auto !important;
+ max-width: 100%;
+ max-height: 100%;
+ width: 100%;
+}
+figure.lightbox {
+ transition: 0.5s;
+ transition-property: background;
+}
+figure.lightbox:target {
+ transition: 0.5s;
+ transition-property: background;
+ z-index: 99999;
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ background: black;
+ background: rgba(0,0,0,.9);
+ color: grey;
+ height: 100% !important;
+ width: 100% !important;
+ padding: 0;
+ margin: 0;
+ border: none;
+}
+figure.lightbox .lightbox-background {
+ display: none;
+}
+figure.lightbox:target .lightbox-background {
+ position: absolute;
+ display: block;
+ width: 100%;
+ height: 100%;
+}
+figure.lightbox:target img {
+ display: block;
+ margin: auto;
+ background: transparent;
+ width: 100vw;
+ height: auto;
+ max-width: 90%;
+ max-height: 80%;
+ padding: 2% 0;
+ border: 0;
+}
+
