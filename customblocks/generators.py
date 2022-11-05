@@ -28,7 +28,6 @@ def figure(ctx, url, *args, lightbox:bool=None, **kwds):
     alt = kwds.pop('alt', None)
     id = kwds.pop('id',None) or (str(uuid.uuid4()) if lightbox else None)
     classes = list(args)
-    print("lightbox", lightbox)
     if lightbox: classes.append('lightbox')
     return E('figure',
         dict(
