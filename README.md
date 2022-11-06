@@ -209,8 +209,8 @@ For example:
 
 - [Full documentation](https://vokimon.github.io/markdown-customblocks)
 - [Code](https://github.com/vokimon/markdown-customblocks)
-- [Release History](https://vokimon.github.io/markdown-customblocks/motivation/CHANGES)
-- [Road map](https://vokimon.github.io/markdown-customblocks/motivation/TODO)
+- [Release History](https://vokimon.github.io/markdown-customblocks/CHANGES)
+- [Road map](https://vokimon.github.io/markdown-customblocks/TODO)
 - [Motivation and design choices](https://vokimon.github.io/markdown-customblocks/motivation)
 - [Inspiration and kudos](https://vokimon.github.io/markdown-customblocks/inspiration)
 
