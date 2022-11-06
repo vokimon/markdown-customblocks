@@ -713,7 +713,7 @@ class CustomBlockExtension_Test(test_tools.TestCase):
         self.assertMarkdown("""\
             ::: custom
             """, """\
-            <custom>None</custom>""")
+            <custom>{}</custom>""")
 
     def test_metadata_extraMeta(self):
         def custom(ctx):
