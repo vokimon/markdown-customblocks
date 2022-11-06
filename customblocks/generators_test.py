@@ -213,7 +213,7 @@ class Generators_Test(test_tools.TestCase):
             ' id="verkamiPortrait"'
             ' scrolling="no"'
             ' src="https://www.verkami.com/projects/7948/widget_portrait"'
-            ' style="width: 240px; height: 350px"'
+            ' style="width: 240px; height: 490px"'
             '></iframe>'
         )
 
