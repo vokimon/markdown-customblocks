@@ -10,7 +10,7 @@ offline=False
 
 class Fetcher_Test(unittest.TestCase):
 
-    from yamlns.testutils import assertNsEqual
+    from yamlns.testutils import assertNsEqual, assertNsContains
 
     def setUp(self):
         self.cachedir = Path('testcache')
@@ -29,6 +29,10 @@ class Fetcher_Test(unittest.TestCase):
     def assertResponseEqual(self, response, expected):
         result = Fetcher._response2namespace(response)
         self.assertNsEqual(result, expected)
+
+    def assertResponseContains(self, response, expected):
+        result = Fetcher._response2namespace(response)
+        self.assertNsContains(result, expected)
 
     @unittest.skipIf(offline, 'this test requires network connection')
     def test_get_real_text(self):
@@ -55,8 +59,11 @@ class Fetcher_Test(unittest.TestCase):
         self.maxDiff = None
         f = Fetcher(cache=self.cachedir)
         response = f.get('https://dummyimage.com/6x4/f00/f00')
-        response.headers.setdefault('Age', '0')
-        self.assertResponseEqual(response, """\
+        response.headers.setdefault('Age', 'Missing')
+        response.headers.setdefault('Expires', 'Missing')
+        response.headers.setdefault('Last-Modified', 'Missing')
+        response.headers.setdefault('Cache-Control', 'Missing')
+        self.assertResponseContains(response, """\
         url: https://dummyimage.com/6x4/f00/f00
         status_code: 200
         content: !!binary |
@@ -69,7 +76,7 @@ class Fetcher_Test(unittest.TestCase):
           Access-Control-Allow-Methods: GET, POST, OPTIONS
           Access-Control-Allow-Origin: '*'
           Access-Control-Expose-Headers: Content-Length,Content-Range
-          Cache-Control: public, max-age=7776000
+          Cache-Control: {Cache-Control}
           Connection: keep-alive
           Content-Length: '107'
           Content-Type: image/png
@@ -79,13 +86,13 @@ class Fetcher_Test(unittest.TestCase):
           Server: cloudflAre
           Referrer-Policy: no-referrer, strict-origin-when-cross-origin
           Age: '{Age}'
-          CF-Cache-Status: HIT
+          CF-Cache-Status: {CF-Cache-Status}
           CF-RAY: {CF-RAY}
-          Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+          #Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
           NEL: '{{"success_fraction":0,"report_to":"cf-nel","max_age":604800}}'
           Report-To: '{Report-To}'
           Server: cloudflare
-          Vary: Accept-Encoding
+          Vary: Accept-Encoding,User-Agent,Origin
           alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
           X-Content-Type-Options: nosniff
           X-Download-Options: noopen

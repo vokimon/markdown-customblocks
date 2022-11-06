@@ -21,7 +21,7 @@ setup(
     },
     install_requires=[
         'markdown',
-        'yamlns',
+        'yamlns>=0.11', # supports assertNsContains
         'beautifulsoup4',
         'decorator',
         'pytest', # testing
