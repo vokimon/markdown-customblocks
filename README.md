@@ -212,12 +212,10 @@ For example:
 		    This is a code block by indentation
 
 
-## Release history
+## Further reading
 
-See [CHANGES.md](CHANGES.md)
-
-
-## Road map
-
-See [TODO.md](TODO.md)
+- [Full documentation](https://vokimon.github.io/markdown-customblocks)
+- [Code](https://github.com/vokimon/markdown-customblocks)
+- [Release History](CHANGES.md)
+- [Road map](TODO.md)
 

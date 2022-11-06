@@ -91,7 +91,7 @@ A generator can use several strategies to generate content:
 - Manipulate `ctx.parent` to add the content and return `None`
 
 In order to construct an ElementTree,
-we recommend using the [Hyperscript utility](#hyperscript-generation).
+we recommend using the [Hyperscript utility](#hyperscript).
 Resulting code will be more compact and readable and
 makes proper escaping when injecting values.
 
