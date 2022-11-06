@@ -11,13 +11,15 @@ import markdown
 md = markdown.Markdown(
     extensions=["customblocks"],
     extension_configs=dict(
-        customblocks={
-            # by direct symbol reference
-            'mytype': myparentmodule.mymodule.mytype,
-            # or using import strings (notice the colon)
-            'aka_mytype': 'myparentmodule.mymodule:mytype',
-            ...
-        }
+        generators=dict(
+            customblocks={
+                # by direct symbol reference
+                'mytype': myparentmodule.mymodule.mytype,
+                # or using import strings (notice the colon)
+                'aka_mytype': 'myparentmodule.mymodule:mytype',
+                ...
+            }
+        )
     ),
 )
 md.convert(markdowncontent)
@@ -39,6 +41,15 @@ MARKDOWN = {
         },
     },
 }
+```
+
+In markdonw `config.yaml`:
+
+```yaml
+customblocks:
+  generators:
+    mytype: myparentmodule.mymodule:mytype
+    aka_mytype: myparentmodule.mymodule:mytype
 ```
 
 ## Parameter mapping
