@@ -5,14 +5,14 @@ with open('README.md') as readme:
 setup(
     name='markdown-customblocks',
     version='1.3.1',
-    keywords='markdown extension customblocks admonitions container figure youtube vimeo twitter verkami goteo',
+    keywords='markdown extension customblocks admonitions container figure map youtube vimeo twitter facebook instagram verkami goteo',
     description='Python Markdown extension to add custom parametrizable and nestable blocks',
     long_description=long_description,
     long_description_content_type='text/markdown',
     author='David García Garzón',
     author_email='voki@canvoki.net',
     python_requires='>=2.7',
-    url='https://github.com/vokimon/markdown-customblocks',
+    url='https://vokimon.github.io/markdown-customblocks',
     packages=find_packages(exclude=['test*']),
     entry_point={
         'markdown.extensions': [
