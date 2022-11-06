@@ -136,13 +136,6 @@ The extension provides the following predefined generators:
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
 
-If you wonder why this extension exists and
-why the design choices were taken like this,
-read the [motivation](motivation.md).
-We all stand on giants' shoulders so take a look at the [long list](inspiration.md)
-of markdown extensions and other software that inspired and influenced ideas for this extension.
-Kudos for all of them.
-
 
 ## General markup syntax
 
@@ -216,6 +209,9 @@ For example:
 
 - [Full documentation](https://vokimon.github.io/markdown-customblocks)
 - [Code](https://github.com/vokimon/markdown-customblocks)
-- [Release History](CHANGES.md)
-- [Road map](TODO.md)
+- [Release History](https://vokimon.github.io/markdown-customblocks/motivation/CHANGES)
+- [Road map](https://vokimon.github.io/markdown-customblocks/motivation/TODO)
+- [Motivation and design choices](https://vokimon.github.io/markdown-customblocks/motivation)
+- [Inspiration and kudos](https://vokimon.github.io/markdown-customblocks/inspiration)
+
 
