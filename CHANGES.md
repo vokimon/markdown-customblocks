@@ -1,12 +1,12 @@
 # Release history
 
-## unreleased
+## markdown-customblocks 1.3.0 (2022-11-06)
 
 - [New documentation]( https:://vokimon.github.io/markdown-customblocks) based on mkdocs
 - New block types:
     - `map`: to embed OSM maps
-    - `facebook`: to embed facebook posts (privacy invasive)
-    - `instagram`: to embed instagram posts (privacy invasive)
+    - `facebook`: to embed facebook posts (draft: still privacy invasive)
+    - `instagram`: to embed instagram posts (draft: still privacy invasive)
 - `linkcard`: Links are openened in a new tab/window
 
 ## markdown-customblocks 1.2.0 (2022-03-08)
