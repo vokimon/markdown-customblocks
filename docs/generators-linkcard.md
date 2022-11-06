@@ -45,7 +45,7 @@ Content, if provided will be used as excerpt instead of the summary in the page.
 
 ## Styling
 
-The above example uses [this css](../css/linkcard.css).
+The above example uses [this css](css/linkcard.css).
 
 ## Examples
 

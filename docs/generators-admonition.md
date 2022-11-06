@@ -58,7 +58,7 @@ content:
 
 ## Styling
 
-You can use the [recommended style](.../css/admonition.css).
+You can use the [recommended style](css/admonition.css).
 
 Since most themes in generation environments (Pelican, mkdocs...)
 have already styles for admonitions, it might work without that css

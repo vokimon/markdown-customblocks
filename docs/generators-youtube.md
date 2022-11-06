@@ -47,7 +47,7 @@ and the style will be added inline to every video.
 The component can be selected as `div.videowrapper.youtube`.
 
 Note that the `videowrapper` class is common with other video embeds
-and has a [recommended css](../css/videowrapper.css).
+and has a [recommended css](css/videowrapper.css).
 
 
 

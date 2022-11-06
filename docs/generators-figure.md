@@ -24,7 +24,7 @@ The content is taken as caption.
 
 ## Styling
 
-A [figure css](../css/figure.css) is provided.
+A [figure css](css/figure.css) is provided.
 
 The `lightbox` mode relies heavily on this css in order to work without using javascript.
 
