@@ -26,6 +26,9 @@ setup(
         'decorator',
         'pytest', # testing
         'responses', # testing
+        'geocoder', # map
+        'mkdocs', # docs
+        'mkdocs-material', # docs
     ],
     test_suite='customblocks',
     classifiers=[

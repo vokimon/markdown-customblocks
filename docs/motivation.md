@@ -5,53 +5,28 @@ and the rationale under the design decissions.
 
 Many custom objects like figures, video embeds...
 have no native markup in Markdown.
-No problem: you can still hardcode them in HTML
+You could hardcode them as HTML
 or you could also use an extension for that.
 
 Hardcoding HTML has a clear drawback:
 Besides cluttering the markdown with HTML,
 whenever we need to upgrade the block,
-(eg. adding a lightbox feature for all the figures)
+because you found a better way of embeding videos or whatever,
 you have to change that code in many places.
 
-Extensions have other problems,
-mostly because of the dynamics of creating and maintaning them.
+Extensions avoid the HTML clutter,
+but, still they are not useful to upgrade your blocks.
+Usually improving a block means moving to a different extension,
+with more features.
+But extensions, in order to avoid collisions, 
+tend to be creative on the markup they use,
+even if they cover the same function.
+So if you migrate to a more powerfull extension,
+you end up editing all your blocks again.
 
-First, 
-extensions struggle to use a unique markup to avoid conflicts with other extensions.
-Because of that, the trend is having a lot of different markups,
-even for extensions sharing the same purpose.
-
-And second, why is that so many extension sharing
-the same purpose (and using so different markups).
-Maybe is because the feature set of the original
-extension is kept and someone comes with a
-
-First, because you don't want to mess existing extension users,
-whenever a new breaking feature appears
-First, in order to identify their own markup,
-extensions have to define a diferential markup.
-Even if extensions have the same semantics they tend to have differentiable markups.
-
-
-
-
-
-until you want to improve them, say changing the `div` structure.
-Then, you have to make the change extensive to
-all the objects in your documentation, and that's hard.
-
-Luckily, many Markdown extensions are available
-which encapsulate such objects in custom fancy markups.
-But the way such extensions are created and maintained have two major drawbacks:
-
-When you find a better extension for your figures,
-again, it is likely you have to edit all your figures, once more,
-because the markup is different.
-
-Also coding an extension is hard.
+Another motivation is that coding an extension is hard.
 Markdown extension API is necessarily complex to address many scenarios.
-But this extension responds just to this single but general scenario:
+But this extension responds just to this single but quite general scenario:
 
 > I want to generate this **piece of HTML** which
 > depends on those **parameters** and might
@@ -84,5 +59,10 @@ and the extension does the mapping with no extra glue required.
 It visually shows the scope of the block and allows nesting.
 If the content is reparsed as Markdown,
 it could still include other components with their inner content a level deeper.
+
+**Why functions as means for extension?**
+
+Well, it is simpler than having class interfaces,
+and Python introspection helps a lot to do the parameter mapping.
 
 

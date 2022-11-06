@@ -4,11 +4,23 @@ site_author: vokimon
 site_description: Parametrizable and nestable custom components for Markdown
 repo_url: https://github.com/vokimon/markdown-customblocks/
 nav:
-  - Getting started: README.md
-  - Predefined generators: predefined-generators.md
+  - First steps: README.md
+  - Built-in generators:
+    - Container: generators-container.md
+    - Admonition: generators-admonition.md
+    - Figure: generators-figure.md
+    - Linkcard: generators-linkcard.md
+    - Youtube: generators-youtube.md
+    - Vimeo: generators-vimeo.md
+    - Twitter: generators-twitter.md
+    - Verkami: generators-verkami.md
+    - Goteo: generators-goteo.md
+  - Defining generators: defining-generators.md
   - About:
     - Motivation and design choices: motivation.md
     - Inspiration: inspiration.md
+    - Release History: CHANGES.md
+    - Road Map: TODO.md
 markdown_extensions:
   - customblocks
   - def_list
@@ -21,8 +33,9 @@ extra_css:
   - css/figure.css
   - css/linkcard.css
   - css/videowrapper.css
-#  - css/admonition.css
+  - #css/admonition.css
 theme:
+  logo:  img/logo-customblocks-white.svg
   name: material
   language: en
   extra:
