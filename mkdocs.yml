@@ -9,10 +9,13 @@ nav:
     - Container: generators-container.md
     - Admonition: generators-admonition.md
     - Figure: generators-figure.md
+    - Map: generators-map.md
     - Linkcard: generators-linkcard.md
     - Youtube: generators-youtube.md
     - Vimeo: generators-vimeo.md
     - Twitter: generators-twitter.md
+    - Instagram: generators-instagram.md
+    - Facebook: generators-facebook.md
     - Verkami: generators-verkami.md
     - Goteo: generators-goteo.md
   - Defining generators: defining-generators.md

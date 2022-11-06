@@ -2,15 +2,20 @@
 
 ## unreleased
 
-- linkcard: Links are openened in a new tab/window
+- [New documentation]( https:://vokimon.github.io/markdown-customblocks) based on mkdocs
+- New block types:
+    - `map`: to embed OSM maps
+    - `facebook`: to embed facebook posts (privacy invasive)
+    - `instagram`: to embed instagram posts (privacy invasive)
+- `linkcard`: Links are openened in a new tab/window
 
 ## markdown-customblocks 1.2.0 (2022-03-08)
 
 - Figures open the image in a new window
 - Figures lightbox visualization (requires some css)
 - GDPR friendly embeds:
-  - youtube: Use youtube-nocookie.com to avoid youtube cookies
-  - vimeo: Use dnt=1 option to avoid vimeo cookies
+    - youtube: Use youtube-nocookie.com to avoid youtube cookies
+    - vimeo: Use dnt=1 option to avoid vimeo cookies
 
 ## markdown-customblocks 1.1.4 (2022-03-05)
 

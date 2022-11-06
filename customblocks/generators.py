@@ -168,7 +168,6 @@ def goteo(ctx, id):
         scrolling="no"
     )
 
-
 def twitter(user,
     tweet=None,
     theme=None,
@@ -192,6 +191,55 @@ def twitter(user,
     soup = BeautifulSoup(result.html, 'html.parser')
     return type(u'')(soup.find('blockquote'))
 
+def facebook(ctx, page, post, *args, text=True, width='auto', height=452., **kwds):
+    text = 'true' if text and text!='false' else 'false'
+    return E('iframe',
+        dict(_class=' '.join(args)),
+        src="https://www.facebook.com/plugins/post.php?"
+            f"href=https%3A%2F%2Fwww.facebook.com%2F{page}%2Fposts%2F{post}&amp;show_text={text}&amp;lazy=false&amp;width=auto",
+        height=f"{height}",
+        scrolling="no",
+        frameborder="0",
+        allowfullscreen="true",
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share",
+        **kwds
+    )
+
+def instagram(ctx, post, *args, caption=True, **kwds):
+    permalink = f"https://www.instagram.com/p/{post}"
+    return E('blockquote.instagram-media',
+        {
+            'data-instgrm-permalink': permalink,
+            'data-instgrm-version': "14",
+        },
+        { 'data-instgrm-captioned': True } if caption else {},
+        E('script', {'async': True, 'src': "//www.instagram.com/embed.js"}),
+        E('', 'Instagram post embedding not available. '),
+        E('a', "Watch it on Instagram", href=permalink),
+        dict(_class=' '.join(args)),
+        **kwds
+    )
+
+def map(ctx, location=None, marker=True, *args, **kwds):
+    import geocoder
+    geocoding = geocoder.osm(location).json
+    print(geocoding)
+    bbox = '%2C'.join(str(x) for x in (
+        geocoding['bbox']['northeast'][::-1] +
+        geocoding['bbox']['southwest'][::-1]
+    ))
+    boundary = f"/relation/{geocoding['osm_id']}"
+    markerparam = f'&amp;marker={geocoding["lat"]}%2C{geocoding["lng"]}' if marker else ''
+    return E('iframe.map',
+        dict(_class=' '.join(args)),
+        frameborder="0",
+        marginwidth="0",
+        marginheight="0",
+        scrolling="no",
+        style="display: block; width: 100%; width: 1fr; aspect-ratio: 16 / 9",
+        src=f"https://www.openstreetmap.org/export/embed.html?relation=345893&amp;layer=mapnik&amp;bbox={bbox}{markerparam}&amp;query=lanteira",
+        **kwds
+    )
 
 
 # vim: et ts=4 sw=4

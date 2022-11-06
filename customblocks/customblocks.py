@@ -250,6 +250,9 @@ typeGenerators = dict(
     verkami = generators.verkami,
     goteo = generators.goteo,
     twitter = generators.twitter,
+    facebook = generators.facebook,
+    instagram = generators.instagram,
+    map = generators.map,
     linkcard = generators.linkcard,
     figure = generators.figure,
 )
