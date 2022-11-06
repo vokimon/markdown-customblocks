@@ -12,14 +12,14 @@
         <meta name="author" content="vokimon">
       
       
-        <link rel="canonical" href="https://vokimon.github.io/markdown-customblocks/generators-facebook/">
+        <link rel="canonical" href="https://vokimon.github.io/markdown-customblocks/tutorial/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.8">
     
     
       
-        <title>Facebook - Markdown Custom Blocks</title>
+        <title>Tutorial - Markdown Custom Blocks</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#facebook-customblocksgeneratorsfacebook" class="md-skip">
+        <a href="#tutorial-how-to-add-new-block-types" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Facebook
+              Tutorial
             
           </span>
         </div>
@@ -269,14 +269,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       
       
@@ -423,66 +421,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Facebook
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../generators-facebook/" class="md-nav__link">
         Facebook
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
-    Options
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
-    TODO
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -528,11 +471,87 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../tutorial/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Tutorial
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#our-first-custom-block" class="md-nav__link">
+    Our first custom block
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#receiving-parameters" class="md-nav__link">
+    Receiving parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-international" class="md-nav__link">
+    Getting international
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escaping-parameters-and-hyperscript" class="md-nav__link">
+    Escaping parameters and hyperscript
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excess-positional-parameters" class="md-nav__link">
+    Excess positional parameters
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -669,22 +688,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#options" class="md-nav__link">
-    Options
+  <a href="#setup" class="md-nav__link">
+    Setup
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
-    Example
+  <a href="#our-first-custom-block" class="md-nav__link">
+    Our first custom block
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#todo" class="md-nav__link">
-    TODO
+  <a href="#receiving-parameters" class="md-nav__link">
+    Receiving parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-international" class="md-nav__link">
+    Getting international
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escaping-parameters-and-hyperscript" class="md-nav__link">
+    Escaping parameters and hyperscript
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#excess-positional-parameters" class="md-nav__link">
+    Excess positional parameters
   </a>
   
 </li>
@@ -703,52 +743,146 @@
                 
                   
 
-  <a href="https://github.com/vokimon/markdown-customblocks/edit/master/docs/generators-facebook.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/vokimon/markdown-customblocks/edit/master/docs/tutorial.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="facebook-customblocksgeneratorsfacebook">Facebook (<code>customblocks.generators.facebook</code>)</h1>
-<p>Embeds a <a href="https://facebook.com">Facebook</a> post.</p>
-<p>Page id and post id are the mandatory parameters for this component.</p>
-<p>You can find them from the post url, obtained by clicking on the post date.
-The url has the form:</p>
-<p><code>https://www.facebook.com/{pageid}/posts/{postid}</code></p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Generated code will include user tracking from Facebook.
-User browser might, wisely, block the embed.</p>
-<p>A privacy safe version of this plugin is planned for the future.</p>
-</div>
-<h2 id="options">Options</h2>
-<dl>
-<dt><code>page</code></dt>
-<dd>Page (or user) id</dd>
-<dt><code>post</code></dt>
-<dd>Post code.</dd>
-</dl>
-<p>You can obtain it from the url the post date points to.
-Should be a public post in order to work.</p>
-<dl>
-<dt><code>width</code> (keyword only, default 500)</dt>
-<dd>embed width (must be between 350 and 750)</dd>
-</dl>
-<h2 id="example">Example</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>::: facebook DesconexionIBEX35 pfbid0DXwq1fVjC7RRHjxqCevvrCuMaihZoSixKpJpUFxBQGGCPFEBGdkiKWYtZx4A6fGRl
+<h1 id="tutorial-how-to-add-new-block-types">Tutorial: How to add new block types</h1>
+<h2 id="setup">Setup</h2>
+<p>For this tutorial let's use markdown from the command line.
+You should setup a working python environment and install
+both <code>markdown</code> and <code>markdown-customblocks</code>
+with <code>pip install</code>.</p>
+<p>To ensure that we have a working markdown package.</p>
+<p>Edit <code>hello.md</code> with the following content:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>:: hello world
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="gs">**Welcome**</span> to my home page
 </code></pre></div>
-<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="452.0" scrolling="no" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FDesconexionIBEX35%2Fposts%2Fpfbid0DXwq1fVjC7RRHjxqCevvrCuMaihZoSixKpJpUFxBQGGCPFEBGdkiKWYtZx4A6fGRl&amp;show_text=true&amp;lazy=false&amp;width=auto"></iframe>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>::: facebook lovokmon 10160236064339354 height=200
+<p>Then run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>markdown_py hello.md -f hello.html -x customblocks
 </code></pre></div>
-<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="200" scrolling="no" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Flovokmon%2Fposts%2F10160236064339354&amp;show_text=true&amp;lazy=false&amp;width=auto"></iframe>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>::: facebook width=350 DesconexionIBEX35 pfbid0DXwq1fVjC7RRHjxqCevvrCuMaihZoSixKpJpUFxBQGGCPFEBGdkiKWYtZx4A6fGRl
+<p>This should generate:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;hello world&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">b</span><span class="p">&gt;</span>Welcome<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span> to my home page<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="452.0" scrolling="no" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FDesconexionIBEX35%2Fposts%2Fpfbid0DXwq1fVjC7RRHjxqCevvrCuMaihZoSixKpJpUFxBQGGCPFEBGdkiKWYtZx4A6fGRl&amp;show_text=true&amp;lazy=false&amp;width=auto" style="width:100%"></iframe>
-<iframe allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen="true" frameborder="0" height="452.0" scrolling="no" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FDesconexionIBEX35%2Fposts%2Fpfbid0DXwq1fVjC7RRHjxqCevvrCuMaihZoSixKpJpUFxBQGGCPFEBGdkiKWYtZx4A6fGRl&amp;show_text=false&amp;lazy=false&amp;width=auto"></iframe>
-<h2 id="todo">TODO</h2>
-<ul>
-<li>Obtain post information on static generation time and build a privacy safe place holder</li>
-</ul>
+<p>Since <code>hello</code> is not bound to any generator,
+the default block type <code>container</code> is picked.</p>
+<p><code>container</code> generates a div with the type (<code>hello</code>) as class,
+the indented content inside, reparsed as markdown,
+any keyless parameter (<code>world</code>) as class as well,
+and keyword values (which we dont provide) as attributes.</p>
+<p>You could try to add <code>style="background:teal"</code> to the block headline and see what happens.</p>
+<h2 id="our-first-custom-block">Our first custom block</h2>
+<p>To create our first block we need to create a python file and a config file.</p>
+<p><code>config.yml</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">customblocks</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">generators</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="nt">hello</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;hello:hello&#39;</span><span class="w"> </span><span class="c1"># tag name, module, function</span><span class="w"></span>
+</code></pre></div>
+<p><code>hello.py</code>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">return</span> <span class="s2">&quot;&lt;h1&gt;hello&lt;/h1&gt;&quot;</span>
+</code></pre></div></p>
+<p>To run it with the config file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>markdown_py hello.md -f hello.html -x customblocks -c config.yml
+</code></pre></div>
+<p>If you run that as is, it will complain on not finding <code>hello</code> module.
+We must tell python to look for packages also in the current directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">export</span> <span class="nv">PYTHONPATH</span><span class="o">=</span><span class="nv">$PYTHONPATH</span>:.
+</code></pre></div>
+<p>If you return any string not being a single root xml fragment,
+you will see errors. Provoque those errors to get used to them.</p>
+<h2 id="receiving-parameters">Receiving parameters</h2>
+<p>Lets take the first parameter as the name and
+use an f-string to insert it capitalized into the output.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Hello </span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/h1&gt;</span>
+</code></pre></div>
+<p>Now we can do:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>:: hello peter
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>:: hello david
+</code></pre></div>
+<h2 id="getting-international">Getting international</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">):</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">translations</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">en</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">es</span><span class="o">=</span><span class="s2">&quot;Hola&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">de</span><span class="o">=</span><span class="s2">&quot;Hallo&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="p">)</span>   
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;</span><span class="si">{</span><span class="n">translations</span><span class="p">[</span><span class="n">lang</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/h1&gt;</span>
+</code></pre></div>
+<p>So:</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>::: hello peter
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>::: hello pedro lang=es
+</code></pre></div>
+Renders
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello Peter<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hola Pedro<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</code></pre></div>
+But this crashes:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>::: hello petro lang=it
+</code></pre></div></p>
+<p>Making it safer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">translations</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">en</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">es</span><span class="o">=</span><span class="s2">&quot;Hola&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">de</span><span class="o">=</span><span class="s2">&quot;Hallo&quot;</span><span class="p">,</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="p">)</span>   
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;</span><span class="si">{</span><span class="n">translations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">lang</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/h1&gt;</span>
+</code></pre></div>
+<h2 id="escaping-parameters-and-hyperscript">Escaping parameters and hyperscript</h2>
+<p>Inserting parameters as verbatim is not recommended since
+is a source of problems. For instance:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>::: hello :-&gt;
+</code></pre></div>
+<p>We could escape parameters everywhere but this renders into a unreadable code.
+Instead, let's use the hyperscript tool, that transparently does just that:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils.hyperscript</span> <span class="kn">import</span> <span class="n">E</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">):</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">translations</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        <span class="n">en</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        <span class="n">de</span><span class="o">=</span><span class="s2">&quot;Hallo&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="n">es</span><span class="o">=</span><span class="s2">&quot;Hola&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="p">)</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>    <span class="k">return</span> <span class="n">E</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>        <span class="n">translations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lang&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">),</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>        <span class="s1">&#39; &#39;</span><span class="p">,</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>        <span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>    <span class="p">)</span>
+</code></pre></div>
+<p>The <code>E</code> first parameter is the tag.
+Next parameters are the content.</p>
+<h2 id="excess-positional-parameters">Excess positional parameters</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>::: hello Albert Einstein
+</code></pre></div>
+<p>This will assign Albert as name and Einstein as language.
+We could quote it and it will work.
+But let's try to simplify things for users
+and take any positional argument as the name.</p>
+<p>If we want to take the excess positional parameters together,
+and not filling <code>lang</code> unless the explicit key is provided:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils.hyperscript</span> <span class="kn">import</span> <span class="n">E</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">):</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="n">translations</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">en</span><span class="o">=</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>        <span class="n">de</span><span class="o">=</span><span class="s2">&quot;Hallo&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>        <span class="n">es</span><span class="o">=</span><span class="s2">&quot;Hola&quot;</span><span class="p">,</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="p">)</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    <span class="k">return</span> <span class="n">E</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>        <span class="n">translations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;lang&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">),</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>        <span class="s1">&#39; &#39;</span><span class="p">,</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>        <span class="n">name</span><span class="o">.</span><span class="n">title</span><span class="p">(),</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    <span class="p">)</span>
+</code></pre></div>
+<p>In Python functions, any parameter after the varidic <code>*</code> is forced to be used with key.
+Any positional parameter will be included in <code>name</code>.</p>
 
 
 
@@ -769,7 +903,7 @@ Should be a public post in order to work.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../generators-instagram/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Instagram" rel="prev">
+        <a href="../generators-goteo/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Goteo" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -778,20 +912,20 @@ Should be a public post in order to work.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Instagram
+              Goteo
             </div>
           </div>
         </a>
       
       
         
-        <a href="../generators-verkami/" class="md-footer__link md-footer__link--next" aria-label="Next: Verkami" rel="next">
+        <a href="../defining-generators/" class="md-footer__link md-footer__link--next" aria-label="Next: Defining generators" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Verkami
+              Defining generators
             </div>
           </div>
           <div class="md-footer__button md-icon">
