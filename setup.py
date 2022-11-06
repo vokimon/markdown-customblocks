@@ -4,7 +4,7 @@ with open('README.md') as readme:
 
 setup(
     name='markdown-customblocks',
-    version='1.3.0',
+    version='1.3.1',
     keywords='markdown extension customblocks admonitions container figure youtube vimeo twitter verkami goteo',
     description='Python Markdown extension to add custom parametrizable and nestable blocks',
     long_description=long_description,

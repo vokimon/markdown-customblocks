@@ -1,8 +1,9 @@
 # Release history
 
-## unreleased
+## markdown-customblocks 1.3.1 (2022-11-06)
 
 - Tests passing
+- Documentation fixes
 
 ## markdown-customblocks 1.3.0 (2022-11-06)
 
