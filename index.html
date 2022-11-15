@@ -790,10 +790,11 @@ generating this:</p>
 <p>That would generate this HTML:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">attrib1</span><span class="o">=</span><span class="s">&quot;value 1&quot;</span> <span class="na">attrib2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>Indented Content<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>Be aware that the previous generator example may work for you,
-does not escape html special characters in parameters for a more general use
-and that the content is taken verbatim just by stripping the indentation.
-You may get this nearly for free, by using some provided utilites,
+<p>The previous example, works and may be enough for you,
+but it won't work in a general scenario.
+Parameters and content are included and
+they should be escaped or processed as Markdown content.
+Luckily, the extension provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
