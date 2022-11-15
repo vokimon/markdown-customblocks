@@ -110,11 +110,22 @@ That would generate this HTML:
 <div attrib1="value 1" attrib2="value2">Indented Content</div>
 ```
 
-::: warning
-    Notice that this is a silly example.
-    It will work for simple params and text content,
-    but it does not escape them properly.
-    The [hyperscript tool](#hyperscript-generation) can be used to make this painless.
+Be aware that the previous generator example may work for you,
+does not escape html special characters in parameters for a more general use
+and that the content is taken verbatim just by stripping the indentation.
+You may get this nearly for free, by using some provided utilites,
+the hyperscript generator and the Markdown subparser:
+
+```python
+from customblocks.utils import E, Markdown
+
+def mygenerator(ctx, param1, param2):
+    return E('', attrib1=param1, attrib2=param2,
+	Markdown(ctx.content, ctx.parser)
+    )
+```
+
+You can read more about them at the [related documentation](https://vokimon.github.io/markdown-customblocks/defining-generators/#hyperscript).
 
 ## Built-in generators
 
