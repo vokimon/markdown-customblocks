@@ -13,6 +13,12 @@ both for geolocation during generation time and and the embed in browsing time.
 `marker`/`nomarker` (bool, default True)
 : Whether to show or not the location with a marker
 
+`*args`
+: Remaining positional arguments are added as class to the upper element
+
+`**kwds`
+: Remaining keyword arguments are added as attributes to the upper element
+
 
 ## Examples
 

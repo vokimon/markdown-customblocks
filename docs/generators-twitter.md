@@ -5,7 +5,7 @@ Embeds a tweet in a privacy safe way.
 ## Example
 
 ```markdown
-::: twitter votomitico 1193240526373507072 heme=dark lang=es track=true
+::: twitter votomitico 1193240526373507072 theme=dark lang=es track=true
 ```
 
 ::: twitter votomitico 1193240526373507072 theme=dark lang=es track=true
