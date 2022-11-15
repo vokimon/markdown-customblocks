@@ -131,19 +131,31 @@ You can read more about them at the [related documentation](https://vokimon.gith
 
 The extension provides the following predefined generators:
 
-- `container`: A div element with arbitrary classes, attributes and content. This is the default when no type matches.
-- `admonition`: Admonitions, boxes for notes, warnings... (quite similar to the [standard extra extension][ExtraAdmonitions]).
-  It is bound to types `note`,  `info`, `error`, `warning`....
-- `figure`: Full featured figures with captions, lightbox...
-- `map`: Maps from OpenStreetMaps.org
-- `linkcard`: External link cards (like Facebook and Twitter do, when you post a link)
-- `youtube`: Embeded videos from youtube...
-- `vimeo`: Embeded videos from vimeo...
-- `twitter`: Embeded tweets
-- `facebook`: Embeded post from facebook...
-- `instagram`: Embeded post from instagram...
-- `verkami`: Fund raising project widget in [Verkami]
-- `goteo`: Fund raising project widget in [Goteo]
+- [`container`](https://vokimon.github.io/markdown-customblocks/generators-container/):
+    A div element with arbitrary classes, attributes and content. This is the default when no type matches.
+- [`admonition`](https://vokimon.github.io/markdown-customblocks/generators-admonition/):
+    Admonitions, boxes for notes, warnings... (quite similar to the [standard extra extension][ExtraAdmonitions]).
+    It is bound to types `note`,  `info`, `error`, `warning`....
+- [`figure`](https://vokimon.github.io/markdown-customblocks/generators-figure/):
+    Full featured figures with captions, lightbox...
+- [`map`](https://vokimon.github.io/markdown-customblocks/generators-map/):
+    Maps from OpenStreetMaps.or
+- [`linkcard`](https://vokimon.github.io/markdown-customblocks/generators-linkcard/):
+    External link cards (like Facebook and Twitter do, when you post a link)
+- [`youtube`](https://vokimon.github.io/markdown-customblocks/generators-youtube/):
+    Embeded videos from youtube...
+- [`vimeo`](https://vokimon.github.io/markdown-customblocks/generators-vimeo/):
+    Embeded videos from vimeo...
+- [`twitter`](https://vokimon.github.io/markdown-customblocks/generators-twitter/):
+    Embeded tweets
+- [`facebook`](https://vokimon.github.io/markdown-customblocks/generators-facebook/):
+    Embeded post from facebook...
+- [`instagram`](https://vokimon.github.io/markdown-customblocks/generators-instagram/):
+    Embeded post from instagram...
+- [`verkami`](https://vokimon.github.io/markdown-customblocks/generators-verkami/):
+    Fund raising project widget in [Verkami]
+- [`goteo`](https://vokimon.github.io/markdown-customblocks/generators-goteo/):
+    Fund raising project widget in [Goteo]
 
 [ExtraAdmonitions]: https://python-markdown.github.io/extensions/admonition/
 
