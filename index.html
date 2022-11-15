@@ -790,37 +790,55 @@ generating this:</p>
 <p>That would generate this HTML:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">attrib1</span><span class="o">=</span><span class="s">&quot;value 1&quot;</span> <span class="na">attrib2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>Indented Content<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Notice that this is a silly example.
-It will work for simple params and text content,
-but it does not escape them properly.
-The <a href="#hyperscript-generation">hyperscript tool</a> can be used to make this painless.</p>
-</div>
+<p>Be aware that the previous generator example may work for you,
+does not escape html special characters in parameters for a more general use
+and that the content is taken verbatim just by stripping the indentation.
+You may get this nearly for free, by using some provided utilites,
+the hyperscript generator and the Markdown subparser:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span> <span class="nf">mygenerator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">return</span> <span class="n">E</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">attrib1</span><span class="o">=</span><span class="n">param1</span><span class="p">,</span> <span class="n">attrib2</span><span class="o">=</span><span class="n">param2</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">Markdown</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">parser</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="p">)</span>
+</code></pre></div>
+<p>You can read more about them at the <a href="https://vokimon.github.io/markdown-customblocks/defining-generators/#hyperscript">related documentation</a>.</p>
 <h2 id="built-in-generators">Built-in generators</h2>
 <p>The extension provides the following predefined generators:</p>
 <ul>
-<li><code>container</code>: A div element with arbitrary classes, attributes and content. This is the default when no type matches.</li>
-<li><code>admonition</code>: Admonitions, boxes for notes, warnings... (quite similar to the <a href="https://python-markdown.github.io/extensions/admonition/">standard extra extension</a>).
-  It is bound to types <code>note</code>,  <code>info</code>, <code>error</code>, <code>warning</code>....</li>
-<li><code>figure</code>: Full featured figures with captions, lightbox...</li>
-<li><code>map</code>: Maps from OpenStreetMaps.org</li>
-<li><code>linkcard</code>: External link cards (like Facebook and Twitter do, when you post a link)</li>
-<li><code>youtube</code>: Embeded videos from youtube...</li>
-<li><code>vimeo</code>: Embeded videos from vimeo...</li>
-<li><code>twitter</code>: Embeded tweets</li>
-<li><code>facebook</code>: Embeded post from facebook...</li>
-<li><code>instagram</code>: Embeded post from instagram...</li>
-<li><code>verkami</code>: Fund raising project widget in [Verkami]</li>
-<li><code>goteo</code>: Fund raising project widget in [Goteo]</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-container/"><code>container</code></a>:
+    A div element with arbitrary classes, attributes and content. This is the default when no type matches.</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-admonition/"><code>admonition</code></a>:
+    Admonitions, boxes for notes, warnings... (quite similar to the <a href="https://python-markdown.github.io/extensions/admonition/">standard extra extension</a>).
+    It is bound to types <code>note</code>,  <code>info</code>, <code>error</code>, <code>warning</code>....</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-figure/"><code>figure</code></a>:
+    Full featured figures with captions, lightbox...</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-map/"><code>map</code></a>:
+    Maps from OpenStreetMaps.or</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-linkcard/"><code>linkcard</code></a>:
+    External link cards (like Facebook and Twitter do, when you post a link)</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-youtube/"><code>youtube</code></a>:
+    Embeded videos from youtube...</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-vimeo/"><code>vimeo</code></a>:
+    Embeded videos from vimeo...</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-twitter/"><code>twitter</code></a>:
+    Embeded tweets</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-facebook/"><code>facebook</code></a>:
+    Embeded post from facebook...</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-instagram/"><code>instagram</code></a>:
+    Embeded post from instagram...</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-verkami/"><code>verkami</code></a>:
+    Fund raising project widget in [Verkami]</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-goteo/"><code>goteo</code></a>:
+    Fund raising project widget in [Goteo]</li>
 </ul>
 <h2 id="general-markup-syntax">General markup syntax</h2>
 <p>This is a more complete example of markup:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>::: mytype param1 key1=value1 &quot;other param&quot; key2=&#39;value2 with words&#39; flag1 noflag2
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    Indented <span class="gs">**content**</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    The block ends whenever the indentation stops
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>This unindented line is not considered part of the block
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>::: mytype param1 key1=value1 &quot;other param&quot; key2=&#39;value2 with words&#39; flag1 noflag2
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    Indented <span class="gs">**content**</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    The block ends whenever the indentation stops
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>This unindented line is not considered part of the block
 </code></pre></div>
 <p><strong>The headline:</strong>
 The line starting with <code>:::</code> is the <em>headline</em>.
@@ -847,14 +865,14 @@ The content ends with the very first non-emtpy line back on the previous indenta
 A block type may choose to interpret this content as markdown as well.
 So you can have nested blocks by adding extra indentation.
 For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>::: recipe
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    # Sweet water
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    ::: ingredients &quot;4 persons&quot;
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        <span class="k">-</span> two spons of suggar
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="k">-</span> a glass of tap water
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    ::: mealphoto sweetwater.jpg
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        Looks gorgeus!
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    Drop the suggar into the glass. Stir.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>::: recipe
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    # Sweet water
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    ::: ingredients &quot;4 persons&quot;
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="k">-</span> two spons of suggar
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        <span class="k">-</span> a glass of tap water
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    ::: mealphoto sweetwater.jpg
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        Looks gorgeus!
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    Drop the suggar into the glass. Stir.
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
