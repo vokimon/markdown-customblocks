@@ -110,10 +110,11 @@ That would generate this HTML:
 <div attrib1="value 1" attrib2="value2">Indented Content</div>
 ```
 
-Be aware that the previous generator example may work for you,
-does not escape html special characters in parameters for a more general use
-and that the content is taken verbatim just by stripping the indentation.
-You may get this nearly for free, by using some provided utilites,
+The previous example, works and may be enough for you,
+but it won't work in a general scenario.
+Parameters and content are included and
+they should be escaped or processed as Markdown content.
+Luckily, the extension provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:
 
 ```python
