@@ -1,5 +1,19 @@
 # Release history
 
+## Unreleased
+
+- Third party generators can be registered using project
+  metadata entry points as `markdown.customblocks.generators`
+- New block types
+  - `wikipedia`: produces a linkcard for a lemma
+- `linkcard`:
+  - Keyless values are added as classes to the top level element
+  - Extract descriptions from MediaWiki based sites (wikipedia...)
+  - Html class `squared` renamed `side`, used to identify side images
+  - Configurable CSS variables in the recommended stylesheet
+  - Improved image layout in the recommended styleshet
+  - Side image turns wide image on small devices
+
 ## markdown-customblocks 1.3.1 (2022-11-06)
 
 - Tests passing

@@ -114,7 +114,7 @@ The previous example, may work for simple cases,
 but it won't work in a general scenario.
 Parameters and content are included as is and
 they should be escaped or processed as Markdown content.
-Luckily, the extension provides some useful tools for that:
+Luckily, `customblocks` provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:
 
 ```python
@@ -122,7 +122,7 @@ from customblocks.utils import E, Markdown
 
 def mygenerator(ctx, param1, param2):
     return E('', attrib1=param1, attrib2=param2,
-	Markdown(ctx.content, ctx.parser)
+        Markdown(ctx.content, ctx.parser)
     )
 ```
 
@@ -220,15 +220,17 @@ For example:
 ```
 
 ::: note
-	A closing `:::` tag is optional.
-	For most cases, indentation should be enough, visually, and functionally.
-	Seldomly, it is necessary like in the following markdown to
-	split the mealphoto content from a code block which is also indented.
+    A closing `:::` tag is optional.
+    For most cases, indentation should be enough, visually, and functionally.
+    But, seldomly, it is necessary.
+    Like in the example below, where
+    the mealphoto content would be mixed with 
+    the later code block
 
-	    ::: mealphoto sweetwater.jpg
-		    Looks gorgeus!
-	    :::
-		    This is a code block by indentation
+        ::: mealphoto sweetwater.jpg
+                Looks gorgeus!
+        :::
+                This is a code block by indentation
 
 
 ## Further reading

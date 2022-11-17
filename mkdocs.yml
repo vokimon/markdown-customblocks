@@ -19,7 +19,7 @@ nav:
     - Facebook: generators-facebook.md
     - Verkami: generators-verkami.md
     - Goteo: generators-goteo.md
-  - Defining generators: defining-generators.md
+  - Creating new block types: defining-generators.md
   - About:
     - Motivation and design choices: motivation.md
     - Inspiration: inspiration.md

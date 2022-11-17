@@ -75,7 +75,11 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Text Processing :: Filters',
         'Topic :: Text Processing :: Markup :: HTML',
-    ]
+    ],
+    project_urls={
+        "Documentation": 'https://vokimon.github.io/markdown-customblocks',
+        "Code": 'https://github.com/vokimon/markdown-customblocks',
+    },
 )
 
 # vim: et ts=4 sw=4

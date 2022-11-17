@@ -1,10 +1,10 @@
-# Implementing a generator
+# Creating new block types
 
 ## Binding to a typename
 
 A block type can be defined just by hooking the **generator** function to the type.
 
-In Python:
+### Python Code
 
 ```python
 import markdown
@@ -25,7 +25,22 @@ md = markdown.Markdown(
 md.convert(markdowncontent)
 ```
 
-In Pelican config:
+### Command line config
+
+If you are using `markdown_py` command line,
+you can use the `-c config.yaml` option,
+and, in `config.yaml`, add:
+
+```yaml
+customblocks:
+  generators:
+    mytype: mypackage.mymodule:mytype
+    aka_mytype: mypackage.mymodule:mytype
+```
+
+### Pelican
+
+In `pelican.conf`:
 
 ```python
 MARKDOWN = {
@@ -43,20 +58,26 @@ MARKDOWN = {
 }
 ```
 
-In markdonw `config.yaml`:
+### MkDocs
+
+In `mkdocs.yaml`:
 
 ```yaml
-customblocks:
-  generators:
-    mytype: mypackage.mymodule:mytype
-    aka_mytype: mypackage.mymodule:mytype
+markdown_extensions:
+  - customblocks:
+      generators:
+        mytype: mypackage.mymodule:mytype,
+        aka_mytype: mypackage.mymodule:mytype
 ```
 
-If you are distributing the generator and want it to
-be bound to a typename on install,
+
+### Packaging
+
+If you are distributing the generator as a package,
+and want it to be bound to a typename on install,
 register an entry point in the `markdown.customblocks.generators` group.
 
-In `setup.py`
+In `setup.py`:
 
 ```python
 setup(
@@ -73,13 +94,13 @@ setup(
 ```
 
 ::: warning
-    Conflicting entrypoints are resolved randomly.
+    Conflicting entrypoints from different packages
+    are resolved randomly.
     Because of that, be carefull not to register names
-    other developers have registered yet.
+    other developers have already used.
 
-    If you want to redefine an existing block type,
-    please do not register it as entry point,
-    let the user to pick it explicitly in config.
+    It is ok to redefine an existing block type,
+    but let the user to pick it explicitly on config.
 
 ## Parameter mapping
 
@@ -96,8 +117,10 @@ Unlike Python, you can interleave in the headline values with and without keys.
 They are resolved as follows:
 
 1. **Context:** The `ctx` parameter is ignored for parameter matching. See bellow on how to use it.
-1. **Explicit keys:** Explicit keys in the headline matching function parameters not defined as '[positional only](positional-only)' are matched first.
-1. **Flag:** Generator arguments annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`) are considered flags, so:
+1. **Explicit keys:** First, `customblocks` binds keyworded values on the headline whose key matches a parameter name in the generator
+    (Excluding parameters defined as '[positional-only]')
+1. **Flag:** Flags are parameters either annotated as `bool` (like example's `myflag`), or defaulting to `True` or `False`, (like example's `yourflag`).
+    They are filled as follows:
     - When a keyless value matches a flag name in the generator (`myflag`), `True` is passed
     - When it matches the flag name prefixed with `no` (`nomyflag`), `False` is passed
 1. **Positional:** Keyless values in the headline are assigned one-to-one by position order to the unassigned parameters, (excluding those defined as '[keyword-only]').
@@ -107,6 +130,23 @@ They are resolved as follows:
 
 [keyword-only]: https://www.python.org/dev/peps/pep-3102/
 [positional-only]: https://www.python.org/dev/peps/pep-0570/
+
+For example, by fedding the followin headline to the signature above:
+
+```markdown
+::: mytype noyourflag myflag value1 param1=value3 value4 bad=value5
+```
+
+Will set:
+```python
+param1 = "value3" # This will be matched first since uses a explicit key
+yourFlag = False # Flags are set later, from noyourflag
+myflag = True  # From myflag value
+param2 = "value1" # param1 already filled, next in signature is param2
+param3 = "" # No value given, will be warned, and set to ''
+param4 = "default2" # this one will get its default value, no warning given
+# Also warn about unexpected `bad` key, and ignored
+```
 
 ## The context object
 
@@ -118,7 +158,7 @@ But it is useful if you want to receive some context parameters like:
 - `ctx.content`: the indented part of the block, with the indentation removed
 - `ctx.parser`: the markdown parser, can be used to parse the inner content or any other markdown code
 - `ctx.type`: the type of the block
-    - If you reuse the same function for different types, this is how you diferentiate them
+    - If you reuse the same function for different types, this is how you discriminate them
 - `ctx.metadata`: A dictionary with metadata from your metadata plugin.
 - `ctx.config`: A dictionary passed from `extension_configs.customblocks.config`
 
