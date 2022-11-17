@@ -14,10 +14,32 @@ setup(
     python_requires='>=2.7',
     url='https://vokimon.github.io/markdown-customblocks',
     packages=find_packages(exclude=['test*']),
-    entry_point={
+    entry_points={
         'markdown.extensions': [
             'customblocks = customblocks:CustomBlocksExtension',
-        ]
+        ],
+        'markdown.customblocks.generators': [
+            'attention = customblocks.generators:admonition',
+            'caution = customblocks.generators:admonition',
+            'danger = customblocks.generators:admonition',
+            'error = customblocks.generators:admonition',
+            'hint = customblocks.generators:admonition',
+            'important = customblocks.generators:admonition',
+            'note = customblocks.generators:admonition',
+            'tip = customblocks.generators:admonition',
+            'warning = customblocks.generators:admonition',
+            'youtube = customblocks.generators:youtube',
+            'vimeo = customblocks.generators:vimeo',
+            'verkami = customblocks.generators:verkami',
+            'goteo = customblocks.generators:goteo',
+            'twitter = customblocks.generators:twitter',
+            'facebook = customblocks.generators:facebook',
+            'instagram = customblocks.generators:instagram',
+            'map = customblocks.generators:map',
+            'linkcard = customblocks.generators:linkcard',
+            'figure = customblocks.generators:figure',
+            'wikipedia = customblocks.generators:wikipedia',
+        ],
     },
     install_requires=[
         'markdown',

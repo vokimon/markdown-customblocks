@@ -11,6 +11,18 @@ import warnings
 from .generators import container
 
 
+def _installedGenerators():
+    if not hasattr(_installedGenerators, 'value'):
+        import pkg_resources
+        print("Making extension")
+        _installedGenerators.value = dict(
+            (entry_point.name, entry_point.load())
+            for entry_point in pkg_resources.iter_entry_points(
+                group='markdown.customblocks.generators'
+            )
+        )
+    return _installedGenerators.value
+
 class CustomBlocksExtension(Extension):
     """ CustomBlocks extension for Python-Markdown. """
 
@@ -207,8 +219,11 @@ class CustomBlocksProcessor(BlockProcessor):
         if blocks:
             blocks[0] = self.RE_END.sub('', blocks[0])
 
-        typeGenerators.update(self.config['generators'])
-        generator = self._getGenerator(typeGenerators.get(blocktype, container))
+        generators = dict(
+            _installedGenerators(),
+            **self.config['generators']
+        )
+        generator = self._getGenerator(generators.get(blocktype, container))
 
         ctx = ns()
         ctx.type = blocktype
@@ -232,35 +247,6 @@ class CustomBlocksProcessor(BlockProcessor):
             result = etree.XML(result)
         parent.append(result)
         return True
-
-
-from . import generators
-
-
-typeGenerators = dict(
-    attention = generators.admonition,
-    caution = generators.admonition,
-    danger = generators.admonition,
-    error = generators.admonition,
-    hint = generators.admonition,
-    important = generators.admonition,
-    note = generators.admonition,
-    tip = generators.admonition,
-    warning = generators.admonition,
-    youtube = generators.youtube,
-    vimeo = generators.vimeo,
-    verkami = generators.verkami,
-    goteo = generators.goteo,
-    twitter = generators.twitter,
-    facebook = generators.facebook,
-    instagram = generators.instagram,
-    map = generators.map,
-    linkcard = generators.linkcard,
-    figure = generators.figure,
-    wikipedia = generators.wikipedia,
-)
-
-
 
 def makeExtension(**kwargs):  # pragma: no cover
     return CustomBlocksExtension(**kwargs)

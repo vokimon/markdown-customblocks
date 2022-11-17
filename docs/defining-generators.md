@@ -14,9 +14,9 @@ md = markdown.Markdown(
         generators=dict(
             customblocks={
                 # by direct symbol reference
-                'mytype': myparentmodule.mymodule.mytype,
+                'mytype': mypackage.mymodule.mytype,
                 # or using import strings (notice the colon)
-                'aka_mytype': 'myparentmodule.mymodule:mytype',
+                'aka_mytype': 'mypackage.mymodule:mytype',
                 ...
             }
         )
@@ -34,9 +34,9 @@ MARKDOWN = {
         'customblocks': {
             'generators': {
                 # by direct symbol reference
-                'mytype': myparentmodule.mymodule.mytype,
+                'mytype': mypackage.mymodule.mytype,
                 # or using import strings (notice the colon)
-                'aka_mytype': 'myparentmodule.mymodule:mytype',
+                'aka_mytype': 'mypackage.mymodule:mytype',
             }
         },
     },
@@ -48,9 +48,38 @@ In markdonw `config.yaml`:
 ```yaml
 customblocks:
   generators:
-    mytype: myparentmodule.mymodule:mytype
-    aka_mytype: myparentmodule.mymodule:mytype
+    mytype: mypackage.mymodule:mytype
+    aka_mytype: mypackage.mymodule:mytype
 ```
+
+If you are distributing the generator and want it to
+be bound to a typename on install,
+register an entry point in the `markdown.customblocks.generators` group.
+
+In `setup.py`
+
+```python
+setup(
+    ...
+    entry_points={
+        ...
+        markdown.customblocks.generators': [
+            'mytype = mypackage.mymodule:mytype',
+            'aka_mytype = mypackage.mymodule:mytype',
+        ],
+    },
+    ...
+}
+```
+
+::: warning
+    Conflicting entrypoints are resolved randomly.
+    Because of that, be carefull not to register names
+    other developers have registered yet.
+
+    If you want to redefine an existing block type,
+    please do not register it as entry point,
+    let the user to pick it explicitly in config.
 
 ## Parameter mapping
 
@@ -149,7 +178,7 @@ Notice the underline, as `class` is a reserved word in Python.
 ```python
 from customblocks.utils import E, Markdown
 
-def mygenerator(ctx, image):
+def mytype(ctx, image):
 	return (
 		E('.mytype',
 			dict(style="width: 30%; align: left"),
