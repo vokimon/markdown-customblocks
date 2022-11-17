@@ -257,6 +257,7 @@ typeGenerators = dict(
     map = generators.map,
     linkcard = generators.linkcard,
     figure = generators.figure,
+    wikipedia = generators.wikipedia,
 )
 
 

@@ -143,6 +143,8 @@ The extension provides the following predefined generators:
     Maps from OpenStreetMaps.or
 - [`linkcard`](https://vokimon.github.io/markdown-customblocks/generators-linkcard/):
     External link cards (like Facebook and Twitter do, when you post a link)
+- [`wikipedia`](https://vokimon.github.io/markdown-customblocks/generators-wikipedia/):
+    Wikipedia article card by lemma (and language)
 - [`youtube`](https://vokimon.github.io/markdown-customblocks/generators-youtube/):
     Embeded videos from youtube...
 - [`vimeo`](https://vokimon.github.io/markdown-customblocks/generators-vimeo/):

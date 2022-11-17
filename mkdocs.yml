@@ -11,6 +11,7 @@ nav:
     - Figure: generators-figure.md
     - Map: generators-map.md
     - Linkcard: generators-linkcard.md
+    - Wikipedia: generators-wikipedia.md
     - Youtube: generators-youtube.md
     - Vimeo: generators-vimeo.md
     - Twitter: generators-twitter.md

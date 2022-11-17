@@ -241,5 +241,9 @@ def map(ctx, location=None, marker=True, *args, **kwds):
         **kwds
     )
 
+def wikipedia(ctx, lemma, *args, lang=None, wideimage=False, **kwds):
+    lang = lang or 'en'
+    wiki_url = f'https://{lang}.wikipedia.org/wiki/{lemma}'
+    return linkcard(ctx, wiki_url, 'wikipedia', wideimage=wideimage, *args, **kwds)
 
 # vim: et ts=4 sw=4

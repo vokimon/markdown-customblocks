@@ -565,4 +565,64 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figure>"
             )
 
+    def test_wikipedia(self):
+        self.assertMarkdown("""
+            ::: wikipedia "Sant Joan Despí"
+            ""","""\
+<div class="linkcard wikipedia">
+<div class="linkcard-featured-image side">
+<a href="https://en.wikipedia.org/wiki/Sant Joan Despí" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Torre_de_la_Creu.JPG/1200px-Torre_de_la_Creu.JPG" />
+</a>
+</div>
+<p class="linkcard-heading"><a href="https://en.wikipedia.org/wiki/Sant Joan Despí" target="_blank">Sant Joan Despí - Wikipedia</a></p>
+<div class="linkcard-excerpt">
+<p>
+<p><b>Sant Joan Despí</b> (<small>Catalan pronunciation:&#160;</small><span title="Representation in the International Phonetic Alphabet (IPA)" lang="ca-Latn-fonipa">[ˈsaɲ ʒuˈan dəsˈpi]</span>; Old Catalan for '"Saint John of the Pine"') is a city and municipality located in the Baix Llobregat area (Barcelona province in Catalonia, Spain). It is situated on the left bank of the Llobregat river.</p>
+</p>
+<span class="linkcard-more"><a href="https://en.wikipedia.org/wiki/Sant Joan Despí" target="_blank">Read more</a></span>
+</div>
+<div class="linkcard-footer">
+<div class="linkcard-site-title">
+<a href="https://en.wikipedia.org" target="_blank">
+<img class="linkcard-site-icon" height="32" src="https://en.wikipedia.org/static/favicon/wikipedia.ico" width="32" />
+<span>EN.WIKIPEDIA.ORG</span>
+</a>
+</div>
+<div class="linkcard-meta">
+</div>
+</div>
+</div>
+""")
+
+    def test_wikipedia_lang(self):
+        self.assertMarkdown("""
+            ::: wikipedia "Sant Joan Despí" lang=ca
+            ""","""\
+<div class="linkcard wikipedia">
+<div class="linkcard-featured-image side">
+<a href="https://ca.wikipedia.org/wiki/Sant Joan Despí" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/MasMorell-SantJoanDespi-CasesAuriga-5573.jpg" />
+</a>
+</div>
+<p class="linkcard-heading"><a href="https://ca.wikipedia.org/wiki/Sant Joan Despí" target="_blank">Sant Joan Despí - Viquipèdia, l'enciclopèdia lliure</a></p>
+<div class="linkcard-excerpt">
+<p>
+<p><b>Sant Joan Despí</b> és un municipi dins de la comarca del Baix Llobregat, situat al pla del Llobregat, a l'esquerra del riu. El municipi confronta amb els de Sant Feliu de Llobregat, Sant Just Desvern, Esplugues de Llobregat, Cornellà de Llobregat, Sant Boi i Santa Coloma de Cervelló.</p>
+</p>
+<span class="linkcard-more"><a href="https://ca.wikipedia.org/wiki/Sant Joan Despí" target="_blank">Read more</a></span>
+</div>
+<div class="linkcard-footer">
+<div class="linkcard-site-title">
+<a href="https://ca.wikipedia.org" target="_blank">
+<img class="linkcard-site-icon" height="32" src="https://ca.wikipedia.org/static/favicon/wikipedia.ico" width="32" />
+<span>CA.WIKIPEDIA.ORG</span>
+</a>
+</div>
+<div class="linkcard-meta">
+</div>
+</div>
+</div>
+""")
+
 # vim: et ts=4 sw=4
