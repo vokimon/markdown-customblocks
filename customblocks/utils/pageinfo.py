@@ -86,7 +86,7 @@ class PageInfo:
         #if description: return description
 
         baseurl, lemma = self._rel('canonical').split('/wiki/')
-        excerpt_url = 'https:' + baseurl+ '/w/api.php?' + (
+        excerpt_url = baseurl+ '/w/api.php?' + (
             f'format=json&action=query&prop=extracts&exsentences=2&exintro&titles={lemma}'
         )
         from . import Fetcher

@@ -174,7 +174,7 @@ class PageInfo_Test(unittest.TestCase):
                     ),
                     E('link',
                         rel='canonical',
-                        href='//ca.wikipedia.org/wiki/Sant_Joan_Despí',
+                        href='https://ca.wikipedia.org/wiki/Sant_Joan_Despí',
                     ),
                 )
             )
@@ -196,7 +196,7 @@ class PageInfo_Test(unittest.TestCase):
                     ),
                     E('link',
                         rel='canonical',
-                        href='//ca.wikipedia.org/wiki/Not_existing_article',
+                        href='https://ca.wikipedia.org/wiki/Not_existing_article',
                     ),
                 )
             )
