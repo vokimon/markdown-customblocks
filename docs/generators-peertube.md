@@ -41,7 +41,10 @@ downloaded using all instances.
 : use p2p to download the video
 
 `*args`
-: excess
+: added as additional class for the outter div
+
+`**kwds`
+: added as attributes for the outter div
 
 ## Styling
 

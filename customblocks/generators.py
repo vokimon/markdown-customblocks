@@ -147,6 +147,7 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
 def peertube(ctx, instance, uuid, *args,
         start=None, stop=None, loop=False, autoplay=False,
         muted=False, title=True, controls=True, p2p=True,
+        **kwds
 ):
     # TODO:
     # warningTitle=0 To hide the privacy warning subtitle
@@ -168,6 +169,7 @@ def peertube(ctx, instance, uuid, *args,
 
     return E(
         ''.join(f'.{cls}' for cls in ('videowrapper', 'peertube', *args)),
+        kwds,
         E('iframe',
             src=f"https://{instance}/videos/embed/{uuid}{options}",
             allowfullscreen="allowfullscreen",

@@ -63,8 +63,6 @@ That stylesheet have some configurable css vars you may modify.
 ## TODO
 
 - Global default options
-- Improve the css layout
 - Image placeholder while loading
 - Display author metadata
-- Support Mediawiki excerpts
 
