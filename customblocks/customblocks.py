@@ -14,7 +14,6 @@ from .generators import container
 def _installedGenerators():
     if not hasattr(_installedGenerators, 'value'):
         import pkg_resources
-        print("Making extension")
         _installedGenerators.value = dict(
             (entry_point.name, entry_point.load())
             for entry_point in pkg_resources.iter_entry_points(

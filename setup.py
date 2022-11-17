@@ -29,6 +29,7 @@ setup(
             'tip = customblocks.generators:admonition',
             'warning = customblocks.generators:admonition',
             'youtube = customblocks.generators:youtube',
+            'peertube = customblocks.generators:peertube',
             'vimeo = customblocks.generators:vimeo',
             'verkami = customblocks.generators:verkami',
             'goteo = customblocks.generators:goteo',

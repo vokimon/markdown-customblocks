@@ -144,6 +144,39 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
         allowfullscreen="allowfullscreen",
     )
 
+def peertube(ctx, instance, uuid, *args,
+        start=None, stop=None, loop=False, autoplay=False,
+        muted=False, title=True, controls=True, p2p=True,
+):
+    # TODO:
+    # warningTitle=0 To hide the privacy warning subtitle
+    # peertubeLink=0 To hide the link to the video in peertube instance
+    options = []
+    if start is not None:
+        options.append("start={}".format(start))
+    if stop is not None:
+        options.append("stop={}".format(stop))
+    if loop: options.append("loop=1")
+    if autoplay: options.append("autoplay=1")
+    if muted: options.append("muted=1")
+    if not title: options.append("title=0")
+    if not controls: options.append("controlBar=0")
+    if not p2p: options.append("p2p=0")
+
+    options = '&amp;'.join(options)
+    if options: options = "?"+options
+
+    return E(
+        ''.join(f'.{cls}' for cls in ('videowrapper', 'peertube', *args)),
+        E('iframe',
+            src=f"https://{instance}/videos/embed/{uuid}{options}",
+            allowfullscreen="allowfullscreen",
+            sandbox="allow-same-origin allow-scripts allow-popups",
+            frameborder="0",
+        ),
+    )
+
+
 def verkami(ctx, id, *, landscape=False):
     orientation = 'landscape' if landscape else 'portrait'
     style = (

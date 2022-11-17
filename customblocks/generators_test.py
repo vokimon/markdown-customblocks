@@ -625,4 +625,22 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    def test_peertube(self):
+        self.assertMarkdown("""
+            ::: peertube tilvids.com bb6057d2-427b-4c31-9b8c-0a8c7d0a29c9
+        """, """\
+<div class="videowrapper peertube">
+<iframe allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups" src="https://tilvids.com/videos/embed/bb6057d2-427b-4c31-9b8c-0a8c7d0a29c9"></iframe>
+</div>
+""")
+
+    def test_peertube_fullOptions(self):
+        self.assertMarkdown("""
+            ::: peertube tilvids.com bb6057d2-427b-4c31-9b8c-0a8c7d0a29c9 start=10s stop=1m loop autoplay muted notitle nocontrols nop2p
+        """, """\
+<div class="videowrapper peertube">
+<iframe allowfullscreen="allowfullscreen" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups" src="https://tilvids.com/videos/embed/bb6057d2-427b-4c31-9b8c-0a8c7d0a29c9?start=10s&amp;stop=1m&amp;loop=1&amp;autoplay=1&amp;muted=1&amp;title=0&amp;controlBar=0&amp;p2p=0"></iframe>
+</div>
+""")
+
 # vim: et ts=4 sw=4

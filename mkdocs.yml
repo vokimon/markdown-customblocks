@@ -13,6 +13,7 @@ nav:
     - Linkcard: generators-linkcard.md
     - Wikipedia: generators-wikipedia.md
     - Youtube: generators-youtube.md
+    - Peertube: generators-peertube.md
     - Vimeo: generators-vimeo.md
     - Twitter: generators-twitter.md
     - Instagram: generators-instagram.md
