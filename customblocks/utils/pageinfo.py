@@ -29,10 +29,12 @@ class PageInfo:
 
     def _tag(self, name):
         tag = self._soup.find(name)
-        if tag: return tag.text
+        if tag: return tag.get_text()
 
     def _meta(self, name):
         meta = self._soup.find('meta', property=name)
+        if meta: return meta.get('content')
+        meta = self._soup.find('meta', dict(name=name))
         if meta: return meta.get('content')
 
     def _rel(self, name):
@@ -76,6 +78,24 @@ class PageInfo:
             self.sitename
         )
 
+    def _mediawikiDescription(self):
+        if 'MediaWiki' not in (self._meta('generator') or ''):
+            return
+        # Not all pages have shortdescription and it is too short
+        #description = self._soup.find(class_='shortdescription')
+        #if description: return description
+
+        baseurl, lemma = self._rel('canonical').split('/wiki/')
+        excerpt_url = 'https:' + baseurl+ '/w/api.php?' + (
+            f'format=json&action=query&prop=extracts&exsentences=2&exintro&titles={lemma}'
+        )
+        from . import Fetcher
+        fetcher = Fetcher('fetchercache/wikipedia') # TODO: Configurable
+        content = ns.deep(fetcher.get(excerpt_url).json())
+        for page in content.query.pages.values():
+            if 'extract' in page:
+                return page.extract
+
     @property
     @cached
     def description(self):
@@ -83,6 +103,7 @@ class PageInfo:
             self._meta('og:description') or
             self._meta('twitter:description') or
             self._meta('description') or
+            self._mediawikiDescription() or
             ''
         )
 
