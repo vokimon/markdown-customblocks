@@ -2,97 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/CHANGES/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/TODO/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/defining-generators/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-admonition/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-container/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-facebook/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-figure/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-goteo/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-instagram/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-linkcard/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-map/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-twitter/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-verkami/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-vimeo/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://vokimon.github.io/markdown-customblocks/generators-wikipedia/</loc>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/generators-youtube/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/inspiration/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/motivation/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://vokimon.github.io/markdown-customblocks/tutorial/</loc>
-         <lastmod>2022-11-15</lastmod>
+         <lastmod>2022-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

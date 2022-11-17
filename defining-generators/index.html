@@ -19,7 +19,7 @@
     
     
       
-        <title>Defining generators - Markdown Custom Blocks</title>
+        <title>Creating new block types - Markdown Custom Blocks</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#implementing-a-generator" class="md-skip">
+        <a href="#creating-new-block-types" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Defining generators
+              Creating new block types
             
           </span>
         </div>
@@ -367,6 +367,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../generators-wikipedia/" class="md-nav__link">
+        Wikipedia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../generators-youtube/" class="md-nav__link">
         Youtube
       </a>
@@ -483,12 +497,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Defining generators
+          Creating new block types
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Defining generators
+        Creating new block types
       </a>
       
         
@@ -510,6 +524,47 @@
   <a href="#binding-to-a-typename" class="md-nav__link">
     Binding to a typename
   </a>
+  
+    <nav class="md-nav" aria-label="Binding to a typename">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-code" class="md-nav__link">
+    Python Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-config" class="md-nav__link">
+    Command line config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pelican" class="md-nav__link">
+    Pelican
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    MkDocs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packaging" class="md-nav__link">
+    Packaging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -697,6 +752,47 @@
     Binding to a typename
   </a>
   
+    <nav class="md-nav" aria-label="Binding to a typename">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-code" class="md-nav__link">
+    Python Code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-config" class="md-nav__link">
+    Command line config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pelican" class="md-nav__link">
+    Pelican
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    MkDocs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#packaging" class="md-nav__link">
+    Packaging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -774,10 +870,10 @@
   </a>
 
 
-<h1 id="implementing-a-generator">Implementing a generator</h1>
+<h1 id="creating-new-block-types">Creating new block types</h1>
 <h2 id="binding-to-a-typename">Binding to a typename</h2>
 <p>A block type can be defined just by hooking the <strong>generator</strong> function to the type.</p>
-<p>In Python:</p>
+<h3 id="python-code">Python Code</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">markdown</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">md</span> <span class="o">=</span> <span class="n">markdown</span><span class="o">.</span><span class="n">Markdown</span><span class="p">(</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">extensions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;customblocks&quot;</span><span class="p">],</span>
@@ -785,9 +881,9 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="n">generators</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="n">customblocks</span><span class="o">=</span><span class="p">{</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                <span class="c1"># by direct symbol reference</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                <span class="s1">&#39;mytype&#39;</span><span class="p">:</span> <span class="n">myparentmodule</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">mytype</span><span class="p">,</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                <span class="s1">&#39;mytype&#39;</span><span class="p">:</span> <span class="n">mypackage</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">mytype</span><span class="p">,</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                <span class="c1"># or using import strings (notice the colon)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                <span class="s1">&#39;aka_mytype&#39;</span><span class="p">:</span> <span class="s1">&#39;myparentmodule.mymodule:mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                <span class="s1">&#39;aka_mytype&#39;</span><span class="p">:</span> <span class="s1">&#39;mypackage.mymodule:mytype&#39;</span><span class="p">,</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                <span class="o">...</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="p">}</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="p">)</span>
@@ -795,40 +891,80 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">)</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">md</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">markdowncontent</span><span class="p">)</span>
 </code></pre></div>
-<p>In Pelican config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">MARKDOWN</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="o">...</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s1">&#39;extensions_configs&#39;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="s1">&#39;customblocks&#39;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="s1">&#39;generators&#39;</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                <span class="c1"># by direct symbol reference</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>                <span class="s1">&#39;mytype&#39;</span><span class="p">:</span> <span class="n">myparentmodule</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">mytype</span><span class="p">,</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                <span class="c1"># or using import strings (notice the colon)</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                <span class="s1">&#39;aka_mytype&#39;</span><span class="p">:</span> <span class="s1">&#39;myparentmodule.mymodule:mytype&#39;</span><span class="p">,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="p">}</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="p">},</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="p">},</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">}</span>
+<h3 id="command-line-config">Command line config</h3>
+<p>If you are using <code>markdown_py</code> command line,
+you can use the <code>-c config.yaml</code> option,
+and, in <code>config.yaml</code>, add:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">customblocks</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">generators</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">mytype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypackage.mymodule:mytype</span><span class="w"></span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">aka_mytype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypackage.mymodule:mytype</span><span class="w"></span>
 </code></pre></div>
-<p>In markdonw <code>config.yaml</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">customblocks</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">generators</span><span class="p">:</span><span class="w"></span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">mytype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myparentmodule.mymodule:mytype</span><span class="w"></span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">aka_mytype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myparentmodule.mymodule:mytype</span><span class="w"></span>
+<h3 id="pelican">Pelican</h3>
+<p>In <code>pelican.conf</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">MARKDOWN</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="o">...</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s1">&#39;extensions_configs&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="s1">&#39;customblocks&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="s1">&#39;generators&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>                <span class="c1"># by direct symbol reference</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>                <span class="s1">&#39;mytype&#39;</span><span class="p">:</span> <span class="n">mypackage</span><span class="o">.</span><span class="n">mymodule</span><span class="o">.</span><span class="n">mytype</span><span class="p">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>                <span class="c1"># or using import strings (notice the colon)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>                <span class="s1">&#39;aka_mytype&#39;</span><span class="p">:</span> <span class="s1">&#39;mypackage.mymodule:mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="p">}</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="p">},</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="p">},</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="p">}</span>
 </code></pre></div>
+<h3 id="mkdocs">MkDocs</h3>
+<p>In <code>mkdocs.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">markdown_extensions</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">customblocks</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">      </span><span class="nt">generators</span><span class="p">:</span><span class="w"></span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="nt">mytype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypackage.mymodule:mytype,</span><span class="w"></span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">aka_mytype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mypackage.mymodule:mytype</span><span class="w"></span>
+</code></pre></div>
+<h3 id="packaging">Packaging</h3>
+<p>If you are distributing the generator as a package,
+and want it to be bound to a typename on install,
+register an entry point in the <code>markdown.customblocks.generators</code> group.</p>
+<p>In <code>setup.py</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">setup</span><span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">...</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="o">...</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">markdown</span><span class="o">.</span><span class="n">customblocks</span><span class="o">.</span><span class="n">generators</span><span class="s1">&#39;: [</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="s1">&#39;mytype = mypackage.mymodule:mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="s1">&#39;aka_mytype = mypackage.mymodule:mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="p">],</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="p">},</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="o">...</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Conflicting entrypoints from different packages
+are resolved randomly.
+Because of that, be carefull not to register names
+other developers have already used.</p>
+<p>It is ok to redefine an existing block type,
+but let the user to pick it explicitly on config.</p>
+</div>
 <h2 id="parameter-mapping">Parameter mapping</h2>
 <p>The signature of the generator will determine the attributes taken from the headline.
 Say you have a generator with the following signature:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">mytype</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">myflag</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="n">param3</span><span class="p">,</span> <span class="n">yourflag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">param4</span><span class="o">=</span><span class="s1">&#39;default2&#39;</span><span class="p">):</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span> <span class="nf">mytype</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">myflag</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="n">param3</span><span class="p">,</span> <span class="n">yourflag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">param4</span><span class="o">=</span><span class="s1">&#39;default2&#39;</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <p>Function parameters are filled using values parsed from <em>head line</em>.
 Unlike Python, you can interleave in the headline values with and without keys.
 They are resolved as follows:</p>
 <ol>
 <li><strong>Context:</strong> The <code>ctx</code> parameter is ignored for parameter matching. See bellow on how to use it.</li>
-<li><strong>Explicit keys:</strong> Explicit keys in the headline matching function parameters not defined as '<a href="positional-only">positional only</a>' are matched first.</li>
-<li><strong>Flag:</strong> Generator arguments annotated as <code>bool</code> (like example's <code>myflag</code>), or defaulting to <code>True</code> or <code>False</code>, (like example's <code>yourflag</code>) are considered flags, so:<ul>
+<li><strong>Explicit keys:</strong> First, <code>customblocks</code> binds keyworded values on the headline whose key matches a parameter name in the generator
+    (Excluding parameters defined as '<a href="https://www.python.org/dev/peps/pep-0570/">positional-only</a>')</li>
+<li><strong>Flag:</strong> Flags are parameters either annotated as <code>bool</code> (like example's <code>myflag</code>), or defaulting to <code>True</code> or <code>False</code>, (like example's <code>yourflag</code>).
+    They are filled as follows:<ul>
 <li>When a keyless value matches a flag name in the generator (<code>myflag</code>), <code>True</code> is passed</li>
 <li>When it matches the flag name prefixed with <code>no</code> (<code>nomyflag</code>), <code>False</code> is passed</li>
 </ul>
@@ -838,6 +974,18 @@ They are resolved as follows:</p>
 <li><strong>Unmatched function parameters:</strong> If they have no default value, will be warned and assigned an empty string.</li>
 <li><strong>Unmatched headline parameters:</strong> They will be warned and ignored.</li>
 </ol>
+<p>For example, by fedding the followin headline to the signature above:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>::: mytype noyourflag myflag value1 param1=value3 value4 bad=value5
+</code></pre></div>
+<p>Will set:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">param1</span> <span class="o">=</span> <span class="s2">&quot;value3&quot;</span> <span class="c1"># This will be matched first since uses a explicit key</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">yourFlag</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># Flags are set later, from noyourflag</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">myflag</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># From myflag value</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">param2</span> <span class="o">=</span> <span class="s2">&quot;value1&quot;</span> <span class="c1"># param1 already filled, next in signature is param2</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">param3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># No value given, will be warned, and set to &#39;&#39;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">param4</span> <span class="o">=</span> <span class="s2">&quot;default2&quot;</span> <span class="c1"># this one will get its default value, no warning given</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1"># Also warn about unexpected `bad` key, and ignored</span>
+</code></pre></div></p>
 <h2 id="the-context-object">The context object</h2>
 <p>Regarding the <code>ctx</code> parameter, it is the context.
 If you don't use it, you can skip it.
@@ -847,7 +995,7 @@ But it is useful if you want to receive some context parameters like:</p>
 <li><code>ctx.content</code>: the indented part of the block, with the indentation removed</li>
 <li><code>ctx.parser</code>: the markdown parser, can be used to parse the inner content or any other markdown code</li>
 <li><code>ctx.type</code>: the type of the block<ul>
-<li>If you reuse the same function for different types, this is how you diferentiate them</li>
+<li>If you reuse the same function for different types, this is how you discriminate them</li>
 </ul>
 </li>
 <li><code>ctx.metadata</code>: A dictionary with metadata from your metadata plugin.</li>
@@ -877,7 +1025,7 @@ If you need this functionality you are encouraged to use them.</p>
 <p><a href="http://hyperhype.github.io/hyperscript/">Hyperscript</a> is the idea of writing code that generates html/xml
 as nested function calls that look like the actual xml structure.
 This can be done by using the <code>customblocks.utils.E</code> function which has this signature:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>def E(tag, *children, **attributes): ...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>def E(tag, *children, **attributes): ...
 </code></pre></div>
 <p><code>tag</code> is the name of the tag (<code>pre</code>, <code>div</code>, <code>strong</code>...).
 An empty string is equivalent to <code>div</code>.
@@ -894,18 +1042,18 @@ Notice the underline, as <code>class</code> is a reserved word in Python.</p>
 <li><code>customblocks.utils.Markdown</code>: will append parsed markdown (see below)</li>
 <li>Any <code>tuple</code>, <code>list</code> or iterable: will add each item following previous rules</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">def</span> <span class="nf">mygenerator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">return</span> <span class="p">(</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="n">E</span><span class="p">(</span><span class="s1">&#39;.mytype&#39;</span><span class="p">,</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            <span class="nb">dict</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;width: 30%; align: left&quot;</span><span class="p">),</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>            <span class="n">E</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">href</span><span class="o">=</span><span class="n">image</span><span class="p">),</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>                <span class="n">E</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">image</span><span class="p">),</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="p">),</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="n">Markdown</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">parser</span><span class="p">),</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="p">)</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span> <span class="nf">mytype</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">return</span> <span class="p">(</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="n">E</span><span class="p">(</span><span class="s1">&#39;.mytype&#39;</span><span class="p">,</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>            <span class="nb">dict</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;width: 30%; align: left&quot;</span><span class="p">),</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>            <span class="n">E</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">href</span><span class="o">=</span><span class="n">image</span><span class="p">),</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>                <span class="n">E</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="n">image</span><span class="p">),</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>            <span class="p">),</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>            <span class="n">Markdown</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">parser</span><span class="p">),</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        <span class="p">)</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="p">)</span>
 </code></pre></div>
 <h3 id="pageinfo">PageInfo</h3>
 <p><code>utils.pageinfo.PageInfo</code> is a class that retrieves
@@ -914,13 +1062,13 @@ meta information from html pages by means of its properties.</p>
 Once you get one property for a given page, later uses will have little impact.</p>
 <p>Any attribute you explicit on the constructor will override
 the ones derived from actual content.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">info</span> <span class="o">=</span> <span class="n">PageInfo</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://site.com/path/page.html&#39;</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">info</span><span class="o">.</span><span class="n">sitename</span> <span class="c1"># the name of the site (meta og:site_name or the domain</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">info</span><span class="o">.</span><span class="n">siteicon</span> <span class="c1"># the favicon or similar</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">info</span><span class="o">.</span><span class="n">siteurl</span>  <span class="c1"># the base url of the site (not the page)</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">info</span><span class="o">.</span><span class="n">title</span>    <span class="c1"># page title (from og:title meta or `&lt;title&gt;` content)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">info</span><span class="o">.</span><span class="n">description</span> <span class="c1"># short description (from og:description or twitter:description)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">info</span><span class="o">.</span><span class="n">image</span>    <span class="c1"># featured image (from og:image or twitter:image, or site image)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">info</span> <span class="o">=</span> <span class="n">PageInfo</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://site.com/path/page.html&#39;</span><span class="p">)</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">info</span><span class="o">.</span><span class="n">sitename</span> <span class="c1"># the name of the site (meta og:site_name or the domain</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">info</span><span class="o">.</span><span class="n">siteicon</span> <span class="c1"># the favicon or similar</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">info</span><span class="o">.</span><span class="n">siteurl</span>  <span class="c1"># the base url of the site (not the page)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">info</span><span class="o">.</span><span class="n">title</span>    <span class="c1"># page title (from og:title meta or `&lt;title&gt;` content)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">info</span><span class="o">.</span><span class="n">description</span> <span class="c1"># short description (from og:description or twitter:description)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">info</span><span class="o">.</span><span class="n">image</span>    <span class="c1"># featured image (from og:image or twitter:image, or site image)</span>
 </code></pre></div>
 <h3 id="fetcher">Fetcher</h3>
 <p>A fetcher object is a wrapper around the <code>requests</code> library
@@ -931,12 +1079,12 @@ the request response is stored in the provided folder in a yaml file
 which has the mangled url as name.
 Successive tries to download it just take the content of that file
 to construct a query.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">Fetcher</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">fetcher</span> <span class="o">=</span> <span class="n">Fetcher</span><span class="p">(</span><span class="s1">&#39;mycachedir&#39;</span><span class="p">)</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">fetcher</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://canvoki.net/codder&#39;</span><span class="p">)</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># to force next call</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">fetcher</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;https://canvoki.net/codder&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">Fetcher</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">fetcher</span> <span class="o">=</span> <span class="n">Fetcher</span><span class="p">(</span><span class="s1">&#39;mycachedir&#39;</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">fetcher</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://canvoki.net/codder&#39;</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># to force next call</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">fetcher</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;https://canvoki.net/codder&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 

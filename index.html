@@ -436,6 +436,20 @@
   
   
     <li class="md-nav__item">
+      <a href="generators-wikipedia/" class="md-nav__link">
+        Wikipedia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="generators-youtube/" class="md-nav__link">
         Youtube
       </a>
@@ -543,7 +557,7 @@
   
     <li class="md-nav__item">
       <a href="defining-generators/" class="md-nav__link">
-        Defining generators
+        Creating new block types
       </a>
     </li>
   
@@ -790,17 +804,17 @@ generating this:</p>
 <p>That would generate this HTML:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">attrib1</span><span class="o">=</span><span class="s">&quot;value 1&quot;</span> <span class="na">attrib2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>Indented Content<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>The previous example, works and may be enough for you,
+<p>The previous example, may work for simple cases,
 but it won't work in a general scenario.
-Parameters and content are included and
+Parameters and content are included as is and
 they should be escaped or processed as Markdown content.
-Luckily, the extension provides some useful tools for that:
+Luckily, <code>customblocks</code> provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span> <span class="nf">mygenerator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">return</span> <span class="n">E</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">attrib1</span><span class="o">=</span><span class="n">param1</span><span class="p">,</span> <span class="n">attrib2</span><span class="o">=</span><span class="n">param2</span><span class="p">,</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">Markdown</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">parser</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="n">Markdown</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">parser</span><span class="p">)</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="p">)</span>
 </code></pre></div>
 <p>You can read more about them at the <a href="https://vokimon.github.io/markdown-customblocks/defining-generators/#hyperscript">related documentation</a>.</p>
@@ -818,6 +832,8 @@ the hyperscript generator and the Markdown subparser:</p>
     Maps from OpenStreetMaps.or</li>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-linkcard/"><code>linkcard</code></a>:
     External link cards (like Facebook and Twitter do, when you post a link)</li>
+<li><a href="https://vokimon.github.io/markdown-customblocks/generators-wikipedia/"><code>wikipedia</code></a>:
+    Wikipedia article card by lemma (and language)</li>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-youtube/"><code>youtube</code></a>:
     Embeded videos from youtube...</li>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-vimeo/"><code>vimeo</code></a>:
@@ -879,12 +895,14 @@ For example:</p>
 <p class="admonition-title">Note</p>
 <p>A closing <code>:::</code> tag is optional.
 For most cases, indentation should be enough, visually, and functionally.
-Seldomly, it is necessary like in the following markdown to
-split the mealphoto content from a code block which is also indented.</p>
+But, seldomly, it is necessary.
+Like in the example below, where
+the mealphoto content would be mixed with 
+the later code block</p>
 <div class="highlight"><pre><span></span><code>::: mealphoto sweetwater.jpg
-    Looks gorgeus!
+        Looks gorgeus!
 :::
-    This is a code block by indentation
+        This is a code block by indentation
 </code></pre></div>
 </div>
 <h2 id="further-reading">Further reading</h2>
