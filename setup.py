@@ -29,6 +29,7 @@ setup(
         'geocoder', # map
         'mkdocs', # docs
         'mkdocs-material', # docs
+        'urllib3<3', # conflicts with requests
     ],
     test_suite='customblocks',
     classifiers=[
