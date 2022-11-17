@@ -30,6 +30,9 @@ Thus, the first fetch will be cached for later generations.
 `wideimage` (bool, default True)
 : Whether the featured image will be shown wide, if not, a small thumb will be shown
 
+`*args`
+: any extra positional value will be added as class to the top level element
+
 Additionally you can provide the following keyword parameters
 to override information extracted from the url:
 
@@ -40,7 +43,7 @@ to override information extracted from the url:
 - `sitename`: the name of the main site
 - `siteicon`: the site icon
 
-Content, if provided will be used as excerpt instead of the summary in the page.
+Content, if provided, will be used as description instead of the summary in the page.
 
 
 ## Styling

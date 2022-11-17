@@ -52,7 +52,7 @@ def figure(ctx, url, *args, lightbox:bool=None, **kwds):
         **kwds
     )
 
-def linkcard(ctx, url, *, wideimage=True, **overrides):
+def linkcard(ctx, url, *args, wideimage=True, **overrides):
     fetcher = Fetcher('fetchercache/linkcard') # TODO: Configurable
     response = fetcher.get(url)
 
@@ -61,6 +61,7 @@ def linkcard(ctx, url, *, wideimage=True, **overrides):
     nl='\n'
     return E('.linkcard',
         info.image and E('.linkcard-featured-image' + ('.square' if not wideimage else ''), nl,
+            dict(_class=' '.join(args)),
             E('a', dict(href=url, target='_blank'), nl,
                 E('img', src=info.image), nl,
             ), nl,
