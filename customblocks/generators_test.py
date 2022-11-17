@@ -339,7 +339,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             ::: linkcard nowideimage https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html
             ""","""\
 <div class="linkcard">
-<div class="linkcard-featured-image square">""" # difference here
+<div class="linkcard-featured-image side">""" # difference here
 """
 <a href="https://www.eldiario.es/economia/Congreso-decreto-ingreso-minimo-vital_0_1036596743.html" target="_blank">
 <img src="https://static.eldiario.es/clip/79066be9-947d-4b83-bab9-a0d092bb391f_facebook-watermarked-aspect-ratio_default_0.jpg" />

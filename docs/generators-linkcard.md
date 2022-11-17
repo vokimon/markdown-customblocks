@@ -50,6 +50,8 @@ Content, if provided, will be used as description instead of the summary in the 
 
 The above example uses [this css](css/linkcard.css).
 
+That stylesheet have some configurable css vars you may modify.
+
 ## Examples
 
 ```markdown

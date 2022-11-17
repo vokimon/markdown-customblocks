@@ -60,8 +60,8 @@ def linkcard(ctx, url, *args, wideimage=True, **overrides):
 
     nl='\n'
     return E('.linkcard',
-        info.image and E('.linkcard-featured-image' + ('.square' if not wideimage else ''), nl,
-            dict(_class=' '.join(args)),
+        dict(_class=' '.join(args)),
+        info.image and E('.linkcard-featured-image' + ('.side' if not wideimage else ''), nl,
             E('a', dict(href=url, target='_blank'), nl,
                 E('img', src=info.image), nl,
             ), nl,
