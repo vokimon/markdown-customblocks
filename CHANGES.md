@@ -1,18 +1,25 @@
 # Release history
 
-## Unreleased
+## markdown-customblocks 1.4.0 (2022-11-20)
 
-- Third party generators can be registered using project
-  metadata entry points as `markdown.customblocks.generators`
+- Third party generators can be registered by using project
+  metadata's entry points for `markdown.customblocks.generators`
 - New block types
-  - `wikipedia`: produces a linkcard for a lemma
+    - `wikipedia`: produces a linkcard for a lemma
+    - `mastodon`: embed a mastodon post
+    - `peertube`: embed a peertube video
 - `linkcard`:
-  - Keyless values are added as classes to the top level element
-  - Extract descriptions from MediaWiki based sites (wikipedia...)
-  - Html class `squared` renamed `side`, used to identify side images
-  - Configurable CSS variables in the recommended stylesheet
-  - Improved image layout in the recommended styleshet
-  - Side image turns wide image on small devices
+    - Keyless values are added as classes to the top level element
+    - Extract descriptions from MediaWiki based sites (wikipedia...)
+    - Html class `squared` renamed `side`, used to identify side images
+    - Configurable CSS variables in the recommended stylesheet
+    - Improved image layout in the recommended styleshet
+    - Side image turns wide image on small devices
+- `vimeo`:
+    - Wrapping inside `div.video.vimeo` analog to other video inserts
+    - Accepts exceding key and positional parameters like `container`
+- `youtube`:
+    - Fix: iframe border removed by default
 
 ## markdown-customblocks 1.3.1 (2022-11-06)
 

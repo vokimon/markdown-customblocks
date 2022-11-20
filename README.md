@@ -18,7 +18,7 @@ whose output can be **redefined** by means of a simple Python function.
 
 Many off-the-shelf components are provided such as
 div-containers, admonitions, figures, link cards, maps...
-and some embeded widgets from common sites (youtube, vimeo, twitter, facebook, instagram, goteo, verkami...)
+and some embeded widgets from common sites (wikipedia, youtube, vimeo, peertube, mastodon, twitter, facebook, instagram, goteo, verkami...)
 
 It also includes convenience tools to ease component definition:
 hyperscript html generation, cached page fetching and metadata page extraction.
