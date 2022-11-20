@@ -119,10 +119,11 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False, style=Non
         ''.join(f'.{cls}' for cls in ('videowrapper', 'youtube', *args)),
         E('iframe',
             src=url,
+            frameborder=0,
             style=iframeStyle,
         ),
         style=wrapperStyle,
-        **kwds
+        **kwds,
     )
 
 def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
@@ -201,7 +202,7 @@ def goteo(ctx, id):
         height="492px",
         src="//www.goteo.org/widget/project/{}".format(id),
         width="300px",
-        scrolling="no"
+        scrolling="no",
     )
 
 def twitter(user,
