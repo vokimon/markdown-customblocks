@@ -126,7 +126,7 @@ def youtube(ctx, id, *args, autoplay=False, controls=True, loop=False, style=Non
         **kwds,
     )
 
-def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
+def vimeo(ctx, id, *args, autoplay=False, loop=False, byline=True, portrait=False, **kwds):
     options=[o for o in [
         'dnt=1', # cookieless (GDPR compliant)
         'byline=0' if not byline else '',
@@ -135,14 +135,18 @@ def vimeo(ctx, id, *, autoplay=False, loop=False, byline=True, portrait=False):
         'autoplay=1' if autoplay else '',
     ] if o]
 
-    return E('iframe',
-        src = "https://player.vimeo.com/video/{}?{}"
-            .format(id, '&'.join(options)),
-        width="100%",
-        height="300",
-        frameborder="0",
-        allow="autoplay; fullscreen",
-        allowfullscreen="allowfullscreen",
+    return E(
+        ''.join(f'.{cls}' for cls in ('videowrapper', 'vimeo', *args)),
+        kwds,
+        E('iframe',
+            src = "https://player.vimeo.com/video/{}?{}"
+                .format(id, '&'.join(options)),
+            width="100%",
+            height="300",
+            frameborder="0",
+            allow="autoplay; fullscreen",
+            allowfullscreen="allowfullscreen",
+        )
     )
 
 def peertube(ctx, instance, uuid, *args,

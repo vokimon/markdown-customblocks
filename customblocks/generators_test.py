@@ -171,35 +171,45 @@ class Generators_Test(test_tools.TestCase):
         self.assertMarkdown("""\
             ::: vimeo 55297514
             """, """\
+            <div class="videowrapper vimeo">
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;portrait=0" width="100%"></iframe>
+            </div>
             """)
 
     def test_vimeo_loop(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 loop
             """, """\
+            <div class="videowrapper vimeo">
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;portrait=0&amp;loop=1" width="100%"></iframe>
+            </div>
             """)
 
     def test_vimeo_autoplay(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 autoplay
             """, """\
+            <div class="videowrapper vimeo">
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;portrait=0&amp;autoplay=1" width="100%"></iframe>
+            </div>
             """)
 
     def test_vimeo_nobyline(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 nobyline
             """, """\
+            <div class="videowrapper vimeo">
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1&amp;byline=0&amp;portrait=0" width="100%"></iframe>
+            </div>
             """)
 
     def test_vimeo_portrait(self):
         self.assertMarkdown("""\
             ::: vimeo 55297514 portrait
             """, """\
+            <div class="videowrapper vimeo">
             <iframe allow="autoplay; fullscreen" allowfullscreen="allowfullscreen" frameborder="0" height="300" src="https://player.vimeo.com/video/55297514?dnt=1" width="100%"></iframe>
+            </div>
             """)
 
     def test_verkami(self):

@@ -28,7 +28,7 @@ This generator generates an embeded vimeo video.
 : added as additional class for the outter div
 
 `**kwds`
-: added as attributes for the outter div
+: added as additional attributes for the outter div
 
 Content is ignored.
 
