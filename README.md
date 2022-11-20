@@ -140,21 +140,25 @@ The extension provides the following predefined generators:
 - [`figure`](https://vokimon.github.io/markdown-customblocks/generators-figure/):
     Full featured figures with captions, lightbox...
 - [`map`](https://vokimon.github.io/markdown-customblocks/generators-map/):
-    Maps from OpenStreetMaps.or
+    Maps from (OpenStreetMaps.org)[https://openstreetmap.org]
 - [`linkcard`](https://vokimon.github.io/markdown-customblocks/generators-linkcard/):
     External link cards (like Facebook and Twitter do, when you post a link)
 - [`wikipedia`](https://vokimon.github.io/markdown-customblocks/generators-wikipedia/):
     Wikipedia article card by lemma (and language)
 - [`youtube`](https://vokimon.github.io/markdown-customblocks/generators-youtube/):
-    Embeded videos from youtube...
+    Embeded videos from youtube.
 - [`vimeo`](https://vokimon.github.io/markdown-customblocks/generators-vimeo/):
-    Embeded videos from vimeo...
+    Embeded videos from vimeo.
+- [`peertube`](https://vokimon.github.io/markdown-customblocks/generators-peertube/):
+    Embeded videos from [peertube](https://joinpeertube.org)
+- [`mastodon`](https://vokimon.github.io/markdown-customblocks/generators-mastodon/):
+    Embeded [mastodon](https://joinmastodon.org) posts
 - [`twitter`](https://vokimon.github.io/markdown-customblocks/generators-twitter/):
     Embeded tweets
 - [`facebook`](https://vokimon.github.io/markdown-customblocks/generators-facebook/):
-    Embeded post from facebook...
+    Embeded post from facebook
 - [`instagram`](https://vokimon.github.io/markdown-customblocks/generators-instagram/):
-    Embeded post from instagram...
+    Embeded post from instagram
 - [`verkami`](https://vokimon.github.io/markdown-customblocks/generators-verkami/):
     Fund raising project widget in [Verkami]
 - [`goteo`](https://vokimon.github.io/markdown-customblocks/generators-goteo/):
