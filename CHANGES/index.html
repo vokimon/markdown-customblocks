@@ -395,8 +395,36 @@
   
   
     <li class="md-nav__item">
+      <a href="../generators-peertube/" class="md-nav__link">
+        Peertube
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../generators-vimeo/" class="md-nav__link">
         Vimeo
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generators-mastodon/" class="md-nav__link">
+        Mastodon
       </a>
     </li>
   
@@ -513,14 +541,14 @@
       
       
         <label class="md-nav__link" for="__nav_4">
-          About
+          Project
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="About" data-md-level="1">
+      <nav class="md-nav" aria-label="Project" data-md-level="1">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
-          About
+          Project
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -592,8 +620,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased" class="md-nav__link">
-    Unreleased
+  <a href="#markdown-customblocks-140-2022-11-20" class="md-nav__link">
+    markdown-customblocks 1.4.0 (2022-11-20)
   </a>
   
 </li>
@@ -738,8 +766,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased" class="md-nav__link">
-    Unreleased
+  <a href="#markdown-customblocks-140-2022-11-20" class="md-nav__link">
+    markdown-customblocks 1.4.0 (2022-11-20)
   </a>
   
 </li>
@@ -849,19 +877,34 @@
 
 
 <h1 id="release-history">Release history</h1>
-<h2 id="unreleased">Unreleased</h2>
+<h2 id="markdown-customblocks-140-2022-11-20">markdown-customblocks 1.4.0 (2022-11-20)</h2>
 <ul>
-<li>Third party generators can be registered using project
-  metadata entry points as <code>markdown.customblocks.generators</code></li>
-<li>New block types</li>
+<li>Third party generators can be registered by using project
+  metadata's entry points for <code>markdown.customblocks.generators</code></li>
+<li>New block types<ul>
 <li><code>wikipedia</code>: produces a linkcard for a lemma</li>
-<li><code>linkcard</code>:</li>
+<li><code>mastodon</code>: embed a mastodon post</li>
+<li><code>peertube</code>: embed a peertube video</li>
+</ul>
+</li>
+<li><code>linkcard</code>:<ul>
 <li>Keyless values are added as classes to the top level element</li>
 <li>Extract descriptions from MediaWiki based sites (wikipedia...)</li>
 <li>Html class <code>squared</code> renamed <code>side</code>, used to identify side images</li>
 <li>Configurable CSS variables in the recommended stylesheet</li>
 <li>Improved image layout in the recommended styleshet</li>
 <li>Side image turns wide image on small devices</li>
+</ul>
+</li>
+<li><code>vimeo</code>:<ul>
+<li>Wrapping inside <code>div.video.vimeo</code> analog to other video inserts</li>
+<li>Accepts exceding key and positional parameters like <code>container</code></li>
+</ul>
+</li>
+<li><code>youtube</code>:<ul>
+<li>Fix: iframe border removed by default</li>
+</ul>
+</li>
 </ul>
 <h2 id="markdown-customblocks-131-2022-11-06">markdown-customblocks 1.3.1 (2022-11-06)</h2>
 <ul>
