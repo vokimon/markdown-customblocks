@@ -232,6 +232,23 @@ def twitter(user,
     soup = BeautifulSoup(result.html, 'html.parser')
     return type(u'')(soup.find('blockquote'))
 
+def mastodon(ctx, instance, user, post):
+    # TODO: For future prove using oembed https://{instance}/api/oembed
+    return E('.postembed.mastodon',
+        E('iframe.mastodon-embed',
+            src=f"https://{instance}/{user}/{post}/embed",
+            style="max-width: 100%; border: 0",
+            width="400",
+            #allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share",
+            allowfullscreen="allowfullscreen",
+        ),
+        # Adjusts iframe height to the content
+        E('script',
+            {'async': "async"},
+            src=f"https://{instance}/embed.js",
+        ),
+    )
+
 def facebook(ctx, page, post, *args, text=True, width='auto', height=452., **kwds):
     text = 'true' if text and text!='false' else 'false'
     return E('iframe',

@@ -653,4 +653,14 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 </div>
 """)
 
+    def test_mastodon(self):
+        self.assertMarkdown("""
+            ::: mastodon mastodon.social @votomitico 101631141406914275
+        """, """\
+<div class="postembed mastodon">
+<iframe allowfullscreen="allowfullscreen" class="mastodon-embed" src="https://mastodon.social/@votomitico/101631141406914275/embed" style="max-width: 100%; border: 0" width="400"></iframe>
+<script async="async" src="https://mastodon.social/embed.js"></script>
+</div>
+""")
+
 # vim: et ts=4 sw=4

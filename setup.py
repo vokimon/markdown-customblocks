@@ -33,6 +33,7 @@ setup(
             'vimeo = customblocks.generators:vimeo',
             'verkami = customblocks.generators:verkami',
             'goteo = customblocks.generators:goteo',
+            'mastodon = customblocks.generators:mastodon',
             'twitter = customblocks.generators:twitter',
             'facebook = customblocks.generators:facebook',
             'instagram = customblocks.generators:instagram',

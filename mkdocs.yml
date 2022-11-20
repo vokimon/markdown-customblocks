@@ -17,13 +17,14 @@ nav:
     - Youtube: generators-youtube.md
     - Peertube: generators-peertube.md
     - Vimeo: generators-vimeo.md
+    - Mastodon: generators-mastodon.md
     - Twitter: generators-twitter.md
     - Instagram: generators-instagram.md
     - Facebook: generators-facebook.md
     - Verkami: generators-verkami.md
     - Goteo: generators-goteo.md
   - Creating new block types: defining-generators.md
-  - About:
+  - Project:
     - Motivation and design choices: motivation.md
     - Inspiration: inspiration.md
     - Release History: CHANGES.md
