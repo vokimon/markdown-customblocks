@@ -12,7 +12,7 @@ Embeds a tweet in a privacy safe way.
 
 ## Options
 
-`user`:
+`user`
 : the user that wrote the tweet
 
 `tweet`
