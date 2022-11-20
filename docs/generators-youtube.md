@@ -22,13 +22,16 @@ This generator generates an embeded youtube video.
 
 ## Options
 
-`autoplay` (flag, default False)
+`id`
+: video id
+
+`autoplay/noautoplay` (flag, default False)
 : starts the video as soon as it is loaded
 
-`loop` (flag, default False)
+`loop/noloop` (flag, default False)
 : restart again the video once finished
 
-`controls` (flag, default True)
+`controls/nocontrols` (flag, default True)
 : show the controls
 
 `*args`

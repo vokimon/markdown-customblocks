@@ -34,7 +34,7 @@ downloaded using all instances.
 `controls/nocontrols` (flag, default True)
 : show or hide the playback controls
 
-`muted` (flag, default False)
+`muted/nomuted` (flag, default False)
 : mute the video on loading
 
 `p2p/nop2p` (flag, default True)
@@ -44,7 +44,7 @@ downloaded using all instances.
 : added as additional class for the outter div
 
 `**kwds`
-: added as attributes for the outter div
+: added as additional attributes for the outter div
 
 ## Styling
 

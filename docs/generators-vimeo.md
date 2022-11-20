@@ -12,16 +12,16 @@ This generator generates an embeded vimeo video.
 
 ## Options
 
-`autoplay` (flag, default False)
+`autoplay/noautoplay` (flag, default False)
 : starts the video as soon as it is loaded
 
-`loop` (flag, default False)
+`loop/noloop` (flag, default False)
 : restart again the video once finished
 
-`bylabel` (flag, default True)
+`bylabel/nobylabel` (flag, default True)
 : Shows the video author's name
 
-`portrait` (flag, default False)
+`portrait/noportrait` (flag, default False)
 : Shows the video author's avatar
 
 `*args`
