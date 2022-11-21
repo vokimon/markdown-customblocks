@@ -77,43 +77,33 @@ Customblocks extension parses markup structures like this one:
 
 ```markdown
 ::: mytype "value 1" param2=value2
-    Indented content
+    Indented **content**
 ```
-Then, the extension delegates HTML generation to a Python function (_generator_)
-which is bound to the type name, `mytype` in the example.
 
-The extension provides many predefined generators
-and you might define your own for new types or
-redefine existing ones to suit your needs.
-
-If no generator is bound to the type name,
-the div-container generator is used as fallback,
-generating this:
+And, by default, generates HTML like this:
 
 ```html
 <div class="mytype value-1" param2="value2">
-   <p>Indented code</p>
+   <p>Indented <b>code</b></p>
 </div>
 ```
 
-
-But we could bind `mytype` to the following generator:
+This is using the default generator `container`.
+But `mytype` could be bound to a Python function like the following one:
 
 ```python
 def mygenerator(ctx, param1, param2):
     return f"""<div attrib1="{param1}" attrib2="{param2}">{ctx.content}</div>"""
 ```
 
-That would generate this HTML:
+And then, previous Markdown would generate this other HTML:
 
 ```html
-<div attrib1="value 1" attrib2="value2">Indented Content</div>
+<div attrib1="value 1" attrib2="value2">Indented **code**</div>
 ```
 
-The previous example, may work for simple cases,
-but it won't work in a general scenario.
-Parameters and content are included as is and
-they should be escaped or processed as Markdown content.
+Notice that this function is not scaping any received value
+and is not converting anything in the content to Markdown.
 Luckily, `customblocks` provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:
 
