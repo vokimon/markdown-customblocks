@@ -140,7 +140,7 @@ The extension provides the following predefined generators:
 - [`figure`](https://vokimon.github.io/markdown-customblocks/generators-figure/):
     Full featured figures with captions, lightbox...
 - [`map`](https://vokimon.github.io/markdown-customblocks/generators-map/):
-    Maps from (OpenStreetMaps.org)[https://openstreetmap.org]
+    Maps from [OpenStreetMaps.org](https://openstreetmap.org)
 - [`linkcard`](https://vokimon.github.io/markdown-customblocks/generators-linkcard/):
     External link cards (like Facebook and Twitter do, when you post a link)
 - [`wikipedia`](https://vokimon.github.io/markdown-customblocks/generators-wikipedia/):
