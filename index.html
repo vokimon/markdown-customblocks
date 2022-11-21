@@ -810,32 +810,24 @@ hyperscript html generation, cached page fetching and metadata page extraction.<
 refer to the documentation of your generator.</p>
 <h2 id="basic-usage">Basic usage</h2>
 <p>Customblocks extension parses markup structures like this one:</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>::: mytype &quot;value 1&quot; param2=value2
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    Indented content
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>::: mytype &quot;value 1&quot; param2=value2
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    Indented <span class="gs">**content**</span>
 </code></pre></div>
-Then, the extension delegates HTML generation to a Python function (<em>generator</em>)
-which is bound to the type name, <code>mytype</code> in the example.</p>
-<p>The extension provides many predefined generators
-and you might define your own for new types or
-redefine existing ones to suit your needs.</p>
-<p>If no generator is bound to the type name,
-the div-container generator is used as fallback,
-generating this:</p>
+<p>And, by default, generates HTML like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;mytype value-1&quot;</span> <span class="na">param2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Indented code<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>   <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Indented <span class="p">&lt;</span><span class="nt">b</span><span class="p">&gt;</span>content<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>But we could bind <code>mytype</code> to the following generator:</p>
+<p>This is the output of the default generator: <code>container</code>.
+But we could bound <code>mytype</code> to a custom Python function like the following one:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">mygenerator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;div attrib1=&quot;</span><span class="si">{</span><span class="n">param1</span><span class="si">}</span><span class="s2">&quot; attrib2=&quot;</span><span class="si">{</span><span class="n">param2</span><span class="si">}</span><span class="s2">&quot;&gt;</span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;&quot;&quot;</span>
 </code></pre></div>
-<p>That would generate this HTML:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">attrib1</span><span class="o">=</span><span class="s">&quot;value 1&quot;</span> <span class="na">attrib2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>Indented Content<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<p>And then, previous Markdown would generate this other HTML:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">attrib1</span><span class="o">=</span><span class="s">&quot;value 1&quot;</span> <span class="na">attrib2</span><span class="o">=</span><span class="s">&quot;value2&quot;</span><span class="p">&gt;</span>Indented **content**<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
-<p>The previous example, may work for simple cases,
-but it won't work in a general scenario.
-Parameters and content are included as is and
-they should be escaped or processed as Markdown content.
+<p>Notice that this function is not escaping any received value
+and is not converting anything in the content to Markdown.
 Luckily, <code>customblocks</code> provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">customblocks.utils</span> <span class="kn">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">Markdown</span>
@@ -847,7 +839,7 @@ the hyperscript generator and the Markdown subparser:</p>
 </code></pre></div>
 <p>You can read more about them at the <a href="https://vokimon.github.io/markdown-customblocks/defining-generators/#hyperscript">related documentation</a>.</p>
 <h2 id="built-in-generators">Built-in generators</h2>
-<p>The extension provides the following predefined generators:</p>
+<p>For convenience, <code>customblocks</code> also provides the following predefined generators:</p>
 <ul>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-container/"><code>container</code></a>:
     A div element with arbitrary classes, attributes and content. This is the default when no type matches.</li>
@@ -857,7 +849,7 @@ the hyperscript generator and the Markdown subparser:</p>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-figure/"><code>figure</code></a>:
     Full featured figures with captions, lightbox...</li>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-map/"><code>map</code></a>:
-    Maps from (OpenStreetMaps.org)[https://openstreetmap.org]</li>
+    Maps from <a href="https://openstreetmap.org">OpenStreetMaps.org</a></li>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-linkcard/"><code>linkcard</code></a>:
     External link cards (like Facebook and Twitter do, when you post a link)</li>
 <li><a href="https://vokimon.github.io/markdown-customblocks/generators-wikipedia/"><code>wikipedia</code></a>:
