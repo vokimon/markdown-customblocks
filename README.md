@@ -84,12 +84,12 @@ And, by default, generates HTML like this:
 
 ```html
 <div class="mytype value-1" param2="value2">
-   <p>Indented <b>code</b></p>
+   <p>Indented <b>content</b></p>
 </div>
 ```
 
-This is using the default generator `container`.
-But `mytype` could be bound to a Python function like the following one:
+This is the output of the default generator: `container`.
+But we could bound `mytype` to a custom Python function like the following one:
 
 ```python
 def mygenerator(ctx, param1, param2):
@@ -99,10 +99,10 @@ def mygenerator(ctx, param1, param2):
 And then, previous Markdown would generate this other HTML:
 
 ```html
-<div attrib1="value 1" attrib2="value2">Indented **code**</div>
+<div attrib1="value 1" attrib2="value2">Indented **content**</div>
 ```
 
-Notice that this function is not scaping any received value
+Notice that this function is not escaping any received value
 and is not converting anything in the content to Markdown.
 Luckily, `customblocks` provides some useful tools for that:
 the hyperscript generator and the Markdown subparser:
@@ -120,7 +120,7 @@ You can read more about them at the [related documentation](https://vokimon.gith
 
 ## Built-in generators
 
-The extension provides the following predefined generators:
+For convenience, `customblocks` also provides the following predefined generators:
 
 - [`container`](https://vokimon.github.io/markdown-customblocks/generators-container/):
     A div element with arbitrary classes, attributes and content. This is the default when no type matches.
