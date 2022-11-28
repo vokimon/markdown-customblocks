@@ -1,4 +1,4 @@
-![Logo](img/logo-customblocks.svg)
+![Logo](http://vokimon.github.io/markdown-customblocks/img/logo-customblocks.svg)
 
 # Customblocks for Markdown
 
