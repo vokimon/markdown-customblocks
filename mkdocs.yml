@@ -42,6 +42,7 @@ extra_css:
   - css/linkcard.css
   - css/videowrapper.css
   - #css/admonition.css
+  - extra.css
 theme:
   logo:  img/logo-customblocks-white.svg
   name: material
