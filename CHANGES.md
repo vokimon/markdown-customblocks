@@ -1,5 +1,9 @@
 # Release history
 
+## markdown-customblocks 1.4.1 (2022-11-28)
+
+- Documentation corrections
+
 ## markdown-customblocks 1.4.0 (2022-11-20)
 
 - Third party generators can be registered by using project

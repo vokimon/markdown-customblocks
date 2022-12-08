@@ -234,6 +234,8 @@ def twitter(user,
 
 def mastodon(ctx, instance, user, post):
     # TODO: For future prove using oembed https://{instance}/api/oembed
+    # TODO: Or taking the post info from here https://{instance}/api/v1/statuses/{id}
+    # and build a iframeless widget
     return E('.postembed.mastodon',
         E('iframe.mastodon-embed',
             src=f"https://{instance}/{user}/{post}/embed",

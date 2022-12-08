@@ -3,8 +3,8 @@ site_url: https://vokimon.github.io/markdown-customblocks
 site_author: vokimon
 site_description: Parametrizable and nestable custom components for Markdown
 repo_url: https://github.com/vokimon/markdown-customblocks/
-watch:
-  - customblocks
+#watch:
+#  - customblocks
 nav:
   - First steps: README.md
   - Built-in generators:
@@ -24,6 +24,7 @@ nav:
     - Verkami: generators-verkami.md
     - Goteo: generators-goteo.md
   - Creating new block types: defining-generators.md
+  #- Tutorial: tutorial.md
   - Project:
     - Motivation and design choices: motivation.md
     - Inspiration: inspiration.md

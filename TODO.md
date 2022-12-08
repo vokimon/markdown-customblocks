@@ -7,8 +7,6 @@
 
 ## Generators
 
-- Linkcard:
-	- Mediawiki: Short description and main image: https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts|pageimages&exintro=&explaintext=&titles=Sant%20Joan%20Desp%C3%AD
 - Youtube:
     - Take aspect ratio and sizes from Youtube api
     - Use covers https://i.ytimg.com/vi/{code}/hqdefault.jpg
