@@ -1,5 +1,9 @@
 # Release history
 
+## unreleased
+
+- Use backslash \ to continue the headline on the next line
+
 ## markdown-customblocks 1.4.1 (2022-11-28)
 
 - Documentation corrections

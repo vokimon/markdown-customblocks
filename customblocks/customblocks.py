@@ -58,7 +58,7 @@ class CustomBlocksProcessor(BlockProcessor):
     RE_HEADLINE = re.compile(
         r'(?:^|\n)::: *' # marker
         r'([\w\-]+)' # keyword
-        r'(?: +(?:[\w]+=)?(' # params (optional keyword)
+        r'(?:( |\\\n)+(?:[\w]+=)?(' # params (optional keyword)
             r"'(?:\\.|[^'])*'|" # single quoted
             r'"(?:\\.|[^"])*"|' # double quoted
             r'[\S]+' # single word
@@ -72,7 +72,7 @@ class CustomBlocksProcessor(BlockProcessor):
             r'"(?:\\.|[^"])*"|' # double quoted
             r'[\S]+' # single word
         r')')
-    # Detect optional end markers (to ignore them)
+    # Detect optional end markers
     RE_END = re.compile(r'^:::(?:$|\n)')
 
     def test(self, parent, block):
@@ -116,6 +116,7 @@ class CustomBlocksProcessor(BlockProcessor):
         The method returns a tuple of a list with all keyless
         parameters and a dict with all keyword parameters.
         """
+        params = params.replace('\\\n', ' ')
         args = []
         kwd = {}
         for key, param in self.RE_PARAM.findall(params):

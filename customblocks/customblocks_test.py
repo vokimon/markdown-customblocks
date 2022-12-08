@@ -1,5 +1,4 @@
 import unittest
-from markdown import markdown
 from markdown import test_tools
 from xml.etree import ElementTree as etree
 
@@ -300,6 +299,14 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             ::: myblock url=http://lala.com/~alice
             """, """\
             <div class="myblock" url="http://lala.com/~alice"></div>
+            """)
+
+    def test_headline_continuation(self):
+        self.assertMarkdown("""\
+            ::: myblock   key1=param1 \\
+            key2=param2
+            """, """\
+            <div class="myblock" key1="param1" key2="param2"></div>
             """)
 
 
