@@ -301,9 +301,27 @@ class CustomBlockExtension_Test(test_tools.TestCase):
             <div class="myblock" url="http://lala.com/~alice"></div>
             """)
 
-    def test_headline_continuation(self):
+    def test_headlineSplit_inbetweenKeys(self):
         self.assertMarkdown("""\
-            ::: myblock   key1=param1 \\
+            ::: myblock key1=param1 \\
+            key2=param2
+            """, """\
+            <div class="myblock" key1="param1" key2="param2"></div>
+            """)
+
+    def test_headlineSplit_adjacentToValue_ignored(self):
+        self.assertMarkdown("""\
+            ::: myblock key1=param1\\
+            key2=param2
+            """, """\
+            <div class="myblock" key1="param1\"></div>
+            <p>key2=param2</p>
+            """)
+
+    def test_headlineSplit_afterType(self):
+        self.assertMarkdown("""\
+            ::: myblock \\
+            key1=param1 \\
             key2=param2
             """, """\
             <div class="myblock" key1="param1" key2="param2"></div>
