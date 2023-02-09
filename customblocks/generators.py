@@ -22,8 +22,8 @@ def admonition(ctx, title=None, *args, **kwds):
         Markdown(ctx.content, ctx.parser),
         **kwds
     )
-
-def figure(ctx, url, *args, lightbox:bool=None, **kwds):
+    
+def figure(ctx, url, *args, lightbox:bool=None, embed:bool=None, **kwds):
     title = kwds.pop('title', None)
     alt = kwds.pop('alt', None)
     id = kwds.pop('id', None) or (str(uuid.uuid4()) if lightbox else None)

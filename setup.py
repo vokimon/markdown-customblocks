@@ -54,6 +54,8 @@ setup(
         'mkdocs', # docs
         'mkdocs-material', # docs
         'urllib3<2', # conflicts with requests
+        'python-magic', # figure embed
+        'pillow',
     ],
     test_suite='customblocks',
     classifiers=[
