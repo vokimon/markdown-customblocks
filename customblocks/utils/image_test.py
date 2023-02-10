@@ -82,13 +82,11 @@ class Image_Test(test_tools.TestCase):
             localfile = local(self.remote_jpeg_sample)
             self.assertEqual(magic.from_file(localfile, mime=True), 'image/jpeg')
             self.assertImageSize(localfile, width=1024, height=752)
-        
+
     def test_local__with_local_idempotent(self):
         with sandbox_dir() as sandbox:
             already_local = 'this/is/a/file'
             localfile = local(already_local)
             self.assertEqual(localfile, Path(already_local))
-
-    
 
 # vim: et ts=4 sw=4

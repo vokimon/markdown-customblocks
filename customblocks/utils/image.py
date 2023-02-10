@@ -6,13 +6,21 @@ import mimetypes
 from PIL import Image, UnidentifiedImageError
 from .fetcher import Fetcher
 
-def embed(localfile):
+def embed(localfile:Path|str) -> str:
+    """
+    Turns a localfile into a base64 encoded data url to embed
+    """
+    localfile=Path(localfile)
     mime = magic.from_file(localfile, mime=True)
-    with Path(localfile).open('rb') as f:
+    with localfile.open('rb') as f:
         encoded = base64.b64encode(f.read()).decode('ascii')
         return f"data:{mime};base64,{encoded}"
 
-def thumbnail(localfile, max_width=200, max_height=200, target=Path()):
+def thumbnail(localfile:Path|str, max_width:int=200, max_height:int=200, target:Path=Path()) -> Path:
+    """
+    Generates a new image file with limited size to be used
+    as thumbnail.
+    """
     localfile = Path(localfile)
     try:
         im = Image.open(localfile)
@@ -26,7 +34,10 @@ def thumbnail(localfile, max_width=200, max_height=200, target=Path()):
     im.save(thumbnailfile)
     return thumbnailfile
 
-def local(url, target:Path=Path()):
+def local(url:str, target:Path=Path()):
+    """
+    Generates a local file based on the remote file content.
+    """
     parsedurl = urlparse(url)
     if not parsedurl.netloc:
         return Path(url) # Local file
