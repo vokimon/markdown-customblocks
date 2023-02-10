@@ -481,12 +481,12 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png"
-                This figure is awsome
+                This figure is awesome
             """,
             "<figure>"
             """<a href="https://via.placeholder.com/300.png" target="_blank"><img src="https://via.placeholder.com/300.png" /></a>"""
             "<figcaption>\n"
-            "<p>This figure is awsome</p>\n"
+            "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
             )
@@ -494,7 +494,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure_title(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" title="This is a title"
-                This figure is awsome
+                This figure is awesome
             """,
             "<figure>"
             '<a href="https://via.placeholder.com/300.png" target="_blank">'
@@ -503,7 +503,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 'title="This is a title" '
             '/></a>'
             "<figcaption>\n"
-            "<p>This figure is awsome</p>\n"
+            "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
             )
@@ -511,7 +511,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure_alt(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" alt="This is a title"
-                This figure is awsome
+                This figure is awesome
             """,
             "<figure>"
             '<a href="https://via.placeholder.com/300.png" target="_blank">'
@@ -520,7 +520,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 'src="https://via.placeholder.com/300.png" '
             '/></a>'
             "<figcaption>\n"
-            "<p>This figure is awsome</p>\n"
+            "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
             )
@@ -528,7 +528,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure_classes(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" left-align
-                This figure is awsome
+                This figure is awesome
             """,
             '<figure class="left-align">'
             '<a href="https://via.placeholder.com/300.png" target="_blank">'
@@ -536,7 +536,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 'src="https://via.placeholder.com/300.png" '
             '/></a>'
             "<figcaption>\n"
-            "<p>This figure is awsome</p>\n"
+            "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
             )
@@ -545,7 +545,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure_attributes_toFigure(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" style="background: red"
-                This figure is awsome
+                This figure is awesome
             """,
             '<figure style="background: red">'
             '<a href="https://via.placeholder.com/300.png" target="_blank">'
@@ -553,7 +553,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 'src="https://via.placeholder.com/300.png" '
             '/></a>'
             "<figcaption>\n"
-            "<p>This figure is awsome</p>\n"
+            "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
             )
@@ -561,7 +561,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure_lightbox(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" lightbox id=myimage
-                This figure is awsome
+                This figure is awesome
             """,
             '<figure class="lightbox" id="myimage">' # added id
             '<a class="lightbox-background" href="javascript:history.back()"></a>' # this is new
@@ -570,7 +570,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 'src="https://via.placeholder.com/300.png" '
             '/></a>'
             "<figcaption>\n"
-            "<p>This figure is awsome</p>\n"
+            "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
             )
