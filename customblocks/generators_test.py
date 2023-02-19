@@ -1,8 +1,14 @@
 import unittest
+from unittest import mock
+from .testutils import sandbox_dir
+import responses
+import requests
 from markdown import markdown
 from markdown import test_tools
 import responses
 from pathlib import Path
+from PIL import Image, ImageDraw
+import base64
 
 class Generators_Test(test_tools.TestCase):
 
@@ -478,6 +484,12 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 """)
 
 
+    def sample_image(self, imagefile):
+        with Image.new(mode='RGB', size=(1920,1080), color="pink") as im:
+            draw = ImageDraw.Draw(im)
+            draw.ellipse([(0,0),(1920,1000)], fill=(0xFF,0xFF,0))
+            im.save(imagefile)
+
     def test_figure(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png"
@@ -573,7 +585,122 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
             "</figure>"
+        )
+
+    def test_figure__local(self):
+        self.assertMarkdown("""
+            ::: figure local https://via.placeholder.com/300.png
+            """,
+            '<figure>'
+            '<a href="cached_images/300.png" target="_blank">'
+            '<img '
+                'src="cached_images/300.png" '
+            '/></a>'
+            "<figcaption></figcaption>\n"
+            "</figure>"
+        )
+
+    def test_figure__local_already_local(self):
+        self.assertMarkdown("""
+            ::: figure local myfile.jpg
+            """,
+            '<figure>'
+            '<a href="myfile.jpg" target="_blank">'
+            '<img '
+                'src="myfile.jpg" '
+            '/></a>'
+            "<figcaption></figcaption>\n"
+            "</figure>"
+        )
+
+    @unittest.skip("WIP")
+    def test_figure__embed(self):
+        with sandbox_dir() as sandbox:
+            Path("drawing.svg").write_text("<svg />")
+            self.assertMarkdown("""
+                ::: figure embed drawing.svg
+                """,
+                '<figure>'
+                    '<a href="data:image/svg+xml;base64,PHN2ZyAvPg==" target="_blank">'
+                '<img '
+                    'src="data:image/svg+xml;base64,PHN2ZyAvPg==" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
             )
+
+    @unittest.skip("WIP")
+    @responses.activate
+    def test_figure__embed_remote(self):
+        with sandbox_dir() as sandbox:
+            responses.add(
+                responses.GET,
+                'http://myhost.com/lala.svg',
+                body='<svg />',
+                content_type="image/svg+xml",
+            )
+            self.assertMarkdown("""
+                ::: figure embed http://myhost.com/lala.svg
+                """,
+                '<figure>'
+                    '<a href="data:image/svg+xml;base64,PHN2ZyAvPg==" target="_blank">'
+                '<img '
+                    'src="data:image/svg+xml;base64,PHN2ZyAvPg==" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__thumb(self):
+        with sandbox_dir() as sandbox:
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure thumb image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.thumb-200x200.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    @unittest.skip("WIP")
+    def test_figure__thumb_embed(self):
+        with sandbox_dir() as sandbox:
+            self.sample_image('image.png')
+            encoded = base64.b64encode(Path('image.png').read_bytes())
+            self.assertMarkdown("""
+                ::: figure thumb embed image.png
+                """,
+                '<figure>'
+                    f'<a href="image.png" target="_blank">'
+                '<img '
+                    f'src="data:image/png;base64,{encoded}" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    @unittest.skip("WIP")
+    @responses.activate
+    def test_figure__thumb_embed_lightbox(self):
+        with sandbox_dir() as sandbox:
+            self.sample_image('image.png')
+            self.assertMarkdown("""
+                ::: figure thumb embed lightbox image.png
+                """,
+                '<figure>'
+                    '<a href="image.png" target="_blank">'
+                '<img '
+                    'src="image.png" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    # TODO: thumbnail in lightbox uses thumb as wide image
 
     def test_wikipedia(self):
         self.assertMarkdown("""

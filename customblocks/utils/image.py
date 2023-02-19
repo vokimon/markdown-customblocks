@@ -34,11 +34,12 @@ def thumbnail(localfile:Path|str, max_width:int=200, max_height:int=200, target:
     im.save(thumbnailfile)
     return thumbnailfile
 
-def local(url:str, target:Path=Path()):
+def local(url:str, target:Path|str=Path()):
     """
     Generates a local file based on the remote file content.
     """
     parsedurl = urlparse(url)
+    target = Path(target)
     if not parsedurl.netloc:
         return Path(url) # Local file
     response = Fetcher('testcache').get(url)

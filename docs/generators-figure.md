@@ -16,6 +16,15 @@ The content is taken as caption.
 `lightbox` (bool)
 : if true, on click, the image will open in a lightbox instead of a new tab which is the default
 
+`embed` (bool)
+: if true inline the image as data url
+
+`local` (bool)
+: if true and url is remote, download the image and make i
+
+`thumb` (bool)
+: if true generate a reduced size image which expands to better resolution
+
 `*args`
 : additional classes for root `<figure>` tag
 
@@ -77,6 +86,7 @@ The `lightbox` option generates a slighty different markup:
 
 ## TODO (you can help!)
 
+- configurable saving place for `local`
 - global settings to avoid changing every figure
 - figure enumeration ("Figure N:")
 - thumbnails

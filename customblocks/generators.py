@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from yamlns import namespace as ns
 import uuid
+from .utils import image
 
 from .utils import E, Markdown
 from .utils import PageInfo
@@ -23,11 +24,28 @@ def admonition(ctx, title=None, *args, **kwds):
         **kwds
     )
     
-def figure(ctx, url, *args, lightbox:bool=None, embed:bool=None, **kwds):
+def figure(
+    ctx,
+    url,
+    *args,
+    lightbox:bool=None,
+    local:bool=None,
+    embed:bool=None,
+    thumb:bool=None,
+    **kwds
+):
     title = kwds.pop('title', None)
     alt = kwds.pop('alt', None)
     id = kwds.pop('id', None) or (str(uuid.uuid4()) if lightbox else None)
     classes = list(args)
+    if local or embed or thumb:
+        localsrc = image.local(url, target="cached_images")
+    src = localsrc if local else url
+    bigsrc = localsrc if local else url
+    if thumb:
+        src = image.thumbnail(localsrc)
+    if embed:
+        src = image.embed(src if thumb else localsrc)
     if lightbox: classes.append('lightbox')
     return E('figure',
         dict(
@@ -37,14 +55,14 @@ def figure(ctx, url, *args, lightbox:bool=None, embed:bool=None, **kwds):
         E('a.lightbox-background', href="javascript:history.back()") if lightbox else '',
         E('a',
             dict(
-                href = f'#{id}' if lightbox else url,
+                href = f'#{id}' if lightbox else bigsrc,
                 target = None if lightbox else '_blank'
             ),
             E('img',
-                src=url,
+                src=bigsrc if lightbox else src,
                 title=title,
                 alt=alt,
-            )
+            ),
         ),
         E('figcaption',
             Markdown(ctx.content, parser=ctx.parser)
