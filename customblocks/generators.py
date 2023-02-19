@@ -48,8 +48,15 @@ def figure(
                 self._value = self._f()
             return self._value
 
+    sizes=200,200
+    if type(thumb)==str:
+        try:
+            sizes=([int(x) for x in thumb.split('x')]*2)[:2]
+        except ValueError:
+            pass
+
     localsrc = Dependency(lambda: image.local(url, target="cached_images"))
-    sizedsrc = Dependency(lambda: image.thumbnail(localsrc()))
+    sizedsrc = Dependency(lambda: image.thumbnail(localsrc(), *sizes))
     encodedsrc = Dependency(lambda: image.embed(localsrc()))
     encodedsizedsrc = Dependency(lambda: image.embed(sizedsrc()))
 

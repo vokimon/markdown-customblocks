@@ -45,6 +45,28 @@ class Image_Test(test_tools.TestCase):
             self.assertEqual(thumb, target / Path('myimage.thumb-200x200.jpg'))
             self.assertImageSize(thumb, width=200, height=113)
 
+    def test_thumbnail__with_maxWidth(self):
+        with sandbox_dir() as sandbox:
+            imagefile = 'myimage.jpg'
+            self.sample_image(imagefile)
+            target=Path('thumbnails')
+
+            thumb = thumbnail(imagefile, target=target, max_width=100, max_height=120)
+
+            self.assertEqual(thumb, target / Path('myimage.thumb-100x120.jpg'))
+            self.assertImageSize(thumb, width=100, height=56)
+
+    def test_thumbnail__with_maxWidth_maxHeight(self):
+        with sandbox_dir() as sandbox:
+            imagefile = 'myimage.jpg'
+            self.sample_image(imagefile)
+            target=Path('thumbnails')
+
+            thumb = thumbnail(imagefile, target=target, max_width=100, max_height=50)
+
+            self.assertEqual(thumb, target / Path('myimage.thumb-100x50.jpg'))
+            self.assertImageSize(thumb, width=89, height=50)
+
     def test_thumbnail__with_svg_idempotent(self):
         with sandbox_dir() as sandbox:
             svgfile = Path("drawing.svg")

@@ -22,8 +22,9 @@ The content is taken as caption.
 `local` (bool)
 : if true and url is remote, download the image and make it a local one
 
-`thumb` (bool)
-: if true generate a reduced size image which expands to a better resolution
+`thumb` (bool|N|NxN)
+: if true generate a reduced size image which expands to a better resolution.
+  A size in pixels may be specified.
 
 `*args`
 : additional classes for root `<figure>` tag

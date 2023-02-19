@@ -685,7 +685,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             )
 
     @responses.activate
-    def test_figure__thumb_lightbox(self):
+    def test_figure__thumb_lightbox__double_image(self):
         with sandbox_dir() as sandbox:
             self.sample_image('image.png')
             self.assertMarkdown("""
@@ -704,7 +704,50 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 "</figure>"
             )
 
-    # TODO: thumbnail in lightbox uses thumb as wide image
+    def test_figure__thumb__withWidth(self):
+        with sandbox_dir() as sandbox:
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure thumb=100 image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.thumb-100x100.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__thumb__withWidthAndHeight(self):
+        with sandbox_dir() as sandbox:
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure thumb=100x50 image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.thumb-100x50.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__thumb__badSize_ignored(self):
+        with sandbox_dir() as sandbox:
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure thumb=badsize image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.thumb-200x200.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
 
     def test_wikipedia(self):
         self.assertMarkdown("""
