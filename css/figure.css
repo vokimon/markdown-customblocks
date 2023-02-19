@@ -58,4 +58,15 @@ figure.lightbox:target img {
  padding: 2% 0;
  border: 0;
 }
-
+figure.lightbox img.full {
+    display: none;
+}
+figure.lightbox:target img.full {
+    display: block;
+}
+figure.lightbox img.thumb {
+    display: block;
+}
+figure.lightbox:target img.thumb {
+    display: none;
+}

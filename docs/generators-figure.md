@@ -14,16 +14,16 @@ The content is taken as caption.
 : image title attribute
 
 `lightbox` (bool)
-: if true, on click, the image will open in a lightbox instead of a new tab which is the default
+: if true, on click, the image will open in a lightbox instead of a new tab which is the default.
 
 `embed` (bool)
 : if true inline the image as data url
 
 `local` (bool)
-: if true and url is remote, download the image and make i
+: if true and url is remote, download the image and make it a local one
 
 `thumb` (bool)
-: if true generate a reduced size image which expands to better resolution
+: if true generate a reduced size image which expands to a better resolution
 
 `*args`
 : additional classes for root `<figure>` tag

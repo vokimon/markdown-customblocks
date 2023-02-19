@@ -38,14 +38,32 @@ def figure(
     alt = kwds.pop('alt', None)
     id = kwds.pop('id', None) or (str(uuid.uuid4()) if lightbox else None)
     classes = list(args)
-    if local or embed or thumb:
-        localsrc = image.local(url, target="cached_images")
-    src = localsrc if local else url
-    bigsrc = localsrc if local else url
-    if thumb:
-        src = image.thumbnail(localsrc)
+
+    class Dependency():
+        def __init__(self, f):
+            self._value=None
+            self._f = f
+        def __call__(self):
+            if self._value is None:
+                self._value = self._f()
+            return self._value
+
+    localsrc = Dependency(lambda: image.local(url, target="cached_images"))
+    sizedsrc = Dependency(lambda: image.thumbnail(localsrc()))
+    encodedsrc = Dependency(lambda: image.embed(localsrc()))
+    encodedsizedsrc = Dependency(lambda: image.embed(sizedsrc()))
+
     if embed:
-        src = image.embed(src if thumb else localsrc)
+        if thumb:
+            detailsrc = localsrc() if local else url
+            previewsrc = encodedsizedsrc()
+        else:
+            detailsrc =  encodedsrc()
+            previewsrc = encodedsrc()
+    else:
+        detailsrc = localsrc() if local else url
+        previewsrc = sizedsrc() if thumb else detailsrc
+
     if lightbox: classes.append('lightbox')
     return E('figure',
         dict(
@@ -55,11 +73,16 @@ def figure(
         E('a.lightbox-background', href="javascript:history.back()") if lightbox else '',
         E('a',
             dict(
-                href = f'#{id}' if lightbox else bigsrc,
+                href = f'#{id}' if lightbox else detailsrc,
                 target = None if lightbox else '_blank'
             ),
-            E('img',
-                src=bigsrc if lightbox else src,
+            E('img' + ('.thumb' if lightbox and thumb else ''),
+                src=previewsrc,
+                title=title,
+                alt=alt,
+            ),
+            lightbox and thumb and E('img.full',
+                src=detailsrc,
                 title=title,
                 alt=alt,
             ),
