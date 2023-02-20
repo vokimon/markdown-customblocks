@@ -38,6 +38,20 @@ A [figure css](css/figure.css) is provided.
 
 The `lightbox` mode relies heavily on this css in order to work without using javascript.
 
+## Configurations
+
+`figure_defaultOptions` (list(str))
+: a list of options to be activated by default.
+  When an option is activated by default, you can stil use `noXXXX` to disable in a specific figure.
+
+`figure_staticPath` (path)
+: prefix were to place generated images
+
+`figure_staticBaseUrl` (url)
+: prefix to append to generated urls in `figure_staticPath`
+
+
+
 ## Examples
 
 ```markdown

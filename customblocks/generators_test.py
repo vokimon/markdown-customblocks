@@ -5,7 +5,6 @@ import responses
 import requests
 from markdown import markdown
 from markdown import test_tools
-import responses
 from pathlib import Path
 from PIL import Image, ImageDraw
 import base64
@@ -684,7 +683,6 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 "</figure>"
             )
 
-    @responses.activate
     def test_figure__thumb_lightbox__double_image(self):
         with sandbox_dir() as sandbox:
             self.sample_image('image.png')
@@ -748,6 +746,53 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 "<figcaption></figcaption>\n"
                 "</figure>"
             )
+
+    def test_figure__config_local(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_local=True)
+            self.assertMarkdown("""
+                ::: figure https://via.placeholder.com/300.png
+                """,
+                '<figure>'
+                    '<a href="cached_images/300.png" target="_blank">'
+                '<img '
+                    'src="cached_images/300.png" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__config_local__overriden(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_local=True)
+            self.assertMarkdown("""
+                ::: figure nolocal https://via.placeholder.com/300.png
+                """,
+                '<figure>'
+                    '<a href="https://via.placeholder.com/300.png" target="_blank">'
+                '<img '
+                    'src="https://via.placeholder.com/300.png" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__config_embed(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_embed=True)
+            Path("drawing.svg").write_text("<svg />")
+            self.assertMarkdown("""
+                ::: figure drawing.svg
+                """,
+                '<figure>'
+                    '<a href="data:image/svg+xml;base64,PHN2ZyAvPg==" target="_blank">'
+                '<img '
+                    'src="data:image/svg+xml;base64,PHN2ZyAvPg==" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
 
     def test_wikipedia(self):
         self.assertMarkdown("""
