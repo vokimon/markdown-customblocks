@@ -23,7 +23,19 @@ def admonition(ctx, title=None, *args, **kwds):
         Markdown(ctx.content, ctx.parser),
         **kwds
     )
-    
+
+def parseSize(size):
+    if type(size) in (tuple, list):
+        return ([int(x) for x in size]*2)[:2]
+    if type(size)==int:
+        return size,size
+    if type(size)==str:
+        try:
+            return parseSize(size.split('x'))
+        except ValueError:
+            pass
+    return 200,200
+
 def figure(
     ctx,
     url,
@@ -48,15 +60,8 @@ def figure(
                 self._value = self._f()
             return self._value
 
-    sizes=200,200
-    if type(thumb)==str:
-        try:
-            sizes=([int(x) for x in thumb.split('x')]*2)[:2]
-        except ValueError:
-            pass
-
     localsrc = Dependency(lambda: image.local(url, target="cached_images"))
-    sizedsrc = Dependency(lambda: image.thumbnail(localsrc(), *sizes))
+    sizedsrc = Dependency(lambda: image.thumbnail(localsrc(), *parseSize(thumb)))
     encodedsrc = Dependency(lambda: image.embed(localsrc()))
     encodedsizedsrc = Dependency(lambda: image.embed(sizedsrc()))
 
