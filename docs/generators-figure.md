@@ -40,17 +40,23 @@ The `lightbox` mode relies heavily on this css in order to work without using ja
 
 ## Configurations
 
-`figure_defaultOptions` (list(str))
-: a list of options to be activated by default.
-  When an option is activated by default, you can stil use `noXXXX` to disable in a specific figure.
+`figure_local` (bool)
+: set it to true to set all images `local` by default. Override with `nolocal`.
+
+`figure_embed` (bool)
+: set it to true to set all images `embed` by default. Override with `noembed`.
+
+`figure_thumb` (bool)
+: set it to true to set all images `thumb` by default. Override with `nothumb` or setting `thumb` to a non boolean value.
+
+`figure_lightbox` (bool)
+: set it to true to set all images `lightbox by default. Override with `nolightbox.
 
 `figure_staticPath` (path)
-: prefix were to place generated images
+: prefix were to place generated images (local, thumbs...)
 
 `figure_staticBaseUrl` (url)
 : prefix to append to generated urls in `figure_staticPath`
-
-
 
 ## Examples
 
