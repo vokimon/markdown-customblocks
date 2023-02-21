@@ -101,11 +101,11 @@ The `lightbox` option generates a slighty different markup:
 
 ## TODO (you can help!)
 
-- configurable saving place for `local`
-- global settings to avoid changing every figure
-- figure enumeration ("Figure N:")
-- thumbnails
-- fetch external images to make them local
-- css for placement classes (left, centered, right...)
-- improve css
+- [ ] configurable saving place for `local`
+- [x] global settings to avoid changing every figure
+- [ ] figure enumeration ("Figure N:")
+- [x] thumbnails
+- [x] fetch external images to make them local
+- [ ] css for placement classes (left, centered, right...)
+- [ ] improve css
 

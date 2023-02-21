@@ -793,6 +793,23 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 "</figure>"
             )
 
+    def test_figure_lightbox(self):
+        self.setupConfig(figure_lightbox=True)
+        self.assertMarkdown("""
+            ::: figure "https://via.placeholder.com/300.png" id=myimage
+                This figure is awesome
+            """,
+            '<figure class="lightbox" id="myimage">' # added id
+            '<a class="lightbox-background" href="javascript:history.back()"></a>' # this is new
+            '<a href="#myimage">' # No target, href is the id
+            '<img '
+                'src="https://via.placeholder.com/300.png" '
+            '/></a>'
+            "<figcaption>\n"
+            "<p>This figure is awesome</p>\n"
+            "</figcaption>\n"
+            "</figure>"
+        )
 
     def test_wikipedia(self):
         self.assertMarkdown("""

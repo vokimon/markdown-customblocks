@@ -48,9 +48,10 @@ setup(
         'yamlns>=0.11', # supports assertNsContains
         'beautifulsoup4',
         'decorator',
-        'pytest', # testing
-        'responses', # testing
         'geocoder', # map
+        'pytest', # testing
+        'pytest-cov', # testing
+        'responses', # testing
         'mkdocs', # docs
         'mkdocs-material', # docs
         'urllib3<2', # conflicts with requests

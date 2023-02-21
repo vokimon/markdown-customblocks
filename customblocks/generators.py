@@ -57,10 +57,9 @@ def figure(
     """
     if thumb is None:
         thumb = ctx.config.get('figure_thumb', None)
-    if lightbox is None:
-        lighbox = ctx.config.get('figure_lightbox', None)
-    inlinecss = ctx.config.get('figure_inlinecss', False)
     """
+    if lightbox is None:
+        lightbox = ctx.config.get('figure_lightbox', None)
 
     class Dependency():
         def __init__(self, f):
