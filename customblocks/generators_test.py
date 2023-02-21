@@ -503,7 +503,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figure>"
             )
 
-    def test_figure_title(self):
+    def test_figure__title(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" title="This is a title"
                 This figure is awesome
@@ -520,7 +520,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figure>"
             )
 
-    def test_figure_alt(self):
+    def test_figure__alt(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" alt="This is a title"
                 This figure is awesome
@@ -537,7 +537,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figure>"
             )
 
-    def test_figure_classes(self):
+    def test_figure__classes(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" left-align
                 This figure is awesome
@@ -554,7 +554,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             )
 
 
-    def test_figure_attributes_toFigure(self):
+    def test_figure__attributes_toFigure(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" style="background: red"
                 This figure is awesome
@@ -570,7 +570,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figure>"
             )
 
-    def test_figure_lightbox(self):
+    def test_figure__lightbox(self):
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" lightbox id=myimage
                 This figure is awesome
@@ -793,7 +793,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
                 "</figure>"
             )
 
-    def test_figure_config_lightbox(self):
+    def test_figure__config_lightbox(self):
         self.setupConfig(figure_lightbox=True)
         self.assertMarkdown("""
             ::: figure "https://via.placeholder.com/300.png" id=myimage
@@ -811,7 +811,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figure>"
         )
 
-    def test_figure_config_lightbox_overriden(self):
+    def test_figure__config_lightbox_overriden(self):
         self.setupConfig(figure_lightbox=True)
         self.assertMarkdown("""
             ::: figure nolightbox "https://via.placeholder.com/300.png" id=myimage
@@ -827,6 +827,70 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
             "</figcaption>\n"
             "</figure>"
         )
+
+    def test_figure__config_thumb(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_thumb=True)
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.thumb-200x200.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__config_thumb_overriden(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_thumb=True)
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure nothumb image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__config_thumb_sizeNotOverridenByThumb(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_thumb=100)
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure thumb image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.thumb-100x100.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
+
+    def test_figure__config_thumb_sizedOverridenByFalse(self):
+        with sandbox_dir() as sandbox:
+            self.setupConfig(figure_thumb=100)
+            self.sample_image('image.jpg')
+            self.assertMarkdown("""
+                ::: figure nothumb image.jpg
+                """,
+                '<figure>'
+                    '<a href="image.jpg" target="_blank">'
+                '<img '
+                    'src="image.jpg" '
+                '/></a>'
+                "<figcaption></figcaption>\n"
+                "</figure>"
+            )
 
     def test_wikipedia(self):
         self.assertMarkdown("""

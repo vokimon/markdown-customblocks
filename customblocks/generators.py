@@ -50,14 +50,14 @@ def figure(
     alt = kwds.pop('alt', None)
     id = kwds.pop('id', None) or (str(uuid.uuid4()) if lightbox else None)
     classes = list(args)
+
     if local is None:
         local = ctx.config.get('figure_local', None)
     if embed is None:
         embed = ctx.config.get('figure_embed', None)
-    """
-    if thumb is None:
-        thumb = ctx.config.get('figure_thumb', None)
-    """
+    thumbOption = ctx.config.get('figure_thumb', None)
+    if thumb is None or (thumb is True and thumbOption):
+        thumb=thumbOption
     if lightbox is None:
         lightbox = ctx.config.get('figure_lightbox', None)
 
