@@ -50,7 +50,7 @@ setup(
         'decorator',
         'geocoder', # map
         'pytest', # testing
-        'pytest-cov', # testing
+        'pytest-cov<4', # testing
         'responses', # testing
         'mkdocs', # docs
         'mkdocs-material', # docs
