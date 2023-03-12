@@ -36,8 +36,6 @@ jobs:
           packages: |
             markdown-full-yaml-metadata
             PyAudio
-            pytest
-            pytest-cov<4
             coveralls
       - name: Unit tests
         run: |
