@@ -29,8 +29,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          pip install mkdocs
-          python setup.py develop
+          pip install -e .
       - uses: BSFishy/pip-action@v1
         with:
           packages: |
