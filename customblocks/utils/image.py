@@ -3,10 +3,11 @@ from urllib.parse import urlparse
 import magic
 import base64
 import mimetypes
+from typing import Union
 from PIL import Image, UnidentifiedImageError
 from .fetcher import Fetcher
 
-def embed(localfile:Path|str) -> str:
+def embed(localfile: Union[Path, str]) -> str:
     """
     Turns a localfile into a base64 encoded data url to embed
     """
@@ -16,7 +17,7 @@ def embed(localfile:Path|str) -> str:
         encoded = base64.b64encode(f.read()).decode('ascii')
         return f"data:{mime};base64,{encoded}"
 
-def thumbnail(localfile:Path|str, max_width:int=200, max_height:int=200, target:Path=Path()) -> Path:
+def thumbnail(localfile: Union[Path, str], max_width:int=200, max_height:int=200, target:Path=Path()) -> Path:
     """
     Generates a new image file with limited size to be used
     as thumbnail.
@@ -34,7 +35,7 @@ def thumbnail(localfile:Path|str, max_width:int=200, max_height:int=200, target:
     im.save(thumbnailfile)
     return thumbnailfile
 
-def local(url:str, target:Path|str=Path()):
+def local(url:str, target: Union[Path,str]=Path()):
     """
     Generates a local file based on the remote file content.
     """
