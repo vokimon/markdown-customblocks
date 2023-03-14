@@ -29,7 +29,6 @@ def thumbnail(localfile: Union[Path, str], max_width:int=200, max_height:int=200
         return localfile
     target.mkdir(parents=True, exist_ok=True)
     thumbnailfile = target / (localfile.stem + f'.thumb-{max_width}x{max_height}' + localfile.suffix)
-    )
     im.thumbnail((max_width, max_height))
     im.save(thumbnailfile)
     return thumbnailfile
