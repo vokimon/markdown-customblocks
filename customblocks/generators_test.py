@@ -905,7 +905,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 <p class="linkcard-heading"><a href="https://en.wikipedia.org/wiki/Sant Joan Despí" target="_blank">Sant Joan Despí - Wikipedia</a></p>
 <div class="linkcard-excerpt">
 <p>
-<p><b>Sant Joan Despí</b> (<small>Catalan pronunciation:&#160;</small><span title="Representation in the International Phonetic Alphabet (IPA)" lang="ca-Latn-fonipa">[ˈsaɲ ʒuˈan dəsˈpi]</span>; Old Catalan for '"Saint John of the Pine"') is a city and municipality located in the Baix Llobregat area (Barcelona province in Catalonia, Spain). It is situated on the left bank of the Llobregat river.</p>
+<p><b>Sant Joan Despí</b> (<small>Catalan pronunciation:&#160;</small><span title="Representation in the International Phonetic Alphabet (IPA)" lang="ca-Latn-fonipa">[ˈsaɲ ʒuˈan dəsˈpi]</span>; Old Catalan for 'Saint John of the Pine') is a city and municipality located in the Baix Llobregat area (Barcelona province in Catalonia, Spain). It is situated on the left bank of the Llobregat river.</p>
 </p>
 <span class="linkcard-more"><a href="https://en.wikipedia.org/wiki/Sant Joan Despí" target="_blank">Read more</a></span>
 </div>
