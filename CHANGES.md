@@ -3,6 +3,12 @@
 ## unreleased
 
 - Use backslash \ to continue the headline on the next line
+- New `figure` attributes:
+    - `inline`: embeds the image as base64 encoded
+    - `local`: turns a remote url image into a relative local resource
+    - `thumb`: reduces the size of the image, enlargeable by clicking
+- Upgrade notes:
+    - Image recommended css for lightbox has changed to enable thumbnailing
 
 ## markdown-customblocks 1.4.1 (2022-11-28)
 
