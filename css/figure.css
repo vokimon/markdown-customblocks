@@ -55,7 +55,7 @@ figure.lightbox:target img {
  width: 100vw;
  height: auto;
  max-width: 90%;
- max-height: 80%;
+ max-height: 80vh;
  padding: 2% 0;
  border: 0;
 }
