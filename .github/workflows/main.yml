@@ -21,30 +21,43 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
       - name: Install system dependencies
         run: |
           sudo apt update -qq
           sudo apt install -y libsndfile1 portaudio19-dev
+
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install dependencies
         run: |
           pip install -e .
+
       - uses: BSFishy/pip-action@v1
         with:
           packages: |
             markdown-full-yaml-metadata
             PyAudio
             coveralls
+
       - name: Unit tests
         run: |
           pytest
+
       - name: Coveralls
         uses: AndreMiras/coveralls-python-action@develop
         with:
           parallel: true
           flag-name: python-${{ matrix.python-version }}
+
+      - name: 📢 Notify status changes
+        if: always()
+        uses: vokimon/gha-notify-telegram@master
+        with:
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
 
   coveralls_finish:
     needs: build
