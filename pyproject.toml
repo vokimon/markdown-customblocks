@@ -51,6 +51,8 @@ test = [
 	'urllib3<2', # conflicts with requests
 	'python-magic', # figure embed
 	'pillow',
+	'pytest',
+	'pytest-cov',
 ]
 examples = [
     'PyAudio',
