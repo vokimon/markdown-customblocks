@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=75", "wheel"]
 
 [project]
 name = "markdown-customblocks"
@@ -32,6 +32,7 @@ classifiers = [
 	'Topic :: Text Processing :: Filters',
 	'Topic :: Text Processing :: Markup :: HTML',
 ]
+
 dependencies = [
 	'markdown',
 	'yamlns>=0.11', # supports assertNsContains
@@ -54,10 +55,10 @@ Documentation = "https://readthedocs.org"
 Repository = "https://github.com/vokimon/markdown-customblocks"
 Changelog = "https://github.com/vokimon/markdown-customblocks/blob/master/CHANGES.md"
 
-[project.entry_points."markdown.extensions"]
+[tools.setuptools.entry_points."markdown.extensions"]
 customblocks = "customblocks:CustomBlocksExtension"
 
-[project.entry_points."markdown.customblocks.generators"]
+[tools.setuptools.entry_points."markdown.customblocks.generators"]
 attention = "customblocks.generators:admonition"
 caution = "customblocks.generators:admonition"
 danger = "customblocks.generators:admonition"
