@@ -1,7 +1,8 @@
 # Release history
 
-## unreleased
+## markdown-customblocks 1.5.0 (2022-12-04)
 
+- Dropped support for Python<3.8
 - Use backslash \ to continue the headline on the next line
 - New `figure` attributes:
     - `inline`: embeds the image as base64 encoded
