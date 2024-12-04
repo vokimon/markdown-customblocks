@@ -1,5 +1,9 @@
 # Release history
 
+## markdown-customblocks 1.5.1 (2022-12-04)
+
+- Empty release to solve packaging problems
+
 ## markdown-customblocks 1.5.0 (2022-12-04)
 
 - Dropped support for Python<3.8
