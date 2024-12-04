@@ -1,5 +1,6 @@
 [build-system]
 requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "markdown-customblocks"
@@ -55,10 +56,10 @@ Documentation = "https://readthedocs.org"
 Repository = "https://github.com/vokimon/markdown-customblocks"
 Changelog = "https://github.com/vokimon/markdown-customblocks/blob/master/CHANGES.md"
 
-[tools.setuptools.entry_points."markdown.extensions"]
+[project.entry-points."markdown.extensions"]
 customblocks = "customblocks:CustomBlocksExtension"
 
-[tools.setuptools.entry_points."markdown.customblocks.generators"]
+[project.entry-points."markdown.customblocks.generators"]
 attention = "customblocks.generators:admonition"
 caution = "customblocks.generators:admonition"
 danger = "customblocks.generators:admonition"
