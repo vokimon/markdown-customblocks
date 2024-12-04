@@ -1,0 +1,76 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "markdown-customblocks"
+version = "1.4.1"
+description='Python Markdown extension to add custom parametrizable and nestable blocks'
+authors = [
+    { name="David García Garzón", email="voki@canvoki.net" },
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file="LICENSE"}
+keywords=["markdown","extension","customblocks","admonitions","container","figure","map","youtube","vimeo","twitter","facebook","instagram","verkami","goteo","mastodon","wikipedia","peertube"]
+
+classifiers = [
+	'Development Status :: 5 - Production/Stable',
+	'Environment :: Console',
+	'Intended Audience :: Developers',
+	'Intended Audience :: Science/Research',
+	'Intended Audience :: Other Audience',
+	'License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)',
+	'Operating System :: OS Independent',
+	'Programming Language :: Python :: 3',
+	'Programming Language :: Python :: 3.8',
+	'Programming Language :: Python :: 3.9',
+	'Programming Language :: Python :: 3.10',
+	'Programming Language :: Python :: 3.11',
+	'Programming Language :: Python :: 3.12',
+	'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+	'Topic :: Software Development :: Libraries :: Python Modules',
+	'Topic :: Text Processing :: Filters',
+	'Topic :: Text Processing :: Markup :: HTML',
+]
+dependencies = [
+    'numpy',
+]
+
+[project.optional-dependencies]
+test = [
+	'markdown',
+	'yamlns>=0.11', # supports assertNsContains
+	'beautifulsoup4',
+	'decorator',
+	'geocoder', # map
+	'pytest', # testing
+	'pytest-cov<4', # testing
+	'responses', # testing
+	#'mkdocs', # docs
+	#'mkdocs-material', # docs
+	'urllib3<2', # conflicts with requests
+	'python-magic', # figure embed
+	'pillow',
+]
+examples = [
+    'PyAudio',
+]
+
+[project.urls]
+Homepage = "https://vokimon.github.io/markdown-customblocks"
+Documentation = "https://readthedocs.org"
+Repository = "https://github.com/vokimon/markdown-customblocks"
+Changelog = "https://github.com/vokimon/markdown-customblocks/blob/master/CHANGES.md"
+
+[tool.setuptools.packages]
+find = {}
+
+[tool.coverage.run]
+relative_files = true
+branch = true
+omit = ["**/*test.py"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=customblocks"
+
+
