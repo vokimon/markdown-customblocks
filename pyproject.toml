@@ -54,6 +54,33 @@ Documentation = "https://readthedocs.org"
 Repository = "https://github.com/vokimon/markdown-customblocks"
 Changelog = "https://github.com/vokimon/markdown-customblocks/blob/master/CHANGES.md"
 
+[project.entry_points."markdown.extensions"]
+customblocks = "customblocks:CustomBlocksExtension"
+
+[project.entry_points."markdown.customblocks.generators"]
+attention = "customblocks.generators:admonition"
+caution = "customblocks.generators:admonition"
+danger = "customblocks.generators:admonition"
+error = "customblocks.generators:admonition"
+hint = "customblocks.generators:admonition"
+important = "customblocks.generators:admonition"
+note = "customblocks.generators:admonition"
+tip = "customblocks.generators:admonition"
+warning = "customblocks.generators:admonition"
+youtube = "customblocks.generators:youtube"
+peertube = "customblocks.generators:peertube"
+vimeo = "customblocks.generators:vimeo"
+verkami = "customblocks.generators:verkami"
+goteo = "customblocks.generators:goteo"
+mastodon = "customblocks.generators:mastodon"
+twitter = "customblocks.generators:twitter"
+facebook = "customblocks.generators:facebook"
+instagram = "customblocks.generators:instagram"
+map = "customblocks.generators:map"
+linkcard = "customblocks.generators:linkcard"
+figure = "customblocks.generators:figure"
+wikipedia = "customblocks.generators:wikipedia"
+
 [tool.setuptools.packages]
 find = {}
 
