@@ -52,7 +52,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://vokimon.github.io/markdown-customblocks"
-Documentation = "https://readthedocs.org"
+Documentation = "https://vokimon.github.io/markdown-customblocks"
 Repository = "https://github.com/vokimon/markdown-customblocks"
 Changelog = "https://github.com/vokimon/markdown-customblocks/blob/master/CHANGES.md"
 
