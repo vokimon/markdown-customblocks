@@ -33,11 +33,6 @@ classifiers = [
 	'Topic :: Text Processing :: Markup :: HTML',
 ]
 dependencies = [
-    'numpy',
-]
-
-[project.optional-dependencies]
-test = [
 	'markdown',
 	'yamlns>=0.11', # supports assertNsContains
 	'beautifulsoup4',
@@ -53,9 +48,6 @@ test = [
 	'pillow',
 	'pytest',
 	'pytest-cov',
-]
-examples = [
-    'PyAudio',
 ]
 
 [project.urls]
