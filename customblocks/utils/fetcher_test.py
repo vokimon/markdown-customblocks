@@ -70,7 +70,6 @@ class Fetcher_Test(unittest.TestCase):
           iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAQMAAACXytwAAAAABlBMVEX/AAD/AAD/OybuAAAACXBI
           WXMAAA7EAAAOxAGVKw4bAAAAC0lEQVQImWNggAAAAAgAAa9T6iIAAAAASUVORK5CYII=
         headers:
-          Accept-Ranges: bytes
           Content-Type: image/png
           Access-Control-Allow-Headers: DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range
           Access-Control-Allow-Methods: GET, POST, OPTIONS
@@ -78,7 +77,6 @@ class Fetcher_Test(unittest.TestCase):
           Access-Control-Expose-Headers: Content-Length,Content-Range
           Cache-Control: {Cache-Control}
           Connection: keep-alive
-          Content-Length: '107'
           Content-Type: image/png
           Date: {Date} # always change
           Expires: {Expires} # always change
@@ -92,8 +90,8 @@ class Fetcher_Test(unittest.TestCase):
           NEL: '{{"success_fraction":0,"report_to":"cf-nel","max_age":604800}}'
           Report-To: '{Report-To}'
           Server: cloudflare
-          Vary: Accept-Encoding,User-Agent,Origin
-          alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+          Vary: Accept-Encoding,X-Ezoic-Excludewebp,User-Agent,Origin
+          alt-svc: h3=":443"; ma=86400
           X-Content-Type-Options: nosniff
           X-Download-Options: noopen
           X-Frame-Options: SAMEORIGIN
