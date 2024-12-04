@@ -7,6 +7,8 @@
     - `inline`: embeds the image as base64 encoded
     - `local`: turns a remote url image into a relative local resource
     - `thumb`: reduces the size of the image, enlargeable by clicking
+- Dropped support for Python<3.8
+- Migrated to pyproject
 - Upgrade notes:
     - Image recommended css for lightbox has changed to enable thumbnailing
 
