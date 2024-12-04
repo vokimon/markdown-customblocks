@@ -14,8 +14,9 @@ jobs:
       matrix:
         python-version:
           - '3.8' # oldest supported Py3 gha
-          - '3.9' # newest passing Py3, reason: pyyaml binaries
-          #- '3' # newest supported Py3
+          - '3.9' # last version importlib.metadata.entry_points with dictionary interface
+          - '3.10' # first version using importlib.metadata.entry_points with selection interface
+          - '3' # newest supported Py3
     name: Python ${{ matrix.python-version }}
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
