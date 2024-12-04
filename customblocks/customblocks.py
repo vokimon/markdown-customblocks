@@ -9,17 +9,14 @@ from yamlns import namespace as ns
 import inspect
 import warnings
 from .generators import container
+from .entrypoints import load_entry_points_group
 
+generators_group = 'markdown.customblocks.generators'
 
 def _installedGenerators():
     if not hasattr(_installedGenerators, 'value'):
-        import pkg_resources
-        _installedGenerators.value = dict(
-            (entry_point.name, entry_point.load())
-            for entry_point in pkg_resources.iter_entry_points(
-                group='markdown.customblocks.generators'
-            )
-        )
+        generators = load_entry_points_group(generators_group)
+        _installedGenerators.value = generators
     return _installedGenerators.value
 
 class CustomBlocksExtension(Extension):
