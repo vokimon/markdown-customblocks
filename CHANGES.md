@@ -1,5 +1,9 @@
 # Release history
 
+## markdown-customblocks 1.5.2 (2022-12-04)
+
+- Fixed documentation link in metadata
+
 ## markdown-customblocks 1.5.1 (2022-12-04)
 
 - Empty release to solve packaging problems
