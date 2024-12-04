@@ -492,11 +492,11 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure(self):
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png"
+            ::: figure "https://placehold.co/300.png"
                 This figure is awesome
             """,
             "<figure>"
-            """<a href="https://via.placeholder.com/300.png" target="_blank"><img src="https://via.placeholder.com/300.png" /></a>"""
+            """<a href="https://placehold.co/300.png" target="_blank"><img src="https://placehold.co/300.png" /></a>"""
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
             "</figcaption>\n"
@@ -505,13 +505,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure__title(self):
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png" title="This is a title"
+            ::: figure "https://placehold.co/300.png" title="This is a title"
                 This figure is awesome
             """,
             "<figure>"
-            '<a href="https://via.placeholder.com/300.png" target="_blank">'
+            '<a href="https://placehold.co/300.png" target="_blank">'
             '<img '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
                 'title="This is a title" '
             '/></a>'
             "<figcaption>\n"
@@ -522,14 +522,14 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure__alt(self):
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png" alt="This is a title"
+            ::: figure "https://placehold.co/300.png" alt="This is a title"
                 This figure is awesome
             """,
             "<figure>"
-            '<a href="https://via.placeholder.com/300.png" target="_blank">'
+            '<a href="https://placehold.co/300.png" target="_blank">'
             '<img '
                 'alt="This is a title" '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
             '/></a>'
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
@@ -539,13 +539,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure__classes(self):
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png" left-align
+            ::: figure "https://placehold.co/300.png" left-align
                 This figure is awesome
             """,
             '<figure class="left-align">'
-            '<a href="https://via.placeholder.com/300.png" target="_blank">'
+            '<a href="https://placehold.co/300.png" target="_blank">'
             '<img '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
             '/></a>'
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
@@ -556,13 +556,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure__attributes_toFigure(self):
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png" style="background: red"
+            ::: figure "https://placehold.co/300.png" style="background: red"
                 This figure is awesome
             """,
             '<figure style="background: red">'
-            '<a href="https://via.placeholder.com/300.png" target="_blank">'
+            '<a href="https://placehold.co/300.png" target="_blank">'
             '<img '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
             '/></a>'
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
@@ -572,14 +572,14 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure__lightbox(self):
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png" lightbox id=myimage
+            ::: figure "https://placehold.co/300.png" lightbox id=myimage
                 This figure is awesome
             """,
             '<figure class="lightbox" id="myimage">' # added id
             '<a class="lightbox-background" href="javascript:history.back()"></a>' # this is new
             '<a href="#myimage">' # No target, href is the id
             '<img '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
             '/></a>'
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
@@ -589,7 +589,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
 
     def test_figure__local(self):
         self.assertMarkdown("""
-            ::: figure local https://via.placeholder.com/300.png
+            ::: figure local https://placehold.co/300.png
             """,
             '<figure>'
             '<a href="cached_images/300.png" target="_blank">'
@@ -751,7 +751,7 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
         with sandbox_dir() as sandbox:
             self.setupConfig(figure_local=True)
             self.assertMarkdown("""
-                ::: figure https://via.placeholder.com/300.png
+                ::: figure https://placehold.co/300.png
                 """,
                 '<figure>'
                     '<a href="cached_images/300.png" target="_blank">'
@@ -766,12 +766,12 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
         with sandbox_dir() as sandbox:
             self.setupConfig(figure_local=True)
             self.assertMarkdown("""
-                ::: figure nolocal https://via.placeholder.com/300.png
+                ::: figure nolocal https://placehold.co/300.png
                 """,
                 '<figure>'
-                    '<a href="https://via.placeholder.com/300.png" target="_blank">'
+                    '<a href="https://placehold.co/300.png" target="_blank">'
                 '<img '
-                    'src="https://via.placeholder.com/300.png" '
+                    'src="https://placehold.co/300.png" '
                 '/></a>'
                 "<figcaption></figcaption>\n"
                 "</figure>"
@@ -796,14 +796,14 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure__config_lightbox(self):
         self.setupConfig(figure_lightbox=True)
         self.assertMarkdown("""
-            ::: figure "https://via.placeholder.com/300.png" id=myimage
+            ::: figure "https://placehold.co/300.png" id=myimage
                 This figure is awesome
             """,
             '<figure class="lightbox" id="myimage">' # added id
             '<a class="lightbox-background" href="javascript:history.back()"></a>' # this is new
             '<a href="#myimage">' # No target, href is the id
             '<img '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
             '/></a>'
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
@@ -814,13 +814,13 @@ La nueva renta mínima estatal se tramitará como proyecto de ley, para que los 
     def test_figure__config_lightbox_overriden(self):
         self.setupConfig(figure_lightbox=True)
         self.assertMarkdown("""
-            ::: figure nolightbox "https://via.placeholder.com/300.png" id=myimage
+            ::: figure nolightbox "https://placehold.co/300.png" id=myimage
                 This figure is awesome
             """,
             '<figure id="myimage">' # added id
-            '<a href="https://via.placeholder.com/300.png" target="_blank">'
+            '<a href="https://placehold.co/300.png" target="_blank">'
             '<img '
-                'src="https://via.placeholder.com/300.png" '
+                'src="https://placehold.co/300.png" '
             '/></a>'
             "<figcaption>\n"
             "<p>This figure is awesome</p>\n"
