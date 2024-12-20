@@ -345,7 +345,10 @@ def instagram(ctx, post, *args, caption=True, **kwds):
 
 def map(ctx, location=None, marker=True, *args, **kwds):
     import geocoder
-    geocoding = geocoder.osm(location).json
+    query = geocoder.osm(location, headers={
+        'User-Agent': 'markdown-customblocks',
+    })
+    geocoding = query.json
     bbox = '%2C'.join(str(x) for x in (
         geocoding['bbox']['northeast'][::-1] +
         geocoding['bbox']['southwest'][::-1]
