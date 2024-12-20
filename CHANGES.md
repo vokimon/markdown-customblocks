@@ -1,5 +1,9 @@
 # Release history
 
+## markdown-customblocks 1.5.3 (2022-12-20)
+
+- map: fix: Geocoding failed because now requires user agent
+
 ## markdown-customblocks 1.5.2 (2022-12-04)
 
 - Fixed documentation link in metadata

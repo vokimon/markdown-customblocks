@@ -1,6 +1,6 @@
 # Wikipedia (`customblocks.generates.wikipedia`)
 
-Generates a [linkcard](generators-linkcard.md) from from a lemma for the Wikipedia.
+Generates a [linkcard](./generators-linkcard.md) from from a lemma for the Wikipedia.
 
 The difference with a `linkcard` is that
 instead of the full url to the article
