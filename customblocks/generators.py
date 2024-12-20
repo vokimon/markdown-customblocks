@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from yamlns import namespace as ns
 import uuid
+import warnings
 from .utils import image
-
 from .utils import E, Markdown
 from .utils import PageInfo
 from .utils import Fetcher
@@ -348,6 +348,13 @@ def map(ctx, location=None, marker=True, *args, **kwds):
     query = geocoder.osm(location, headers={
         'User-Agent': 'markdown-customblocks',
     })
+    if not query.ok:
+        print(dir(query))
+        warnings.warn(f"Error {query}")
+        return E('.error',
+            f'Error geolocating {location}',
+            style="display: block flex; width: 100%; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 9",
+        )
     geocoding = query.json
     bbox = '%2C'.join(str(x) for x in (
         geocoding['bbox']['northeast'][::-1] +
