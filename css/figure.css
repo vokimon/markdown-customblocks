@@ -3,7 +3,8 @@ figure {
  background: #efefef;
  color: #111;
  padding: 3pt;
- display: inline-block;
+ display: inline-flex;
+ flex-direction: column;
 }
 figure figcaption {
  width: 100%;
@@ -30,7 +31,7 @@ figure.lightbox:target {
  left: 0;
  right: 0;
  background: black;
- background: rgba(0,0,0,.9);
+ background: rgba(0,0,0,.97);
  color: grey;
  height: 100% !important;
  width: 100% !important;
@@ -54,8 +55,19 @@ figure.lightbox:target img {
  width: 100vw;
  height: auto;
  max-width: 90%;
- max-height: 80%;
+ max-height: 80vh;
  padding: 2% 0;
  border: 0;
 }
-
+figure.lightbox img.full {
+ display: none;
+}
+figure.lightbox:target img.full {
+ display: block;
+}
+figure.lightbox img.thumb {
+ display: block;
+}
+figure.lightbox:target img.thumb {
+ display: none;
+}
