@@ -119,7 +119,7 @@ class CustomBlocksProcessor(BlockProcessor):
         for key, param in self.RE_PARAM.findall(params):
             if param[0] == param[-1] == '"':
                 param = eval(param)
-            if param[0] == param[-1] == "'":
+            elif param[0] == param[-1] == "'":
                 param = eval(param)
             if key:
                 kwd[key] = param
