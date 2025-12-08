@@ -40,11 +40,6 @@ dependencies = [
 	'beautifulsoup4',
 	'decorator',
 	'geocoder', # map
-	'pytest', # testing
-	'pytest-cov<4', # testing
-	'responses', # testing
-	#'mkdocs', # docs
-	#'mkdocs-material', # docs
 	'python-magic', # figure embed
 	'pillow',
 ]
@@ -94,3 +89,13 @@ omit = ["**/*test.py"]
 addopts = "--cov=customblocks"
 
 
+[dependency-groups]
+test = [
+	"pytest",
+	"pytest-cov",
+	"responses",
+]
+docs = [
+	#'mkdocs', # docs
+	#'mkdocs-material', # docs
+]
