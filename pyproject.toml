@@ -96,6 +96,6 @@ test = [
 	"responses",
 ]
 docs = [
-	#'mkdocs', # docs
-	#'mkdocs-material', # docs
+	"mkdocs", # docs
+	"mkdocs-material", # docs
 ]
