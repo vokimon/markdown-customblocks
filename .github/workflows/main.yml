@@ -33,8 +33,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install -e .
-          pip install --group test
+          pip install pytest pytest-cov responses  # pip install --group test
 
       - uses: BSFishy/pip-action@v1
         with:
