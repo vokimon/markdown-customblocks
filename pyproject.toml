@@ -44,6 +44,17 @@ dependencies = [
 	'pillow',
 ]
 
+[dependency-groups]
+test = [
+	"pytest",
+	"pytest-cov",
+	"responses",
+]
+docs = [
+	"mkdocs",
+	"mkdocs-material",
+]
+
 [project.urls]
 Homepage = "https://vokimon.github.io/markdown-customblocks"
 Documentation = "https://vokimon.github.io/markdown-customblocks"
@@ -88,14 +99,3 @@ omit = ["**/*test.py"]
 [tool.pytest.ini_options]
 addopts = "--cov=customblocks"
 
-
-[dependency-groups]
-test = [
-	"pytest",
-	"pytest-cov",
-	"responses",
-]
-docs = [
-	"mkdocs", # docs
-	"mkdocs-material", # docs
-]
